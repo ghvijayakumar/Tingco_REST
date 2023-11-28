@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 5, 2012 11:42:16 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DeviceDataItemScaling" schema="dbo" table="DeviceDataItemScaling">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.DeviceDataItemScalingId" name="id">
+      <key-property name="deviceId" type="string">
+        <column length="36" name="DeviceID"/>
+      </key-property>
+      <key-property name="deviceDataItemId" type="string">
+        <column length="36" name="DeviceDataItemID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.DeviceDataItems" fetch="select" insert="false" name="deviceDataItems" update="false">
+      <column length="36" name="DeviceDataItemID" not-null="true"/>
+    </many-to-one>
+    <property name="productVariantId" type="string">
+      <column length="36" name="ProductVariantID"/>
+    </property>
+    <property name="scalingOperand" type="string">
+      <column name="ScalingOperand"/>
+    </property>
+    <property name="scalingFactor" type="double">
+      <column name="ScalingFactor"/>
+    </property>
+    <property name="rawMinValue" type="double">
+      <column name="RawMinValue"/>
+    </property>
+    <property name="rawMaxValue" type="double">
+      <column name="RawMaxValue"/>
+    </property>
+    <property name="fixedValue" type="double">
+      <column name="FixedValue"/>
+    </property>
+    <property name="warningLowValue" type="double">
+      <column name="WarningLowValue"/>
+    </property>
+    <property name="warningLowEventTypeId" type="string">
+      <column length="36" name="WarningLowEventTypeID"/>
+    </property>
+    <property name="warningHighValue" type="double">
+      <column name="WarningHighValue"/>
+    </property>
+    <property name="warningHighEventTypeId" type="string">
+      <column length="36" name="WarningHighEventTypeID"/>
+    </property>
+    <property name="alarmLowValue" type="double">
+      <column name="AlarmLowValue"/>
+    </property>
+    <property name="alarmLowEventTypeId" type="string">
+      <column length="36" name="AlarmLowEventTypeID"/>
+    </property>
+    <property name="alarmHighValue" type="double">
+      <column name="AlarmHighValue"/>
+    </property>
+    <property name="alarmHighEventTypeId" type="string">
+      <column length="36" name="AlarmHighEventTypeID"/>
+    </property>
+    <property name="orderMoreBelowThisValue" type="double">
+      <column name="OrderMoreBelowThisValue"/>
+    </property>
+    <property name="orderMoreEventTypeId" type="string">
+      <column length="36" name="OrderMoreEventTypeID"/>
+    </property>
+    <property name="flagScaleValue" type="int">
+      <column name="FlagScaleValue" not-null="true"/>
+    </property>
+    <property name="flagSetValueToMaxIfAboveMax" type="int">
+      <column name="FlagSetValueToMaxIfAboveMax" not-null="true"/>
+    </property>
+    <property name="flagSetValueToMinIfBelowMin" type="int">
+      <column name="FlagSetValueToMinIfBelowMin" not-null="true"/>
+    </property>
+    <property name="flagSaveAsFixedValue" type="int">
+      <column name="FlagSaveAsFixedValue" not-null="true"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="scaledMinValue" type="double">
+      <column length="23" name="ScaledMinValue"/>
+    </property>
+    <property name="scaledMaxValue" type="double">
+      <column length="23" name="ScaledMaxValue"/>
+    </property>
+  </class>
+  <query name="getDeviceDataItemScalingByDeviceId">
+        from DeviceDataItemScaling as d where d.id.deviceId in (:deviceId)
+    </query>
+  <query name="getDeviceDataItemScalingByproductVariantId">
+        from DeviceDataItemScaling as d where d.productVariantId = :productVariantId
+    </query>
+  <query name="getAllDeviceDataItemScaling">
+        from DeviceDataItemScaling
+    </query>
+  <query name="getDeviceDataItemScalingByDeviceIdAndVariantId">
+        from DeviceDataItemScaling as d where d.id.deviceId in (:deviceId) and d.productVariantId = :productVariantId
+    </query>
+  <query name="getDeviceDataItemScalingById">
+        from DeviceDataItemScaling where id.deviceId = :deviceId and id.deviceDataItemId = :deviceDataItemId
+    </query>
+  <query name="getDeviceDataItemScalingByDeviceDataItemID">
+        from DeviceDataItemScaling where id.deviceDataItemId = :deviceDataItemId
+    </query>
+</hibernate-mapping>

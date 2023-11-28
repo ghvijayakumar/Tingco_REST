@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 23, 2012 11:52:17 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ApplicationEmailTemplates" schema="dbo" table="ApplicationEmailTemplates">
+    <cache usage="nonstrict-read-write"/>
+    <id name="applicationEmailTemplateId" type="string">
+      <column length="36" name="ApplicationEmailTemplateID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Applications" fetch="select" name="applications">
+      <column length="36" name="ApplicationID" not-null="true"/>
+    </many-to-one>
+    <property name="objectCode" type="string">
+      <column name="ObjectCode" not-null="true"/>
+    </property>
+    <property name="countryId" type="int">
+      <column name="CountryID" not-null="true"/>
+    </property>
+    <property name="emailSubject" type="string">
+      <column name="EmailSubject" not-null="true"/>
+    </property>
+    <property name="emailBody" type="string">
+      <column name="EmailBody" not-null="true"/>
+    </property>
+    <property name="emailSignature" type="string">
+      <column name="EmailSignature" not-null="true"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getAppEmailTemplates">
+        from ApplicationEmailTemplates where countryId = :countryId
+    </query>
+  <query name="getAppEmailTemplatesCheck">
+        from ApplicationEmailTemplates where countryId = :countryId and applications.applicationId = :applicationId and objectCode =:objectCode
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 25, 2011 3:25:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.ContentGroups" schema="dbo" table="ContentGroups">
+    <cache usage="nonstrict-read-write"/>
+    <id name="contentGroupId" type="string">
+      <column length="36" name="ContentGroupID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="contentGroupName" type="string">
+      <column length="50" name="ContentGroupName" not-null="true"/>
+    </property>
+    <property name="contentGroupDescription" type="string">
+      <column length="200" name="ContentGroupDescription"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getContentGroupsByContentGroupId">
+        from ContentGroups where contentGroupId in (:contentGroupId) order by contentGroupName
+    </query>
+  <query name="getAllContentGroups">
+        from ContentGroups order by createdDate desc
+    </query>
+  <query name="getContentGroupsById">
+        from ContentGroups where contentGroupId =:contentGroupId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 26, 2014 3:44:51 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.DeviceServicesAvailableBundles" schema="dbo" table="DeviceServicesAvailableBundles">
+    <composite-id class="se.info24.pojo.DeviceServicesAvailableBundlesId" name="id">
+      <key-property name="deviceId" type="string">
+        <column length="36" name="DeviceID"/>
+      </key-property>
+      <key-property name="serviceId" type="string">
+        <column length="36" name="ServiceID"/>
+      </key-property>
+      <key-property name="bundleVersionId" type="string">
+        <column length="36" name="BundleVersionID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Services" fetch="select" insert="false" name="services" update="false">
+      <column length="36" name="ServiceID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.BundleVersions" fetch="select" insert="false" name="bundleVersions" update="false">
+      <column length="36" name="BundleVersionID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Device" fetch="select" insert="false" name="device" update="false">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </many-to-one>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+  </class>
+  <query name="getDeviceServicesAvailableBundlesByDeviceIdServiceNameOrder">
+        select distinct services.serviceId as serviceId, services.serviceName as serviceName from DeviceServicesAvailableBundles where id.deviceId = :deviceId order by services.serviceName asc
+    </query>
+  <query name="getDeviceAvailableBundlesNotInAllowedBundlesByDeviceId">
+        from DeviceServicesAvailableBundles where id.deviceId = :deviceId and id.bundleVersionId not in(select dsab.id.bundleVersionId from DeviceServicesAllowedBundles dsab where dsab.id.deviceId = :deviceId) order by bundleVersions.bundle.bundleName asc
+    </query>
+  <query name="getDeviceAvailableBundlesNotInAllowedBundlesByDeviceIdServiceId">
+        from DeviceServicesAvailableBundles where id.deviceId = :deviceId and id.serviceId = :serviceId and id.bundleVersionId not in(select dsab.id.bundleVersionId from DeviceServicesAllowedBundles dsab where dsab.id.deviceId = :deviceId and dsab.id.serviceId = :serviceId) order by bundleVersions.bundle.bundleName asc
+    </query>
+</hibernate-mapping>

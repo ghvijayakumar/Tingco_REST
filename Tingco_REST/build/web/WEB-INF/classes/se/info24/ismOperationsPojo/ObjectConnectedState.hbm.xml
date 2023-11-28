@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 9, 2014 11:30:15 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISMOperations" name="se.info24.ismOperationsPojo.ObjectConnectedState" schema="dbo" table="ObjectConnectedState">
+    <id name="objectId" type="string">
+      <column length="36" name="ObjectID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="lastContactServiceId" type="string">
+      <column length="36" name="LastContactServiceID" not-null="true"/>
+    </property>
+    <property name="lastContactTime" type="timestamp">
+      <column length="23" name="LastContactTime" not-null="true"/>
+    </property>
+    <property name="lastContactMessage" type="string">
+      <column name="LastContactMessage"/>
+    </property>
+    <property name="connectedExpiryTime" type="timestamp">
+      <column length="23" name="ConnectedExpiryTime" not-null="true"/>
+    </property>
+    <property name="isConnected" type="java.lang.Integer">
+      <column name="IsConnected"/>
+    </property>
+    <property name="eventConnectedIsSent" type="java.lang.Integer">
+      <column name="EventConnectedIsSent"/>
+    </property>
+    <property name="eventDisconnectedIsSent" type="java.lang.Integer">
+      <column name="EventDisconnectedIsSent"/>
+    </property>
+    <property name="status" type="string">
+      <column name="Status"/>
+    </property>
+    <property name="state" type="string">
+      <column name="State"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getObjectConnectedStateByObjectIdServiceId">
+        from ObjectConnectedState where objectId = :objectId and lastContactServiceId = :lastContactServiceId
+    </query>
+</hibernate-mapping>

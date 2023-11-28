@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 26, 2012 3:24:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.PricePlanItems" schema="dbo" table="PricePlanItems">
+    <cache usage="nonstrict-read-write"/>
+    <id name="pricePlanItemId" type="string">
+      <column length="36" name="PricePlanItemID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.ValidationExpressions" fetch="select" name="validationExpressions">
+      <column name="ValidationExpressionID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.PricePlanItemTypes" fetch="select" name="pricePlanItemTypes">
+      <column length="36" name="PricePlanItemTypeID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ValidationDataType" fetch="select" name="validationDataType">
+      <column name="ValidationDataTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="pricePlanItemParentId" type="string">
+      <column length="36" name="PricePlanItemParentID"/>
+    </property>
+    <property name="pricePlanVersionId" type="string">
+      <column length="36" name="PricePlanVersionID" not-null="true"/>
+    </property>
+    <property name="itemName" type="string">
+      <column length="50" name="ItemName" not-null="true"/>
+    </property>
+    <property name="itemDescription" type="string">
+      <column length="200" name="ItemDescription"/>
+    </property>
+    <property name="chargeTypeId" type="string">
+      <column length="36" name="ChargeTypeID" not-null="true"/>
+    </property>
+    <property name="validationDataType_1" type="string">
+      <column length="200" name="ValidationDataType" not-null="true"/>
+    </property>
+    <property name="validationExpression" type="string">
+      <column length="200" name="ValidationExpression" not-null="true"/>
+    </property>
+    <property name="validationValue" type="string">
+      <column length="200" name="ValidationValue" not-null="true"/>
+    </property>
+    <property name="itemAmount" type="big_decimal">
+      <column name="ItemAmount"/>
+    </property>
+    <property name="itemPercent" type="big_decimal">
+      <column name="ItemPercent"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="priority" type="java.lang.Integer">
+      <column name="Priority"/>
+    </property>
+    <set cascade="delete" inverse="true" name="pricePlanItemses">
+      <key>
+        <column length="36" name="PricePlanItemParentID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.PricePlanItems"/>
+    </set>
+  </class>
+  <query name="getPricePlanItemsByPricePlanVersionId">
+        from PricePlanItems where pricePlanVersionId = :pricePlanVersionId order by itemName
+    </query>
+  <query name="getPricePlanItemsByItemIdAndVersionId">
+        from PricePlanItems where pricePlanItemId = :pricePlanItemId and pricePlanVersionId = :pricePlanVersionId
+    </query>
+  <query name="getPricePlanItemsByPricePlanItemId">
+        from PricePlanItems where pricePlanItemId = :pricePlanItemId
+    </query>
+  <query name="GetMaxValueOfPriority">
+        from PricePlanItems order by priority desc
+    </query>
+</hibernate-mapping>

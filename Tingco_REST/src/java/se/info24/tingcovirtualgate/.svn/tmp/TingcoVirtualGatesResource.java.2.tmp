@@ -1,0 +1,500 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package se.info24.tingcovirtualgate;
+
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Hashtable;
+import java.util.TimeZone;
+import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.POST;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Path;
+import javax.ws.rs.GET;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import org.hibernate.Session;
+<<<<<<< .mine
+import org.hibernate.Transaction;
+import se.info24.devicejaxb.TingcoDevice;
+=======
+import org.hibernate.Transaction;
+import se.info24.device.DeviceDAO;
+import se.info24.ismOperationsPojo.AccessLog;
+import se.info24.ismOperationsPojo.DeviceStatus;
+import se.info24.ismOperationsPojo.MeasurementData;
+import se.info24.ismOperationsPojo.MeasurementDataId;
+>>>>>>> .r2119
+import se.info24.ismOperationsPojo.AccessLog;
+import se.info24.ismOperationsPojo.DeviceStatus;
+import se.info24.ismOperationsPojo.MeasurementData;
+import se.info24.ismOperationsPojo.MeasurementDataId;
+import se.info24.ismOperationsPojo.ObjectConnectedState;
+<<<<<<< .mine
+import se.info24.jaxbUtil.TingcoVirtualGateXML;
+import se.info24.pojo.Device;
+import se.info24.pojo.UserAlias;
+=======
+import se.info24.jaxbUtil.TingcoVirtualGateXML;
+import se.info24.pojo.ContainerDevices;
+import se.info24.pojo.ContainerUserAlias;
+import se.info24.pojo.ContainerUserAliasId;
+import se.info24.pojo.Device;
+import se.info24.pojo.DeviceTypes;
+import se.info24.pojo.UserAlias;
+import se.info24.pojo.UserAliasTypes;
+>>>>>>> .r2119
+import se.info24.pojo.UserSessions2;
+import se.info24.tingcovirtualgatejaxb.TingcoVirtualGate;
+import se.info24.user.UserDAO;
+import se.info24.user.User_LoginsResource;
+import se.info24.util.HibernateUtil;
+import se.info24.util.RESTDoc;
+import se.info24.util.TCMUtil;
+import se.info24.util.TingcoConstants;
+
+/**
+ * REST Web Service
+ *
+ * @author Vijayakumar
+ */
+@Path("/tingcovirtualgates")
+public class TingcoVirtualGatesResource {
+
+    @Context
+    private UriInfo context;
+    @Context
+    private HttpServletRequest request;
+    GregorianCalendar currentDateTime = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+    TingcoVirtualGateXML tingcoVirtualGateXML = new TingcoVirtualGateXML();
+
+    /** Creates a new instance of TingcoVirtualGatesResource */
+    public TingcoVirtualGatesResource() {
+    }
+
+    /**
+     * CheckTingcoAPIConnected
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/checktingcoapiconnected/rest/{rest}/deviceid/{deviceid}")
+    @RESTDoc(methodName = "CheckTingcoAPIConnected", desc = "Used to Check TingcoAPI is Connected or not in Tingco Virtual Gate", req_Params = {"DeviceID;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoVirtualGate getXml_checkTingcoAPIConnected(@PathParam("deviceid") String deviceId) {
+        return checkTingcoAPIConnected(deviceId);
+    }
+
+    /**
+     * CheckTingcoAPIConnected
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/checktingcoapiconnected/json/{json}/deviceid/{deviceid}")
+    public TingcoVirtualGate getJson_checkTingcoAPIConnected(@PathParam("deviceid") String deviceId) {
+        return checkTingcoAPIConnected(deviceId);
+    }
+
+    @GET
+    @Produces("application/xml")
+    @Path("/insertcheckoutdetails/rest/{rest}/deviceid/{deviceid}/useraliasid/{useraliasid}")
+    @RESTDoc(methodName = "CheckTingcoAPIConnected", desc = "Used to Check TingcoAPI is Connected or not in Tingco Virtual Gate", req_Params = {"DeviceID;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoVirtualGate getXml_InsertCheckOutDetails(@PathParam("deviceid") String deviceId, @PathParam("useraliasid") String userAliasID) {
+        return insertCheckOutDetails(deviceId, userAliasID);
+    }
+
+    /**
+     * InsertCheckInDetails
+     * @param deviceId
+     * @param userAliasId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/insertcheckindetails/rest/{rest}/deviceid/{deviceid}/useraliasid/{useraliasid}")
+    @RESTDoc(methodName = "InsertCheckInDetails", desc = "Used to Insert CheckIn Details", req_Params = {"DeviceID;UUID", "UserAliasID;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoVirtualGate getXml_insertcheckindetails(@PathParam("deviceid") String deviceId, @PathParam("useraliasid") String userAliasId) {
+        return insertCheckInDetails(deviceId, userAliasId);
+    }
+
+    /**
+     * InsertCheckInDetails
+     * @param deviceId
+     * @param userAliasId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/insertcheckindetails/json/{json}/deviceid/{deviceid}/useraliasid/{useraliasid}")
+    public TingcoVirtualGate getJson_insertcheckindetails(@PathParam("deviceid") String deviceId, @PathParam("useraliasid") String userAliasId) {
+        return insertCheckInDetails(deviceId, userAliasId);
+    }
+
+    /**
+     * POST method for creating an instance of TingcoVirtualGatesResource
+     * @param content representation for the new resource
+     * @return an HTTP response with content of the created resource
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    public Response postXml(String content) {
+        //TODO
+        return Response.created(context.getAbsolutePath()).build();
+    }
+
+    /**
+     * Sub-resource locator method for  {id}
+     */
+    @Path("{id}")
+    public TingcoVirtualGateResource getTingcoVirtualGateResource() {
+        return new TingcoVirtualGateResource();
+    }
+
+    private TingcoVirtualGate insertCheckOutDetails(String deviceId, String userAliasID) {
+        long requestedTime = System.currentTimeMillis();
+        Session ismOperationsession = null;
+        Session session = null;
+        TingcoVirtualGate tingcoVirtualGate = null;
+        boolean hasPermission = false;
+        TingcoVirtualGateDAO virtualGateDAO = new TingcoVirtualGateDAO();
+        GregorianCalendar gc = new GregorianCalendar();
+        Transaction tx = null;
+        try {
+            tingcoVirtualGate = tingcoVirtualGateXML.buildTingcoVirtualGateTemplate();
+//            tingcoDevice = tingcoDeviceXML.buildTingcoDeviceTemplate();
+            if (deviceId.equals("")) {
+                tingcoVirtualGate.getMsgStatus().setResponseCode(-1);
+                tingcoVirtualGate.getMsgStatus().setResponseText("DeviceId should not empty");
+                return tingcoVirtualGate;
+            }
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.ACCESS, TCMUtil.ADD);
+                if (hasPermission) {
+                    ismOperationsession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    AccessLog accessLog = new AccessLog();
+                    accessLog.setAccessLogRowId(UUID.randomUUID().toString());
+                    accessLog.setAccessTime(currentDateTime.getTime());
+                    Device device = (Device) session.get(Device.class, deviceId);
+                    if (device != null) {
+                        tingcoVirtualGate.getMsgStatus().setResponseCode(-1);
+                        tingcoVirtualGate.getMsgStatus().setResponseText("Data Not Found");
+                        return tingcoVirtualGate;
+                    }
+                    accessLog.setDeviceId(deviceId);
+                    accessLog.setDeviceGroupId(device.getGroupId());
+                    accessLog.setDeviceName(device.getDeviceName());
+                    accessLog.setResource("Virtual Gate");
+                    UserAlias userAlias = (UserAlias) session.get(UserAlias.class, userAliasID);
+                    if (userAlias != null) {
+                        tingcoVirtualGate.getMsgStatus().setResponseCode(-1);
+                        tingcoVirtualGate.getMsgStatus().setResponseText("Data Not Found");
+                        return tingcoVirtualGate;
+                    }
+                    accessLog.setUserAlias(userAlias.getUserAlias());
+                    accessLog.setUserAliasId(userAlias.getUserAliasId());
+                    accessLog.setFirstName(userAlias.getFirstName());
+                    accessLog.setLastName(userAlias.getLastName());
+                    if (userAlias.getUserId() != null) {
+                        accessLog.setUserId(userAlias.getUserId());
+                    }
+                    accessLog.setUserGroupId(userAlias.getGroupId());
+                    accessLog.setUserAliasTypeId(userAlias.getUserAliasTypes().getUserAliasTypeId());
+                    accessLog.setUserAliasTypeName(userAlias.getUserAliasTypes().getUserAliasTypeName());
+                    accessLog.setEventTypeId("2C7E511E-F189-4CD0-9B6A-9E7CCD8D0A3D");
+                    accessLog.setEventSubject("Check-out");
+                    DeviceStatus deviceStatus = (DeviceStatus) ismOperationsession.get(DeviceStatus.class, deviceId);
+                    if (deviceStatus != null) {
+                        accessLog.setPosLatitude(new BigDecimal(deviceStatus.getPosLatitude()));
+                        accessLog.setPosLongitude(new BigDecimal(deviceStatus.getPosLongitude()));
+                        accessLog.setPosAltitude(new BigDecimal(deviceStatus.getPosDepth()));
+                        accessLog.setPosHeading(deviceStatus.getPosDirection());
+                    }
+                    accessLog.setCoordinateSystemId("WGS84");
+                    accessLog.setLastUpdatedByUserId(sessions2.getUserId());
+                    accessLog.setUpdatedDate(gc.getTime());
+                    accessLog.setCreatedDate(gc.getTime());
+
+                    MeasurementData measurementData = new MeasurementData();
+                    measurementData.setId(new MeasurementDataId(UUID.randomUUID().toString(), "4e37dd0e-295c-40fd-986f-b252edd1f828"));
+                    measurementData.setDataItemTime(gc.getTime());
+                    measurementData.setObjectId(deviceId);
+                    measurementData.setGroupId(device.getGroups().getGroupId());
+                    measurementData.setMeasurementValue(new BigDecimal(1));
+                    java.text.DateFormat yyyy = new SimpleDateFormat("yyyy");
+                    java.text.DateFormat mm = new SimpleDateFormat("MM");
+                    java.text.DateFormat dd = new SimpleDateFormat("dd");
+                    java.text.DateFormat hh = new SimpleDateFormat("HH");
+                    measurementData.setYear(Short.parseShort(yyyy.format(gc.getTime())));
+                    measurementData.setDay(Short.parseShort(dd.format(gc.getTime())));
+                    measurementData.setMonth(Short.parseShort(mm.format(gc.getTime())));
+                    measurementData.setHour(Short.parseShort(hh.format(gc.getTime())));
+                    measurementData.setCreatedDate(gc.getTime());
+                    measurementData.setUpdatedDate(gc.getTime());
+
+                    tx = ismOperationsession.beginTransaction();
+                    ismOperationsession.saveOrUpdate(accessLog);
+                    ismOperationsession.saveOrUpdate(measurementData);
+                    tx.commit();
+
+                } else {
+                    tingcoVirtualGate.getMsgStatus().setResponseCode(-10);
+                    tingcoVirtualGate.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoVirtualGate;
+                }
+            } else {
+                tingcoVirtualGate.getMsgStatus().setResponseCode(-3);
+                tingcoVirtualGate.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoVirtualGate;
+            }
+        } catch (Exception ex) {
+            if(tx != null){
+                tx.rollback();
+            }
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoVirtualGate.getMsgStatus().setResponseCode(-1);
+            tingcoVirtualGate.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (ismOperationsession != null) {
+                ismOperationsession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoVirtualGate;
+    }
+
+    private TingcoVirtualGate checkTingcoAPIConnected(String deviceId) {
+        long requestedTime = System.currentTimeMillis();
+        Session ismOperationsession = null;
+        Transaction tx = null;
+        TingcoVirtualGate tingcoVirtualGate = null;
+        boolean hasPermission = false;
+        TingcoVirtualGateDAO virtualGateDAO = new TingcoVirtualGateDAO();
+        GregorianCalendar gc = new GregorianCalendar();
+        try {
+            tingcoVirtualGate = tingcoVirtualGateXML.buildTingcoVirtualGateTemplate();
+            if (deviceId.equals("")) {
+                tingcoVirtualGate.getMsgStatus().setResponseCode(-1);
+                tingcoVirtualGate.getMsgStatus().setResponseText("DeviceId should not empty");
+                return tingcoVirtualGate;
+            }
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.ACCESS, TCMUtil.ADD);
+                if (hasPermission) {
+                    ismOperationsession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    tx = ismOperationsession.beginTransaction();
+                    ObjectConnectedState objectConnectedState = null;
+                    Object objectConnectedStateObject = virtualGateDAO.getObjectConnectedStateByObjectIdAndServiceId(deviceId, TingcoConstants.getServiceID(), ismOperationsession);
+                    if (objectConnectedStateObject != null) {
+                        objectConnectedState = (ObjectConnectedState) objectConnectedStateObject;
+                        objectConnectedState.setLastContactTime(currentDateTime.getTime());
+                        objectConnectedState.setLastContactMessage("PING");
+                        gc.add(Calendar.SECOND, 130);
+                        objectConnectedState.setConnectedExpiryTime(gc.getTime());
+                        objectConnectedState.setIsConnected(1);
+                        objectConnectedState.setLastUpdatedByUserId(sessions2.getUserId());
+                        objectConnectedState.setUpdatedDate(currentDateTime.getTime());
+                    } else {
+                        objectConnectedState = new ObjectConnectedState();
+                        objectConnectedState.setObjectId(deviceId);
+                        objectConnectedState.setLastContactServiceId(TingcoConstants.getServiceID());
+                        objectConnectedState.setLastContactTime(currentDateTime.getTime());
+                        objectConnectedState.setLastContactMessage("PING");
+                        gc.add(Calendar.SECOND, 130);
+                        objectConnectedState.setConnectedExpiryTime(gc.getTime());
+                        objectConnectedState.setIsConnected(1);
+                        objectConnectedState.setLastUpdatedByUserId(sessions2.getUserId());
+                        objectConnectedState.setCreatedDate(currentDateTime.getTime());
+                        objectConnectedState.setUpdatedDate(currentDateTime.getTime());
+                    }
+                    ismOperationsession.saveOrUpdate(objectConnectedState);
+                    tx.commit();
+                } else {
+                    tingcoVirtualGate.getMsgStatus().setResponseCode(-10);
+                    tingcoVirtualGate.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoVirtualGate;
+                }
+            } else {
+                tingcoVirtualGate.getMsgStatus().setResponseCode(-3);
+                tingcoVirtualGate.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoVirtualGate;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoVirtualGate.getMsgStatus().setResponseCode(-1);
+            tingcoVirtualGate.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (ismOperationsession != null) {
+                ismOperationsession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoVirtualGate;
+    }
+
+    private boolean getPermission(String userId, String functionarea, String operation) {
+        boolean hasPermission = false;
+        Hashtable<String, ArrayList> ht = (Hashtable<String, ArrayList>) User_LoginsResource.permissions.get(userId);
+        if (ht.containsKey(functionarea)) {
+            ArrayList<String> operations = ht.get(functionarea);
+            for (int i = 0; i < operations.size(); i++) {
+                if (operations.get(i).equalsIgnoreCase(operation)) {
+                    hasPermission = true;
+                    break;
+                }
+            }
+        }
+        return hasPermission;
+    }
+
+    public void delayLog(long requestedTime) {
+        TCMUtil.loger(getClass().getName(), " [tingco API] [Request took " + (System.currentTimeMillis() - requestedTime) + "ms]", "Info");
+    }
+
+    private TingcoVirtualGate insertCheckInDetails(String deviceId, String userAliasId) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoVirtualGateDAO virtualGateDAO = new TingcoVirtualGateDAO();
+        DeviceDAO deviceDAO = new DeviceDAO();
+        UserDAO userDAO = new UserDAO();
+        Session session = null;
+        Session ismOperationsession = null;
+        Transaction tx = null;
+        Transaction ismtx = null;
+        TingcoVirtualGate tingcoVirtualGate = null;
+        boolean hasPermission = false;
+        try {
+            tingcoVirtualGate = tingcoVirtualGateXML.buildTingcoVirtualGateTemplate();
+            if (deviceId.equals("")) {
+                tingcoVirtualGate.getMsgStatus().setResponseCode(-1);
+                tingcoVirtualGate.getMsgStatus().setResponseText("DeviceId should not empty");
+                return tingcoVirtualGate;
+            }
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.ACCESS, TCMUtil.ADD);
+                if (hasPermission) {
+                    ismOperationsession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    tx = ismOperationsession.beginTransaction();
+                    ismtx = session.beginTransaction();
+                    ContainerDevices containerDevices = deviceDAO.getContainerDevicesByDeviceId(deviceId, session).get(0);
+                    UserAlias userAlias = userDAO.getUserAliasDetailsByUserAliasID(session, userAliasId);
+                    Device device = deviceDAO.getDeviceById(deviceId, session);
+                    DeviceTypes deviceTypes = deviceDAO.getDeviceTypesById(device.getDeviceTypes().getDeviceTypeId(), session);
+                    DeviceStatus deviceStatus = deviceDAO.getDeviceStatusByDeviceId(deviceId, session);
+                    UserAliasTypes userAliasTypes = (UserAliasTypes) userDAO.getUserAliasTypesByID(session, userAlias.getUserAliasTypes().getUserAliasTypeId());
+                    Object containerUserAliasObject = virtualGateDAO.getContainerUserAliasByIds(containerDevices.getContainers().getContainerId(), userAliasId, session);
+                    ContainerUserAlias containerUserAlias = null;
+                    if (containerUserAliasObject != null) {
+                        containerUserAlias = (ContainerUserAlias) containerUserAliasObject;
+                        containerUserAlias.setUserAlias(userAlias.getUserAlias());
+                        containerUserAlias.setCheckInDate(currentDateTime.getTime());
+                        containerUserAlias.setCheckInDeviceId(deviceId);
+                        containerUserAlias.setCheckinDeviceName(device.getDeviceName());
+                        containerUserAlias.setCheckinDeviceGroupId(device.getGroups().getGroupId());
+                        containerUserAlias.setCheckinDeviceTypeId(device.getDeviceTypes().getDeviceTypeId());
+                        containerUserAlias.setCheckinDeviceAgreementId(device.getAgreements().getAgreementId());
+                        containerUserAlias.setCheckInServiceId(TingcoConstants.getServiceID());
+                        containerUserAlias.setLastUpdatedByUserId(sessions2.getUserId());
+                        containerUserAlias.setUpdatedDate(currentDateTime.getTime());
+                    } else {
+                        containerUserAlias = new ContainerUserAlias();
+                        containerUserAlias.setId(new ContainerUserAliasId(containerDevices.getContainers().getContainerId(), userAliasId));
+                        containerUserAlias.setUserAlias(userAlias.getUserAlias());
+                        containerUserAlias.setCheckInDate(currentDateTime.getTime());
+                        containerUserAlias.setCheckInDeviceId(deviceId);
+                        containerUserAlias.setCheckinDeviceName(device.getDeviceName());
+                        containerUserAlias.setCheckinDeviceGroupId(device.getGroups().getGroupId());
+                        containerUserAlias.setCheckinDeviceTypeId(device.getDeviceTypes().getDeviceTypeId());
+                        containerUserAlias.setCheckinDeviceAgreementId(device.getAgreements().getAgreementId());
+                        containerUserAlias.setCheckInServiceId(TingcoConstants.getServiceID());
+                        containerUserAlias.setLastUpdatedByUserId(sessions2.getUserId());
+                        containerUserAlias.setCreatedDate(currentDateTime.getTime());
+                        containerUserAlias.setUpdatedDate(currentDateTime.getTime());
+                    }
+                    session.saveOrUpdate(containerUserAlias);
+
+                    AccessLog accessLog = new AccessLog();
+                    accessLog.setAccessLogRowId(UUID.randomUUID().toString());
+                    accessLog.setAccessTime(currentDateTime.getTime());
+                    accessLog.setDeviceId(deviceId);
+                    accessLog.setDeviceGroupId(device.getGroups().getGroupId());
+                    accessLog.setDeviceName(device.getDeviceName());
+                    accessLog.setResource("Virtual Gate");
+                    accessLog.setUserAliasId(userAliasId);
+                    accessLog.setUserAlias(userAlias.getUserAlias());
+                    accessLog.setFirstName(userAlias.getFirstName());
+                    accessLog.setLastName(userAlias.getLastName());
+                    accessLog.setUserId(userAlias.getUserId() != null ? userAlias.getUserId() : null);
+                    accessLog.setUserGroupId(userAlias.getGroupId());
+                    accessLog.setUserAliasTypeId(userAlias.getUserAliasTypes().getUserAliasTypeId());
+                    accessLog.setUserAliasTypeName(userAliasTypes.getUserAliasTypeName());
+                    accessLog.setEventTypeId("B8D3E7F2-3770-4AC7-A313-9E8B052782FA");
+                    accessLog.setEventSubject("Check-in");
+                    accessLog.setPosLatitude(new BigDecimal(deviceStatus.getPosLatitude()));
+                    accessLog.setPosLongitude(new BigDecimal(deviceStatus.getPosLongitude()));
+                    accessLog.setPosAltitude(new BigDecimal(deviceStatus.getPosDepth()));
+                    accessLog.setPosHeading(deviceStatus.getPosDirection());
+                    accessLog.setCoordinateSystemId("WGS84");
+                    accessLog.setLastUpdatedByUserId(sessions2.getUserId());
+                    accessLog.setCreatedDate(currentDateTime.getTime());
+                    accessLog.setUpdatedDate(currentDateTime.getTime());
+                    ismOperationsession.saveOrUpdate(accessLog);
+
+                    MeasurementData measurementData = new MeasurementData();
+                    measurementData.setId(new MeasurementDataId(UUID.randomUUID().toString(), "03e271cc-6c3b-484d-b38e-5dedee1ff6a0"));
+                    measurementData.setDataItemTime(currentDateTime.getTime());
+                    measurementData.setObjectId(deviceId);
+                    measurementData.setGroupId(device.getGroups().getGroupId());
+                    measurementData.setMeasurementValue(new BigDecimal(1));
+                    java.text.DateFormat yyyy = new SimpleDateFormat("yyyy");
+                    java.text.DateFormat mm = new SimpleDateFormat("MM");
+                    java.text.DateFormat dd = new SimpleDateFormat("dd");
+                    java.text.DateFormat hh = new SimpleDateFormat("HH");
+                    measurementData.setYear(Short.parseShort(yyyy.format(currentDateTime.getTime())));
+                    measurementData.setMonth(Short.parseShort(mm.format(currentDateTime.getTime())));
+                    measurementData.setDay(Short.parseShort(dd.format(currentDateTime.getTime())));
+                    measurementData.setHour(Short.parseShort(hh.format(currentDateTime.getTime())));
+                    measurementData.setCreatedDate(currentDateTime.getTime());
+                    measurementData.setUpdatedDate(currentDateTime.getTime());
+                    ismOperationsession.saveOrUpdate(measurementData);
+
+                    ismtx.commit();
+                    tx.commit();
+                } else {
+                    tingcoVirtualGate.getMsgStatus().setResponseCode(-10);
+                    tingcoVirtualGate.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoVirtualGate;
+                }
+            } else {
+                tingcoVirtualGate.getMsgStatus().setResponseCode(-3);
+                tingcoVirtualGate.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoVirtualGate;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoVirtualGate.getMsgStatus().setResponseCode(-1);
+            tingcoVirtualGate.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (ismOperationsession != null) {
+                ismOperationsession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoVirtualGate;
+    }
+}

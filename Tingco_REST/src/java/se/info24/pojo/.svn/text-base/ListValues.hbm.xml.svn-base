@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 23, 2013 10:58:19 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ListValues" schema="dbo" table="ListValues">
+    <cache usage="nonstrict-read-write"/>
+    <id name="listValueId" type="string">
+      <column length="36" name="ListValueID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Lists" fetch="select" name="lists">
+      <column length="36" name="ListID" not-null="true"/>
+    </many-to-one>
+    <property name="listValue1" type="string">
+      <column name="ListValue1" not-null="true"/>
+    </property>
+    <property name="listValue2" type="string">
+      <column name="ListValue2"/>
+    </property>
+    <property name="listValue3" type="string">
+      <column name="ListValue3"/>
+    </property>
+    <property name="listValue4" type="string">
+      <column name="ListValue4"/>
+    </property>
+    <property name="listValue5" type="string">
+      <column name="ListValue5"/>
+    </property>
+    <property name="displayOrder" type="java.lang.Integer">
+      <column name="DisplayOrder"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getListValuesByListId">
+        from ListValues where lists.listId = :listId
+    </query>
+</hibernate-mapping>

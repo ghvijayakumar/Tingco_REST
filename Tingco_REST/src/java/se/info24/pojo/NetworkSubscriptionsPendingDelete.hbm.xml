@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 19, 2013 10:34:50 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.NetworkSubscriptionsPendingDelete" schema="dbo" table="NetworkSubscriptionsPendingDelete">
+    <cache usage="nonstrict-read-write"/>
+    <id name="networkSubscriptionId" type="string">
+      <column length="36" name="NetworkSubscriptionID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="deleteSubscriptionAfterThisDate" type="timestamp">
+      <column length="23" name="DeleteSubscriptionAfterThisDate" not-null="true"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getNetworkSubscriptionsPendingDeleteBySubscriptionId">
+        from NetworkSubscriptionsPendingDelete where networkSubscriptionId = :networkSubscriptionId
+    </query>
+</hibernate-mapping>

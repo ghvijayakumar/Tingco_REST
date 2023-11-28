@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 29, 2012 2:11:06 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.Device" schema="dbo" table="Device">
+    <cache usage="nonstrict-read-write"/>
+    <id name="deviceId" type="string">
+      <column length="36" name="DeviceID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Agreements" fetch="select" name="agreements">
+      <column length="36" name="AgreementID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Groups" fetch="select" name="groups">
+      <column length="36" name="GroupID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.DeviceTypes" fetch="select" name="deviceTypes">
+      <column length="36" name="DeviceTypeID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.DeviceSettingsPackages" fetch="select" name="deviceSettingsPackages">
+      <column length="36" name="DeviceSettingsPackageID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Company" fetch="select" name="company">
+      <column length="36" name="CompanyID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Addresses" fetch="select" name="addresses">
+      <column length="36" name="AddressID"/>
+    </many-to-one>
+    <property name="deviceName" type="string">
+      <column name="DeviceName" not-null="true"/>
+    </property>
+    <property name="deviceDescription" type="string">
+      <column name="DeviceDescription"/>
+    </property>
+    <property name="deviceName2" type="string">
+      <column name="DeviceName2"/>
+    </property>
+    <property name="deviceEnabled" type="java.lang.Integer">
+      <column name="DeviceEnabled"/>
+    </property>
+    <property name="invoiceDevice" type="java.lang.Integer">
+      <column name="InvoiceDevice"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="installedDate" type="timestamp">
+      <column length="23" name="InstalledDate"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="assetId" type="string">
+      <column name="AssetID"/>
+    </property>
+    <property name="shortDescription" type="string">
+      <column name="ShortDescription"/>
+    </property>
+    <set cascade="delete" inverse="true" name="deviceSettingses">
+      <key>
+        <column length="36" name="DeviceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceSettings"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceAgreementMembershipses">
+      <key>
+        <column length="36" name="DeviceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceAgreementMemberships"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceDetailses">
+      <key>
+        <column length="36" name="DeviceID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceDetails"/>
+    </set>
+    <set cascade="delete" inverse="true" name="serviceDeviceSubscriptionses">
+      <key>
+        <column length="36" name="DeviceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ServiceDeviceSubscriptions"/>
+    </set>
+    <set cascade="delete" inverse="true" name="productVariantDeviceses">
+      <key>
+        <column length="36" name="DeviceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ProductVariantDevices"/>
+    </set>
+    <!--  <set cascade="save-update,delete" inverse="true" name="objectFieldData">
+            <key>
+                <column length="36" name="ObjectID" not-null="true"/>
+            </key>
+            <one-to-many class="se.info24.pojo.ObjectFieldData"/>
+        </set>-->
+    <set cascade="save-update,delete" inverse="true" name="containerDevices">
+      <key>
+        <column length="36" name="DeviceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ContainerDevices"/>
+    </set>
+    <set inverse="true" name="supportCaseDeviceLinkses">
+      <key>
+        <column length="36" name="DeviceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.SupportCaseDeviceLinks"/>
+    </set>
+    <set inverse="true" name="networkSubscriptionses">
+      <key>
+        <column length="36" name="DeviceID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.NetworkSubscriptions"/>
+    </set>
+    <set inverse="true" name="deviceCommandScheduleses">
+      <key>
+        <column length="36" name="DeviceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceCommandSchedules"/>
+    </set>
+    <set inverse="true" name="commandParseTargetses">
+      <key>
+        <column length="36" name="DeviceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.CommandParseTargets"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceServiceses">
+      <key>
+        <column length="36" name="DeviceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceServices"/>
+    </set>
+    <set inverse="true" name="deviceServicesAllowedBundleses">
+      <key>
+        <column length="36" name="DeviceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceServicesAllowedBundles"/>
+    </set>
+    <set inverse="true" name="deviceServicesAvailableBundleses">
+      <key>
+        <column length="36" name="DeviceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceServicesAvailableBundles"/>
+    </set>
+    <set inverse="true" name="deviceServicesActiveBundleses">
+      <key>
+        <column length="36" name="DeviceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceServicesActiveBundles"/>
+    </set>
+    <set inverse="true" name="deviceBillingCategorieses">
+      <key>
+        <column length="36" name="DeviceID" not-null="true" unique="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceBillingCategories"/>
+    </set>
+    <set inverse="true" name="deviceLinkses">
+      <key>
+        <column length="36" name="DeviceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceLinks"/>
+    </set>
+    <set inverse="true" name="buildingDeviceses">
+      <key>
+        <column length="36" name="DeviceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.BuildingDevices"/>
+    </set>
+  </class>
+  <query name="getDeviceById">
+        from Device as d where d.deviceId = :deviceId
+    </query>
+  <query name="getDeviceByDeviceTypeIdNDeviceName2">
+        from Device as d where d.deviceTypes.deviceTypeId = :deviceTypeId and d.deviceName2 = :deviceName2
+    </query>
+  <query name="getDeviceByGroupIDNDeviceName">
+        from Device as d where d.groups.groupId = :groupId and d.deviceName = :deviceName
+    </query>
+  <query name="getAllDevices">
+        from Device
+    </query>
+  <query name="getDeviceDetailByUserId">
+        from Device as d where d.userId = :userId and d.deviceId = :deviceId
+    </query>
+  <query name="getDeviceDetails">
+        from Device as d where d.groups.groupId in (:groupId) and (d.deviceId =:deviceId or d.deviceName like :searchField or d.deviceName2 like :searchField) order by d.deviceName asc, d.deviceName2 asc
+    </query>
+  <query name="getDeviceDetailsByGroupId">
+        from Device as d where d.groups.groupId in (:groupId)
+    </query>
+  <query name="getDeviceDetailsBySearchField">
+        from Device as d where d.deviceId=:deviceId or d.deviceName like :searchField or d.deviceName2 like :searchField
+    </query>
+  <query name="getDeviceByGroupID">
+        from Device as d where d.groups.groupId in (:groupId) order by d.createdDate desc
+    </query>
+  <query name="getDeviceByDeviceGroupID">
+        from Device as d where d.deviceId=:deviceId and d.groups.groupId in (:groupId) order by deviceName asc
+    </query>
+  <query name="getDeviceByUserId">
+        from Device as d where d.userId = :userId
+    </query>
+  <query name="getDeviceByGroup">
+        from Device as d where d.groups.groupId = :groupId
+    </query>
+  <query name="getDeviceByListId">
+        from Device as d where d.deviceId in (:deviceId) order by d.deviceName
+    </query>
+  <query name="getDeviceByGroupIdNDeviceName2">
+        from Device as d where d.groups.groupId = :groupId and d.deviceName2 = :deviceName2
+    </query>
+  <query name="getDeviceBySearchdeviceName">
+        from Device as d where d.groups.groupId in (:groupId) and (d.deviceName like '%'+:searchField+'%' or d.deviceName2 like '%'+:searchField+'%') order by deviceName asc
+    </query>
+  <query name="getDeviceBySearchdeviceNames">
+        from Device as d where d.groups.groupId in (:groupId) and (d.deviceId =:searchField or d.deviceName like '%'+:searchField+'%')
+    </query>
+  <query name="getDeviceBySearchdeviceNameonly">
+        from Device as d where d.groups.groupId in (:groupId) and d.deviceName like '%'+:searchField+'%'
+    </query>
+  <query name="getDeviceByDeviceTypeId">
+        from Device as d where d.deviceTypes.deviceTypeId = :deviceTypeId
+    </query>
+  <query name="getDeviceByAssetId">
+        from Device as d where d.assetId = :assetId order by deviceName asc
+    </query>
+  <query name="getDeviceByAddressID">
+        from Device as d where d.addresses.addressId in(:addressId)
+    </query>
+  <query name="getDeviceByGroupListandDeviceIdList">
+        from Device as d where d.groups.groupId in(:groupId) and d.deviceId in (:deviceId) order by d.deviceName
+    </query>
+</hibernate-mapping>

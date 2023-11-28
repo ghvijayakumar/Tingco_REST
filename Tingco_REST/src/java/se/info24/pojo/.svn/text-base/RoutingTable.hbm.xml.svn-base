@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 24, 2012 2:20:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.RoutingTable" schema="dbo" table="RoutingTable">
+    <cache usage="nonstrict-read-write"/>
+    <id name="routeId" type="string">
+      <column length="36" name="RouteID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.RoutingTable" fetch="select" name="routingTable">
+      <column length="36" name="RouteParentID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Routers" fetch="select" name="routers">
+      <column length="36" name="RouterID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Groups" fetch="select" name="groups">
+      <column length="36" name="GroupID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ValidationDataType" fetch="select" name="validationDataType">
+      <column name="ValidationDataTypeID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ValidationExpressions" fetch="select" name="validationExpressions">
+      <column name="ValidationExpressionID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.MessageTypes" fetch="select" name="messageTypes">
+      <column length="36" name="MessageTypeID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.MessageItems" fetch="select" name="messageItems">
+      <column length="36" name="MessageItemID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Channels" fetch="select" name="channels">
+      <column length="36" name="ChannelID"/>
+    </many-to-one>
+    <property name="routeName" type="string">
+      <column name="RouteName" not-null="true"/>
+    </property>
+    <property name="routeDescription" type="string">
+      <column name="RouteDescription"/>
+    </property>
+    <property name="validationData" type="string">
+      <column name="ValidationData"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate"/>
+    </property>
+    <property name="routeEnabled" type="java.lang.Integer">
+      <column name="RouteEnabled"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="routingTables">
+      <key>
+        <column length="36" name="RouteParentID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.RoutingTable"/>
+    </set>
+  </class>
+  <query name="getRoutingTableByGroupId">
+        from RoutingTable where groups.groupId = :groupId
+    </query>
+</hibernate-mapping>

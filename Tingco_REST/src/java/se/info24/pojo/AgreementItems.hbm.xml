@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 19, 2013 3:58:20 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.AgreementItems" schema="dbo" table="AgreementItems">
+    <cache usage="nonstrict-read-write"/>
+    <id name="agreementItemId" type="string">
+      <column length="36" name="AgreementItemID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.AgreementStatuses" fetch="select" name="agreementStatuses">
+      <column length="36" name="AgreementStatusID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Agreements" fetch="select" name="agreements">
+      <column length="36" name="AgreementID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.PricePlans" fetch="select" name="pricePlans">
+      <column length="36" name="PricePlanID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.AgreementItemTypes" fetch="select" name="agreementItemTypes">
+      <column length="36" name="AgreementItemTypeID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.FunctionAreas" fetch="select" name="functionAreas">
+      <column length="36" name="FunctionAreaID"/>
+    </many-to-one>
+    <property name="agreementItemParentId" type="string">
+      <column length="36" name="AgreementItemParentID"/>
+    </property>
+    <property name="itemSectionNumber" type="int">
+      <column name="ItemSectionNumber" not-null="true"/>
+    </property>
+    <property name="itemName" type="string">
+      <column name="ItemName" not-null="true"/>
+    </property>
+    <property name="itemText" type="string">
+      <column name="ItemText" not-null="true"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate"/>
+    </property>
+    <property name="completedDate" type="timestamp">
+      <column length="23" name="CompletedDate"/>
+    </property>
+    <property name="objectId" type="string">
+      <column length="36" name="ObjectID"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getAgreementItemsByAgreementID">
+      from AgreementItems  where agreements.agreementId = :agreementId
+    </query>
+  <query name="getAgreementItemsByAgreementIDAndItemSectionNumber">
+      from AgreementItems where agreements.agreementId = :agreementId and itemSectionNumber = :itemSectionNumber
+    </query>
+  <query name="getAgreementItemsByAgreementId">
+      from AgreementItems where agreements.agreementId = :agreementId order by createdDate
+    </query>
+  <query name="getAgreementItemsByAgreementItemId">
+      from AgreementItems where agreementItemId = :agreementItemId
+    </query>
+  <query name="getAgreementItemsOrderByItemSectionNumber">
+      from AgreementItems where agreementItemId in (:agreementItemId) order by itemSectionNumber
+    </query>
+  <query name="getAgreementItemsByagreementItemParentId">
+      from AgreementItems where agreementItemParentId = :agreementItemParentId
+    </query>
+</hibernate-mapping>

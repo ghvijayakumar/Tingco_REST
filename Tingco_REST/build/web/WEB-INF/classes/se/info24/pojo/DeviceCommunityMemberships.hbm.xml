@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2010 12:53:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DeviceCommunityMemberships" schema="dbo" table="DeviceCommunityMemberships">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.DeviceCommunityMembershipsId" name="id">
+      <key-property name="deviceId" type="string">
+        <column length="36" name="DeviceID"/>
+      </key-property>
+      <key-property name="communityId" type="string">
+        <column length="36" name="CommunityID"/>
+      </key-property>
+    </composite-id>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 5, 2013 11:21:45 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.AgreementRoleTypeTranslations" schema="dbo" table="AgreementRoleTypeTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.AgreementRoleTypeTranslationsId" name="id">
+      <key-property name="agreementRoleTypeId" type="string">
+        <column length="36" name="AgreementRoleTypeID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.AgreementRolesTypes" fetch="select" insert="false" name="agreementRolesTypes" update="false">
+      <column length="36" name="AgreementRoleTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="roleTypeName" type="string">
+      <column name="RoleTypeName" not-null="true"/>
+    </property>
+    <property name="roleTypeDescription" type="string">
+      <column name="RoleTypeDescription"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getAllAgreementRoleTypeTranslations">
+        from AgreementRoleTypeTranslations where id.countryId = :countryId order by roleTypeName asc
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 13, 2012 9:50:55 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.ObjectComments" schema="dbo" table="ObjectComments">
+    <cache usage="nonstrict-read-write"/>
+    <id name="objectCommentId" type="string">
+      <column length="36" name="ObjectCommentID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="objectCommentParentId" type="string">
+      <column length="36" name="ObjectCommentParentID"/>
+    </property>
+    <property name="objectId" type="string">
+      <column length="36" name="ObjectID" not-null="true"/>
+    </property>
+    <property name="subject" type="string">
+      <column length="50" name="Subject" not-null="true"/>
+    </property>
+    <property name="body" type="string">
+      <column length="1073741823" name="Body" not-null="true"/>
+    </property>
+    <property name="countryId" type="int">
+      <column name="CountryID" not-null="true"/>
+    </property>
+    <property name="userRatingAverage" type="java.lang.Integer">
+      <column name="UserRatingAverage"/>
+    </property>
+    <property name="userRatingNumberOf" type="java.lang.Integer">
+      <column name="UserRatingNumberOf"/>
+    </property>
+    <property name="isDeleted" type="java.lang.Integer">
+      <column name="IsDeleted"/>
+    </property>
+    <property name="createdByUserId" type="string">
+      <column length="36" name="CreatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="deleteObjectCommentByObjectCommentId">
+        delete from ObjectComments oc where oc.objectCommentId = :objectCommentId
+    </query>
+  <query name="getObjectCommentByObjectCommentId">
+        from ObjectComments oc where oc.objectCommentId = :objectCommentId
+    </query>
+  <query name="getObjectCommentByObjectId">
+        from ObjectComments oc where oc.objectId = :objectId and isDeleted = '0' order by createdDate desc
+    </query>
+</hibernate-mapping>

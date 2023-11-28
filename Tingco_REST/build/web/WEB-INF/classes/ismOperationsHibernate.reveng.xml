@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="ISMOperations" match-schema="dbo"/>
+  <table-filter match-name="AccessLog"/>
+  <table-filter match-name="APILog"/>
+  <table-filter match-name="DeviceActivationSchedules"/>
+  <table-filter match-name="DeviceMessages"/>
+  <table-filter match-name="DeviceStatus"/>
+  <table-filter match-name="EventDetails"/>
+  <table-filter match-name="EventLog"/>
+  <table-filter match-name="EventsActive"/>
+  <table-filter match-name="ItemConnectionStatus"/>
+  <table-filter match-name="sysdiagrams"/>
+  <table-filter match-name="TransactionProducts"/>
+  <table-filter match-name="TransactionResult"/>
+  <table-filter match-name="ContainerData"/>
+  <table-filter match-name="MediaFiles"/>
+  <table-filter match-name="ContentGroupItems"/>
+  <table-filter match-name="ContentItemsToDevice"/>
+  <table-filter match-name="ContentItemLinks"/>
+  <table-filter match-name="ContainerFillings"/>
+  <table-filter match-name="ContainerUsageData"/>
+  <table-filter match-name="BundleFiles"/>
+  <table-filter match-name="ContainerTransactions"/>
+  <table-filter match-name="Blacklist"/>
+  <table-filter match-name="ObjectConnectedState"/>
+  <table-filter match-name="InstantMessageLog"/>
+  <table-filter match-name="ServiceContentCategories"/>
+  <table-filter match-name="ObjectLog"/>
+  <table-filter match-name="ServiceStatus"/>
+  <table-filter match-name="ObjectProductVariantCounters"/>
+  <table-filter match-name="TransactionCodes"/>
+  <table-filter match-name="AgreementBillingData"/>
+  <table-filter match-name="Widgets2"/>
+  <table-filter match-name="ContentItemCommands"/>
+  <table-filter match-name="ContentItemFeedback"/>
+  <table-filter match-name="FraudLog"/>
+  <table-filter match-name="ContentItemStatistics"/>
+  <table-filter match-name="TransactionPriceRanges"/>
+</hibernate-reverse-engineering>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2011 11:43:03 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Channels" schema="dbo" table="Channels">
+    <cache usage="nonstrict-read-write"/>
+    <id name="channelId" type="string">
+      <column length="36" name="ChannelID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Groups" fetch="select" name="groups">
+      <column length="36" name="GroupID"/>
+    </many-to-one>
+    <property name="channelName" type="string">
+      <column length="50" name="ChannelName" not-null="true"/>
+    </property>
+    <property name="channelDescription" type="string">
+      <column length="200" name="ChannelDescription"/>
+    </property>
+    <property name="channelData" type="string">
+      <column length="200" name="ChannelData"/>
+    </property>
+    <property name="channelEnabled" type="java.lang.Integer">
+      <column name="ChannelEnabled"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <!--<set name="routerses" inverse="true">
+            <key>
+                <column name="ChannelID" length="36" />
+            </key>
+            <one-to-many class="se.info24.pojo.Routers" />
+        </set>
+        <set name="routingTables" inverse="true">
+            <key>
+                <column name="ChannelID" length="36" />
+            </key>
+            <one-to-many class="se.info24.pojo.RoutingTable" />
+        </set>
+        <set name="servicesChannelses" inverse="true">
+            <key>
+                <column name="ChannelID" length="36" not-null="true" />
+            </key>
+            <one-to-many class="se.info24.pojo.ServicesChannels" />
+        </set> -->
+    <set inverse="true" name="servicesChannelses">
+      <key>
+        <column length="36" name="ChannelID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ServicesChannels"/>
+    </set>
+    <set inverse="true" name="providersesForCapChannel">
+      <key>
+        <column length="36" name="CapChannel"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Providers"/>
+    </set>
+    <set inverse="true" name="providersesForAuthChannel">
+      <key>
+        <column length="36" name="AuthChannel"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Providers"/>
+    </set>
+  </class>
+  <query name="getChannelById">
+        from Channels as c where c.channelId =:channelId
+    </query>
+  <query name="getAllChannels">
+        from Channels
+    </query>
+  <query name="getChannelByIds">
+        from Channels as c where c.channelId in(:channelId) order by channelName
+    </query>
+</hibernate-mapping>

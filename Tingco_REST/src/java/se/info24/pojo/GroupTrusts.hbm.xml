@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 3, 2011 5:08:17 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.GroupTrusts" schema="dbo" table="GroupTrusts">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.GroupTrustsId" name="id">
+      <key-property name="groupId" type="string">
+        <column length="36" name="GroupID"/>
+      </key-property>
+      <key-property name="itrustGroupId" type="string">
+        <column length="36" name="ITrustGroupID"/>
+      </key-property>
+      <key-property name="userRoleId" type="string">
+        <column length="36" name="UserRoleID"/>
+      </key-property>
+    </composite-id>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate" not-null="true"/>
+    </property>
+    <property name="isInternal" type="java.lang.Integer">
+      <column name="IsInternal"/>
+    </property>
+    <property name="isCustomer" type="java.lang.Integer">
+      <column name="IsCustomer"/>
+    </property>
+    <property name="isSupplier" type="java.lang.Integer">
+      <column name="IsSupplier"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getGroupTrustsById">
+        from GroupTrusts as gt where gt.id.itrustGroupId = :iTrustgroupID
+    </query>
+  <query name="getGroupTrustsByGroupId">
+        from GroupTrusts as gt where gt.id.groupId = :groupId
+    </query>
+  <query name="deleteGroupTrustById">
+        delete from GroupTrusts where ITrustGroupID = :iTrustgroupID and UserRoleID = :roleId
+    </query>
+  <query name="getGroupTrustsByIds">
+        from GroupTrusts where GroupID = :groupID and ITrustGroupID = :iTrustgroupID and UserRoleID = :roleID
+    </query>
+  <query name="getGroupTrustsByGroupIdAndITrustID">
+        from GroupTrusts as gt where gt.id.groupId = :groupId and gt.id.itrustGroupId = :iTrustgroupID
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2010 12:53:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.TimeZones" schema="dbo" table="TimeZones">
+    <cache usage="nonstrict-read-write"/>
+    <id name="timeZoneId" type="string">
+      <column length="36" name="TimeZoneID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="timeZoneName" type="string">
+      <column length="200" name="TimeZoneName" not-null="true"/>
+    </property>
+    <property name="timeZoneDescription" type="string">
+      <column length="200" name="TimeZoneDescription"/>
+    </property>
+    <property name="timeZoneGmtoffset" type="string">
+      <column length="10" name="TimeZoneGMTOffset" not-null="true"/>
+    </property>
+    <property name="daylightSavingStartTime" type="string">
+      <column length="10" name="DaylightSavingStartTime"/>
+    </property>
+    <property name="daylightSavingEndTime" type="string">
+      <column length="10" name="DaylightSavingEndTime"/>
+    </property>
+    <property name="daylightSavingOffset" type="string">
+      <column length="10" name="DaylightSavingOffset"/>
+    </property>
+    <property name="daylightSavingStartRule" type="string">
+      <column length="50" name="DaylightSavingStartRule"/>
+    </property>
+    <property name="daylightSavingStopRule" type="string">
+      <column length="50" name="DaylightSavingStopRule"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="timeZoneCode" type="string">
+      <column length="50" name="TimeZoneCode"/>
+    </property>
+  </class>
+  <query name="getAllTimeZones">
+      from TimeZones order by timeZoneName
+  </query>
+  <query name="getTimezoneById">
+      from TimeZones as t where t.timeZoneId = :timezoneId
+  </query>
+</hibernate-mapping>

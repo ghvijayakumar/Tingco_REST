@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 29, 2012 2:44:31 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DeviceTypeChannels" schema="dbo" table="DeviceTypeChannels">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.DeviceTypeChannelsId" name="id">
+      <key-property name="deviceTypeId" type="string">
+        <column length="36" name="DeviceTypeID"/>
+      </key-property>
+      <key-property name="channelId" type="string">
+        <column length="36" name="ChannelID"/>
+      </key-property>
+      <key-property name="channelDirection" type="int">
+        <column name="ChannelDirection"/>
+      </key-property>
+    </composite-id>
+    <property name="channelTag" type="string">
+      <column length="50" name="ChannelTag"/>
+    </property>
+    <property name="lastUpdatedByUser" type="string">
+      <column length="36" name="LastUpdatedByUser"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getDeviceTypeChannels">
+        from DeviceTypeChannels dtc where dtc.id.deviceTypeId = :deviceTypeId and dtc.id.channelDirection = '0'
+    </query>
+  <query name="getDeviceTypeChannelsBydeviceTypeId">
+        from DeviceTypeChannels dtc where dtc.id.deviceTypeId = :deviceTypeId
+    </query>
+  <query name="getDeviceTypeChannelsByID">
+        from DeviceTypeChannels dtc where dtc.id.deviceTypeId = :deviceTypeId and dtc.id.channelId = :channelId and dtc.id.channelDirection = :channelDirection
+    </query>
+</hibernate-mapping>

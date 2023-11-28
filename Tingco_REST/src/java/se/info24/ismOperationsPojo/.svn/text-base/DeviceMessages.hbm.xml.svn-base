@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 30, 2010 1:32:29 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.DeviceMessages" schema="dbo" table="DeviceMessages">
+    <cache usage="nonstrict-read-write"/>
+    <id name="deviceMessageId" type="string">
+      <column length="36" name="DeviceMessageID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="deviceId" type="string">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="dataItemId" type="string">
+      <column length="36" name="DataItemID"/>
+    </property>
+    <property name="sourceReferenceId" type="string">
+      <column length="200" name="SourceReferenceID"/>
+    </property>
+    <property name="deviceTypeId" type="string">
+      <column length="36" name="DeviceTypeID"/>
+    </property>
+    <property name="messageText" type="string">
+      <column length="1073741823" name="MessageText" not-null="true"/>
+    </property>
+    <property name="priority" type="java.lang.Integer">
+      <column name="Priority"/>
+    </property>
+    <property name="sendToDeviceNow" type="java.lang.Integer">
+      <column name="SendToDeviceNow"/>
+    </property>
+    <property name="isNew" type="java.lang.Integer">
+      <column name="IsNew"/>
+    </property>
+    <property name="isSentToDevice" type="java.lang.Integer">
+      <column name="IsSentToDevice"/>
+    </property>
+    <property name="isReceivedFromDevice" type="java.lang.Integer">
+      <column name="IsReceivedFromDevice"/>
+    </property>
+    <property name="isDeleted" type="java.lang.Integer">
+      <column name="IsDeleted"/>
+    </property>
+    <property name="isEmergency" type="java.lang.Integer">
+      <column name="IsEmergency"/>
+    </property>
+    <property name="isEmergencyAck" type="java.lang.Integer">
+      <column name="IsEmergencyAck"/>
+    </property>
+    <property name="posLatitude" type="java.lang.Double">
+      <column name="PosLatitude" precision="53" scale="0"/>
+    </property>
+    <property name="posLongitude" type="java.lang.Double">
+      <column name="PosLongitude" precision="53" scale="0"/>
+    </property>
+    <property name="posDepth" type="java.lang.Double">
+      <column name="PosDepth" precision="53" scale="0"/>
+    </property>
+    <property name="posDirection" type="java.lang.Integer">
+      <column name="PosDirection"/>
+    </property>
+    <property name="deviceStatus" type="string">
+      <column length="50" name="DeviceStatus"/>
+    </property>
+    <property name="createdByUserId" type="string">
+      <column length="36" name="CreatedByUserID"/>
+    </property>
+    <property name="sentToDeviceDate" type="timestamp">
+      <column length="23" name="SentToDeviceDate"/>
+    </property>
+    <property name="receivedFromDeviceDate" type="timestamp">
+      <column length="23" name="ReceivedFromDeviceDate"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getDeviceMessagesById">
+      from DeviceMessages as dm where dm.deviceMessageId =:deviceMessageID
+  </query>
+  <query name="getAllDeviceMessages">
+      from DeviceMessages
+  </query>
+</hibernate-mapping>

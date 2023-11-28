@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 23, 2013 10:58:19 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ObjectStateControl" schema="dbo" table="ObjectStateControl">
+    <cache usage="nonstrict-read-write"/>
+    <id name="objectId" type="string">
+      <column length="36" name="ObjectID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="stateModeIsAutomatic" type="int">
+      <column name="StateModeIsAutomatic" not-null="true"/>
+    </property>
+    <property name="stateModeIsManual" type="int">
+      <column name="StateModeIsManual" not-null="true"/>
+    </property>
+    <property name="stateModeIsSchedule" type="int">
+      <column name="StateModeIsSchedule" not-null="true"/>
+    </property>
+    <property name="manualModeObjectStateCodeId" type="string">
+      <column length="36" name="ManualModeObjectStateCodeID"/>
+    </property>
+    <property name="scheduleModeScheduleId" type="string">
+      <column length="36" name="ScheduleModeScheduleID"/>
+    </property>
+    <property name="scheduleDuringObjectStateCodeId" type="string">
+      <column length="36" name="ScheduleDuringObjectStateCodeID"/>
+    </property>
+    <property name="scheduleOutsideObjectStateCodeId" type="string">
+      <column length="36" name="ScheduleOutsideObjectStateCodeID"/>
+    </property>
+    <property name="stateCommentInternal" type="string">
+      <column name="StateCommentInternal"/>
+    </property>
+    <property name="stateCommentPublic" type="string">
+      <column name="StateCommentPublic"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getObjectStateControlByObjectId">
+        from ObjectStateControl where objectId = :objectId
+    </query>
+</hibernate-mapping>

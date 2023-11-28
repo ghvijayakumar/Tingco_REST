@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb
+END
+Attribute.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/Attribute.java
+END
+ContentItemStatistics.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/ContentItemStatistics.java
+END
+GroupID.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/GroupID.java
+END
+ContentGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/ContentGroups.java
+END
+Content.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/Content.java
+END
+ContentItemCommands.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/ContentItemCommands.java
+END
+ContentItemCommandCountry.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/ContentItemCommandCountry.java
+END
+ContentItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/ContentItems.java
+END
+TingcoContent.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/TingcoContent.java
+END
+CountryID.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/CountryID.java
+END
+Attributes.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/Attributes.java
+END
+Point.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/Point.java
+END
+ContentItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/ContentItem.java
+END
+MsgStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/MsgStatus.java
+END
+Geometry.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/Geometry.java
+END
+ContentAttribute.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/ContentAttribute.java
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/ObjectFactory.java
+END
+ContentItemFeedback.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/contentjaxb/ContentItemFeedback.java
+END

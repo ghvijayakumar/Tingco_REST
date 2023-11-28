@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 3:59:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.SystemSettings" schema="dbo" table="SystemSettings">
+    <cache usage="nonstrict-read-write"/>
+    <id name="systemSettingId" type="string">
+      <column length="36" name="SystemSettingID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="systemSettingName" type="string">
+      <column length="50" name="SystemSettingName" not-null="true"/>
+    </property>
+    <property name="systemSettingValue" type="string">
+      <column length="200" name="SystemSettingValue" not-null="true"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+</hibernate-mapping>

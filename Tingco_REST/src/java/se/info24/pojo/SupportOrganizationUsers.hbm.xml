@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 5, 2013 11:23:34 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.SupportOrganizationUsers" schema="dbo" table="SupportOrganizationUsers">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.SupportOrganizationUsersId" name="id">
+      <key-property name="supportOrganizationId" type="string">
+        <column length="36" name="SupportOrganizationID"/>
+      </key-property>
+      <key-property name="userId" type="string">
+        <column length="36" name="UserID"/>
+      </key-property>
+    </composite-id>
+    <property name="isManager" type="java.lang.Integer">
+      <column name="IsManager"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <!--<query name="getSupportOrganizationUsersByUserId">
+        from SupportOrganizationUsers where id.userId in (:userId) and isManager = 1
+    </query>-->
+  <query name="getSupportOrganizationUsersByUserIdandId">
+        from SupportOrganizationUsers where id.userId = :userId and id.supportOrganizationId = :supportOrganizationId and isManager = 1
+    </query>
+  <query name="getSupportOrganizationUsersById">
+        from SupportOrganizationUsers where id.supportOrganizationId = :supportOrganizationId
+    </query>
+  <query name="getSupportOrganizationUsersByIds">
+        from SupportOrganizationUsers where id.supportOrganizationId = :supportOrganizationId and id.userId = :userId
+    </query>
+  <query name="getSupportOrganizationUsersByUserAndSupportOrganization">
+        from SupportOrganizationUsers where id.userId = :userId and id.supportOrganizationId = :supportOrganizationId
+    </query>
+  <query name="getSupportOrganizationUsersByUserId">
+        from SupportOrganizationUsers where id.userId = :userId
+    </query>
+</hibernate-mapping>

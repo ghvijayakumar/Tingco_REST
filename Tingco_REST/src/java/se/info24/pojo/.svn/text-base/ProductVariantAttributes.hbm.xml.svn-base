@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 8, 2013 3:53:44 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ProductVariantAttributes" schema="dbo" table="ProductVariantAttributes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="productVariantAttributeId" type="string">
+      <column length="36" name="ProductVariantAttributeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="productVariantId" type="string">
+      <column length="36" name="ProductVariantID" not-null="true"/>
+    </property>
+    <property name="attributeName" type="string">
+      <column name="AttributeName" not-null="true"/>
+    </property>
+    <property name="attributeValue" type="string">
+      <column name="AttributeValue"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getProductVariantAttributesByProductVariantId">
+        from ProductVariantAttributes where productVariantId in (:productVariantId) order by attributeName
+    </query>
+  <query name="getProductVariantAttributesByID">
+        from ProductVariantAttributes where productVariantAttributeId = :productVariantAttributeId and productVariantId =:productVariantId
+    </query>
+</hibernate-mapping>

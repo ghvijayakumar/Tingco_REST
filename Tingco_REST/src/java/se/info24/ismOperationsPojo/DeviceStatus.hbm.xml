@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 28, 2011 6:45:17 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.DeviceStatus" schema="dbo" table="DeviceStatus">
+    <cache usage="nonstrict-read-write"/>
+    <id name="deviceId" type="string">
+      <column length="36" name="DeviceID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="dataItemId" type="string">
+      <column length="36" name="DataItemID" not-null="true"/>
+    </property>
+    <property name="dataItemTime" type="timestamp">
+      <column length="23" name="DataItemTime" not-null="true"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="posLatitude" type="string">
+      <column name="PosLatitude" precision="53" scale="0"/>
+    </property>
+    <property name="posLongitude" type="string">
+      <column name="PosLongitude" precision="53" scale="0"/>
+    </property>
+    <property name="posDepth" type="string">
+      <column name="PosDepth" precision="53" scale="0"/>
+    </property>
+    <property name="posDirection" type="java.lang.Integer">
+      <column name="PosDirection"/>
+    </property>
+    <property name="coordinateSystemId" type="string">
+      <column length="50" name="CoordinateSystemID"/>
+    </property>
+    <property name="msgId" type="string">
+      <column length="36" name="MsgID"/>
+    </property>
+    <property name="msgTimeStamp" type="timestamp">
+      <column length="23" name="MsgTimeStamp"/>
+    </property>
+    <property name="msgSenderDeviceId" type="string">
+      <column length="36" name="MsgSenderDeviceID"/>
+    </property>
+    <property name="msgSenderServiceId" type="string">
+      <column length="36" name="MsgSenderServiceID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getDeviceStatusByDeviceId">
+      from DeviceStatus as ds where ds.deviceId = :deviceId
+  </query>
+  <query name="getDeviceStatusByGroupId">
+      from DeviceStatus as ds where ds.groupId = :groupId
+  </query>
+  <query name="getDeviceStatus">
+      from DeviceStatus as ds where ds.deviceId = :deviceId and ds.groupId = :groupId
+  </query>
+  <query name="getDeviceStatusByDeviceIDandIsEnabled">
+      from DeviceStatus as ds where ds.deviceId = :deviceId and ds.isEnabled = '1'
+  </query>
+  <query name="getDeviceStatusByDeviceIds">
+      from DeviceStatus as ds where ds.deviceId in (:deviceId) order by createdDate desc
+  </query>
+</hibernate-mapping>

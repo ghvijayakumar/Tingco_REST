@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 13, 2012 12:50:38 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Products" schema="dbo" table="Products">
+    <cache usage="nonstrict-read-write"/>
+    <id name="productId" type="string">
+      <column length="36" name="ProductID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.ProductCategories" fetch="select" name="productCategories">
+      <column length="36" name="ProductCategoryID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ProductTypes" fetch="select" name="productTypes">
+      <column length="36" name="ProductTypeID"/>
+    </many-to-one>
+    <!-- <property name="productTypeId" type="string">
+            <column name="ProductTypeId" length="36" />
+        </property>
+        <property name="productCategoryId" type="string">
+            <column length="36" name="ProductCategoryID"/>
+        </property> -->
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="displayInWebShop" type="java.lang.Integer">
+      <column name="DisplayInWebShop"/>
+    </property>
+    <property name="isDeleted" type="java.lang.Integer">
+      <column name="IsDeleted"/>
+    </property>
+    <property name="isDownloadProduct" type="java.lang.Integer">
+      <column name="IsDownloadProduct"/>
+    </property>
+    <property name="extendedMembershipRequired" type="java.lang.Integer">
+      <column name="ExtendedMembershipRequired"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="productAttributeses">
+      <key>
+        <column length="36" name="ProductID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ProductAttributes"/>
+    </set>
+    <set cascade="save-update,delete" inverse="true" name="productTranslationses">
+      <key>
+        <column length="36" name="ProductID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ProductTranslations"/>
+    </set>
+    <set inverse="true" name="productVariantses">
+      <key>
+        <column length="36" name="ProductID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ProductVariants"/>
+    </set>
+    <set cascade="save-update,delete" inverse="true" name="productsInGroupses">
+      <key>
+        <column length="36" name="ProductID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ProductsInGroups"/>
+    </set>
+  </class>
+  <query name="getAllProducts">
+        from Products
+    </query>
+  <query name="getProducts">
+        from Products where productId in (:productId) 
+    </query>
+  <query name="getProductsByProductCategoryId">
+        from Products where productCategoryId = :productCategoryId
+    </query>
+  <query name="getProductsByOrder">
+        from Products where productId in (:productId) order by createdDate desc
+    </query>
+  <query name="getProductsByProductID">
+        from Products where productId =:productId
+    </query>
+</hibernate-mapping>

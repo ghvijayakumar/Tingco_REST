@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 28, 2014 4:47:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.Bundle" schema="dbo" table="Bundle">
+    <id name="bundleId" type="string">
+      <column length="36" name="BundleID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="bundleName" type="string">
+      <column name="BundleName" not-null="true"/>
+    </property>
+    <property name="bundleSymbolicName" type="string">
+      <column name="BundleSymbolicName"/>
+    </property>
+    <property name="bundleDescription" type="string">
+      <column name="BundleDescription"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="bundleCategoryId" type="string">
+      <column length="36" name="BundleCategoryID"/>
+    </property>
+    <property name="bundleTypeId" type="string">
+      <column length="36" name="BundleTypeID"/>
+    </property>
+    <property name="bundleIconUrl" type="string">
+      <column name="BundleIconURL"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="bundleLogs">
+      <key>
+        <column length="36" name="BundleID" not-null="true" unique="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.BundleLog"/>
+    </set>
+    <set cascade="save-update,delete" inverse="true" name="bundleVersionses">
+      <key>
+        <column length="36" name="BundleID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.BundleVersions"/>
+    </set>
+    <set inverse="true" name="serviceTypeBundleses">
+      <key>
+        <column length="36" name="BundleID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ServiceTypeBundles"/>
+    </set>
+  </class>
+  <query name="getBundleById">
+        from Bundle where bundleId = :bundleId
+    </query>
+  <query name="getBundleByIds">
+        from Bundle where bundleId in (:bundleId) order by bundleName
+    </query>
+  <query name="getBundleByCountryID">
+        from Bundle where groupId in (:groupId) order by bundleName
+    </query>
+  <query name="getBundleTranslationsByName">
+        from Bundle where groupId in (:groupId) and bundleName like '%'+:bundleName+'%' order by bundleName
+    </query>
+</hibernate-mapping>

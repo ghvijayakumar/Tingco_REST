@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 22, 2012 5:50:04 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ObjectContacts" schema="dbo" table="ObjectContacts">
+    <cache usage="nonstrict-read-write"/>
+    <id name="objectContactId" type="string">
+      <column length="36" name="ObjectContactID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.ObjectContactTypes" fetch="select" name="objectContactTypes">
+      <column length="36" name="ObjectContactTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="contactFirstName" type="string">
+      <column name="ContactFirstName" not-null="true"/>
+    </property>
+    <property name="contactLastName" type="string">
+      <column name="ContactLastName" not-null="true"/>
+    </property>
+    <property name="contactOrganizationName" type="string">
+      <column name="ContactOrganizationName"/>
+    </property>
+    <property name="contactTitle" type="string">
+      <column name="ContactTitle"/>
+    </property>
+    <property name="contactEmail" type="string">
+      <column name="ContactEmail"/>
+    </property>
+    <property name="contactPhone" type="string">
+      <column name="ContactPhone"/>
+    </property>
+    <property name="contactMobilePhone" type="string">
+      <column name="ContactMobilePhone"/>
+    </property>
+    <property name="contactFax" type="string">
+      <column name="ContactFax"/>
+    </property>
+    <property name="contactDescription" type="string">
+      <column name="ContactDescription"/>
+    </property>
+    <property name="contactShortDescription" type="string">
+      <column name="ContactShortDescription"/>
+    </property>
+    <property name="contactStreetAddress1" type="string">
+      <column name="ContactStreetAddress1"/>
+    </property>
+    <property name="contactStreetAddress2" type="string">
+      <column name="ContactStreetAddress2"/>
+    </property>
+    <property name="contactSuite" type="string">
+      <column name="ContactSuite"/>
+    </property>
+    <property name="contactZipCode" type="string">
+      <column name="ContactZipCode"/>
+    </property>
+    <property name="contactCity" type="string">
+      <column name="ContactCity"/>
+    </property>
+    <property name="countryId" type="java.lang.Integer">
+      <column name="CountryID"/>
+    </property>
+    <property name="countryStateId" type="string">
+      <column length="36" name="CountryStateID"/>
+    </property>
+    <property name="contactWeb" type="string">
+      <column name="ContactWeb"/>
+    </property>
+    <property name="contactIm" type="string">
+      <column name="ContactIM"/>
+    </property>
+    <property name="linkedToUserId" type="string">
+      <column length="36" name="LinkedToUserID"/>
+    </property>
+    <property name="sortOrder" type="java.lang.Integer">
+      <column name="SortOrder"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getObjectContacts">
+        from ObjectContacts where objectContactId in (:objectContactId) order by contactFirstName asc, contactLastName asc
+    </query>
+  <query name="getObjectContactsDetails">
+        from ObjectContacts where objectContactId in (:objectContactId) and groupId = :groupId and countryId = :countryId order by createdDate desc, contactFirstName asc, contactLastName asc
+    </query>
+  <query name="getObjectContactsByGroupId">
+        from ObjectContacts where groupId in (:groupId) order by contactFirstName, contactLastName, contactOrganizationName
+    </query>
+</hibernate-mapping>

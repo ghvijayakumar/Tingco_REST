@@ -1,0 +1,131 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/NB_2011/!svn/ver/2167/Tingco_REST/src/java/se/info24/utiljaxb
+END
+Country.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/Country.java
+END
+TingcoUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2167/Tingco_REST/src/java/se/info24/utiljaxb/TingcoUtils.java
+END
+Languages.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/Languages.java
+END
+ObjectLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2167/Tingco_REST/src/java/se/info24/utiljaxb/ObjectLog.java
+END
+GroupID.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/GroupID.java
+END
+CountryPhoneCodes.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/CountryPhoneCodes.java
+END
+News.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/NB_2011/!svn/ver/2156/Tingco_REST/src/java/se/info24/utiljaxb/News.java
+END
+NewsCategoryTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/NewsCategoryTranslations.java
+END
+Timezones.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/Timezones.java
+END
+NetworkTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/NetworkTypes.java
+END
+CountryID.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/CountryID.java
+END
+LastUpdatedByUserID.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/LastUpdatedByUserID.java
+END
+NewsCategories.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/NewsCategories.java
+END
+UserInvitation.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/UserInvitation.java
+END
+CountryStates.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/CountryStates.java
+END
+UserTimeZone.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/UserTimeZone.java
+END
+Currency.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/Currency.java
+END
+MsgStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/MsgStatus.java
+END
+WeekDayTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2129/Tingco_REST/src/java/se/info24/utiljaxb/WeekDayTranslations.java
+END
+ObjectLogs.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2167/Tingco_REST/src/java/se/info24/utiljaxb/ObjectLogs.java
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2167/Tingco_REST/src/java/se/info24/utiljaxb/ObjectFactory.java
+END

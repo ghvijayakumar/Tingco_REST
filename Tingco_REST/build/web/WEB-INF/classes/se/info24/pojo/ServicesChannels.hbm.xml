@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 18, 2013 11:55:16 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ServicesChannels" schema="dbo" table="ServicesChannels">
+    <cache usage="nonstrict-read-write"/>
+    <id name="serviceChannelId" type="int">
+      <column name="ServiceChannelID"/>
+      <generator class="native"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Services" fetch="select" name="services">
+      <column length="36" name="ServiceID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Channels" fetch="select" name="channels">
+      <column length="36" name="ChannelID" not-null="true"/>
+    </many-to-one>
+    <property name="channelDirection" type="int">
+      <column name="ChannelDirection" not-null="true"/>
+    </property>
+    <property name="channelTag" type="string">
+      <column name="ChannelTag"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getServicesChannelsById">
+        from ServicesChannels  where serviceChannelId =:serviceChannelId
+    </query>
+  <query name="getServicesChannelsByServiceId">
+        from ServicesChannels  where services.serviceId =:serviceId
+    </query>
+</hibernate-mapping>

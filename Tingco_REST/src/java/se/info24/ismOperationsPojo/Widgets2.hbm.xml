@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 6, 2014 11:26:16 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="tcmweb" name="se.info24.ismOperationsPojo.Widgets2" schema="dbo" table="Widgets2">
+    <id name="widgetId" type="string">
+      <column length="36" name="WidgetID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID"/>
+    </property>
+    <property name="widgetName" type="string">
+      <column name="WidgetName" not-null="true"/>
+    </property>
+    <property name="widgetDescription" type="string">
+      <column name="WidgetDescription"/>
+    </property>
+    <property name="widgetTypeId" type="string">
+      <column length="36" name="WidgetTypeID"/>
+    </property>
+    <property name="widgetTemplateId" type="string">
+      <column length="36" name="WidgetTemplateID"/>
+    </property>
+    <property name="widgetUrl" type="string">
+      <column name="WidgetURL" not-null="true"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="reloadTimer" type="java.lang.Integer">
+      <column name="ReloadTimer"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate"/>
+    </property>
+    <property name="apimethod" type="string">
+      <column name="APIMethod"/>
+    </property>
+    <property name="apiuser" type="string">
+      <column name="APIUser"/>
+    </property>
+    <property name="apipassword" type="string">
+      <column name="APIPassword"/>
+    </property>
+    <property name="objectId" type="string">
+      <column length="36" name="ObjectID"/>
+    </property>
+    <property name="externalUrl" type="string">
+      <column name="ExternalURL"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="width" type="java.lang.Integer">
+      <column name="Width"/>
+    </property>
+    <property name="height" type="java.lang.Integer">
+      <column name="Height"/>
+    </property>
+    <property name="imageUrl" type="string">
+      <column name="ImageURL"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="deviceDateItemId" type="string">
+      <column length="36" name="DeviceDateItemID"/>
+    </property>
+    <property name="numberOfDecimals" type="java.lang.Integer">
+      <column name="NumberOfDecimals"/>
+    </property>
+    <property name="unit" type="string">
+      <column name="Unit"/>
+    </property>
+    <property name="timeZone" type="string">
+      <column name="TimeZone"/>
+    </property>
+    <property name="minValue" type="big_decimal">
+      <column name="MinValue"/>
+    </property>
+    <property name="maxValue" type="big_decimal">
+      <column name="MaxValue"/>
+    </property>
+    <property name="warningLowValue" type="big_decimal">
+      <column name="WarningLowValue"/>
+    </property>
+    <property name="warningHighValue" type="big_decimal">
+      <column name="WarningHighValue"/>
+    </property>
+  </class>
+  <query name="getWidgets2ById">
+        from Widgets2 where widgetId = :widgetId
+    </query>
+</hibernate-mapping>

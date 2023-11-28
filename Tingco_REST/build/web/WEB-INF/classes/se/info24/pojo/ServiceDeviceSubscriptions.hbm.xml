@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 29, 2012 5:22:27 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ServiceDeviceSubscriptions" schema="dbo" table="ServiceDeviceSubscriptions">
+    <cache usage="nonstrict-read-write"/>
+    <id name="serviceDeviceSubscriptionId" type="string">
+      <column length="36" name="ServiceDeviceSubscriptionID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Agreements" fetch="select" name="agreements">
+      <column length="36" name="AgreementID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Services" fetch="select" name="services">
+      <column length="36" name="ServiceID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ServiceClientLogins" fetch="select" name="serviceClientLogins">
+      <column length="36" name="ServiceClientLoginID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Device" fetch="select" name="device">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </many-to-one>
+    <property name="subscriptionEnabled" type="java.lang.Integer">
+      <column name="SubscriptionEnabled"/>
+    </property>
+    <property name="serviceSubscriptionAclid" type="string">
+      <column length="36" name="ServiceSubscriptionACLID"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="serviceDeviceSettingses">
+      <key>
+        <column length="36" name="ServiceDeviceSubscriptionID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ServiceDeviceSettings"/>
+    </set>
+  </class>
+  <query name="getServiceDeviceSubscriptions">
+        from ServiceDeviceSubscriptions where serviceDeviceSubscriptionId = :serviceDeviceSubscriptionId
+    </query>
+  <query name="getServiceDeviceSubscriptionsById">
+        from ServiceDeviceSubscriptions where services.serviceId = :serviceId and device.deviceId = :deviceId and serviceClientLogins.serviceClientLoginId = :serviceClientLoginId
+    </query>
+  <query name="getServiceDeviceSubscriptionsByDeviceId">
+        from ServiceDeviceSubscriptions where device.deviceId = :deviceId order by createdDate desc
+    </query>
+  <query name="getServiceDeviceSubscriptionsByDeviceIds">
+        from ServiceDeviceSubscriptions where device.deviceId in(:deviceId) order by createdDate desc
+    </query>
+  <query name="getServiceDeviceSubscriptionsByIdList">
+        from ServiceDeviceSubscriptions where serviceDeviceSubscriptionId in (:serviceDeviceSubscriptionId) order by services.serviceName, serviceClientLogins.serviceClientLoginName
+    </query>
+  <query name="getServiceDeviceSubscriptionsByIds">
+        from ServiceDeviceSubscriptions where services.serviceId in (:serviceId) and device.deviceId = :deviceId and serviceClientLogins.serviceClientLoginId = :serviceClientLoginId and agreements.agreementId = :agreementId
+    </query>
+</hibernate-mapping>

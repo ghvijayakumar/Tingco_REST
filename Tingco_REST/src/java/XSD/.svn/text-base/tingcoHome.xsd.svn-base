@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="tingcoHome">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="MsgID"/>
+                <xs:element ref="MsgTimeStamp"/>
+                <xs:element ref="MsgStatus" minOccurs="0"/>
+                <xs:element ref="Buildings"/>
+                <xs:element ref="Zones"/>
+            </xs:sequence>
+            <xs:attribute name="TimeZone" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="UTC"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="RegionalUnits" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Metric"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="MsgVer" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:decimal"/>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="CreateRef" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Info24"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Zones">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Zone" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Zone">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ZoneID" type="xs:string"/>
+                <xs:element name="ZoneName" type="xs:string"/>
+                <xs:element name="ZoneDescription" type="xs:string"/>
+                <xs:element ref="GroupID"/>
+                <xs:element name="IconURL" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+                <xs:element ref="Room"  maxOccurs="unbounded"/>
+            </xs:sequence>
+			<xs:attribute name="SeqNo">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Buildings">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Building" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Building">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="BuildingID" type="xs:string"/>
+                <xs:element ref="BuildingParentID"/>
+                <xs:element name="BuildingName" type="xs:string"/>
+                <xs:element name="BuildingDescription" type="xs:string"/>
+                <xs:element ref="OwnerGroupID"/>
+                <xs:element ref="UsedByGroupID"/>
+                <xs:element ref="AgreementID"/>
+                <xs:element ref="ContainerID"/>
+                <xs:element ref="DeviceID"/>
+                <xs:element name="PropertyCode" type="xs:string"/>
+                <xs:element name="BuildingNumber" type="xs:string"/>
+				<xs:element name="BuildingCode" type="xs:string"/>
+                <xs:element name="ShareOfParent" type="xs:int"/>
+				<xs:element name="FloorLevel" type="xs:string"/>
+                <xs:element name="Area" type="xs:decimal"/>
+				<xs:element name="AreaUnit" type="xs:string"/>
+                <xs:element name="Volume" type="xs:decimal"/>
+				<xs:element name="VolumeUnit" type="xs:string"/>
+                <xs:element name="Rating" type="xs:int"/>
+				<xs:element name="IsNonSmoking" type="xs:int"/>
+                <xs:element name="IsPublicAccess" type="xs:int"/>
+                <xs:element name="IsOpen" type="xs:int"/>
+				<xs:element name="IsInEmergencyMode" type="xs:int"/>
+				<xs:element name="Street1" type="xs:string"/>                
+				<xs:element name="Street2" type="xs:string"/>
+				<xs:element name="ZipCode" type="xs:string"/>
+				<xs:element name="City" type="xs:string"/>
+                <xs:element name="State" type="xs:string"/>
+                <xs:element name="Region" type="xs:string"/>
+                <xs:element ref="CountryID"/>
+                <xs:element name="Latitude" type="xs:decimal"/>
+                <xs:element name="Longitude" type="xs:decimal"/>
+                <xs:element name="Altitude" type="xs:decimal"/>
+                <xs:element name="LayoutImageURL" type="xs:string"/>
+				<xs:element name="WebsiteURL" type="xs:string"/>
+				<xs:element name="ClimatePricePreference" type="xs:int"/>
+
+                <xs:element name="IsPetsAllowed" type="xs:string"/>
+				<xs:element name="UserCanChangeClimatePricePref" type="xs:string"/>
+
+				<xs:element ref="EnergyMeterDeviceID"/>
+                <xs:element ref="HeatMeterDeviceID"/>
+                <xs:element ref="WaterMeterDeviceID"/>
+                <xs:element ref="GasMeterDeviceID"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+                <xs:element ref="Room"  maxOccurs="unbounded"/>
+                <xs:element ref="BuildingTypes"  maxOccurs="unbounded"/>
+                <xs:element ref="BuildingDevices" />
+            </xs:sequence>
+			<xs:attribute name="SeqNo">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BuildingTypes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="BuildingTypeID" type="xs:string"/>
+                <xs:element name="ObjectCode" type="xs:string"/>
+                <xs:element name="IconURL" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+                <xs:element ref="BuildingTypeTranslations"  maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BuildingTypeTranslations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="BuildingTypeID" type="xs:string"/>
+                <xs:element ref="CountryID"/>
+                <xs:element name="BuildingTypeName" type="xs:string"/>
+                <xs:element name="BuildingTypeDescription" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BuildingDevices">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="BuildingID" type="xs:string"/>
+                <xs:element ref="DeviceID" maxOccurs="unbounded" />
+                <xs:element ref="Room" maxOccurs="unbounded" />
+                <xs:element name="ContentItemID" type="xs:string"/>
+                <xs:element name="ServiceProviderID" type="xs:string"/>
+                <xs:element name="LayoutXCoord" type="xs:string"/>
+                <xs:element name="LayoutYCoord" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Room">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="RoomID" type="xs:string"/>
+                <xs:element name="RoomName" type="xs:string"/>
+                <xs:element name="RoomDescription" type="xs:string"/>
+                <xs:element name="RoomNumber" type="xs:string"/>
+                <xs:element ref="OwnerGroupID"/>
+                <xs:element ref="UsedByGroupID"/>
+                <xs:element name="RoomTypeID" type="xs:string"/>
+                <xs:element ref="Building" />
+                <xs:element ref="ContainerID" />
+                <xs:element name="Area" type="xs:decimal"/>
+				<xs:element name="AreaUnit" type="xs:string"/>
+                <xs:element name="Volume" type="xs:decimal"/>
+				<xs:element name="VolumeUnit" type="xs:string"/>
+                <xs:element name="Rating" type="xs:integer"/>
+				<xs:element name="IsNonSmoking" type="xs:int"/>
+                <xs:element name="IsPublicAccess" type="xs:int"/>
+                <xs:element name="IsDoNotDisturb" type="xs:int"/>
+				<xs:element ref="AgreementID" />
+				<xs:element name="FloorLevel" type="xs:string"/>
+				<xs:element name="LayoutImageURL" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+                <xs:element ref="RoomTypes"  maxOccurs="unbounded"/>
+                <xs:element ref="Zone"  maxOccurs="unbounded"/>
+            </xs:sequence>
+			<xs:attribute name="SeqNo">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="RoomTypes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="RoomTypeID" type="xs:string"/>
+                <xs:element name="ObjectCode" type="xs:string"/>
+                <xs:element name="IconURL" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+                <xs:element ref="RoomTypeTranslations"  maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="RoomTypeTranslations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="RoomTypeID" type="xs:string"/>
+                <xs:element ref="CountryID"/>
+                <xs:element name="RoomTypeName" type="xs:string"/>
+                <xs:element name="RoomTypeDescription" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ResponseCode" type="xs:int"/>
+    <xs:element name="MsgTimeStamp">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="MsgStatus">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ResponseCode" type="xs:int"/>
+                <xs:element name="ResponseText" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MsgID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="CreatedDate">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="UpdatedDate">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+ 
+    <xs:simpleType name="ST_EnergyMeterDeviceID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ST_HeatMeterDeviceID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ST_WaterMeterDeviceID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ST_GasMeterDeviceID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ST_AgreementID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="ST_CountryID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ST_OwnerGroupID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ST_UsedByGroupID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ST_GroupID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ST_DeviceID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ST_BuildingParentID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="ST_ContainerID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:element name="ContainerID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_ContainerID">
+                    <xs:attribute name="ContainerName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BuildingParentID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_BuildingParentID">
+                    <xs:attribute name="BuildingParentName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="CountryID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_CountryID">
+                    <xs:attribute name="CountryName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="OwnerGroupID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_OwnerGroupID">
+                    <xs:attribute name="OwnerGroupName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="UsedByGroupID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_UsedByGroupID">
+                    <xs:attribute name="UsedByGroupName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GroupID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_GroupID">
+                    <xs:attribute name="GroupName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="DeviceID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_DeviceID">
+                    <xs:attribute name="DeviceName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+ 
+
+<xs:element name="EnergyMeterDeviceID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_EnergyMeterDeviceID">
+                    <xs:attribute name="EnergyMeterDeviceName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="HeatMeterDeviceID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_HeatMeterDeviceID">
+                    <xs:attribute name="HeatMeterDeviceName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="WaterMeterDeviceID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_WaterMeterDeviceID">
+                    <xs:attribute name="WaterMeterDeviceName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GasMeterDeviceID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_GasMeterDeviceID">
+                    <xs:attribute name="GasMeterDeviceName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AgreementID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_AgreementID">
+                    <xs:attribute name="AgreementName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

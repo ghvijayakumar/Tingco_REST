@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2012 12:18:32 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ServiceClientLogins" schema="dbo" table="ServiceClientLogins">
+    <cache usage="nonstrict-read-write"/>
+    <id name="serviceClientLoginId" type="string">
+      <column length="36" name="ServiceClientLoginID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Groups" insert="false" name="groups" update="false">
+      <!-- uncommented for services/GetDeliveryAccountDetails/ service -->
+      <column length="36" name="GroupID" not-null="true"/>
+    </many-to-one>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="serviceClientLoginName" type="string">
+      <column name="ServiceClientLoginName" not-null="true"/>
+    </property>
+    <property name="serviceClientLoginDescription" type="string">
+      <column name="ServiceClientLoginDescription"/>
+    </property>
+    <property name="clientLogin" type="string">
+      <column length="36" name="ClientLogin"/>
+    </property>
+    <property name="password" type="string">
+      <column name="Password"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="protocol" type="string">
+      <column name="Protocol"/>
+    </property>
+    <property name="protocolVersion" type="java.lang.Integer">
+      <column name="ProtocolVersion"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="serviceDeviceSubscriptionses">
+      <key>
+        <column length="36" name="ServiceClientLoginID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ServiceDeviceSubscriptions"/>
+    </set>
+    <set inverse="true" name="groupDefaultServiceClientLogins">
+      <key>
+        <column length="36" name="ServiceClientLoginID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.GroupDefaultServiceClientLogin"/>
+    </set>
+  </class>
+  <query name="getServiceClientLoginsById">
+        from ServiceClientLogins where serviceClientLoginId = :serviceClientLoginId
+    </query>
+  <query name="getServiceClientLoginsByIdAndGroupID">
+        from ServiceClientLogins where serviceClientLoginId = :serviceClientLoginId and groupId = :groupId
+    </query>
+  <query name="getServiceClientLogins">
+        from ServiceClientLogins where serviceClientLoginId in (:serviceClientLoginId)
+    </query>
+  <query name="getServiceClientLoginsByGroupId">
+        from ServiceClientLogins where groupId = :groupId order by serviceClientLoginName asc
+    </query>
+  <query name="getServiceClientLoginsByGroupIds">
+        from ServiceClientLogins where groupId in (:groupId) order by serviceClientLoginName asc
+    </query>
+  <query name="getServiceClientLoginsByIdandSearchString">
+        from ServiceClientLogins where groupId in (:groupId) and serviceClientLoginName like '%'+:searchString+'%' order by serviceClientLoginName asc
+    </query>
+  <query name="getServiceClientLoginsByGroupIdListAndSearchString">
+        from ServiceClientLogins where groupId in (:groupId) and (serviceClientLoginName like '%'+:searchString+'%' or serviceClientLoginDescription like '%'+:searchString+'%' or clientLogin like '%'+:searchString+'%' or serviceClientLoginId like '%'+:searchString+'%') order by serviceClientLoginName
+    </query>
+</hibernate-mapping>

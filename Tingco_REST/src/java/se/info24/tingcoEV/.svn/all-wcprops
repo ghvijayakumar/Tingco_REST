@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/NB_2011/!svn/ver/2434/Tingco_REST/src/java/se/info24/tingcoEV
+END
+Country.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/975/Tingco_REST/src/java/se/info24/tingcoEV/Country.java
+END
+UsageRecord.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/975/Tingco_REST/src/java/se/info24/tingcoEV/UsageRecord.java
+END
+UserAliasOrder.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2406/Tingco_REST/src/java/se/info24/tingcoEV/UserAliasOrder.java
+END
+ChargePoints.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/975/Tingco_REST/src/java/se/info24/tingcoEV/ChargePoints.java
+END
+UsageRecords.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/975/Tingco_REST/src/java/se/info24/tingcoEV/UsageRecords.java
+END
+UserAliasOrders.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/975/Tingco_REST/src/java/se/info24/tingcoEV/UserAliasOrders.java
+END
+UserKey.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/975/Tingco_REST/src/java/se/info24/tingcoEV/UserKey.java
+END
+Activatekey.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2434/Tingco_REST/src/java/se/info24/tingcoEV/Activatekey.java
+END
+Currency.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/975/Tingco_REST/src/java/se/info24/tingcoEV/Currency.java
+END
+MsgStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/975/Tingco_REST/src/java/se/info24/tingcoEV/MsgStatus.java
+END
+Userkeys.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/975/Tingco_REST/src/java/se/info24/tingcoEV/Userkeys.java
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2434/Tingco_REST/src/java/se/info24/tingcoEV/ObjectFactory.java
+END
+TingcoEV.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/975/Tingco_REST/src/java/se/info24/tingcoEV/TingcoEV.java
+END

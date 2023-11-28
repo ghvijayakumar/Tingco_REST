@@ -1,0 +1,299 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/NB_2011/!svn/ver/2431/Tingco_REST/src/java/se/info24/usersjaxb
+END
+Operation.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/Operation.java
+END
+Users.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/2355/Tingco_REST/src/java/se/info24/usersjaxb/Users.java
+END
+FunctionAreas.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2198/Tingco_REST/src/java/se/info24/usersjaxb/FunctionAreas.java
+END
+TingcoUsers.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2355/Tingco_REST/src/java/se/info24/usersjaxb/TingcoUsers.java
+END
+UserAliasID.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2355/Tingco_REST/src/java/se/info24/usersjaxb/UserAliasID.java
+END
+ApplicationModule.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1819/Tingco_REST/src/java/se/info24/usersjaxb/ApplicationModule.java
+END
+UserTimeZones.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/UserTimeZones.java
+END
+DeviceID.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2355/Tingco_REST/src/java/se/info24/usersjaxb/DeviceID.java
+END
+User.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/2423/Tingco_REST/src/java/se/info24/usersjaxb/User.java
+END
+LastUpdatedByUserID.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/LastUpdatedByUserID.java
+END
+UserRoles.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/UserRoles.java
+END
+ObjectTags.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2422/Tingco_REST/src/java/se/info24/usersjaxb/ObjectTags.java
+END
+AddressType.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/AddressType.java
+END
+AddressTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/AddressTypeTranslations.java
+END
+MsgStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/MsgStatus.java
+END
+Currency.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/Currency.java
+END
+ApplicationModules.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1819/Tingco_REST/src/java/se/info24/usersjaxb/ApplicationModules.java
+END
+UserTimeZones2.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/UserTimeZones2.java
+END
+UserAliasDetails.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2422/Tingco_REST/src/java/se/info24/usersjaxb/UserAliasDetails.java
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2431/Tingco_REST/src/java/se/info24/usersjaxb/ObjectFactory.java
+END
+EventDatas.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2355/Tingco_REST/src/java/se/info24/usersjaxb/EventDatas.java
+END
+UserSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/UserSettings.java
+END
+UserRole.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/1819/Tingco_REST/src/java/se/info24/usersjaxb/UserRole.java
+END
+UserTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/UserTypes.java
+END
+Country.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/Country.java
+END
+FraudLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2355/Tingco_REST/src/java/se/info24/usersjaxb/FraudLog.java
+END
+UserAliasOrders.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/1658/Tingco_REST/src/java/se/info24/usersjaxb/UserAliasOrders.java
+END
+BlackList.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2431/Tingco_REST/src/java/se/info24/usersjaxb/BlackList.java
+END
+GroupID.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/GroupID.java
+END
+UserStatuses.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/UserStatuses.java
+END
+Permissions.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/Permissions.java
+END
+UserSetting.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/UserSetting.java
+END
+Addresses.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/Addresses.java
+END
+CountryID.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/CountryID.java
+END
+UserAliases.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2431/Tingco_REST/src/java/se/info24/usersjaxb/UserAliases.java
+END
+UserLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2095/Tingco_REST/src/java/se/info24/usersjaxb/UserLog.java
+END
+UserSession.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/UserSession.java
+END
+UserStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/UserStatus.java
+END
+Operations.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/Operations.java
+END
+UserAliasOrder.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1658/Tingco_REST/src/java/se/info24/usersjaxb/UserAliasOrder.java
+END
+Address.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2024/Tingco_REST/src/java/se/info24/usersjaxb/Address.java
+END
+ObjectGroupTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/ObjectGroupTranslations.java
+END
+Function.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2198/Tingco_REST/src/java/se/info24/usersjaxb/Function.java
+END
+FraudLogs.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2354/Tingco_REST/src/java/se/info24/usersjaxb/FraudLogs.java
+END
+Permission.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/Permission.java
+END
+UserTimeZone.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/UserTimeZone.java
+END
+UserGroupMemberships.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/UserGroupMemberships.java
+END
+OGMUserAlias.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/OGMUserAlias.java
+END
+UserTypeID.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/992/Tingco_REST/src/java/se/info24/usersjaxb/UserTypeID.java
+END

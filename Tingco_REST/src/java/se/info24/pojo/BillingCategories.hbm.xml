@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 8, 2014 4:03:11 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.BillingCategories" schema="dbo" table="BillingCategories">
+    <id name="billingCategoryId" type="string">
+      <column length="36" name="BillingCategoryID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="objectCode" type="string">
+      <column name="ObjectCode" not-null="true" unique="true"/>
+    </property>
+    <property name="sku" type="string">
+      <column name="SKU" not-null="true"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="deviceBillingCategorieses">
+      <key>
+        <column length="36" name="BillingCategoryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceBillingCategories"/>
+    </set>
+    <set inverse="true" name="deviceTypeBillingCategorieses">
+      <key>
+        <column length="36" name="BillingCategoryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypeBillingCategories"/>
+    </set>
+    <set inverse="true" name="billingCategoryTranslationses">
+      <key>
+        <column length="36" name="BillingCategoryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.BillingCategoryTranslations"/>
+    </set>
+  </class>
+  <query name="getBillingCategories">
+        from BillingCategories where billingCategoryId = :billingCategoryId
+    </query>
+  <query name="getBillingCategoriesByBillingCategoryIDAndGroupID">
+        from BillingCategories where billingCategoryId in(:billingCategoryId) and groupId in(:groupId)
+    </query>
+  <query name="getBillingCategoriesByBillingCategoryID">
+        from BillingCategories where billingCategoryId in(:billingCategoryId) order by createdDate desc
+    </query>
+  <query name="getBillingCategoriesByGroupIDs">
+        from BillingCategories where groupId in(:groupId)
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,257 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/NB_2011/!svn/ver/2387/Tingco_REST/src/java/se/info24/appjaxb
+END
+ApplicationSolution.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ApplicationSolution.java
+END
+ApplicationSetting.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ApplicationSetting.java
+END
+AgreementRolesTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/AgreementRolesTypes.java
+END
+AgreementBillingData.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2284/Tingco_REST/src/java/se/info24/appjaxb/AgreementBillingData.java
+END
+ApplicationPackageNames.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ApplicationPackageNames.java
+END
+Application.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2387/Tingco_REST/src/java/se/info24/appjaxb/Application.java
+END
+ApplicationName.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ApplicationName.java
+END
+Agreement.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2284/Tingco_REST/src/java/se/info24/appjaxb/Agreement.java
+END
+ApplicationDescription.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ApplicationDescription.java
+END
+UserPermissions.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/UserPermissions.java
+END
+SystemMessages.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/SystemMessages.java
+END
+AgreementDetails.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/AgreementDetails.java
+END
+SolutionName.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/SolutionName.java
+END
+ApplicationPackage.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2095/Tingco_REST/src/java/se/info24/appjaxb/ApplicationPackage.java
+END
+LastUpdatedByUserID.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/LastUpdatedByUserID.java
+END
+ApplicationSolutionNames.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ApplicationSolutionNames.java
+END
+ApplicationSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ApplicationSettings.java
+END
+ModuleName.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ModuleName.java
+END
+Applications.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/Applications.java
+END
+ApplicationEmailTemplates.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2387/Tingco_REST/src/java/se/info24/appjaxb/ApplicationEmailTemplates.java
+END
+AgreementItemTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/AgreementItemTypeTranslations.java
+END
+ApplicationDescriptions.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ApplicationDescriptions.java
+END
+MsgStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/MsgStatus.java
+END
+TingcoApplications.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/TingcoApplications.java
+END
+ApplicationModules.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ApplicationModules.java
+END
+PackageName.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/PackageName.java
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ObjectFactory.java
+END
+ApplicationPackages.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ApplicationPackages.java
+END
+AgreementItemTypeID.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/AgreementItemTypeID.java
+END
+GroupID.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/GroupID.java
+END
+AgreementItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2086/Tingco_REST/src/java/se/info24/appjaxb/AgreementItems.java
+END
+AgreementTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/AgreementTypeTranslations.java
+END
+AgreementRoles.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2064/Tingco_REST/src/java/se/info24/appjaxb/AgreementRoles.java
+END
+AgreementStatusTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/AgreementStatusTranslations.java
+END
+ApplicationTypeID.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ApplicationTypeID.java
+END
+ApplicationSolutions.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ApplicationSolutions.java
+END
+ApplicationNames.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ApplicationNames.java
+END
+SystemMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/SystemMessage.java
+END
+GroupMemberships.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/GroupMemberships.java
+END
+AgreementRoleTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/AgreementRoleTypeTranslations.java
+END
+ApplicationModuleNames.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/ApplicationModuleNames.java
+END
+AgreementParentID.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/1729/Tingco_REST/src/java/se/info24/appjaxb/AgreementParentID.java
+END

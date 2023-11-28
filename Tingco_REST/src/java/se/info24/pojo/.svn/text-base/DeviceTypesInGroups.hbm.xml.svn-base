@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 27, 2011 11:09:38 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DeviceTypesInGroups" schema="dbo" table="DeviceTypesInGroups">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.DeviceTypesInGroupsId" name="id">
+      <key-property name="deviceTypeId" type="string">
+        <column length="36" name="DeviceTypeID"/>
+      </key-property>
+      <key-property name="groupId" type="string">
+        <column length="36" name="GroupID"/>
+      </key-property>
+    </composite-id>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getDeviceHistoryDataItemsById">
+        from DeviceTypesInGroups as dt where dt.id.groupId =:groupId
+    </query>
+  <query name="getDeviceTypesInGroupsById">
+        from DeviceTypesInGroups as dt where dt.id.groupId =:groupId and dt.id.deviceTypeId =:deviceTypeId
+    </query>
+  <query name="getDeviceTypesInGroupsByGroupIds">
+        from DeviceTypesInGroups as dt where dt.id.groupId in (:groupId)
+    </query>
+</hibernate-mapping>

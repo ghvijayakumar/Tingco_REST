@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 21, 2014 12:56:47 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.BuildingDevices" schema="dbo" table="BuildingDevices">
+    <composite-id class="se.info24.pojo.BuildingDevicesId" name="id">
+      <key-property name="buildingId" type="string">
+        <column length="36" name="BuildingID"/>
+      </key-property>
+      <key-property name="deviceId" type="string">
+        <column length="36" name="DeviceID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Buildings" fetch="select" insert="false" name="buildings" update="false">
+      <column length="36" name="BuildingID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Rooms" fetch="select" name="rooms">
+      <column length="36" name="RoomID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Device" fetch="select" insert="false" name="device" update="false">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </many-to-one>
+    <property name="contentItemId" type="string">
+      <column length="36" name="ContentItemID"/>
+    </property>
+    <property name="serviceProviderId" type="string">
+      <column length="36" name="ServiceProviderID"/>
+    </property>
+    <property name="layoutXcoord" type="big_decimal">
+      <column name="LayoutXCoord"/>
+    </property>
+    <property name="layoutYcoord" type="big_decimal">
+      <column name="LayoutYCoord"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getBuildingDevicesByIds">
+        from BuildingDevices where id.buildingId = :buildingId and id.deviceId = :deviceId
+    </query>
+</hibernate-mapping>

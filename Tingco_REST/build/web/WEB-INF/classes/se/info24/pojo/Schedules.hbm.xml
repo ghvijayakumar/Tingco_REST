@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 5, 2012 1:15:01 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Schedules" schema="dbo" table="Schedules">
+    <cache usage="nonstrict-read-write"/>
+    <id name="scheduleId" type="string">
+      <column length="36" name="ScheduleID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.DateGroups" fetch="select" name="dateGroups">
+      <column length="36" name="DateGroupID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.TimeGroups" fetch="select" name="timeGroups">
+      <column length="36" name="TimeGroupID"/>
+    </many-to-one>
+    <property name="scheduleName" type="string">
+      <column name="ScheduleName" not-null="true"/>
+    </property>
+    <property name="scheduleDescription" type="string">
+      <column name="ScheduleDescription"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="ogmdevices">
+      <key>
+        <column length="36" name="ScheduleID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Ogmdevice"/>
+    </set>
+    <set inverse="true" name="containerses">
+      <key>
+        <column length="36" name="OpenScheduleID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Containers"/>
+    </set>
+    <set inverse="true" name="deviceCommandScheduleses">
+      <key>
+        <column length="36" name="ScheduleID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceCommandSchedules"/>
+    </set>
+  </class>
+  <query name="getSchedulesByGroupidList">
+        from Schedules where groupId in (:GroupID) order  by scheduleName asc
+    </query>
+  <query name="getSchedulesByIdList">
+        from Schedules  where scheduleId in (:scheduleId)
+    </query>
+  <query name="getSchedulesById">
+        from Schedules  where scheduleId = :scheduleId
+    </query>
+  <query name="getSchedulesByGroupId">
+        from Schedules where groupId = :groupId
+    </query>
+</hibernate-mapping>

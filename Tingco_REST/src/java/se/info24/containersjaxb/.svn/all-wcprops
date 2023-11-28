@@ -1,0 +1,251 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb
+END
+ObjectTypeFields.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ObjectTypeFields.java
+END
+Service.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/Service.java
+END
+ProductVariantTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ProductVariantTranslations.java
+END
+ObjectContactTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ObjectContactTypes.java
+END
+ContainerTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ContainerTypes.java
+END
+OGMContainers.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/OGMContainers.java
+END
+FieldTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/FieldTypes.java
+END
+Data.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/1221/Tingco_REST/src/java/se/info24/containersjaxb/Data.java
+END
+FillLevel.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/FillLevel.java
+END
+ObjectContactMemberships.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ObjectContactMemberships.java
+END
+Field.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/Field.java
+END
+ContainerDevices.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ContainerDevices.java
+END
+FieldTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/FieldTranslations.java
+END
+ObjectContactTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ObjectContactTypeTranslations.java
+END
+ObjectFieldDatas.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ObjectFieldDatas.java
+END
+ProductVariants.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ProductVariants.java
+END
+MsgStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/MsgStatus.java
+END
+Currency.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/Currency.java
+END
+ListValues.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ListValues.java
+END
+ContainerDevicesPost.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ContainerDevicesPost.java
+END
+Lists.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/Lists.java
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ObjectFactory.java
+END
+Country.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/Country.java
+END
+SupportCaseStatuses.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/SupportCaseStatuses.java
+END
+ObjectFieldData.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ObjectFieldData.java
+END
+ObjectContacts.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ObjectContacts.java
+END
+Containers.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/Containers.java
+END
+Fields.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/Fields.java
+END
+TingcoContainers.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/TingcoContainers.java
+END
+GroupID.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/GroupID.java
+END
+ContainerData.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ContainerData.java
+END
+Color.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/Color.java
+END
+Unit.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/Unit.java
+END
+UnitTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/UnitTranslations.java
+END
+Container.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/Container.java
+END
+Services.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/Services.java
+END
+Address.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/Address.java
+END
+ObjectGroupTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ObjectGroupTranslations.java
+END
+ContainerShapes.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ContainerShapes.java
+END
+ContainerUserAlias.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/ContainerUserAlias.java
+END
+SensorTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/containersjaxb/SensorTypes.java
+END

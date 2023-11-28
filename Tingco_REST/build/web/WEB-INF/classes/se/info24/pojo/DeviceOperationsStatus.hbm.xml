@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2010 12:53:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DeviceOperationsStatus" schema="dbo" table="DeviceOperationsStatus">
+    <cache usage="nonstrict-read-write"/>
+    <id name="deviceOperationsStatusId" type="string">
+      <column length="36" name="DeviceOperationsStatusID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="deviceOperationsMembers">
+      <key>
+        <column length="36" name="DeviceOperationsStatusID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceOperationsMember"/>
+    </set>
+    <set inverse="true" name="deviceOperationsStatusTranslations">
+      <key>
+        <column length="36" name="DeviceOperationsStatusID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceOperationsStatusTranslation"/>
+    </set>
+  </class>
+</hibernate-mapping>

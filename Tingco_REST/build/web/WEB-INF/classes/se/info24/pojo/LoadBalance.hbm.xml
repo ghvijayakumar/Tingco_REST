@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 28, 2014 5:45:13 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.LoadBalance" schema="dbo" table="LoadBalance">
+    <id name="loadBalanceId" type="string">
+      <column length="36" name="LoadBalanceID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="loadBalanceName" type="string">
+      <column name="LoadBalanceName" not-null="true"/>
+    </property>
+    <property name="loadBalanceDescription" type="string">
+      <column name="LoadBalanceDescription"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="maxCurrentTotal" type="big_decimal">
+      <column name="MaxCurrentTotal" precision="18"/>
+    </property>
+    <property name="maxCurrentL1" type="big_decimal">
+      <column name="MaxCurrentL1" precision="18"/>
+    </property>
+    <property name="maxCurrentL2" type="big_decimal">
+      <column name="MaxCurrentL2" precision="18"/>
+    </property>
+    <property name="maxCurrentL3" type="big_decimal">
+      <column name="MaxCurrentL3" precision="18"/>
+    </property>
+    <property name="isPhaseL1" type="java.lang.Integer">
+      <column name="IsPhaseL1"/>
+    </property>
+    <property name="isPhaseL2" type="java.lang.Integer">
+      <column name="IsPhaseL2"/>
+    </property>
+    <property name="isPhaseL3" type="java.lang.Integer">
+      <column name="IsPhaseL3"/>
+    </property>
+    <property name="currentTotal" type="big_decimal">
+      <column name="CurrentTotal" precision="18"/>
+    </property>
+    <property name="currentL1" type="big_decimal">
+      <column name="CurrentL1" precision="18"/>
+    </property>
+    <property name="currentL2" type="big_decimal">
+      <column name="CurrentL2" precision="18"/>
+    </property>
+    <property name="currentL3" type="big_decimal">
+      <column name="CurrentL3" precision="18"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getAllLoadBalanceOrderByLoadBalanceName">
+        from LoadBalance order by loadBalanceName
+    </query>
+  <query name="getAllLoadBalanceByLoadBalanceID">
+        from LoadBalance where loadBalanceId = :loadBalanceId
+    </query>
+</hibernate-mapping>

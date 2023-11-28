@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 24, 2013 1:11:05 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Unit" schema="dbo" table="Unit">
+    <cache usage="nonstrict-read-write"/>
+    <id name="unitId" type="string">
+      <column length="36" name="UnitID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="objectCode" type="string">
+      <column name="ObjectCode" not-null="true" unique="true"/>
+    </property>
+    <property name="unitCategoryId" type="string">
+      <column length="36" name="UnitCategoryID"/>
+    </property>
+    <property name="unitSystemId" type="string">
+      <column length="36" name="UnitSystemID"/>
+    </property>
+    <property name="unitIconUrl" type="string">
+      <column name="UnitIconURL"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="unitTranslationses">
+      <key>
+        <column length="36" name="UnitID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.UnitTranslations"/>
+    </set>
+  </class>
+</hibernate-mapping>

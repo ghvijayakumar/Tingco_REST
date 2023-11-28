@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 5, 2013 11:23:34 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.SupportStatusTranslations" schema="dbo" table="SupportStatusTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.SupportStatusTranslationsId" name="id">
+      <key-property name="supportCaseStatusId" type="string">
+        <column length="36" name="SupportCaseStatusID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <property name="supportCaseStatusName" type="string">
+      <column name="SupportCaseStatusName" not-null="true"/>
+    </property>
+    <property name="supportCaseStatusDescription" type="string">
+      <column name="SupportCaseStatusDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getSupportStatusTranslationsByCountryId">
+        from SupportStatusTranslations where id.countryId = :countryId order by createdDate desc
+    </query>
+  <query name="getSupportStatusTranslationsByCountryIdOrderBy">
+        from SupportStatusTranslations where id.countryId = :countryId order by supportCaseStatusName
+    </query>
+  <query name="getSupportStatusTranslationsByIds">
+        from SupportStatusTranslations where id.supportCaseStatusId = :supportCaseStatusId and id.countryId = :countryId
+    </query>
+</hibernate-mapping>

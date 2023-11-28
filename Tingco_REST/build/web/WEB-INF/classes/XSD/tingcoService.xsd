@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="ST_DeviceTypeID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:element name="tingcoService">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="MsgID"/>
+                <xs:element ref="MsgTimeStamp"/>
+                <xs:element ref="MsgStatus" minOccurs="0" />
+                <xs:element ref="Services" minOccurs="0" />
+            </xs:sequence>
+            <xs:attribute name="TimeZone" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="UTC"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="RegionalUnits" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Metric"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="MsgVer" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:decimal"/>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="CreateRef" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Info24"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="DeviceTypeID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_DeviceTypeID">
+                    <xs:attribute name="DeviceTypeName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="MsgTimeStamp">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="MsgStatus">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ResponseCode"/>
+                <xs:element ref="ResponseText"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MsgID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="ResponseText">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ResponseCode">
+        <xs:simpleType>
+            <xs:restriction base="xs:int"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="Services">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ServiceStatusOnlineCount" type="xs:string" />
+                <xs:element name="ServiceStatusOfflineCount" type="xs:string" />
+                <xs:element ref="DeviceTypeID" minOccurs="0"/>
+                <xs:element ref="Service" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ServicesChannel">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ServiceChannelID" type="xs:int"/>
+                <xs:element ref="ServiceID"/>
+                <xs:element name="ChannelID" type="xs:string"/>
+                <xs:element name="ChannelDirection" type="xs:int"/>
+                <xs:element name="ChannelTag" type="xs:string"/>
+                <xs:element name="ChannelName" type="xs:string"/>
+                <xs:element name="ChannelData" type="xs:string"/>
+            </xs:sequence>
+            <xs:attribute name="SeqNo">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ServicesChannels">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ServicesChannel" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    
+    
+    <xs:element name="Service">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ServiceType"/>
+                <xs:element ref="ChannelType"/>
+                <xs:element ref="ServiceID"/>
+                <xs:element ref="ServiceName"/>
+                <xs:element ref="ServiceDescription"/>
+                <xs:element ref="GroupID"/>
+                <xs:element ref="ServiceEnabled"/>
+                <xs:element name="ServiceEnabledTCMV3" type="xs:string" />
+                <xs:element ref="ActiveFromDate"/>
+                <xs:element ref="Replicates"/>
+                <xs:element name="ReplicatesName" type="xs:string"/>
+                <xs:element ref="UserID"/>
+                <xs:element name="CountryID" type="xs:int" />
+                <xs:element name="OptionalCountryID" type="xs:string" />
+                <xs:element name="ObjectGroupName" type="xs:string" />
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+                <xs:element ref="Device" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ServiceStatus" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="DeviceTypeServices"/>
+                <xs:element ref="ServiceDeviceSubscription" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ServiceContentSubscription" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ServiceClientLogins" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ServiceSettings"/>
+                <xs:element ref="ServicesChannels"/>
+                <xs:element ref="Bundles"/>
+            </xs:sequence>
+            <xs:attribute name="SeqNo">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ServiceID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ServiceName">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ServiceDescription">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ServiceEnabled">
+        <xs:simpleType>
+            <xs:restriction base="xs:int"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="Replicates">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="UserID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="ActiveFromDate">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="Device">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="DeviceID" type="xs:string"/>
+                <xs:element name="DeviceName" type="xs:string"/>
+                <xs:element ref="DeviceTypes" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="DeviceTypes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="DeviceTypeID" type="xs:string" />
+                <xs:element name="DeviceTypeName" type="xs:string" />
+                <xs:element name="DeviceTypeDesc" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="ServiceType">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ServiceTypeID"/>
+                <xs:element ref="ServiceTypeName"/>
+                <xs:element ref="ServiceTypeDesc"/>
+                <xs:element ref="LastUpdatedByUserID"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="ChannelType">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ChannelID"/>
+                <xs:element ref="ChannelName"/>
+                <xs:element ref="ChannelDesc"/>
+                <xs:element ref="ChannelData"/>
+                <xs:element ref="ChannelEnabled"/>
+                <xs:element ref="GroupID"/>
+                <xs:element ref="LastUpdatedByUserID"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+            </xs:sequence>
+            <xs:attribute name="SeqNo">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ChannelID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="ChannelName">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="ChannelDesc">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="ChannelData">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="ChannelEnabled">
+        <xs:simpleType>
+            <xs:restriction base="xs:int"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="GroupID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_GroupID">
+                    <xs:attribute name="GroupName" type="xs:string" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="ST_GroupID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:element name="ServiceTypeID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="ServiceTypeName">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="ServiceTypeDesc">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="LastUpdatedByUserID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_LastUpdatedByUserID">
+                    <xs:attribute name="UserFullName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="ST_LastUpdatedByUserID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+	
+    <xs:element name="CreatedDate">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="UpdatedDate">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="DeviceTypeServices">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="IsDefault" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ServiceDeviceSubscription">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ServiceDeviceSubscriptionID" type="xs:string"/>
+                <xs:element ref="ServiceDeviceSettings" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ServiceContentSubscription">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ServiceContentSubscriptionID" type="xs:string"/>
+                <xs:element ref="ContentCategory" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ContentCategory">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ContentCategoryId" type="xs:string"/>
+                <xs:element name="ContentCategoryName" type="xs:string"/>
+                <xs:element name="ContentCategoryDescription" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ServiceClientLogins">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ServiceClientLoginID" type="xs:string"/>
+                <xs:element name="ServiceClientLoginName" type="xs:string"/>
+                <xs:element name="ServiceClientLoginDescription" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="ServiceDeviceSettings">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ServiceDeviceSettingID"/>
+                <xs:element ref="ServiceDeviceSettingParentID"/>
+                <xs:element ref="ServiceDeviceSubscriptionID"/>
+                <xs:element ref="ServiceDeviceSettingName"/>
+                <xs:element ref="ServiceDeviceSettingValue"/>
+                <xs:element ref="ActiveFromDate"/>
+                <xs:element ref="LastUpdatedByUserID" minOccurs="0"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+                <xs:element ref="ObjectSettingTemplates" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="SeqNo" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ServiceSettings">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ServiceSetting" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ServiceSetting">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ServiceSettingID"/>
+                <xs:element ref="ServiceSettingParentID"/>
+                <xs:element ref="ServiceID"/>
+                <xs:element name="ServiceSettingName" type="xs:string"/>
+                <xs:element name="ServiceSettingValue" type="xs:string"/>
+                <xs:element name="SettingDataTypeId" type="xs:string"/>
+                <xs:element ref="LastUpdatedByUserID"/>
+                <xs:element name="LastUpdatedUser" type="xs:string"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+                <xs:element name="ActiveFromDate" type="xs:dateTime"/>
+                <xs:element name="ActiveFromDateTCMV3" type="xs:string"/>
+                <xs:element ref="SettingDataType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    
+    <xs:element name="ServiceDeviceSettingID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ServiceDeviceSettingParentID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ServiceDeviceSubscriptionID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ServiceDeviceSettingName">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ServiceDeviceSettingValue">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    
+    <xs:element name="ServiceSettingParentID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="ServiceSettingID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="ObjectSettingTemplates">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ObjectSettingTemplateID" />
+                <xs:element ref="ObjectSettingTemplateParentID" />
+                <xs:element ref="ObjectSettingName"/>
+                <xs:element ref="ObjectSettingDefaultValue"/>
+                <xs:element ref="ObjectSettingDescription"/>
+                <xs:element ref="SettingRequired"/>
+                <xs:element ref="SettingValueValidationRegEx" />
+                <xs:element ref="LastUpdatedByUserID" />
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+                <xs:element ref="SettingDataType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="SeqNo" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BundleIDs">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ObjectSettingTemplateID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ObjectSettingTemplateParentID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ObjectSettingName">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ObjectSettingDefaultValue">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ObjectSettingDescription">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="SettingRequired">
+        <xs:simpleType>
+            <xs:restriction base="xs:int"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="SettingValueValidationRegEx">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="SettingDataType">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="SettingDataTypeID"/>
+                <xs:element name="SettingDataType" type="xs:string"/>
+                <xs:element ref="SettingDataTypeDescription"/>
+                <xs:element ref="UserID" />
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+            </xs:sequence>
+            <xs:attribute name="SeqNo" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SettingDataTypeID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="SettingDataTypeDescription">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="Bundles">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Bundle" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Bundle">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="BundleIDs" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="BundleID" type="xs:string" />
+                <xs:element name="BundleName" type="xs:string" />
+                <xs:element name="BundleSymbolicName" type="xs:string" />
+                <xs:element name="BundleDescription" type="xs:string" />
+                <xs:element ref="GroupID" />
+                <xs:element name="BundleCategoryID" type="xs:string" />
+                <xs:element name="BundleCategoryName" type="xs:string" />
+                <xs:element name="BundleTypeID" type="xs:string" />
+                <xs:element name="BundleTypeName" type="xs:string" />
+                <xs:element name="BundleIconURL" type="xs:string" />
+                <xs:element name="CreatedDateTCMV3" type="xs:string" />
+                <xs:element ref="UserID" />
+                <xs:element ref="CreatedDate" />
+                <xs:element ref="UpdatedDate" />
+                <xs:element ref="BundleVersions" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="BundleLog" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BundleVersions">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="BundleVersion" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BundleVersion">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="BundleVersionID" type="xs:string" />
+                <xs:element name="BundleID" type="xs:string" />
+                <xs:element name="Major" type="xs:integer" />
+                <xs:element name="Minor" type="xs:integer" />
+                <xs:element name="Micro" type="xs:integer" />
+                <xs:element name="Version" type="xs:string" />
+                <xs:element name="Qualifier" type="xs:string" />
+                <xs:element name="ChangeLog" type="xs:string" />
+                <xs:element name="FullName" type="xs:string" />
+                <xs:element name="CreatedDateTCMV3" type="xs:string" />
+                <xs:element ref="UserID" />
+                <xs:element ref="CreatedDate" />
+                <xs:element ref="UpdatedDate" />
+                <xs:element ref="BundleFiles" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BundleLog">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="BundleVersionID" type="xs:string" />
+                <xs:element name="BundleID" type="xs:string" />
+                <xs:element name="BundleName" type="xs:string" />
+                <xs:element name="Message" type="xs:string" />
+                <xs:element name="MessageCode" type="xs:string" />
+                <xs:element name="CreatedDate" type="xs:string" />
+                <xs:element ref="BundleVersion" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BundleFiles">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="BundleFileID" type="xs:string" />
+                <xs:element name="BundleVersionID" type="xs:string" />
+                <xs:element name="BundleFileName" type="xs:string" />
+                <xs:element name="BundleFileLength" type="xs:integer" />
+                <xs:element name="BundleFileBlob" type="xs:string" />
+                <xs:element ref="UserID" />
+                <xs:element ref="CreatedDate" />
+                <xs:element ref="UpdatedDate" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ServiceStatus">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ServiceID" />
+                <xs:element name="DeviceID" type="xs:string" />
+                <xs:element name="IsOnline" type="xs:integer" />
+                <xs:element name="IsOnlineChangedDate" type="xs:string" />
+                <xs:element name="ObjectStateCode" type="xs:string" />
+                <xs:element name="ObjectStateChangedDate" type="xs:string" />
+                <xs:element name="StatusText" type="xs:string" />
+                <xs:element name="ErrorText" type="xs:string" />
+                <xs:element name="OnlineCount" type="xs:integer" />
+                <xs:element name="OfflineCount" type="xs:integer" />
+                <xs:element ref="CreatedDate" />
+                <xs:element ref="UpdatedDate" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

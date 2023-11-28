@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 30, 2010 1:32:29 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.Sysdiagrams" schema="dbo" table="sysdiagrams">
+    <cache usage="nonstrict-read-write"/>
+    <id name="diagramId" type="int">
+      <column name="diagram_id"/>
+      <generator class="assigned"/>
+    </id>
+    <version name="version" type="java.lang.Integer">
+      <column name="version"/>
+    </version>
+    <property name="name" type="string">
+      <column length="128" name="name" not-null="true"/>
+    </property>
+    <property name="principalId" type="int">
+      <column name="principal_id" not-null="true"/>
+    </property>
+    <property name="definition" type="binary">
+      <column name="definition"/>
+    </property>
+  </class>
+</hibernate-mapping>

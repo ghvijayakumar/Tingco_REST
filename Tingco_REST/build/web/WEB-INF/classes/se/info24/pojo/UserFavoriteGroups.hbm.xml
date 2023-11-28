@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 24, 2011 3:27:30 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserFavoriteGroups" schema="dbo" table="UserFavoriteGroups">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.UserFavoriteGroupsId" name="id">
+      <key-property name="userId" type="string">
+        <column length="36" name="UserID"/>
+      </key-property>
+      <key-property name="groupId" type="string">
+        <column length="36" name="GroupID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Groups" fetch="select" insert="false" name="group" update="false">
+      <column length="36" name="GroupID" not-null="true"/>
+    </many-to-one>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getUserFavoriteGroupsById">
+        from UserFavoriteGroups as ufg where ufg.id.userId = :userId
+    </query>
+  <query name="deleteUserFavoriteGroupsById">
+        delete from UserFavoriteGroups ufg where ufg.id.userId = :userId
+    </query>
+  <query name="UserFavoriteGroupsByGroupId">
+        delete from UserFavoriteGroups ufg where ufg.id.groupId = :groupId
+    </query>
+  <query name="getUserFavoriteGroupsByGroupId">
+        from UserFavoriteGroups ufg where ufg.id.groupId = :groupId
+    </query>
+</hibernate-mapping>

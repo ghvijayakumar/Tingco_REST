@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 11, 2014 10:44:11 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.NewsVisibleInGroups" schema="dbo" table="NewsVisibleInGroups">
+    <composite-id class="se.info24.pojo.NewsVisibleInGroupsId" name="id">
+      <key-property name="newsId" type="string">
+        <column length="36" name="NewsID"/>
+      </key-property>
+      <key-property name="groupId" type="string">
+        <column length="36" name="GroupID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.News" fetch="select" insert="false" name="news" update="false">
+      <column length="36" name="NewsID" not-null="true"/>
+    </many-to-one>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getNewsVisibleInGroupsByGroupID">
+        from NewsVisibleInGroups where id.groupId =:groupId
+    </query>
+  <query name="getNewsVisibleInGroupsByNewsID">
+        from NewsVisibleInGroups where id.newsId = :newsId
+    </query>
+</hibernate-mapping>

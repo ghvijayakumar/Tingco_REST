@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 17, 2012 5:59:44 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.GroupAddresses" schema="dbo" table="GroupAddresses">
+    <cache usage="nonstrict-read-write"/>
+    <id name="groupAddressId" type="int">
+      <column name="GroupAddressID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Groups" fetch="select" name="groups">
+      <column length="36" name="GroupID" not-null="true"/>
+    </many-to-one>
+    <property name="addressId" type="string">
+      <column length="36" name="AddressID" not-null="true"/>
+    </property>
+    <property name="addressTypeId" type="int">
+      <column name="AddressTypeID" not-null="true"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getGroupAddressesByGroupId">
+        from GroupAddresses where groups.groupId = :groupId
+    </query>
+  <query name="getGroupAddressesByGroupIdAddressTypeId">
+        from GroupAddresses where groups.groupId = :groupId and addressTypeId =:addressTypeId
+    </query>
+</hibernate-mapping>

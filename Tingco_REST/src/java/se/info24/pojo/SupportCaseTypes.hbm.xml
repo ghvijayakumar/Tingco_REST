@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 24, 2012 12:58:04 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.SupportCaseTypes" schema="dbo" table="SupportCaseTypes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="supportCaseTypeId" type="string">
+      <column length="36" name="SupportCaseTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="sortOrder" type="java.lang.Integer">
+      <column name="SortOrder"/>
+    </property>
+    <property name="lasteUpdatedByUserId" type="string">
+      <column length="36" name="LasteUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="objectCode" type="string">
+      <column name="ObjectCode"/>
+    </property>
+    <property name="iconUrl" type="string">
+      <column name="IconURL"/>
+    </property>
+    <property name="color" type="string">
+      <column name="Color"/>
+    </property>
+    <set inverse="true" name="supportCaseses">
+      <key>
+        <column length="36" name="SupportCaseTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.SupportCases"/>
+    </set>
+  </class>
+  <query name="getSupportCaseTypesByIds">
+        from SupportCaseTypes where supportCaseTypeId in (:supportCaseTypeId) order by sortOrder
+    </query>
+</hibernate-mapping>

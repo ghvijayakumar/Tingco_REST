@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/NB_2011/!svn/ver/2447/Tingco_REST/src/java
+END
+timHibernate.reveng.xml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/NB_2011/!svn/ver/1687/Tingco_REST/src/java/timHibernate.reveng.xml
+END
+ismOperationsHibernate.reveng.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2444/Tingco_REST/src/java/ismOperationsHibernate.reveng.xml
+END
+hibernate.reveng.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/NB_2011/!svn/ver/2382/Tingco_REST/src/java/hibernate.reveng.xml
+END
+timHibernate.cfg.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/NB_2011/!svn/ver/1976/Tingco_REST/src/java/timHibernate.cfg.xml
+END
+log4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/NB_2011/!svn/ver/1429/Tingco_REST/src/java/log4j.properties
+END
+ismOperationsHibernate.cfg.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/2447/Tingco_REST/src/java/ismOperationsHibernate.cfg.xml
+END
+ehcache.cfg.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/ehcache.cfg.xml
+END
+hibernate.cfg.xml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/NB_2011/!svn/ver/2382/Tingco_REST/src/java/hibernate.cfg.xml
+END
+ehcacheOperation.cfg.xml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/NB_2011/!svn/ver/2222/Tingco_REST/src/java/ehcacheOperation.cfg.xml
+END

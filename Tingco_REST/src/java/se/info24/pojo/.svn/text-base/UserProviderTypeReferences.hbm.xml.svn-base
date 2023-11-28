@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 12, 2013 9:52:14 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserProviderTypeReferences" schema="dbo" table="UserProviderTypeReferences">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.UserProviderTypeReferencesId" name="id">
+      <key-property name="userId" type="string">
+        <column length="36" name="UserID"/>
+      </key-property>
+      <key-property name="providerTypeId" type="string">
+        <column length="36" name="ProviderTypeID"/>
+      </key-property>
+    </composite-id>
+    <!-- <many-to-one name="users2" class="se.info24.pojo.Users2" update="false" insert="false" fetch="select">
+            <column name="UserID" length="36" not-null="true" />
+        </many-to-one>
+        <many-to-one name="providerTypes" class="se.info24.pojo.ProviderTypes" update="false" insert="false" fetch="select">
+            <column name="ProviderTypeID" length="36" not-null="true" />
+        </many-to-one>-->
+    <property name="userProviderReference1" type="string">
+      <column name="UserProviderReference1" not-null="true"/>
+    </property>
+    <property name="userProviderReference2" type="string">
+      <column name="UserProviderReference2"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getUserProviderTypeReferencesByUserID">
+        from UserProviderTypeReferences where id.userId =:userId
+    </query>
+  <query name="getUserProviderTypeReferencesByIdandUserID">
+            from UserProviderTypeReferences where id.providerTypeId =:providerTypeId and id.userId =:userId
+    </query>
+</hibernate-mapping>

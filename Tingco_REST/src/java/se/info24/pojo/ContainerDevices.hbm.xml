@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 7, 2013 10:56:54 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="se.info24.pojo.ContainerDevices" schema="dbo" table="ContainerDevices">
+        <cache usage="nonstrict-read-write"/>
+        <composite-id class="se.info24.pojo.ContainerDevicesId" name="id">
+            <key-property name="containerId" type="string">
+                <column length="36" name="ContainerID"/>
+            </key-property>
+            <key-property name="deviceId" type="string">
+                <column length="36" name="DeviceID"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="se.info24.pojo.Containers" fetch="select" insert="false" name="containers" update="false">
+            <column length="36" name="ContainerID" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="se.info24.pojo.Device" fetch="select" insert="false" name="device" update="false">
+            <column length="36" name="DeviceID" not-null="true"/>
+        </many-to-one>
+        <property name="deviceDataItemId" type="string">
+            <column length="36" name="DeviceDataItemID" not-null="true"/>
+        </property>
+        <property name="rawMinValue" type="big_decimal">
+            <column name="RawMinValue"/>
+        </property>
+        <property name="rawMaxValue" type="big_decimal">
+            <column name="RawMaxValue"/>
+        </property>
+        <property name="scaledMinValue" type="big_decimal">
+            <column name="ScaledMinValue"/>
+        </property>
+        <property name="scaledMaxValue" type="big_decimal">
+            <column name="ScaledMaxValue"/>
+        </property>
+        <property name="flagScaleValue" type="int">
+            <column name="FlagScaleValue" not-null="true"/>
+        </property>
+        <property name="scalingOperand" type="string">
+            <column name="ScalingOperand"/>
+        </property>
+        <property name="scalingFactor" type="big_decimal">
+            <column name="ScalingFactor"/>
+        </property>
+        <property name="isEnabled" type="int">
+            <column name="IsEnabled" not-null="true"/>
+        </property>
+        <property name="fillDirection" type="int">
+            <column name="FillDirection" not-null="true"/>
+        </property>
+        <property name="sensorTypeId" type="string">
+            <column length="36" name="SensorTypeID"/>
+        </property>
+        <property name="lastUpdatedByUserId" type="string">
+            <column length="36" name="LastUpdatedByUserID"/>
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column length="23" name="CreatedDate"/>
+        </property>
+        <property name="updatedDate" type="timestamp">
+            <column length="23" name="UpdatedDate"/>
+        </property>
+    </class>
+    <query name="getContainerDevicesByContainerId">
+        from ContainerDevices where containerId = :containerId
+    </query>
+    <query name="getContainerDevicesByContainerIdOrderBy">
+        from ContainerDevices where containerId = :containerId order by createdDate desc
+    </query>
+    <query name="getContainerDevicesByDeviceId">
+        from ContainerDevices where id.deviceId = :deviceId order by createdDate desc
+    </query>
+    <query name="getContainerDevicesByDeviceIdByDeviceDate">
+        from ContainerDevices where id.containerId = :containerId order by device.createdDate desc
+    </query>
+    <query name="getContainerDevicesByContainerIdandDeviceId">
+        from ContainerDevices where id.containerId = :containerId and id.deviceId =:deviceId
+    </query>
+    <query name="getContainerDevicesByContainerIdandDeviceDataItemId">
+        from ContainerDevices where id.containerId = :containerId and deviceDataItemId in(:deviceDataItemId)
+    </query>
+</hibernate-mapping>

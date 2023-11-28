@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 7, 2013 10:56:54 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Containers" schema="dbo" table="Containers">
+    <cache usage="nonstrict-read-write"/>
+    <id name="containerId" type="string">
+      <column length="36" name="ContainerID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Schedules" fetch="select" name="schedules">
+      <column length="36" name="OpenScheduleID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Agreements" fetch="select" name="agreements">
+      <column length="36" name="AgreementID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ContainerShapes" fetch="select" name="containerShapes">
+      <column length="36" name="ContainerShapeID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.CostCenters" fetch="select" name="costCenters">
+      <column length="36" name="CostCenterID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ContainerTypes" fetch="select" name="containerTypes">
+      <column length="36" name="ContainerTypeID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Addresses" name="addresses">
+      <column length="36" name="AddressID"/>
+    </many-to-one>
+    <property name="containerParentId" type="string">
+      <column length="36" name="ContainerParentID"/>
+    </property>
+    <property name="containerName" type="string">
+      <column name="ContainerName" not-null="true"/>
+    </property>
+    <property name="containerDescription" type="string">
+      <column name="ContainerDescription"/>
+    </property>
+    <property name="containerNumber" type="string">
+      <column name="ContainerNumber"/>
+    </property>
+    <many-to-one class="se.info24.pojo.Groups" fetch="select" name="groups">
+      <column length="36" name="GroupID" not-null="true"/>
+    </many-to-one>
+    <!-- <property name="groupId" type="string">
+            <column name="GroupID" length="36" not-null="true" />
+        </property> -->
+    <property name="isEnabled" type="int">
+      <column name="IsEnabled" not-null="true"/>
+    </property>
+    <property name="isOpen" type="java.lang.Integer">
+      <column name="IsOpen"/>
+    </property>
+    <property name="isMobileContainer" type="java.lang.Integer">
+      <column name="IsMobileContainer"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate"/>
+    </property>
+    <property name="objectStateCodeId" type="string">
+      <column length="36" name="ObjectStateCodeID"/>
+    </property>
+    <property name="assetId" type="string">
+      <column name="AssetID"/>
+    </property>
+    <property name="productVariantId" type="string">
+      <column length="36" name="ProductVariantID"/>
+    </property>
+    <property name="productVariantUnit" type="string">
+      <column name="ProductVariantUnit"/>
+    </property>
+    <property name="productVariantDensity" type="big_decimal">
+      <column name="ProductVariantDensity"/>
+    </property>
+    <property name="containerLength" type="big_decimal">
+      <column name="ContainerLength"/>
+    </property>
+    <property name="containerWidth" type="big_decimal">
+      <column name="ContainerWidth"/>
+    </property>
+    <property name="containerHeight" type="big_decimal">
+      <column name="ContainerHeight"/>
+    </property>
+    <property name="containerMinLevel" type="big_decimal">
+      <column name="ContainerMinLevel" not-null="true"/>
+    </property>
+    <property name="containerEmptyLevel" type="big_decimal">
+      <column name="ContainerEmptyLevel"/>
+    </property>
+    <property name="containerFullLevel" type="big_decimal">
+      <column name="ContainerFullLevel"/>
+    </property>
+    <property name="containerMaxLevel" type="big_decimal">
+      <column name="ContainerMaxLevel" not-null="true"/>
+    </property>
+    <property name="warningLowValue" type="big_decimal">
+      <column name="WarningLowValue"/>
+    </property>
+    <property name="warningLowEventTypeId" type="string">
+      <column length="36" name="WarningLowEventTypeID"/>
+    </property>
+    <property name="warningHighValue" type="big_decimal">
+      <column name="WarningHighValue"/>
+    </property>
+    <property name="warningHighEventTypeId" type="string">
+      <column length="36" name="WarningHighEventTypeID"/>
+    </property>
+    <property name="alarmLowValue" type="big_decimal">
+      <column name="AlarmLowValue"/>
+    </property>
+    <property name="alarmLowEventTypeId" type="string">
+      <column length="36" name="AlarmLowEventTypeID"/>
+    </property>
+    <property name="alarmHighValue" type="big_decimal">
+      <column name="AlarmHighValue"/>
+    </property>
+    <property name="alarmHighEventTypeId" type="string">
+      <column length="36" name="AlarmHighEventTypeID"/>
+    </property>
+    <property name="orderMoreBelowThisValue" type="big_decimal">
+      <column name="OrderMoreBelowThisValue"/>
+    </property>
+    <property name="orderMoreEventTypeId" type="string">
+      <column length="36" name="OrderMoreEventTypeID"/>
+    </property>
+    <property name="currentFillLevel" type="big_decimal">
+      <column name="CurrentFillLevel"/>
+    </property>
+    <property name="currentFreeLevel" type="big_decimal">
+      <column name="CurrentFreeLevel"/>
+    </property>
+    <property name="currentFillLevelPercent" type="java.lang.Integer">
+      <column name="CurrentFillLevelPercent"/>
+    </property>
+    <property name="currentFreeLevelPercent" type="java.lang.Integer">
+      <column name="CurrentFreeLevelPercent"/>
+    </property>
+    <property name="isEmpty" type="java.lang.Integer">
+      <column name="IsEmpty"/>
+    </property>
+    <property name="isFull" type="java.lang.Integer">
+      <column name="IsFull"/>
+    </property>
+    <property name="emptyPublicText" type="string">
+      <column name="EmptyPublicText"/>
+    </property>
+    <property name="fullPublicText" type="string">
+      <column name="FullPublicText"/>
+    </property>
+    <property name="averageFilling" type="big_decimal">
+      <column name="AverageFilling"/>
+    </property>
+    <property name="averageUsage" type="big_decimal">
+      <column name="AverageUsage"/>
+    </property>
+    <property name="flagSetValueToMaxIfAboveMax" type="java.lang.Integer">
+      <column name="FlagSetValueToMaxIfAboveMax"/>
+    </property>
+    <property name="flagSetValueToMinIfBelowMin" type="java.lang.Integer">
+      <column name="FlagSetValueToMinIfBelowMin"/>
+    </property>
+    <property name="isTriggedWarningLow" type="java.lang.Integer">
+      <column name="IsTriggedWarningLow"/>
+    </property>
+    <property name="isTriggedWarningHigh" type="java.lang.Integer">
+      <column name="IsTriggedWarningHigh"/>
+    </property>
+    <property name="isTriggedAlarmLow" type="java.lang.Integer">
+      <column name="IsTriggedAlarmLow"/>
+    </property>
+    <property name="isTriggedAlarmHighValue" type="java.lang.Integer">
+      <column name="IsTriggedAlarmHighValue"/>
+    </property>
+    <property name="isTriggedOrderMore" type="java.lang.Integer">
+      <column name="IsTriggedOrderMore"/>
+    </property>
+    <property name="eventSendingDeviceId" type="string">
+      <column length="36" name="EventSendingDeviceID"/>
+    </property>
+    <property name="salesNumber" type="string">
+      <column name="SalesNumber"/>
+    </property>
+    <property name="depot" type="string">
+      <column name="Depot"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set cascade="delete" inverse="true" name="containerDeviceses">
+      <key>
+        <column length="36" name="ContainerID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ContainerDevices"/>
+    </set>
+    <set cascade="delete" inverse="true" name="ogmcontainerses">
+      <key>
+        <column length="36" name="ContainerID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Ogmcontainers"/>
+    </set>
+    <set inverse="true" name="containerUserAliases">
+      <key>
+        <column length="36" name="ContainerID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ContainerUserAlias"/>
+    </set>
+  </class>
+  <query name="getContainersById">
+        from Containers where containerId = :containerId
+    </query>
+  <query name="getContainersGroupID">
+        from Containers where groupId = :groupId order by createdDate
+    </query>
+  <query name="getContainersByGroupIDList">
+        from Containers where groupId in (:groupId) order by createdDate desc
+    </query>
+  <query name="getContainersByGroupIDListOrderByName">
+        from Containers where groupId in (:groupId) order by containerName
+    </query>
+  <query name="getContainersByGroupIDListAndAssetID">
+        from Containers where groupId in (:groupId) and assetId = :assetId order by createdDate asc
+    </query>
+  <query name="getContainersOrderByNumber">
+        from Containers where containerId in (:containerId) order by containerNumber
+    </query>
+  <query name="getContainersOrderByName">
+        from Containers where containerId in (:containerId) order by containerName
+    </query>
+  <query name="searchContainersByNameOrNumber">
+        from Containers where groupId = :groupId and containerName like :searchField or containerNumber like :searchField
+    </query>
+  <query name="searchContainersByNameOrNumbers">
+        from Containers where groupId in (:groupId) and (containerId = :containerId or containerName like '%'+:searchField+'%' or containerNumber like '%'+:searchField+'%') order by containerName
+    </query>
+  <query name="GetContainersByGroupIDAndProductVariantID">
+        from Containers where groupId = :groupId and productVariantId =:productVariantId order by containerName
+    </query>
+  <query name="getContainersForMyTankMonitor">
+        from Containers where containerId in(select id.containerId from ContainerDevices where id.deviceId in(select id.objectId from ObjectFieldData where id.fieldId= :fieldId and fieldvalue= :fieldValue)) order by containerNumber
+    </query>
+</hibernate-mapping>

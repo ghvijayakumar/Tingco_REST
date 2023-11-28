@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 25, 2013 1:29:19 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DeviceTypeContentAttributes" schema="dbo" table="DeviceTypeContentAttributes">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.DeviceTypeContentAttributesId" name="id">
+      <key-property name="deviceTypeId" type="string">
+        <column length="36" name="DeviceTypeID"/>
+      </key-property>
+      <key-property name="contentAttributeId" type="string">
+        <column length="36" name="ContentAttributeID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.ContentAttributes" fetch="select" insert="false" name="contentAttributes" update="false">
+      <column length="36" name="ContentAttributeID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.DeviceTypes" fetch="select" insert="false" name="deviceTypes" update="false">
+      <column length="36" name="DeviceTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="attributeDefaultValue" type="string">
+      <column name="AttributeDefaultValue" not-null="true"/>
+    </property>
+    <property name="unit" type="string">
+      <column name="Unit"/>
+    </property>
+    <property name="dataType" type="string">
+      <column name="DataType"/>
+    </property>
+    <property name="description" type="string">
+      <column name="Description"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getDeviceTypeContentAttributesByDeviceTypeId">
+        from DeviceTypeContentAttributes where deviceTypeId = :deviceTypeId
+    </query>
+</hibernate-mapping>

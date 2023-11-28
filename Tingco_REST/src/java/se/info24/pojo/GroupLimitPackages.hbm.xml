@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 4, 2012 12:08:11 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.GroupLimitPackages" schema="dbo" table="GroupLimitPackages">
+    <cache usage="nonstrict-read-write"/>
+    <id name="groupLimitPackageId" type="string">
+      <column length="36" name="GroupLimitPackageID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="packageName" type="string">
+      <column name="PackageName"/>
+    </property>
+    <property name="packageDescription" type="string">
+      <column name="PackageDescription"/>
+    </property>
+    <property name="displayOrder" type="java.lang.Integer">
+      <column name="DisplayOrder"/>
+    </property>
+    <property name="maxNumberOfDevices" type="java.lang.Integer">
+      <column name="MaxNumberOfDevices"/>
+    </property>
+    <property name="maxNumberOfUsers" type="java.lang.Integer">
+      <column name="MaxNumberOfUsers"/>
+    </property>
+    <property name="maxNumberOfSubscriptions" type="java.lang.Integer">
+      <column name="MaxNumberOfSubscriptions"/>
+    </property>
+    <property name="maxNumberOfChildGroups" type="java.lang.Integer">
+      <column name="MaxNumberOfChildGroups"/>
+    </property>
+    <property name="maxNumberOfTrustingGroups" type="java.lang.Integer">
+      <column name="MaxNumberOfTrustingGroups"/>
+    </property>
+    <property name="maxDataStorageSize" type="java.lang.Integer">
+      <column name="MaxDataStorageSize"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="groupLimitses">
+      <key>
+        <column length="36" name="GroupLimitPackageID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.GroupLimits"/>
+    </set>
+  </class>
+  <query name="getAllGroupLimitPackages">
+        from GroupLimitPackages order by packageName
+    </query>
+  <query name="getGroupLimitPackagesById">
+        from GroupLimitPackages where groupLimitPackageId = :groupLimitPackageId
+    </query>
+</hibernate-mapping>

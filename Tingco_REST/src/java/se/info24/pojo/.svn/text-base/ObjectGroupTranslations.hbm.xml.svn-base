@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 4, 2012 10:52:55 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ObjectGroupTranslations" schema="dbo" table="ObjectGroupTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ObjectGroupTranslationsId" name="id">
+      <key-property name="objectGroupId" type="string">
+        <column length="36" name="ObjectGroupID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.ObjectGroups" fetch="select" insert="false" name="objectGroups" update="false">
+      <column length="36" name="ObjectGroupID" not-null="true"/>
+    </many-to-one>
+    <property name="objectGroupName" type="string">
+      <column name="ObjectGroupName" not-null="true"/>
+    </property>
+    <property name="objectGroupDescription" type="string">
+      <column name="ObjectGroupDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getObjectGroupTranslationsByIdandObjectGroupName">
+        from ObjectGroupTranslations where id.objectGroupId in (:objectGroupId) and id.countryId = :countryId and objectGroupName like '%'+:searchString+'%' order by objectGroupName
+    </query>
+  <query name="getObjectGroupTranslationsByCountryIdandObjectGroupName">
+        from ObjectGroupTranslations where id.countryId = :countryId and objectGroupName like '%'+:searchString+'%' order by objectGroupName
+    </query>
+  <query name="getObjectGroupTranslationsById">
+        from ObjectGroupTranslations where id.objectGroupId in (:objectGroupId) and id.countryId = :countryId order by objectGroupName
+    </query>
+  <query name="getObjectGroupTranslationsByObjectGroupId">
+        from ObjectGroupTranslations where id.objectGroupId  = :objectGroupId
+    </query>
+  <query name="getObjectGroupTranslationsByIds">
+        from ObjectGroupTranslations where id.objectGroupId  = :objectGroupId and id.countryId = :countryId order by objectGroupName
+    </query>
+  <query name="getObjectGroupTranslationsByObjectGroupName">
+        from ObjectGroupTranslations where id.objectGroupId in (:objectGroupId) and objectGroupName like '%'+:searchString+'%' order by objectGroupName
+    </query>
+  <query name="getObjectGroupTranslationsByObjectGroupNames">
+        from ObjectGroupTranslations where objectGroupName like '%'+:searchString+'%' order by objectGroupName
+    </query>
+  <query name="getObjectGroupTranslationsBySearchString">
+        from ObjectGroupTranslations where id.countryId = :countryId and (objectGroupName like '%'+:searchString+'%' or objectGroupDescription like '%'+:searchString+'%') order by objectGroupName
+    </query>
+</hibernate-mapping>

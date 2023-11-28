@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 4, 2011 1:10:14 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserAlias" schema="dbo" table="UserAlias">
+    <cache usage="nonstrict-read-write"/>
+    <id name="userAliasId" type="string">
+      <column length="36" name="UserAliasID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.UserAliasTypes" fetch="select" name="userAliasTypes">
+      <column length="36" name="UserAliasTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="userAlias" type="string">
+      <column length="200" name="UserAlias" not-null="true"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID"/>
+    </property>
+    <property name="firstName" type="string">
+      <column length="200" name="FirstName"/>
+    </property>
+    <property name="lastName" type="string">
+      <column length="200" name="LastName"/>
+    </property>
+    <property name="userEmail" type="string">
+      <column length="200" name="UserEmail"/>
+    </property>
+    <property name="userMobilePhone" type="string">
+      <column length="50" name="UserMobilePhone"/>
+    </property>
+    <property name="socialSecurityNumber" type="string">
+      <column length="50" name="SocialSecurityNumber"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate"/>
+    </property>
+    <property name="firstUseDate" type="timestamp">
+      <column length="23" name="FirstUseDate"/>
+    </property>
+    <property name="lastUseDate" type="timestamp">
+      <column length="23" name="LastUseDate"/>
+    </property>
+    <property name="creditAmount" type="java.lang.Double">
+      <column name="CreditAmount" precision="53" scale="0"/>
+    </property>
+    <property name="creditAmountCurrencyId" type="java.lang.Integer">
+      <column name="CreditAmountCurrencyID"/>
+    </property>
+    <property name="credits" type="java.lang.Integer">
+      <column name="Credits"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="extVerify" type="timestamp">
+      <column length="23" name="ExtVerify"/>
+    </property>
+    <set cascade="all" inverse="true" name="userAliasDetailses" >
+      <key>
+        <column length="36" name="UserAliasID" not-null="true" unique="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.UserAliasDetails"/>
+    </set>
+    <set cascade="all" inverse="true" name="ogmuserAliases">
+      <key>
+        <column length="36" name="UserAliasID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.OgmuserAlias"/>
+    </set>
+  </class>
+  <query name="getUserAliasByLoggedInUserID">
+        from UserAlias where userId=:userID order by userAlias
+    </query>
+  <query name="getUserAliasByUserAliasID">
+       from UserAlias where userAliasId = :userAliasId
+    </query>
+  <query name="getUserAliasDetailsByUserAliasIDs">
+       from UserAlias where userAliasId in (:userAliasId)  order by firstName, lastName
+    </query>
+  <query name="getUserAliasByUserID">
+        from UserAlias where userId = :userId order by createdDate desc
+    </query>
+  <query name="getUserAliasByUserAliasTypeIdAndUserAlias">
+        from UserAlias where userAlias = :userAlias and userAliasTypes.userAliasTypeId = :userAliasTypeId
+    </query>
+  <query name="getUserAliasByUserAlias">
+       from UserAlias where userAlias=:userAlias
+    </query>
+  <query name="getUserAliasBySearchFilter">
+        from UserAlias where (userAlias like '%'+:searchString+'%') and userId in (:userId)
+    </query>
+  <query name="getUserAliasBySearchString">
+        from UserAlias where (userAlias like '%'+:searchString+'%' or firstName like '%'+:searchString+'%' or lastName like '%'+:searchString+'%') and groupId in(:groupId)  order by firstName, lastName
+    </query>
+  <query name="getUserAliasBySearchStringAndGroupID">
+        from UserAlias where (userAlias like '%'+:searchString+'%' or firstName like '%'+:searchString+'%' or lastName like '%'+:searchString+'%') and groupId in (:groupId)  order by createdDate desc
+    </query>
+  <query name="getUserAliasByTrustedGroupIDs">
+        from UserAlias where groupId in (:groupId)  order by createdDate desc
+    </query>
+  <query name="getUserAliasDetailsByUserAliasIDsAndValidDate">
+       from UserAlias where userAliasId in (:userAliasId) and isEnabled = 1 and (:timenow between activeFromDate and activeToDate) order by createdDate desc
+    </query>
+</hibernate-mapping>

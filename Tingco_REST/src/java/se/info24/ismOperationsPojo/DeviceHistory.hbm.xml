@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 28, 2011 6:45:17 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISMOperations" name="se.info24.ismOperationsPojo.DeviceHistory" schema="dbo" table="DeviceHistory">
+    <cache usage="nonstrict-read-write"/>
+    <id name="deviceHistoryId" type="string">
+      <column length="36" name="DeviceHistoryID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="deviceId" type="string">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </property>
+    <property name="dataItemId" type="string">
+      <column length="36" name="DataItemID" not-null="true"/>
+    </property>
+    <property name="dataItemTime" type="timestamp">
+      <column length="23" name="DataItemTime" not-null="true"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="posLatitude" type="java.lang.Double">
+      <column name="PosLatitude" precision="53" scale="0"/>
+    </property>
+    <property name="posLongitude" type="java.lang.Double">
+      <column name="PosLongitude" precision="53" scale="0"/>
+    </property>
+    <property name="posDepth" type="java.lang.Double">
+      <column name="PosDepth" precision="53" scale="0"/>
+    </property>
+    <property name="posDirection" type="java.lang.Integer">
+      <column name="PosDirection"/>
+    </property>
+    <property name="coordinateSystemId" type="string">
+      <column length="50" name="CoordinateSystemID"/>
+    </property>
+    <property name="msgId" type="string">
+      <column length="36" name="MsgID"/>
+    </property>
+    <property name="msgTimeStamp" type="timestamp">
+      <column length="23" name="MsgTimeStamp"/>
+    </property>
+    <property name="msgSenderDeviceId" type="string">
+      <column length="36" name="MsgSenderDeviceID"/>
+    </property>
+    <property name="msgSenderServiceId" type="string">
+      <column length="36" name="MsgSenderServiceID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getDeviceHistoryByDeviceIdAnddataItemTime">
+      from DeviceHistory where deviceId = :deviceId and dataItemTime between (:fromDate) and (:toDate) order by dataItemTime desc
+  </query>
+</hibernate-mapping>

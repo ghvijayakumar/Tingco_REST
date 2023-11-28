@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 8, 2014 4:03:11 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.DeviceBillingCategories" schema="dbo" table="DeviceBillingCategories">
+    <id name="deviceId" type="string">
+      <column length="36" name="DeviceID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.BillingCategories" fetch="select" name="billingCategories">
+      <column length="36" name="BillingCategoryID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Device" fetch="select" insert="false" name="device" update="false">
+      <column length="36" name="DeviceID" not-null="true" unique="true"/>
+    </many-to-one>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getDeviceBillingCategories">
+        from DeviceBillingCategories where deviceId = :deviceId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 30, 2010 1:32:29 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.EventLog" schema="dbo" table="EventLog">
+    <cache usage="nonstrict-read-write"/>
+    <id name="eventId" type="string">
+      <column length="36" name="EventID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="eventTypeId" type="string">
+      <column length="36" name="EventTypeID" not-null="true"/>
+    </property>
+    <property name="eventTime" type="timestamp">
+      <column length="23" name="EventTime" not-null="true"/>
+    </property>
+    <property name="eventClosedTime" type="timestamp">
+      <column length="23" name="EventClosedTime"/>
+    </property>
+    <property name="eventAcknowledgedTime" type="timestamp">
+      <column length="23" name="EventAcknowledgedTime"/>
+    </property>
+    <property name="eventAcknowledgeUserId" type="string">
+      <column length="36" name="EventAcknowledgeUserID"/>
+    </property>
+    <property name="subject" type="string">
+      <column length="250" name="Subject" not-null="true"/>
+    </property>
+    <property name="body" type="string">
+      <column name="Body"/>
+    </property>
+    <property name="active" type="short">
+      <column name="Active" not-null="true"/>
+    </property>
+    <property name="priority" type="short">
+      <column name="Priority" not-null="true"/>
+    </property>
+    <property name="sourceTypeId" type="string">
+      <column length="36" name="SourceTypeID" not-null="true"/>
+    </property>
+    <property name="sourceId" type="string">
+      <column length="36" name="SourceID" not-null="true"/>
+    </property>
+    <property name="targetTypeId" type="string">
+      <column length="36" name="TargetTypeID"/>
+    </property>
+    <property name="targetId" type="string">
+      <column length="36" name="TargetID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate" not-null="true"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate" not-null="true"/>
+    </property>
+    <set inverse="true" name="eventDetailses">
+      <key>
+        <column length="36" name="EventID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.ismOperationsPojo.EventDetails"/>
+    </set>
+  </class>
+  <query name="getEventLogbyEventTypeIdandSourceIdTop100">
+        from EventLog where eventTypeId in (:eventTypeId) and sourceId = :sourceId order by eventTime desc
+    </query>
+  <query name="getEventLogbyEventTypeIdandSourceId">
+        from EventLog where eventTypeId in (:eventTypeId) and sourceId = :sourceId and (eventTime between :fromDate and :toDate) order by eventTime desc
+    </query>
+  <query name="getEventLogbyEventTypeIdandEventTime">
+        from EventLog where eventTypeId in (:eventTypeId) and (eventTime between :fromDate and :toDate) and sourceId =:sourceId order by eventTime desc
+    </query>
+</hibernate-mapping>

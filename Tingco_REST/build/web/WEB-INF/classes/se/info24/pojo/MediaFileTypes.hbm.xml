@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 3, 2013 5:37:51 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.MediaFileTypes" schema="dbo" table="MediaFileTypes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="mediaFileTypeId" type="string">
+      <column length="36" name="MediaFileTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="typeName" type="string">
+      <column name="TypeName" not-null="true"/>
+    </property>
+    <property name="typeDescription" type="string">
+      <column name="TypeDescription"/>
+    </property>
+    <property name="objectCode" type="string">
+      <column name="ObjectCode" not-null="true"/>
+    </property>
+    <property name="iconUrl" type="string">
+      <column name="IconURL"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getMediaFileTypesByIds">
+        from MediaFileTypes where mediaFileTypeId in (:mediaFileTypeId)
+    </query>
+  <query name="getMediaFileTypes">
+        from MediaFileTypes order by typeName
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 23, 2013 12:51:02 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.CommandParseTargets" schema="dbo" table="CommandParseTargets">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.CommandParseTargetsId" name="id">
+      <key-property name="commandId" type="string">
+        <column length="36" name="CommandID"/>
+      </key-property>
+      <key-property name="targetString" type="string">
+        <column name="TargetString"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Commands" fetch="select" insert="false" name="commands" update="false">
+      <column length="36" name="CommandID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.DeviceTypeCommands" fetch="select" name="deviceTypeCommands">
+      <column length="36" name="DeviceTypeCommandID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Device" fetch="select" name="device">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </many-to-one>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getCommandParseTargetsByCommandIdAndDeviceId">
+        from CommandParseTargets where id.commandId = :commandId and device.deviceId = :deviceId
+    </query>
+  <query name="getCommandParseTargetsByIds">
+        from CommandParseTargets where id.commandId = :commandId and id.targetString = :targetString and device.deviceId = :deviceId
+    </query>
+</hibernate-mapping>

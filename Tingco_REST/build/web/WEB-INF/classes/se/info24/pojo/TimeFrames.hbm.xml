@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 13, 2012 10:38:45 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.TimeFrames" schema="dbo" table="TimeFrames">
+    <cache usage="nonstrict-read-write"/>
+    <id name="timeFrameId" type="string">
+      <column length="36" name="TimeFrameID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Weekdays" fetch="select" name="weekdays">
+      <column length="36" name="WeekdayID" not-null="true"/>
+    </many-to-one>
+    <property name="timeFrameName" type="string">
+      <column length="50" name="TimeFrameName" not-null="true"/>
+    </property>
+    <property name="timeFrameDescription" type="string">
+      <column length="200" name="TimeFrameDescription"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="startTime" type="timestamp">
+      <column length="23" name="StartTime" not-null="true"/>
+    </property>
+    <property name="stopTime" type="timestamp">
+      <column length="23" name="StopTime" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="timeFrameGroupses">
+      <key>
+        <column length="36" name="TimeFrameID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.TimeFrameGroups"/>
+    </set>
+  </class>
+</hibernate-mapping>

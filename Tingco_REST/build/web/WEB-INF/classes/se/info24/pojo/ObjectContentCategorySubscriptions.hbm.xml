@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 24, 2011 11:31:48 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ObjectContentCategorySubscriptions" schema="dbo" table="ObjectContentCategorySubscriptions">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ObjectContentCategorySubscriptionsId" name="id">
+      <key-property name="objectId" type="string">
+        <column length="36" name="ObjectID"/>
+      </key-property>
+      <key-property name="contentCategoryId" type="string">
+        <column length="36" name="ContentCategoryID"/>
+      </key-property>
+    </composite-id>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate"/>
+    </property>
+    <property name="agreementId" type="string">
+      <column length="36" name="AgreementID"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getObjectContentCategoriesById">
+        from ObjectContentCategorySubscriptions occs where occs.id.objectId = :groupId
+    </query>
+</hibernate-mapping>

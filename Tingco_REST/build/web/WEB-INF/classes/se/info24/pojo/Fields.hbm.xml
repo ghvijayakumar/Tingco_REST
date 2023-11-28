@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 23, 2013 10:58:19 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Fields" schema="dbo" table="Fields">
+    <cache usage="nonstrict-read-write"/>
+    <id name="fieldId" type="string">
+      <column length="36" name="FieldID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Lists" fetch="select" name="lists">
+      <column length="36" name="ListID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.FieldTypes" fetch="select" name="fieldTypes">
+      <column length="36" name="FieldTypeID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.FieldCategories" fetch="select" name="fieldCategories">
+      <column length="36" name="FieldCategoryID" not-null="true"/>
+    </many-to-one>
+    <property name="objectCode" type="string">
+      <column name="ObjectCode" not-null="true" unique="true"/>
+    </property>
+    <property name="validationRegEx" type="string">
+      <column name="ValidationRegEx"/>
+    </property>
+    <property name="length" type="int">
+      <column name="Length" not-null="true"/>
+    </property>
+    <property name="decimals" type="java.lang.Integer">
+      <column name="Decimals"/>
+    </property>
+    <property name="defaultValue" type="string">
+      <column name="DefaultValue"/>
+    </property>
+    <property name="minValue" type="big_decimal">
+      <column name="MinValue"/>
+    </property>
+    <property name="maxValue" type="big_decimal">
+      <column name="MaxValue"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="objectFieldDatas">
+      <key>
+        <column length="36" name="FieldID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ObjectFieldData"/>
+    </set>
+    <set inverse="true" name="fieldTranslationses">
+      <key>
+        <column length="36" name="FieldID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.FieldTranslations"/>
+    </set>
+    <set inverse="true" name="objectTypeFieldses">
+      <key>
+        <column length="36" name="FieldID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ObjectTypeFields"/>
+    </set>
+  </class>
+</hibernate-mapping>

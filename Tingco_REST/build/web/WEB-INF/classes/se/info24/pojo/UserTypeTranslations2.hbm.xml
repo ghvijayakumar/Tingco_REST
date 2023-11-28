@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 3:59:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserTypeTranslations2" schema="dbo" table="UserTypeTranslations2">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.UserTypeTranslations2Id" name="id">
+      <key-property name="userTypeId" type="string">
+        <column length="36" name="UserTypeID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.UserTypes2" fetch="select" insert="false" name="userTypes2" update="false">
+      <column length="36" name="UserTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="userTypeName" type="string">
+      <column length="50" name="UserTypeName" not-null="true"/>
+    </property>
+    <property name="userTypeDescription" type="string">
+      <column length="200" name="UserTypeDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getUserTypeTranslations2">
+      from UserTypeTranslations2 where id.userTypeId in (:userTypeId) and id.countryId = :countryId order by userTypeName
+  </query>
+  <query name="getUserTypeTranslationsByIds">
+      from UserTypeTranslations2 where id.userTypeId = :userTypeId and id.countryId = :countryId
+  </query>
+</hibernate-mapping>

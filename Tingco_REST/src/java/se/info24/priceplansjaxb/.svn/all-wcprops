@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/NB_2011/!svn/ver/2095/Tingco_REST/src/java/se/info24/priceplansjaxb
+END
+PricePlans.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/PricePlans.java
+END
+PricePlanItemTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/PricePlanItemTypeTranslations.java
+END
+PricePlanTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/PricePlanTypes.java
+END
+Products.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/Products.java
+END
+TingcoPricePlans.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/TingcoPricePlans.java
+END
+PricePlanVersions.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2086/Tingco_REST/src/java/se/info24/priceplansjaxb/PricePlanVersions.java
+END
+ProductVariantTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/ProductVariantTranslations.java
+END
+ValidationDataTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/ValidationDataTypes.java
+END
+PricePlan.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2095/Tingco_REST/src/java/se/info24/priceplansjaxb/PricePlan.java
+END
+UserAliasTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/UserAliasTypes.java
+END
+ChargeTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/ChargeTypes.java
+END
+PricePlanItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/PricePlanItems.java
+END
+ProductCategoryTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/ProductCategoryTranslations.java
+END
+PricePlanTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/PricePlanTypeTranslations.java
+END
+PricePlanItemTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/PricePlanItemTypes.java
+END
+ProductTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/ProductTranslations.java
+END
+ProductCategories.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/ProductCategories.java
+END
+ValidationValue.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/ValidationValue.java
+END
+ProductVariants.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/ProductVariants.java
+END
+MsgStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/MsgStatus.java
+END
+ChargeTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/ChargeTypeTranslations.java
+END
+ValidationExpressions.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/ValidationExpressions.java
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/982/Tingco_REST/src/java/se/info24/priceplansjaxb/ObjectFactory.java
+END

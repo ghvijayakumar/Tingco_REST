@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 27, 2013 2:19:13 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ProviderTypes" schema="dbo" table="ProviderTypes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="providerTypeId" type="string">
+      <column length="36" name="ProviderTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="objectCode" type="string">
+      <column name="ObjectCode" not-null="true" unique="true"/>
+    </property>
+    <property name="displayInWebShop" type="java.lang.Integer">
+      <column name="DisplayInWebShop"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <!--<set name="userProviderTypeses" inverse="true">
+            <key>
+                <column name="ProviderTypeID" length="36" not-null="true" />
+            </key>
+            <one-to-many class="se.info24.pojo.UserProviderTypes" />
+        </set>-->
+    <set cascade="delete" inverse="true" name="providerTypeTranslationses">
+      <key>
+        <column length="36" name="ProviderTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ProviderTypeTranslations"/>
+    </set>
+    <set inverse="true" name="applicationProviderTypeses">
+      <key>
+        <column length="36" name="ProviderTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ApplicationProviderTypes"/>
+    </set>
+  </class>
+  <!--<set name="applicationProviderTypeses" inverse="true">
+            <key>
+                <column name="ProviderTypeID" length="36" not-null="true" />
+            </key>
+            <one-to-many class="se.info24.pojo.ApplicationProviderTypes" />
+        </set>-->
+  <query name="getProviderTypesByIds">
+            from ProviderTypes where providerTypeId in (:providerTypeId) and displayInWebShop = 1
+    </query>
+  <query name="getProviderTypesById">
+            from ProviderTypes where providerTypeId =:providerTypeId
+    </query>
+</hibernate-mapping>

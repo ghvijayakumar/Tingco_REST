@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 24, 2012 2:20:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.NetworkSubscriptionStatuses" schema="dbo" table="NetworkSubscriptionStatuses">
+    <cache usage="nonstrict-read-write"/>
+    <id name="networkSubscriptionStatusId" type="string">
+      <column length="36" name="NetworkSubscriptionStatusID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="statusName" type="string">
+      <column name="StatusName" not-null="true"/>
+    </property>
+    <property name="statusDescription" type="string">
+      <column name="StatusDescription"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="networkSubscriptionses">
+      <key>
+        <column length="36" name="NetworkSubscriptionStatusID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.NetworkSubscriptions"/>
+    </set>
+  </class>
+  <query name="getNetworkSubscriptionStatusesAll">
+        from NetworkSubscriptionStatuses order by statusName
+    </query>
+  <query name="getNetworkSubscriptionStatusesById">
+        from NetworkSubscriptionStatuses where networkSubscriptionStatusId =:networkSubscriptionStatusId
+    </query>
+</hibernate-mapping>

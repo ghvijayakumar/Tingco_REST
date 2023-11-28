@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/NB_2011/!svn/ver/2434/Tingco_REST/src/java/XSD
+END
+tingcoDrivers.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/NB_2011/!svn/ver/2162/Tingco_REST/src/java/XSD/tingcoDrivers.xsd
+END
+tingcoGroups.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/NB_2011/!svn/ver/2380/Tingco_REST/src/java/XSD/tingcoGroups.xsd
+END
+tingcoNetworkSubscriptions.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2248/Tingco_REST/src/java/XSD/tingcoNetworkSubscriptions.xsd
+END
+Email.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/NB_2011/!svn/ver/2206/Tingco_REST/src/java/XSD/Email.xsd
+END
+tingcoApplications.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/NB_2011/!svn/ver/2387/Tingco_REST/src/java/XSD/tingcoApplications.xsd
+END
+tingcoVirtualGate.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/NB_2011/!svn/ver/2123/Tingco_REST/src/java/XSD/tingcoVirtualGate.xsd
+END
+tingcoHome.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/NB_2011/!svn/ver/2406/Tingco_REST/src/java/XSD/tingcoHome.xsd
+END
+tingcoReports.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/NB_2011/!svn/ver/2364/Tingco_REST/src/java/XSD/tingcoReports.xsd
+END
+tingcoDevice.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/NB_2011/!svn/ver/2423/Tingco_REST/src/java/XSD/tingcoDevice.xsd
+END
+tingcoService.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/XSD/tingcoService.xsd
+END
+tingcoPricePlans.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/NB_2011/!svn/ver/2096/Tingco_REST/src/java/XSD/tingcoPricePlans.xsd
+END
+tingcoUsers.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/NB_2011/!svn/ver/2431/Tingco_REST/src/java/XSD/tingcoUsers.xsd
+END
+tingcoCommands.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/NB_2011/!svn/ver/1649/Tingco_REST/src/java/XSD/tingcoCommands.xsd
+END
+tingcoCustomer.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/NB_2011/!svn/ver/1976/Tingco_REST/src/java/XSD/tingcoCustomer.xsd
+END
+tingcoProducts.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/NB_2011/!svn/ver/2280/Tingco_REST/src/java/XSD/tingcoProducts.xsd
+END
+tingcoDevice_Post.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/NB_2011/!svn/ver/2374/Tingco_REST/src/java/XSD/tingcoDevice_Post.xsd
+END
+tingcoContainers.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/XSD/tingcoContainers.xsd
+END
+tingcoMobile.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/NB_2011/!svn/ver/1705/Tingco_REST/src/java/XSD/tingcoMobile.xsd
+END
+tingcoSupportCase.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/NB_2011/!svn/ver/2255/Tingco_REST/src/java/XSD/tingcoSupportCase.xsd
+END
+tingcoAPI.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/XSD/tingcoAPI.xsd
+END
+tingcoMeasurementTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/2395/Tingco_REST/src/java/XSD/tingcoMeasurementTypes.xsd
+END
+tingcoEV.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/NB_2011/!svn/ver/2434/Tingco_REST/src/java/XSD/tingcoEV.xsd
+END
+tingcoContent.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/XSD/tingcoContent.xsd
+END
+tingcoUtil.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/NB_2011/!svn/ver/2167/Tingco_REST/src/java/XSD/tingcoUtil.xsd
+END

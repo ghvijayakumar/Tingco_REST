@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 24, 2012 2:20:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.MessageTypes" schema="dbo" table="MessageTypes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="messageTypeId" type="string">
+      <column length="36" name="MessageTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="messageTypeName" type="string">
+      <column name="MessageTypeName" not-null="true"/>
+    </property>
+    <property name="messageTypeDescription" type="string">
+      <column name="MessageTypeDescription"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="routingTables">
+      <key>
+        <column length="36" name="MessageTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.RoutingTable"/>
+    </set>
+    <set inverse="true" name="messageItemses">
+      <key>
+        <column length="36" name="MessageTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.MessageItems"/>
+    </set>
+  </class>
+</hibernate-mapping>

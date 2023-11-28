@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 14, 2012 10:11:45 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ReportTemplateSettings" schema="dbo" table="ReportTemplateSettings">
+    <cache usage="nonstrict-read-write"/>
+    <id name="reportTemplateSettingId" type="string">
+      <column length="36" name="ReportTemplateSettingID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="reportId" type="string">
+      <column length="36" name="ReportID" not-null="true"/>
+    </property>
+    <property name="settingName" type="string">
+      <column length="50" name="SettingName" not-null="true"/>
+    </property>
+    <property name="settingDescription" type="string">
+      <column length="200" name="SettingDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getReportTemplateSettings">
+        from ReportTemplateSettings where reportId = :reportId and settingName = :settingName
+    </query>
+</hibernate-mapping>

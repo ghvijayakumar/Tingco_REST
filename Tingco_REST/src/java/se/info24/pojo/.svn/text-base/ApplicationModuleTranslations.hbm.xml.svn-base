@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 13, 2012 2:28:59 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ApplicationModuleTranslations" schema="dbo" table="ApplicationModuleTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ApplicationModuleTranslationsId" name="id">
+      <key-property name="applicationModuleId" type="string">
+        <column length="36" name="ApplicationModuleID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.ApplicationModules" fetch="select" insert="false" name="applicationModules" update="false">
+      <column length="36" name="ApplicationModuleID" not-null="true"/>
+    </many-to-one>
+    <property name="applicationModuleName" type="string">
+      <column name="ApplicationModuleName" not-null="true"/>
+    </property>
+    <property name="applicationModuleDescription" type="string">
+      <column name="ApplicationModuleDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getApplicationModuleTranslations">
+        from ApplicationModuleTranslations
+    </query>
+  <query name="getAppModuleTransByAppModuleIdAndCountryId">
+        from ApplicationModuleTranslations where id.applicationModuleId = :applicationModuleId and id.countryId = :countryId
+    </query>
+  <query name="getAppModuleTransByAppModuleIdListAndCountryId">
+        from ApplicationModuleTranslations where id.applicationModuleId in(:applicationModuleId) and id.countryId = :countryId order by applicationModuleName
+    </query>
+</hibernate-mapping>

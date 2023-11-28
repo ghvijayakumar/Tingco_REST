@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 23, 2013 10:58:19 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ObjectAddresses" schema="dbo" table="ObjectAddresses">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ObjectAddressesId" name="id">
+      <key-property name="objectId" type="string">
+        <column length="36" name="ObjectID"/>
+      </key-property>
+      <key-property name="addressTypeId" type="int">
+        <column name="AddressTypeID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.AddressType" fetch="select" insert="false" name="addressType" update="false">
+      <column name="AddressTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="addressId" type="string">
+      <column length="36" name="AddressID" not-null="true"/>
+    </property>
+    <property name="lastUpdatedUserId" type="string">
+      <column length="36" name="LastUpdatedUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getObjectAddressesByID">
+        from ObjectAddresses where id.objectId = :objectId and id.addressTypeId = :addressTypeId
+    </query>
+  <query name="getObjectAddressesByobjectId">
+        from ObjectAddresses where id.objectId = :objectId
+    </query>
+</hibernate-mapping>

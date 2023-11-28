@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 8, 2012 2:22:09 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.DriversLogItemHistory" schema="dbo" table="DriversLogItemHistory">
+    <cache usage="nonstrict-read-write"/>
+    <id name="driversLogItemId" type="string">
+      <column length="36" name="DriversLogItemID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="deviceId" type="string">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </property>
+    <property name="deviceGroupId" type="string">
+      <column length="36" name="DeviceGroupID"/>
+    </property>
+    <property name="deviceName" type="string">
+      <column length="50" name="DeviceName"/>
+    </property>
+    <property name="driverUserId" type="string">
+      <column length="36" name="DriverUserID" not-null="true"/>
+    </property>
+    <property name="driverName" type="string">
+      <column length="50" name="DriverName"/>
+    </property>
+    <property name="startTime" type="timestamp">
+      <column length="23" name="StartTime" not-null="true"/>
+    </property>
+    <property name="stopTime" type="timestamp">
+      <column length="23" name="StopTime" not-null="true"/>
+    </property>
+    <property name="totalTime" type="int">
+      <column name="TotalTime" not-null="true"/>
+    </property>
+    <property name="startOdometer" type="int">
+      <column name="StartOdometer" not-null="true"/>
+    </property>
+    <property name="stopOdometer" type="int">
+      <column name="StopOdometer" not-null="true"/>
+    </property>
+    <property name="totalDistance" type="big_decimal">
+      <column name="TotalDistance" not-null="true" precision="18"/>
+    </property>
+    <property name="startLatitude" type="big_decimal">
+      <column name="StartLatitude" not-null="true" precision="10" scale="7"/>
+    </property>
+    <property name="startLongitude" type="big_decimal">
+      <column name="StartLongitude" not-null="true" precision="10" scale="7"/>
+    </property>
+    <property name="startAltitude" type="big_decimal">
+      <column name="StartAltitude" precision="8" scale="1"/>
+    </property>
+    <property name="startHeading" type="java.lang.Integer">
+      <column name="StartHeading"/>
+    </property>
+    <property name="startAddress" type="string">
+      <column length="200" name="StartAddress" not-null="true"/>
+    </property>
+    <property name="startCity" type="string">
+      <column length="50" name="StartCity"/>
+    </property>
+    <property name="stopLatitude" type="big_decimal">
+      <column name="StopLatitude" not-null="true" precision="10" scale="7"/>
+    </property>
+    <property name="stopLongitude" type="big_decimal">
+      <column name="StopLongitude" not-null="true" precision="10" scale="7"/>
+    </property>
+    <property name="stopAltitude" type="big_decimal">
+      <column name="StopAltitude" precision="8" scale="1"/>
+    </property>
+    <property name="stopHeading" type="java.lang.Integer">
+      <column name="StopHeading"/>
+    </property>
+    <property name="stopAddress" type="string">
+      <column length="200" name="StopAddress" not-null="true"/>
+    </property>
+    <property name="stopCity" type="string">
+      <column length="50" name="StopCity"/>
+    </property>
+    <property name="journeyTypeId" type="string">
+      <column length="36" name="JourneyTypeID"/>
+    </property>
+    <property name="journeyPurpose" type="string">
+      <column length="200" name="JourneyPurpose"/>
+    </property>
+    <property name="journeyAccount" type="string">
+      <column length="50" name="JourneyAccount"/>
+    </property>
+    <property name="journeyNote" type="string">
+      <column length="50" name="JourneyNote"/>
+    </property>
+    <property name="journeyWorkOrder" type="string">
+      <column length="50" name="JourneyWorkOrder"/>
+    </property>
+    <property name="journeyWorkOrderId" type="string">
+      <column length="36" name="JourneyWorkOrderID"/>
+    </property>
+    <property name="isDeleted" type="java.lang.Integer">
+      <column name="IsDeleted"/>
+    </property>
+    <property name="isReadyForExport" type="java.lang.Integer">
+      <column name="IsReadyForExport"/>
+    </property>
+    <property name="isExported" type="java.lang.Integer">
+      <column name="IsExported"/>
+    </property>
+    <property name="exportedDate" type="timestamp">
+      <column length="23" name="ExportedDate"/>
+    </property>
+    <property name="averageSpeed" type="big_decimal">
+      <column name="AverageSpeed" precision="4" scale="1"/>
+    </property>
+    <property name="maxSpeed" type="big_decimal">
+      <column name="MaxSpeed" precision="4" scale="1"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getDriverLogHistoryByJourneyDate">
+        from DriversLogItemHistory dlh where dlh.driverUserId=:userId and dlh.deviceId=:deviceId and ((dlh.startTime between :fromDate and :toDate) or (dlh.stopTime between :fromDate and :toDate)) and (:journeyPurpose is null or dlh.journeyPurpose=:journeyPurpose)
+    </query>
+  <query name="getDriverLogHistoryByExportedDate">
+        from DriversLogItemHistory dlh where dlh.driverUserId=:userId and dlh.deviceId=:deviceId and (dlh.exportedDate between :fromDate and :toDate) and (:journeyPurpose is null or dlh.journeyPurpose=:journeyPurpose)
+    </query>
+  <query name="getDriverLogHistoryByJourneyDateAndTypeID">
+        from DriversLogItemHistory dlh where dlh.driverUserId=:userId and dlh.deviceId=:deviceId and ((dlh.startTime between :fromDate and :toDate) or (dlh.stopTime between :fromDate and :toDate)) and (:journeyPurpose is null or dlh.journeyPurpose=:journeyPurpose) and dlh.journeyTypeId =:journeyTypeId
+    </query>
+  <query name="getDriverLogHistoryByExportedDateAndTypeID">
+        from DriversLogItemHistory dlh where dlh.driverUserId=:userId and dlh.deviceId=:deviceId and (dlh.exportedDate between :fromDate and :toDate) and (:journeyPurpose is null or dlh.journeyPurpose=:journeyPurpose) and dlh.journeyTypeId =:journeyTypeId
+    </query>
+  <query name="getDriverLogHistoryByJourneyDateAndTypeIDOnly">
+        from DriversLogItemHistory dlh where dlh.driverUserId=:userId and dlh.deviceId=:deviceId and ((dlh.startTime between :fromDate and :toDate) or (dlh.stopTime between :fromDate and :toDate)) and dlh.journeyTypeId =:journeyTypeId
+    </query>
+  <query name="getDriverLogHistoryByExportedDateAndTypeIDOnly">
+        from DriversLogItemHistory dlh where dlh.driverUserId=:userId and dlh.deviceId=:deviceId and (dlh.exportedDate between :fromDate and :toDate) and dlh.journeyTypeId =:journeyTypeId
+    </query>
+  <query name="getDriverLogHistoryByJourneyDates">
+        from DriversLogItemHistory dlh where dlh.driverUserId=:userId and dlh.deviceId=:deviceId and ((dlh.startTime between :fromDate and :toDate) or (dlh.stopTime between :fromDate and :toDate))
+    </query>
+  <query name="getDriverLogHistoryByExportedDates">
+        from DriversLogItemHistory dlh where dlh.driverUserId=:userId and dlh.deviceId=:deviceId and (dlh.exportedDate between :fromDate and :toDate)
+    </query>
+</hibernate-mapping>

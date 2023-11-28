@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 16, 2012 11:28:09 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Services" schema="dbo" table="Services">
+    <cache usage="nonstrict-read-write"/>
+    <id name="serviceId" type="string">
+      <column length="36" name="ServiceID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Groups" fetch="select" name="groups">
+      <column length="36" name="GroupID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ServiceTypes" fetch="select" name="serviceTypes">
+      <column length="36" name="ServiceTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="serviceName" type="string">
+      <column length="50" name="ServiceName" not-null="true"/>
+    </property>
+    <property name="serviceDescription" type="string">
+      <column length="200" name="ServiceDescription"/>
+    </property>
+    <property name="serviceEnabled" type="java.lang.Integer">
+      <column name="ServiceEnabled"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate"/>
+    </property>
+    <property name="replicates" type="string">
+      <column length="36" name="Replicates"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set cascade="delete" inverse="true" name="servicesVisibleToGroups">
+      <key>
+        <column length="36" name="ServiceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ServicesVisibleToGroup"/>
+    </set>
+    <set cascade="delete" inverse="true" name="serviceDeviceSubscriptionses">
+      <key>
+        <column length="36" name="ServiceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ServiceDeviceSubscriptions"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceTypeServiceses">
+      <key>
+        <column length="36" name="ServiceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypeServices"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceServiceses" order-by="createdDate desc">
+      <key>
+        <column length="36" name="ServiceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceServices"/>
+    </set>
+    <set inverse="true" name="supportCaseServiceLinkses">
+      <key>
+        <column length="36" name="ServiceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.SupportCaseServiceLinks"/>
+    </set>
+    <set inverse="true" name="servicesChannelses">
+      <key>
+        <column length="36" name="ServiceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ServicesChannels"/>
+    </set>
+    <set inverse="true" name="serviceContentCategorieses">
+      <key>
+        <column length="36" name="ServiceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ServiceContentCategories"/>
+    </set>
+    <set inverse="true" name="deviceServicesActiveBundleses">
+      <key>
+        <column length="36" name="ServiceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceServicesActiveBundles"/>
+    </set>
+    <set inverse="true" name="deviceServicesAvailableBundleses">
+      <key>
+        <column length="36" name="ServiceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceServicesAvailableBundles"/>
+    </set>
+    <set inverse="true" name="deviceServicesAllowedBundleses">
+      <key>
+        <column length="36" name="ServiceID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceServicesAllowedBundles"/>
+    </set>
+  </class>
+  <query name="getServicesByID">
+        from Services where serviceId in (:serviceId) order by serviceName
+    </query>
+  <query name="getServicesByServiceId">
+        from Services where serviceId = :serviceId
+    </query>
+  <query name="getServicesByServiceName">
+        from Services where serviceName like '%'+:searchString+'%' order by serviceName
+    </query>
+  <query name="getServicesByUserId">
+        from Services where userId = :userId
+    </query>
+  <query name="getServicesByGroupId">
+        from Services where groups.groupId = :groupId
+    </query>
+  <query name="getAllServices">
+        from Services order by serviceName
+    </query>
+  <query name="getServicesByServiceIDAndGroupIDs">
+        from Services where serviceId in (:serviceId) and groups.groupId in (:groupId) order by createdDate desc
+    </query>
+  <query name="getServicesByServiceIDsOrderByCreatedDate">
+        from Services where serviceId in (:serviceId) order by createdDate desc
+    </query>
+  <query name="getServicesBySearchStringAndGroupIDs">
+        from Services where serviceName like '%'+:searchString+'%' and groups.groupId in (:groupId)
+    </query>
+  <query name="getServicesByTrustedGroupIDs">
+        from Services where groups.groupId in (:groupId)
+    </query>
+  <query name="getServicesByServiceIdAndTrustedGroupIDS">
+        from Services where serviceId = :serviceId and groups.groupId in (:groupId)
+    </query>
+</hibernate-mapping>

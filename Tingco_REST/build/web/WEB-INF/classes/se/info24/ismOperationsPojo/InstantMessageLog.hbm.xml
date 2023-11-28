@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 11, 2014 11:11:06 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISMOperations" name="se.info24.ismOperationsPojo.InstantMessageLog" schema="dbo" table="InstantMessageLog">
+    <id name="imlogId" type="string">
+      <column length="36" name="IMLogID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="commandId" type="string">
+      <column name="CommandID"/>
+    </property>
+    <property name="commandName" type="string">
+      <column name="CommandName"/>
+    </property>
+    <property name="commandStatus" type="string">
+      <column name="CommandStatus"/>
+    </property>
+    <property name="sequenceNumber" type="string">
+      <column name="SequenceNumber"/>
+    </property>
+    <property name="serviceId" type="string">
+      <column length="36" name="ServiceID" not-null="true"/>
+    </property>
+    <property name="deviceId" type="string">
+      <column length="36" name="DeviceID"/>
+    </property>
+    <property name="deviceName" type="string">
+      <column name="DeviceName"/>
+    </property>
+    <property name="deviceName2" type="string">
+      <column name="DeviceName2"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="imtext" type="string">
+      <column name="IMText"/>
+    </property>
+    <property name="imtextEncoding" type="string">
+      <column name="IMTextEncoding"/>
+    </property>
+    <property name="dataItemTime" type="timestamp">
+      <column length="23" name="DataItemTime"/>
+    </property>
+    <property name="immessageId" type="string">
+      <column name="IMMessageID"/>
+    </property>
+    <property name="priority" type="string">
+      <column name="Priority"/>
+    </property>
+    <property name="imsender" type="string">
+      <column name="IMSender"/>
+    </property>
+    <property name="imreceiver" type="string">
+      <column name="IMReceiver"/>
+    </property>
+    <property name="imtariffClass" type="string">
+      <column name="IMTariffClass"/>
+    </property>
+    <property name="imamount" type="java.lang.Double">
+      <column name="IMAmount" precision="53" scale="0"/>
+    </property>
+    <property name="imamountCurrency" type="string">
+      <column name="IMAmountCurrency"/>
+    </property>
+    <property name="imamountVat" type="java.lang.Double">
+      <column name="IMAmountVAT" precision="53" scale="0"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate"/>
+    </property>
+    <property name="responseCode" type="string">
+      <column name="ResponseCode"/>
+    </property>
+    <property name="responseText" type="string">
+      <column name="ResponseText"/>
+    </property>
+    <property name="reasonCode" type="string">
+      <column name="ReasonCode"/>
+    </property>
+    <property name="reasonText" type="string">
+      <column name="ReasonText"/>
+    </property>
+    <property name="statusCode" type="string">
+      <column name="StatusCode"/>
+    </property>
+    <property name="statusText" type="string">
+      <column name="StatusText"/>
+    </property>
+    <property name="billingStatusCode" type="string">
+      <column name="BillingStatusCode"/>
+    </property>
+    <property name="billingStatusText" type="string">
+      <column name="BillingStatusText"/>
+    </property>
+    <property name="posLatitude" type="java.lang.Double">
+      <column name="PosLatitude" precision="53" scale="0"/>
+    </property>
+    <property name="posLongitude" type="java.lang.Double">
+      <column name="PosLongitude" precision="53" scale="0"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getInstantMessageLogByIds">
+        from InstantMessageLog where imlogId in(:imlogId) order by createdDate desc
+    </query>
+</hibernate-mapping>

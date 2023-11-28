@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 13, 2012 10:38:45 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserDetails" schema="dbo" table="UserDetails">
+    <cache usage="nonstrict-read-write"/>
+    <id name="userId" type="string">
+      <column length="36" name="UserID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="userName" type="string">
+      <column length="50" name="UserName" not-null="true"/>
+    </property>
+    <property name="userDescription" type="string">
+      <column length="200" name="UserDescription"/>
+    </property>
+    <property name="companyId" type="string">
+      <column length="36" name="CompanyID" not-null="true"/>
+    </property>
+    <property name="userTitle" type="string">
+      <column length="50" name="UserTitle"/>
+    </property>
+    <property name="userEmail" type="string">
+      <column length="200" name="UserEmail"/>
+    </property>
+    <property name="countryId" type="int">
+      <column name="CountryID" not-null="true"/>
+    </property>
+    <property name="userBirthday" type="timestamp">
+      <column length="23" name="UserBirthday"/>
+    </property>
+    <property name="userLockedOut" type="boolean">
+      <column name="UserLockedOut" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="userMobileNumber" type="string">
+      <column length="30" name="UserMobileNumber"/>
+    </property>
+    <set inverse="true" name="userContentTypeses">
+      <key>
+        <column length="36" name="UserID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.UserContentTypes"/>
+    </set>
+    <!-- <set name="userSiteMapNodeMembershipses" inverse="true">
+            <key>
+                <column name="UserID" length="36" not-null="true" />
+            </key>
+            <one-to-many class="se.info24.pojo.UserSiteMapNodeMemberships" />
+        </set>-->
+    <set inverse="true" name="userContentCategorieses">
+      <key>
+        <column length="36" name="UserID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.UserContentCategories"/>
+    </set>
+  </class>
+  <query name="getUserDetailsByUserID">
+        from UserDetails ud where ud.userId = :userId
+    </query>
+</hibernate-mapping>

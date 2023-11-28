@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 17, 2013 3:57:08 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.SensorTypes" schema="dbo" table="SensorTypes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="sensorTypeId" type="string">
+      <column length="36" name="SensorTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="sensorTypeName" type="string">
+      <column name="SensorTypeName" not-null="true"/>
+    </property>
+    <property name="sensorTypeDescription" type="string">
+      <column name="SensorTypeDescription"/>
+    </property>
+    <property name="objectCode" type="string">
+      <column name="ObjectCode" not-null="true" unique="true"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getAllSensorTypes">
+        from SensorTypes order by sensorTypeName asc
+    </query>
+  <query name="getSensorTypesById">
+        from SensorTypes where sensorTypeId = :sensorTypeId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 30, 2012 10:12:28 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ObjectSettingPackages" schema="dbo" table="ObjectSettingPackages">
+    <cache usage="nonstrict-read-write"/>
+    <id name="objectSettingPackageId" type="string">
+      <column length="36" name="ObjectSettingPackageID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="objectTypeId" type="string">
+      <column length="36" name="ObjectTypeID" not-null="true"/>
+    </property>
+    <property name="lastUpdatedByUser" type="string">
+      <column length="36" name="LastUpdatedByUser"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="groupObjectSettingPackageses">
+      <key>
+        <column length="36" name="ObjectSettingPackageID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.GroupObjectSettingPackages"/>
+    </set>
+    <set inverse="true" name="objectSettingPackageTranslationses">
+      <key>
+        <column length="36" name="ObjectSettingPackageID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ObjectSettingPackageTranslations"/>
+    </set>
+    <set inverse="true" name="objectSettingPackageMembershipses">
+      <key>
+        <column length="36" name="ObjectSettingPackageID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ObjectSettingPackageMemberships"/>
+    </set>
+    <set inverse="true" name="objectSettingPackageTemplateses">
+      <key>
+        <column length="36" name="ObjectSettingPackageID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ObjectSettingPackageTemplates"/>
+    </set>
+  </class>
+  <query name="getObjectSettingPackagesByIds">
+        from ObjectSettingPackages where objectSettingPackageId in (:objectSettingPackageId) and objectTypeId = :objectTypeId order by createdDate desc
+    </query>
+</hibernate-mapping>

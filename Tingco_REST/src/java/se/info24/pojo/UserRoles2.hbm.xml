@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 13, 2012 10:38:45 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserRoles2" schema="dbo" table="UserRoles2">
+    <cache usage="nonstrict-read-write"/>
+    <id name="userRoleId" type="string">
+      <column length="36" name="UserRoleID"/>
+      <generator class="assigned"/>
+    </id>
+    <!-- <many-to-one name="userRoles2" class="se.info24.pojo.UserRoles2" fetch="select">
+            <column name="UserRoleParentID" length="36" />
+        </many-to-one>-->
+    <property name="userRoleName" type="string">
+      <column length="50" name="UserRoleName" not-null="true"/>
+    </property>
+    <property name="userRoleparentID" type="string">
+      <column length="50" name="UserRoleparentID"/>
+    </property>
+    <property name="userRoleDescription" type="string">
+      <column length="200" name="UserRoleDescription"/>
+    </property>
+    <property name="isSystemRole" type="java.lang.Integer">
+      <column name="IsSystemRole"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <!--<set name="userRoles2s" inverse="true">
+            <key>
+                <column name="UserRoleParentID" length="36" />
+            </key>
+            <one-to-many class="se.info24.pojo.UserRoles2" />
+        </set>-->
+    <set inverse="true" name="userRoleObjectPermissions2s">
+      <key>
+        <column length="36" name="UserRoleID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.UserRoleObjectPermissions2"/>
+    </set>
+    <set inverse="true" name="userRoleMemberships2s">
+      <key>
+        <column length="36" name="UserRoleID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.UserRoleMemberships2"/>
+    </set>
+    <set inverse="true" name="userRolesInGroups2s">
+      <key>
+        <column length="36" name="UserRoleID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.UserRolesInGroups2"/>
+    </set>
+  </class>
+  <query name="getUserRoleByUserRoleID">
+      from UserRoles2 where UserRoleID = :roleID
+  </query>
+  <query name="getUserRoleByIDs">
+      from UserRoles2 where UserRoleID in (:userRoleID) order by userRoleName
+  </query>
+  <query name="getAllUserRoles2">
+      from UserRoles2
+  </query>
+</hibernate-mapping>

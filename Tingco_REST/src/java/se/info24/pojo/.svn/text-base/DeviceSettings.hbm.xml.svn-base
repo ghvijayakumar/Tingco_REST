@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 6, 2012 3:01:15 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DeviceSettings" schema="dbo" table="DeviceSettings">
+    <cache usage="nonstrict-read-write"/>
+    <id name="deviceSettingId" type="string">
+      <column length="36" name="DeviceSettingID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.DeviceSettings" name="deviceSettings">
+      <column length="36" name="DeviceSettingParentID"/>
+    </many-to-one>
+    <!--<property name="deviceSettingParentID" type="string">
+            <column name="DeviceSettingParentID" length="36" />
+        </property>-->
+    <many-to-one class="se.info24.pojo.SettingDataType" fetch="select" name="settingDataType">
+      <column length="36" name="SettingDataTypeID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Device" fetch="select" name="device">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </many-to-one>
+    <property name="deviceSettingName" type="string">
+      <column name="DeviceSettingName" not-null="true"/>
+    </property>
+    <property name="deviceSettingValue" type="string">
+      <column name="DeviceSettingValue" not-null="true"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="objectSettingTemplateId" type="string">
+      <column length="36" name="ObjectSettingTemplateID"/>
+    </property>
+    <set cascade="delete" inverse="true" name="deviceSettingses">
+      <key>
+        <column length="36" name="DeviceSettingParentID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceSettings"/>
+    </set>
+  </class>
+  <query name="getDeviceSettingsById">
+        from DeviceSettings where objectSettingTemplateId = :objectSettingTemplateId and device.deviceId = :deviceId order by activeFromDate desc
+    </query>
+  <query name="getDeviceSettingsByDeviceId">
+        from DeviceSettings where device.deviceId = :deviceId order by deviceSettingName
+    </query>
+  <query name="getDeviceSettingsByDeviceIdandSettingId">
+        from DeviceSettings where deviceSettingId = :deviceSettingId and device.deviceId = :deviceId
+    </query>
+  <query name="getDeviceSettingsByIdandName">
+        from DeviceSettings where device.deviceId = :deviceId and deviceSettingName = :deviceSettingName order by activeFromDate desc
+    </query>
+  <query name="getDeviceSettingsByIds">
+        from DeviceSettings where device.deviceId = :deviceId and deviceSettingName = :deviceSettingName and  objectSettingTemplateId = :objectSettingTemplateId order by activeFromDate desc
+    </query>
+  <query name="getDeviceSettingsByDeviceIdandSettingParentId">
+        from DeviceSettings where deviceSettingParentID = :deviceSettingParentId and device.deviceId = :deviceId
+    </query>
+  <query name="getDeviceSettingsBySettingId">
+        from DeviceSettings where deviceSettingId = :deviceSettingId
+    </query>
+</hibernate-mapping>

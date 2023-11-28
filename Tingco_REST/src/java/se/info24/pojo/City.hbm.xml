@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2011 11:43:03 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.City" schema="dbo" table="City">
+    <cache usage="nonstrict-read-write"/>
+    <id name="city" type="int">
+      <column name="City"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Country" fetch="select" name="country">
+      <column name="CountryID"/>
+    </many-to-one>
+    <property name="displayOrder" type="java.lang.Integer">
+      <column name="DisplayOrder"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set cascade="save-update,delete" inverse="true" name="cityTranslationses">
+      <key>
+        <column name="CityID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.CityTranslations"/>
+    </set>
+  </class>
+  <query name="getCityById">
+        from City as c where c.city = :cityId
+    </query>
+</hibernate-mapping>

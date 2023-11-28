@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 30, 2010 1:32:29 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.EventDetails" schema="dbo" table="EventDetails">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.ismOperationsPojo.EventDetailsId" name="id">
+      <key-property name="eventId" type="string">
+        <column length="36" name="EventID"/>
+      </key-property>
+      <key-property name="name" type="string">
+        <column length="50" name="Name"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.ismOperationsPojo.EventLog" fetch="select" insert="false" name="eventLog" update="false">
+      <column length="36" name="EventID" not-null="true"/>
+    </many-to-one>
+    <property name="type" type="string">
+      <column length="50" name="Type" not-null="true"/>
+    </property>
+    <property name="data" type="string">
+      <column name="Data" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate" not-null="true"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate" not-null="true"/>
+    </property>
+  </class>
+  <query name="getEventDetailsById">
+      from EventDetails where id.eventId = :eventId order by id.name asc
+    </query>
+  <query name="getDeviceEventLog">
+      from EventDetails where id.eventId in(:eventId) and (id.name = 'ErrorCode' or id.name = 'VendorErrorCode')
+    </query>
+</hibernate-mapping>

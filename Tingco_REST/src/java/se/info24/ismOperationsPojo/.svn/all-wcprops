@@ -1,0 +1,629 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/NB_2011/!svn/ver/2445/Tingco_REST/src/java/se/info24/ismOperationsPojo
+END
+DeviceStatusDataItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/1976/Tingco_REST/src/java/se/info24/ismOperationsPojo/DeviceStatusDataItems.java
+END
+ContentItemsToDevice.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/1576/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItemsToDevice.java
+END
+Apilog.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/Apilog.hbm.xml
+END
+ContentItems.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItems.hbm.xml
+END
+ObjectComments.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ObjectComments.hbm.xml
+END
+ObjectUsageRecords.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ObjectUsageRecords.hbm.xml
+END
+AccessLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2169/Tingco_REST/src/java/se/info24/ismOperationsPojo/AccessLog.java
+END
+TransactionCodes.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2282/Tingco_REST/src/java/se/info24/ismOperationsPojo/TransactionCodes.java
+END
+EventDetailsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/EventDetailsId.java
+END
+DeviceHistory.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/DeviceHistory.hbm.xml
+END
+Blacklist.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1984/Tingco_REST/src/java/se/info24/ismOperationsPojo/Blacklist.java
+END
+ContainerTransactions.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/2113/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContainerTransactions.java
+END
+ObjectUsageRecords.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/ObjectUsageRecords.java
+END
+ServiceStatusId.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2205/Tingco_REST/src/java/se/info24/ismOperationsPojo/ServiceStatusId.java
+END
+DeviceHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/DeviceHistory.java
+END
+EventLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/EventLog.java
+END
+MediaFiles.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/MediaFiles.hbm.xml
+END
+TransactionProductsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/840/Tingco_REST/src/java/se/info24/ismOperationsPojo/TransactionProductsId.java
+END
+AgreementBillingData.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/AgreementBillingData.hbm.xml
+END
+EventDetails.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/EventDetails.java
+END
+FraudLog.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/FraudLog.hbm.xml
+END
+ObjectConnectedState.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2116/Tingco_REST/src/java/se/info24/ismOperationsPojo/ObjectConnectedState.java
+END
+MeasurementDataId.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/411/Tingco_REST/src/java/se/info24/ismOperationsPojo/MeasurementDataId.java
+END
+Blacklist.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2422/Tingco_REST/src/java/se/info24/ismOperationsPojo/Blacklist.hbm.xml
+END
+ContentGroupSubscriptionsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentGroupSubscriptionsId.java
+END
+TransactionProducts.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/2445/Tingco_REST/src/java/se/info24/ismOperationsPojo/TransactionProducts.hbm.xml
+END
+ContentItemAttributes.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItemAttributes.java
+END
+DeviceHistoryDataItems.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/DeviceHistoryDataItems.hbm.xml
+END
+DeviceStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2169/Tingco_REST/src/java/se/info24/ismOperationsPojo/DeviceStatus.java
+END
+ItemConnectionStatus.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ItemConnectionStatus.hbm.xml
+END
+ContentGroupItemsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/1569/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentGroupItemsId.java
+END
+ContentItemLinksId.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/1603/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItemLinksId.java
+END
+TransactionProducts.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2445/Tingco_REST/src/java/se/info24/ismOperationsPojo/TransactionProducts.java
+END
+Sysdiagrams.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/Sysdiagrams.hbm.xml
+END
+ContainerFillings.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/1624/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContainerFillings.java
+END
+InstantMessageLog.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/InstantMessageLog.hbm.xml
+END
+ContentItemCommands.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2353/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItemCommands.java
+END
+ContainerData.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1192/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContainerData.java
+END
+DeviceHistoryDataItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/DeviceHistoryDataItems.java
+END
+ContentGroupItems.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentGroupItems.hbm.xml
+END
+MeasurementData.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2190/Tingco_REST/src/java/se/info24/ismOperationsPojo/MeasurementData.java
+END
+ContentGroupSubscriptions.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentGroupSubscriptions.java
+END
+ObjectProductVariantCounters.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/NB_2011/!svn/ver/2222/Tingco_REST/src/java/se/info24/ismOperationsPojo/ObjectProductVariantCounters.java
+END
+DeviceStatusDataItems.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/DeviceStatusDataItems.hbm.xml
+END
+ContentItemsToDevice.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItemsToDevice.hbm.xml
+END
+ContentItemAttributes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItemAttributes.hbm.xml
+END
+DeviceMessages.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/DeviceMessages.java
+END
+AccessLog.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/AccessLog.hbm.xml
+END
+TransactionCodes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/TransactionCodes.hbm.xml
+END
+ContentGroupItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/1569/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentGroupItems.java
+END
+BundleFiles.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/1984/Tingco_REST/src/java/se/info24/ismOperationsPojo/BundleFiles.java
+END
+ContentGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentGroups.hbm.xml
+END
+ContainerTransactions.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContainerTransactions.hbm.xml
+END
+ContainerData.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContainerData.hbm.xml
+END
+MediaFiles.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1409/Tingco_REST/src/java/se/info24/ismOperationsPojo/MediaFiles.java
+END
+AgreementBillingData.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2282/Tingco_REST/src/java/se/info24/ismOperationsPojo/AgreementBillingData.java
+END
+DriversLogItems.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/DriversLogItems.hbm.xml
+END
+EventLog.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/EventLog.hbm.xml
+END
+TransactionPriceRanges.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/2445/Tingco_REST/src/java/se/info24/ismOperationsPojo/TransactionPriceRanges.java
+END
+EventDetails.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/EventDetails.hbm.xml
+END
+Apilog.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/Apilog.java
+END
+ContentItemAttributesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItemAttributesId.java
+END
+ContentItemLinks.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItemLinks.hbm.xml
+END
+BundleFiles.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/BundleFiles.hbm.xml
+END
+ItemConnectionStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/380/Tingco_REST/src/java/se/info24/ismOperationsPojo/ItemConnectionStatus.java
+END
+ContentItemFeedback.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItemFeedback.hbm.xml
+END
+TransactionResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2445/Tingco_REST/src/java/se/info24/ismOperationsPojo/TransactionResult.java
+END
+ContainerUsageData.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContainerUsageData.hbm.xml
+END
+Sysdiagrams.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/Sysdiagrams.java
+END
+DeviceStatus.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/DeviceStatus.hbm.xml
+END
+Widgets2.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2304/Tingco_REST/src/java/se/info24/ismOperationsPojo/Widgets2.java
+END
+TransactionPriceRanges.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/NB_2011/!svn/ver/2445/Tingco_REST/src/java/se/info24/ismOperationsPojo/TransactionPriceRanges.hbm.xml
+END
+ContentItemCommands.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItemCommands.hbm.xml
+END
+EventsActive.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/EventsActive.java
+END
+ContainerUsageData.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/1624/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContainerUsageData.java
+END
+ContentGroupSubscriptions.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentGroupSubscriptions.hbm.xml
+END
+MeasurementData.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/MeasurementData.hbm.xml
+END
+ObjectProductVariantCounters.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ObjectProductVariantCounters.hbm.xml
+END
+FraudLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2353/Tingco_REST/src/java/se/info24/ismOperationsPojo/FraudLog.java
+END
+ServiceStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2205/Tingco_REST/src/java/se/info24/ismOperationsPojo/ServiceStatus.java
+END
+ContentItemStatistics.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/2366/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItemStatistics.java
+END
+DriversLogItemHistory.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/DriversLogItemHistory.hbm.xml
+END
+DeviceActivationSchedules.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/DeviceActivationSchedules.hbm.xml
+END
+TransactionResult.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2445/Tingco_REST/src/java/se/info24/ismOperationsPojo/TransactionResult.hbm.xml
+END
+ObjectLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2167/Tingco_REST/src/java/se/info24/ismOperationsPojo/ObjectLog.java
+END
+ContentGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentGroups.java
+END
+DeviceMessages.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/DeviceMessages.hbm.xml
+END
+DeviceStatusDataItemsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/ismOperationsPojo/DeviceStatusDataItemsId.java
+END
+ContentItemsToDeviceId.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/1569/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItemsToDeviceId.java
+END
+ContentItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1577/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItems.java
+END
+ObjectComments.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/380/Tingco_REST/src/java/se/info24/ismOperationsPojo/ObjectComments.java
+END
+Widgets2.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/Widgets2.hbm.xml
+END
+ObjectConnectedState.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ObjectConnectedState.hbm.xml
+END
+DriversLogItemHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/326/Tingco_REST/src/java/se/info24/ismOperationsPojo/DriversLogItemHistory.java
+END
+DeviceActivationSchedules.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/NB_2011/!svn/ver/2289/Tingco_REST/src/java/se/info24/ismOperationsPojo/DeviceActivationSchedules.java
+END
+DriversLogItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/326/Tingco_REST/src/java/se/info24/ismOperationsPojo/DriversLogItems.java
+END
+EventsActive.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/EventsActive.hbm.xml
+END
+InstantMessageLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2125/Tingco_REST/src/java/se/info24/ismOperationsPojo/InstantMessageLog.java
+END
+ServiceStatus.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ServiceStatus.hbm.xml
+END
+ContentItemStatistics.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItemStatistics.hbm.xml
+END
+ContentItemLinks.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/1603/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItemLinks.java
+END
+ObjectLog.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ObjectLog.hbm.xml
+END
+ContainerFillings.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContainerFillings.hbm.xml
+END
+ContentItemFeedback.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2353/Tingco_REST/src/java/se/info24/ismOperationsPojo/ContentItemFeedback.java
+END

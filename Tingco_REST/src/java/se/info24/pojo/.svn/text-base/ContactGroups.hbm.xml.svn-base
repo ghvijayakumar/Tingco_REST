@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 12, 2012 12:03:14 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ContactGroups" schema="dbo" table="ContactGroups">
+    <cache usage="nonstrict-read-write"/>
+    <id name="contactGroupId" type="string">
+      <column length="36" name="ContactGroupID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="contactGroupParentId" type="string">
+      <column length="36" name="ContactGroupParentID"/>
+    </property>
+    <property name="contactGroupName" type="string">
+      <column name="ContactGroupName" not-null="true"/>
+    </property>
+    <property name="contactGroupDescription" type="string">
+      <column name="ContactGroupDescription"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getContactGroupByGroupid">
+        from ContactGroups  where groupId in (:GroupID) order  by contactGroupName asc
+    </query>
+  <query name="getContactGroupById">
+        from ContactGroups  where contactGroupId in (:contactGroupId)
+    </query>
+  <query name="getContactGroupBySearchCreteria">
+        from ContactGroups where groupId in (:GroupID) and (contactGroupName like '%'+:searchString+'%' or contactGroupDescription like '%'+:searchString+'%' or contactGroupId = :searchString) order by contactGroupName asc
+    </query>
+  <query name="getContactGroupByContactGroupId">
+        from ContactGroups where groupId in (:GroupID) and contactGroupId = :searchString order by contactGroupName asc
+    </query>
+  <query name="getContactGroupBySearchCreterias">
+        from ContactGroups where groupId in (:GroupID) and (contactGroupName like '%'+:searchString+'%' or contactGroupDescription like '%'+:searchString+'%') order by contactGroupName asc
+    </query>
+</hibernate-mapping>

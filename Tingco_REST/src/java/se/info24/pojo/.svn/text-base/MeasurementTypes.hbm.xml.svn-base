@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 13, 2012 10:38:45 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.MeasurementTypes" schema="dbo" table="MeasurementTypes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="measurementTypeId" type="string">
+      <column length="36" name="MeasurementTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <!-- Below objectusageunits many-to-one was already commented (Don't know the reason). Uncommented on 23-oct-2012 to use in measurementdatagraph-->
+    <many-to-one class="se.info24.pojo.ObjectUsageUnits" fetch="select" name="objectUsageUnits">
+      <column length="36" name="UsageUnitID"/>
+    </many-to-one>
+    <property name="dataGroupName" type="string">
+      <column length="200" name="DataGroupName" not-null="true"/>
+    </property>
+    <property name="dataFieldName" type="string">
+      <column length="200" name="DataFieldName" not-null="true"/>
+    </property>
+    <property name="saveAsFixedValue" type="big_decimal">
+      <column name="SaveAsFixedValue"/>
+    </property>
+    <property name="scalingOperand" type="string">
+      <column length="10" name="ScalingOperand"/>
+    </property>
+    <property name="scalingFactor" type="java.lang.Double">
+      <column name="ScalingFactor" precision="53" scale="0"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate"/>
+    </property>
+    <property name="maxValueFilter" type="big_decimal">
+      <column name="MaxValueFilter"/>
+    </property>
+    <property name="minValueFilter" type="big_decimal">
+      <column name="MinValueFilter"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="measurementTypeTranslationses">
+      <key>
+        <column length="36" name="MeasurementTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.MeasurementTypeTranslations"/>
+    </set>
+    <set inverse="true" name="measurementTypesInGroupses">
+      <key>
+        <column length="36" name="MeasurementTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.MeasurementTypesInGroups"/>
+    </set>
+    <set inverse="true" name="productVariantMeasurementTypeses">
+      <key>
+        <column length="36" name="MeasurementTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ProductVariantMeasurementTypes"/>
+    </set>
+  </class>
+  <query name="getMeasurementTypesbyIdsList">
+      from MeasurementTypes where measurementTypeId in (:measurementTypeId)
+    </query>
+  <query name="getMeasurementTypesById">
+        from MeasurementTypes where measurementTypeId = :measurementTypeId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 18, 2013 3:12:54 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.ServiceSettings" schema="dbo" table="ServiceSettings">
+    <cache usage="nonstrict-read-write"/>
+    <id name="serviceSettingId" type="string">
+      <column length="36" name="ServiceSettingID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Services" fetch="select" name="services">
+      <column length="36" name="ServiceID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.SettingDataType" fetch="select" name="settingDataType">
+      <column length="36" name="SettingDataTypeID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ServiceSettings" fetch="select" name="serviceSettings">
+      <column length="36" name="ServiceSettingParentID"/>
+    </many-to-one>
+    <property name="serviceSettingName" type="string">
+      <column name="ServiceSettingName" not-null="true"/>
+    </property>
+    <property name="serviceSettingValue" type="string">
+      <column name="ServiceSettingValue" not-null="true"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set cascade="delete" inverse="true" name="serviceSettingses">
+      <key>
+        <column length="36" name="ServiceSettingParentID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ServiceSettings"/>
+    </set>
+  </class>
+  <query name="getServiceSettingsByServiceId">
+        from ServiceSettings where services.serviceId = :serviceId order by serviceSettingName asc
+    </query>
+  <query name="getServiceSettingsById">
+        from ServiceSettings where serviceSettingId = :serviceSettingId
+    </query>
+</hibernate-mapping>

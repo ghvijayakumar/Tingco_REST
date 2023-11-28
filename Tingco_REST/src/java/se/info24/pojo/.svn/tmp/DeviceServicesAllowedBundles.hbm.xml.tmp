@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 26, 2014 3:44:51 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="se.info24.pojo.DeviceServicesAllowedBundles" table="DeviceServicesAllowedBundles" schema="dbo" catalog="ISM">
+        <composite-id name="id" class="se.info24.pojo.DeviceServicesAllowedBundlesId">
+            <key-property name="deviceId" type="string">
+                <column name="DeviceID" length="36" />
+            </key-property>
+            <key-property name="serviceId" type="string">
+                <column name="ServiceID" length="36" />
+            </key-property>
+            <key-property name="bundleVersionId" type="string">
+                <column name="BundleVersionID" length="36" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="services" class="se.info24.pojo.Services" update="false" insert="false" fetch="select">
+            <column name="ServiceID" length="36" not-null="true" />
+        </many-to-one>
+        <many-to-one name="bundleVersions" class="se.info24.pojo.BundleVersions" update="false" insert="false" fetch="select">
+            <column name="BundleVersionID" length="36" not-null="true" />
+        </many-to-one>
+        <many-to-one name="device" class="se.info24.pojo.Device" update="false" insert="false" fetch="select">
+            <column name="DeviceID" length="36" not-null="true" />
+        </many-to-one>
+        <property name="allowedFrom" type="timestamp">
+            <column name="AllowedFrom" length="23" />
+        </property>
+        <property name="allowedByUser" type="string">
+            <column name="AllowedByUser" length="36" not-null="true" />
+        </property>
+        <property name="installedDate" type="timestamp">
+            <column name="InstalledDate" length="23" />
+        </property>
+    </class>
+    <query name="getDeviceServicesAllowedBundlesByDeviceId">
+        from DeviceServicesAllowedBundles where id.deviceId = :deviceId order by bundleVersions.bundle.bundleName asc
+    </query>
+    <query name="getDeviceServicesAllowedBundlesByIds">
+        from DeviceServicesAllowedBundles where id.deviceId = :deviceId and id.serviceId = :serviceId order by bundleVersions.bundle.bundleName asc
+    </query>
+</hibernate-mapping>

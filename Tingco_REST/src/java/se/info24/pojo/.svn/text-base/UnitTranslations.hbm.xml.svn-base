@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 24, 2013 1:11:05 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UnitTranslations" schema="dbo" table="UnitTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.UnitTranslationsId" name="id">
+      <key-property name="unitId" type="string">
+        <column length="36" name="UnitID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Country" fetch="select" insert="false" name="country" update="false">
+      <column name="CountryID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Unit" fetch="select" insert="false" name="unit" update="false">
+      <column length="36" name="UnitID" not-null="true"/>
+    </many-to-one>
+    <property name="unitName" type="string">
+      <column name="UnitName" not-null="true"/>
+    </property>
+    <property name="unitShortName" type="string">
+      <column name="UnitShortName" not-null="true"/>
+    </property>
+    <property name="unitDescription" type="string">
+      <column name="UnitDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getUnitTranslations">
+        from UnitTranslations where id.countryId = :countryId order by unitName asc
+    </query>
+</hibernate-mapping>

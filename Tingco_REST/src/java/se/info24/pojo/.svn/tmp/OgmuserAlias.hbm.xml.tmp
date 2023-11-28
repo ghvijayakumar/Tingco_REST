@@ -1,0 +1,87 @@
+<<<<<<< .mine
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 8, 2013 11:28:44 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="se.info24.pojo.OgmuserAlias" table="OGMUserAlias" schema="dbo" >
+        <cache usage="nonstrict-read-write" />
+        <composite-id name="id" class="se.info24.pojo.OgmuserAliasId">
+            <key-property name="userAliasId" type="string">
+                <column name="UserAliasID" length="36" />
+            </key-property>
+            <key-property name="objectGroupId" type="string">
+                <column name="ObjectGroupID" length="36" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="objectGroups" class="se.info24.pojo.ObjectGroups" update="false" insert="false" fetch="select">
+            <column name="ObjectGroupID" length="36" not-null="true" />
+        </many-to-one>
+        <many-to-one name="userAlias" class="se.info24.pojo.UserAlias" update="false" insert="false" fetch="select">
+            <column name="UserAliasID" length="36" not-null="true" />
+        </many-to-one>
+        <property name="lastUpdatedByUserId" type="string">
+            <column name="LastUpdatedByUserID" length="36" />
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column name="CreatedDate" length="23" />
+        </property>
+        <property name="updatedDate" type="timestamp">
+            <column name="UpdatedDate" length="23" />
+        </property>
+    </class>
+    <query name="getOgmuserAliasByID">
+        from OgmuserAlias where id.userAliasId=:userAliasId
+    </query>
+    <query name="getOgmuserAliasByIDandGroupID">
+        from OgmuserAlias where id.userAliasId=:userAliasId and id.objectGroupId = :objectGroupId
+    </query>
+    <query name="getOgmuserAliasByObjectGroupId">
+      from OgmuserAlias where id.objectGroupId = :objectGroupId
+  </query>
+  <query name="getOgmuserAliasByObjectGroupIdList">
+      from OgmuserAlias where id.objectGroupId in (:objectGroupId)
+  </query>
+</hibernate-mapping>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 8, 2013 11:28:44 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.OgmuserAlias" schema="dbo" table="OGMUserAlias">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.OgmuserAliasId" name="id">
+      <key-property name="userAliasId" type="string">
+        <column length="36" name="UserAliasID"/>
+      </key-property>
+      <key-property name="objectGroupId" type="string">
+        <column length="36" name="ObjectGroupID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.ObjectGroups" fetch="select" insert="false" name="objectGroups" update="false">
+      <column length="36" name="ObjectGroupID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.UserAlias" fetch="select" insert="false" name="userAlias" update="false">
+      <column length="36" name="UserAliasID" not-null="true"/>
+    </many-to-one>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getOgmuserAliasByID">
+        from OgmuserAlias where id.userAliasId=:userAliasId
+    </query>
+  <query name="getOgmuserAliasByObjectGroupId">
+      from OgmuserAlias where id.objectGroupId = :objectGroupId
+  </query>
+  <query name="getOgmuserAliasByObjectGroupIdList">
+      from OgmuserAlias where id.objectGroupId in (:objectGroupId)
+  </query>
+</hibernate-mapping>
+>>>>>>> .r2413

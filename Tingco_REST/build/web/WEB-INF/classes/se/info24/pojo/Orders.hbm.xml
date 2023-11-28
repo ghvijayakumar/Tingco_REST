@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2012 12:18:32 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Orders" schema="dbo" table="Orders">
+    <cache usage="nonstrict-read-write"/>
+    <id name="orderId" type="string">
+      <column length="36" name="OrderID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="orderComments" type="string">
+      <column name="OrderComments"/>
+    </property>
+    <property name="orderStatusId" type="string">
+      <column length="36" name="OrderStatusID"/>
+    </property>
+    <property name="orderStatusText" type="string">
+      <column name="OrderStatusText"/>
+    </property>
+    <property name="orderedDate" type="timestamp">
+      <column length="23" name="OrderedDate" not-null="true"/>
+    </property>
+    <property name="orderedByUserId" type="string">
+      <column length="36" name="OrderedByUserID" not-null="true"/>
+    </property>
+    <property name="orderedByUserFullName" type="string">
+      <column name="OrderedByUserFullName" not-null="true"/>
+    </property>
+    <property name="customerPurchaseOrderNumber" type="string">
+      <column name="CustomerPurchaseOrderNumber"/>
+    </property>
+    <property name="plannedShippingDate" type="timestamp">
+      <column length="23" name="PlannedShippingDate"/>
+    </property>
+    <property name="actualShippingDate" type="timestamp">
+      <column length="23" name="ActualShippingDate"/>
+    </property>
+    <property name="shippedDate" type="timestamp">
+      <column length="23" name="ShippedDate"/>
+    </property>
+    <property name="isShipped" type="java.lang.Integer">
+      <column name="IsShipped"/>
+    </property>
+    <property name="isCanceled" type="java.lang.Integer">
+      <column name="IsCanceled"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate" not-null="true"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate" not-null="true"/>
+    </property>
+    <set inverse="true" name="orderItemses">
+      <key>
+        <column length="36" name="OrderID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.OrderItems"/>
+    </set>
+  </class>
+</hibernate-mapping>

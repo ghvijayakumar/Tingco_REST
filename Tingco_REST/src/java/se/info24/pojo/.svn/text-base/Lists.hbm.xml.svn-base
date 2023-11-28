@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 23, 2013 10:58:19 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Lists" schema="dbo" table="Lists">
+    <cache usage="nonstrict-read-write"/>
+    <id name="listId" type="string">
+      <column length="36" name="ListID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Groups" fetch="select" name="groups">
+      <column length="36" name="GroupID" not-null="true"/>
+    </many-to-one>
+    <property name="listName" type="string">
+      <column name="ListName" not-null="true"/>
+    </property>
+    <property name="listDescription" type="string">
+      <column name="ListDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="fieldses">
+      <key>
+        <column length="36" name="ListID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Fields"/>
+    </set>
+    <set inverse="true" name="listValueses">
+      <key>
+        <column length="36" name="ListID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ListValues"/>
+    </set>
+  </class>
+</hibernate-mapping>

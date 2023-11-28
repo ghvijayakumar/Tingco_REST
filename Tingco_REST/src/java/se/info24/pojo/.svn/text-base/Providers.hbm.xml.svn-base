@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 22, 2013 2:37:49 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.Providers" schema="dbo" table="Providers">
+    <cache usage="nonstrict-read-write"/>
+    <id name="providerId" type="string">
+      <column length="36" name="ProviderID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Channels" fetch="select" name="channelsByAuthChannel">
+      <column length="36" name="AuthChannel"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Channels" fetch="select" name="channelsByCapChannel">
+      <column length="36" name="CapChannel"/>
+    </many-to-one>
+    <property name="providerName" type="string">
+      <column length="50" name="ProviderName" not-null="true"/>
+    </property>
+    <property name="providerDescription" type="string">
+      <column length="200" name="ProviderDescription"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="providerTypeId" type="string">
+      <column length="36" name="ProviderTypeID"/>
+    </property>
+    <set inverse="true" name="recurringPurchaseses">
+      <key>
+        <column length="36" name="ProviderID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.RecurringPurchases"/>
+    </set>
+  </class>
+  <query name="getProvidersByProviderIDs">
+        from Providers where providerId in (:providerId) order by providerName asc
+    </query>
+  <query name="getProvidersByProviderIDsAndName">
+        from Providers where providerId in (:providerId)and providerName like '%'+:providerName+'%' order by providerName asc
+    </query>
+</hibernate-mapping>

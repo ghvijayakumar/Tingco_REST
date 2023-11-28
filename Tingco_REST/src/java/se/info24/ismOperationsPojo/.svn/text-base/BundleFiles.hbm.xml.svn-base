@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 28, 2014 4:50:12 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISMOperations" name="se.info24.ismOperationsPojo.BundleFiles" schema="dbo" table="BundleFiles">
+    <id name="bundleFileId" type="string">
+      <column length="36" name="BundleFileID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="bundleVersionId" type="string">
+      <column length="36" name="BundleVersionID" not-null="true"/>
+    </property>
+    <property name="bundleFileName" type="string">
+      <column name="BundleFileName" not-null="true"/>
+    </property>
+    <property name="bundleFileLength" type="long">
+      <column name="BundleFileLength" not-null="true"/>
+    </property>
+    <property name="bundleFileBlob" type="binary">
+      <column name="BundleFileBlob" not-null="true"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getBundleFilesByBundleVersionID">
+        from BundleFiles where bundleVersionId = :bundleVersionId order by createdDate desc
+    </query>
+</hibernate-mapping>

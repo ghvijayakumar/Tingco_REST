@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 23, 2013 10:58:19 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.FieldTypes" schema="dbo" table="FieldTypes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="fieldTypeId" type="string">
+      <column length="36" name="FieldTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="fieldTypeCode" type="string">
+      <column name="FieldTypeCode" not-null="true" unique="true"/>
+    </property>
+    <property name="fieldTypeName" type="string">
+      <column name="FieldTypeName" not-null="true"/>
+    </property>
+    <property name="fieldTypeDescription" type="string">
+      <column name="FieldTypeDescription"/>
+    </property>
+    <property name="fieldTypeIconUrl" type="string">
+      <column name="FieldTypeIconURL"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="fieldses">
+      <key>
+        <column length="36" name="FieldTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Fields"/>
+    </set>
+  </class>
+</hibernate-mapping>

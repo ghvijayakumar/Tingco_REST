@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 3:59:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.Country" schema="dbo" table="Country">
+    <cache usage="nonstrict-read-write"/>
+    <id name="countryId" type="int">
+      <column name="CountryID"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Currency" fetch="select" name="currency">
+      <column name="CurrencyID"/>
+    </many-to-one>
+    <property name="countryName" type="string">
+      <column length="50" name="CountryName"/>
+    </property>
+    <property name="countryDescription" type="string">
+      <column length="200" name="CountryDescription"/>
+    </property>
+    <property name="languageCode" type="string">
+      <column length="10" name="LanguageCode"/>
+    </property>
+    <property name="language" type="string">
+      <column length="50" name="Language"/>
+    </property>
+    <property name="displayOrder" type="java.lang.Integer">
+      <column name="DisplayOrder"/>
+    </property>
+    <property name="functionId" type="java.lang.Integer">
+      <column name="FunctionID"/>
+    </property>
+    <property name="timeZoneId" type="string">
+      <column length="36" name="TimeZoneID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="countryCode" type="string">
+      <column length="50" name="CountryCode"/>
+    </property>
+    <property name="isLocalized" type="java.lang.Integer">
+      <column name="IsLocalized"/>
+    </property>
+    <!-- <set inverse="true" name="groupTranslationses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.GroupTranslations"/>
+    </set>
+    <set inverse="true" name="applicationTranslationses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ApplicationTranslations"/>
+    </set>
+    <set inverse="true" name="applicationTypeTranslationses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ApplicationTypeTranslations"/>
+    </set>
+    <set inverse="true" name="systemMessageTranslationses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.SystemMessageTranslations"/>
+    </set> -->
+    <set inverse="true" name="productVariantPriceses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ProductVariantPrices"/>
+    </set>
+    <set inverse="true" name="fieldTranslationses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.FieldTranslations"/>
+    </set>
+    <set inverse="true" name="providerTypeTranslationses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ProviderTypeTranslations"/>
+    </set>
+    <set inverse="true" name="companies">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Company"/>
+    </set>
+    <set inverse="true" name="addresseses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Addresses"/>
+    </set>
+    <set inverse="true" name="unitTranslationses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.UnitTranslations"/>
+    </set>
+    <set inverse="true" name="commandTranslationses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.CommandTranslations"/>
+    </set>
+    <set inverse="true" name="recurrenceTypeTranslationses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.RecurrenceTypeTranslations"/>
+    </set>
+    <set inverse="true" name="bundleCategoryTranslationses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.BundleCategoryTranslations"/>
+    </set>
+    <set inverse="true" name="bundleTypeTranslationses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.BundleTypeTranslations"/>
+    </set>
+    <set inverse="true" name="newsCategoryTranslationses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.NewsCategoryTranslations"/>
+    </set>
+    <set inverse="true" name="billingCategoryTranslationses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.BillingCategoryTranslations"/>
+    </set>
+    <set inverse="true" name="buildingses">
+      <key>
+        <column name="CountryID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Buildings"/>
+    </set>
+    <set inverse="true" name="buildingTypeTranslationses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.BuildingTypeTranslations"/>
+    </set>
+    <set inverse="true" name="roomTypeTranslationses">
+      <key>
+        <column name="CountryID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.RoomTypeTranslations"/>
+    </set>
+  </class>
+  <query name="getAllCountry">
+      from Country order by countryName
+    </query>
+  <query name="getCountryByIdList">
+      from Country where countryId in (:countryId) order by countryName
+    </query>
+  <query name="getCountryById">
+      from Country where CountryID = :countryID
+    </query>
+  <sql-query callable="true" name="selectCountry_SP">
+        <return alias="country" class="se.info24.pojo.Country"/>
+{ call GetCountries() }
+    </sql-query>
+  <query name="getCountryByLanguage">
+      from Country order by language
+    </query>
+  <query name="getCountriesByseachString">
+      <!-- from Country where (countryId = :searchString or countryName like '%'+:searchString+'%') order by countryName -->
+      from Country where countryName like '%'+:searchString+'%' order by countryName
+    </query>
+</hibernate-mapping>

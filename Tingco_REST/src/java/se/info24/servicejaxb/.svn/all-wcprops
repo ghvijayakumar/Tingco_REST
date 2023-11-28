@@ -1,0 +1,191 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb
+END
+Device.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/Device.java
+END
+Service.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/Service.java
+END
+ServiceDeviceSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/ServiceDeviceSettings.java
+END
+BundleVersions.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/BundleVersions.java
+END
+TingcoService.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/TingcoService.java
+END
+DeviceTypeServices.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/DeviceTypeServices.java
+END
+ServiceClientLogins.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/ServiceClientLogins.java
+END
+ServiceSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/ServiceSettings.java
+END
+LastUpdatedByUserID.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/LastUpdatedByUserID.java
+END
+ServiceDeviceSubscription.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/ServiceDeviceSubscription.java
+END
+MsgStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/MsgStatus.java
+END
+ServiceSetting.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/ServiceSetting.java
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/ObjectFactory.java
+END
+ServicesChannels.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/ServicesChannels.java
+END
+ServiceContentSubscription.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/ServiceContentSubscription.java
+END
+ServiceType.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/ServiceType.java
+END
+ServiceStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2205/Tingco_REST/src/java/se/info24/servicejaxb/ServiceStatus.java
+END
+ContentCategory.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/ContentCategory.java
+END
+GroupID.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/GroupID.java
+END
+Bundle.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/Bundle.java
+END
+SettingDataType.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/SettingDataType.java
+END
+ChannelType.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/ChannelType.java
+END
+BundleLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/BundleLog.java
+END
+ServicesChannel.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/ServicesChannel.java
+END
+DeviceTypeID.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/DeviceTypeID.java
+END
+BundleVersion.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/BundleVersion.java
+END
+Services.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/Services.java
+END
+ObjectSettingTemplates.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/ObjectSettingTemplates.java
+END
+DeviceTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/DeviceTypes.java
+END
+BundleFiles.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/BundleFiles.java
+END
+Bundles.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2256/Tingco_REST/src/java/se/info24/servicejaxb/Bundles.java
+END

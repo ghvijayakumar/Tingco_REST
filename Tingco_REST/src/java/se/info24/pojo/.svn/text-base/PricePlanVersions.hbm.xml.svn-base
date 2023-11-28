@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 26, 2012 3:24:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.PricePlanVersions" schema="dbo" table="PricePlanVersions">
+    <cache usage="nonstrict-read-write"/>
+    <id name="pricePlanVersionId" type="string">
+      <column length="36" name="PricePlanVersionID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.PricePlans" fetch="select" name="pricePlans">
+      <column length="36" name="PricePlanID" not-null="true"/>
+    </many-to-one>
+    <property name="versionName" type="string">
+      <column length="50" name="VersionName" not-null="true"/>
+    </property>
+    <property name="versionDescription" type="string">
+      <column length="200" name="VersionDescription"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate" not-null="true"/>
+    </property>
+    <property name="priority" type="int">
+      <column name="Priority" not-null="true"/>
+    </property>
+    <property name="currencyId" type="int">
+      <column name="CurrencyID" not-null="true"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getPricePlanVersions">
+        from PricePlanVersions where pricePlans.pricePlanId = :pricePlanId
+    </query>
+  <query name="getPricePlanVersionsById">
+        from PricePlanVersions where  pricePlanVersionId = :pricePlanVersionId
+    </query>
+  <query name="getPricePlanVersionsByPricePlanId">
+        from PricePlanVersions where pricePlans.pricePlanId = :pricePlanId order by createdDate desc
+    </query>
+  <query name="getPricePlanVersionsByIdsOrderByVersionName">
+        from PricePlanVersions where  pricePlanVersionId in (:pricePlanVersionId) order by versionName
+    </query>
+</hibernate-mapping>

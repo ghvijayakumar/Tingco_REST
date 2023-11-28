@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 13, 2012 12:50:38 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ProductTranslations" schema="dbo" table="ProductTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ProductTranslationsId" name="id">
+      <key-property name="productId" type="string">
+        <column length="36" name="ProductID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Products" fetch="select" insert="false" name="products" update="false">
+      <column length="36" name="ProductID" not-null="true"/>
+    </many-to-one>
+    <property name="productName" type="string">
+      <column length="50" name="ProductName" not-null="true"/>
+    </property>
+    <property name="productDescription" type="string">
+      <column name="ProductDescription"/>
+    </property>
+    <property name="productSummary" type="string">
+      <column name="ProductSummary"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getProductTranslations">
+        from ProductTranslations where productId in (:productId) and countryId = :countryId order by productName
+    </query>
+  <query name="getProductTranslationsById">
+        from ProductTranslations where productId = :productId and countryId = :countryId
+    </query>
+  <query name="getProductTranslationsByIdandSearch">
+        from ProductTranslations where productId in (:productId) and (productId = :productID or productName like :searchString) and countryId = :countryId order by productName asc
+    </query>
+</hibernate-mapping>

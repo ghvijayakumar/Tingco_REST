@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 3:59:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserLog" schema="dbo" table="UserLog">
+    <cache usage="nonstrict-read-write"/>
+    <id name="logUserActionId" type="long">
+      <column name="LogUserActionID"/>
+      <generator class="identity"/>
+    </id>
+    <property name="userId" type="string">
+      <column length="36" name="UserID" not-null="true"/>
+    </property>
+    <property name="action" type="string">
+      <column length="1073741823" name="Action" not-null="true"/>
+    </property>
+    <property name="tableName" type="string">
+      <column length="50" name="TableName" not-null="true"/>
+    </property>
+    <property name="results" type="string">
+      <column length="50" name="Results"/>
+    </property>
+    <property name="actionValue1" type="string">
+      <column length="50" name="ActionValue1"/>
+    </property>
+    <property name="actionValue2" type="string">
+      <column length="50" name="ActionValue2"/>
+    </property>
+    <property name="requestIp" type="string">
+      <column length="24" name="RequestIP"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getUserLogByUserIDTop100">
+        from UserLog where userId =:userId order by createdDate desc
+    </query>
+  <query name="getUserLogByUserID">
+        from UserLog where userId =:userId and (createdDate between :fromDate and :toDate) order by createdDate desc
+    </query>
+</hibernate-mapping>

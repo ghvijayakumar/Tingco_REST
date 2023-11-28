@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 5, 2012 10:48:52 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.ItemConnectionStatus" schema="dbo" table="ItemConnectionStatus">
+    <cache usage="nonstrict-read-write"/>
+    <id name="itemId" type="string">
+      <column length="36" name="ItemID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="connected" type="short">
+      <column name="Connected" not-null="true"/>
+    </property>
+    <property name="queueSize" type="java.lang.Integer">
+      <column name="QueueSize"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate" not-null="true"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate" not-null="true"/>
+    </property>
+    <property name="hostId" type="string">
+      <column length="36" name="HostID"/>
+    </property>
+    <property name="connectChange" type="timestamp">
+      <column length="23" name="ConnectChange"/>
+    </property>
+    <property name="objectStateCode" type="string">
+      <column length="10" name="ObjectStateCode"/>
+    </property>
+    <property name="stateChangedDate" type="timestamp">
+      <column length="23" name="StateChangedDate"/>
+    </property>
+  </class>
+  <query name="getItemConnectionStatusById">
+      from ItemConnectionStatus as ics where ics.itemId = :itemId
+  </query>
+  <query name="getItemConnectionStatusByIds">
+      from ItemConnectionStatus as ics where ics.itemId in (:itemId) and ics.connected = :connected
+  </query>
+  <query name="getItemConnectionStatusByItemIds">
+      from ItemConnectionStatus as ics where ics.itemId in (:itemId)
+  </query>
+</hibernate-mapping>

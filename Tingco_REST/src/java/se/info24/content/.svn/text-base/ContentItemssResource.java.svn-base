@@ -1,0 +1,4164 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package se.info24.content;
+
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Set;
+import java.util.TimeZone;
+import java.util.UUID;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.Path;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.PathParam;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import se.info24.chargePoint.ChargePointsResource;
+import se.info24.containers.ContainerDAO;
+import se.info24.contentjaxb.Content;
+import se.info24.contentjaxb.ContentAttribute;
+import se.info24.contentjaxb.ContentItem;
+import se.info24.contentjaxb.ContentItemCommands;
+import se.info24.contentjaxb.TingcoContent;
+import se.info24.device.DeviceDAO;
+import se.info24.group.GroupDAO;
+import se.info24.ismOperationsPojo.ContentGroupItems;
+import se.info24.ismOperationsPojo.ContentGroupItemsId;
+import se.info24.ismOperationsPojo.ContentGroups;
+import se.info24.ismOperationsPojo.ContentItemAttributes;
+import se.info24.ismOperationsPojo.ContentItemAttributesId;
+import se.info24.ismOperationsPojo.ContentItemFeedback;
+import se.info24.ismOperationsPojo.ContentItemLinks;
+import se.info24.ismOperationsPojo.ContentItemLinksId;
+import se.info24.ismOperationsPojo.ContentItemStatistics;
+import se.info24.ismOperationsPojo.ContentItems;
+import se.info24.ismOperationsPojo.ContentItemsToDevice;
+import se.info24.ismOperationsPojo.ContentItemsToDeviceId;
+import se.info24.ismOperationsPojo.DeviceStatus;
+import se.info24.ismOperationsPojo.ObjectComments;
+import se.info24.jaxbUtil.TingcoContentXML;
+import se.info24.permission.PermissionDAO;
+import se.info24.pojo.Channels;
+import se.info24.pojo.ContentAttributes;
+import se.info24.pojo.ContentCategoryTranslations;
+import se.info24.pojo.Country;
+import se.info24.pojo.Device;
+import se.info24.pojo.DeviceTypeChannels;
+import se.info24.pojo.DeviceTypeCommandTranslations;
+import se.info24.pojo.DeviceTypeCommands;
+import se.info24.pojo.DeviceTypeContentAttributes;
+import se.info24.pojo.DeviceTypeDefaultCategory;
+import se.info24.pojo.EventTypeTranslations;
+import se.info24.pojo.GroupTranslations;
+import se.info24.pojo.Groups;
+import se.info24.pojo.ObjectContactMemberships;
+import se.info24.pojo.ObjectContacts;
+import se.info24.pojo.PermissionOperations;
+import se.info24.pojo.Services;
+import se.info24.pojo.SupportCaseDeviceLinks;
+import se.info24.pojo.SupportCaseDeviceLinksId;
+import se.info24.pojo.SupportCaseImpacts;
+import se.info24.pojo.SupportCasePriorities;
+import se.info24.pojo.SupportCaseStatuses;
+import se.info24.pojo.SupportCaseTypes;
+import se.info24.pojo.SupportCases;
+import se.info24.pojo.SupportOrganizations;
+import se.info24.pojo.UserRoleMemberships2;
+import se.info24.pojo.UserRoleObjectPermissions2;
+import se.info24.pojo.UserSessions2;
+import se.info24.pojo.UserTimeZones2;
+import se.info24.pojo.Users2;
+import se.info24.protocols.ddm.DataContainer;
+import se.info24.protocols.ddm.DataField;
+import se.info24.protocols.ddm.DataGroup;
+import se.info24.protocols.ddm.DataSequence;
+import se.info24.protocols.ddm.DeviceDataMessage;
+import se.info24.protocols.ddm.DeviceDataMessageDocument;
+import se.info24.protocols.ddm.LanguageString;
+import se.info24.protocols.ddm.MsgReceivers;
+import se.info24.protocols.ddm.MsgSender;
+import se.info24.protocols.em.EventMessage;
+import se.info24.protocols.em.EventMessageDocument;
+import se.info24.restUtil.RestUtilDAO;
+import se.info24.service.ServiceDAO;
+import se.info24.supportcase.SupportCasesDAO;
+import se.info24.user.CountryDAO;
+import se.info24.user.User_LoginsResource;
+import se.info24.util.DbManager;
+import se.info24.util.HibernateUtil;
+import se.info24.util.JAXBManager;
+import se.info24.util.RESTDoc;
+import se.info24.util.TCMUtil;
+import se.info24.util.TingcoConstants;
+
+/**
+ * REST Web Service
+ *
+ * @author Hitha
+ */
+@Path("/contentitems")
+public class ContentItemssResource {
+
+    @Context
+    private UriInfo context;
+    @Context
+    private HttpServletRequest request;
+    ContentDAO contentDAO = new ContentDAO();
+    ContainerDAO containerDAO = new ContainerDAO();
+    GroupDAO groupDAO = new GroupDAO();
+    TingcoContentXML tingcoContentXML = new TingcoContentXML();
+
+    /** Creates a new instance of ContentItemssResource */
+    public ContentItemssResource() {
+    }
+
+    /**
+     * GetContentItemByCateagoryID
+     * @param conCatID
+     * @return
+     */
+    @GET
+    @Path("/getbycategoryid/rest/{rest}/contentcategoryid/{contentcategoryid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentItemByCateagoryID", desc = "Retrieve's ContentItem Details based on ContentCategoryID", req_Params = {"ContentCategoryID;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_ByCategoryId(@PathParam("contentcategoryid") String conCatID) {
+        return contentItemsByCategoryID(conCatID);
+    }
+
+    /**
+     * GetContentItemByCateagoryID
+     * @param conCatID
+     * @return
+     */
+    @GET
+    @Path("/getbycategoryid/json/{json}/contentcategoryid/{contentcategoryid}")
+    @Produces("application/json")
+    public TingcoContent getJson_ByCategoryId(@PathParam("contentcategoryid") String conCatID) {
+        return contentItemsByCategoryID(conCatID);
+    }
+
+    /**
+     * GetContentItemByCateagoryID
+     * @param conCatID
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemsbycategoryid/rest/{rest}/contentcategoryid/{contentcategoryid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentItemByCateagoryID", desc = "Retrieve's ContentItem Details based on ContentCategoryID", req_Params = {"ContentCategoryID;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_getContentItemsByCategoryId(@PathParam("contentcategoryid") String conCatID) {
+        return getContentItemsByCategoryID(conCatID);
+    }
+
+    /**
+     * GetContentItemByCateagoryID
+     * @param conCatID
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemsbycategoryid/json/{json}/contentcategoryid/{contentcategoryid}")
+    @Produces("application/json")
+    public TingcoContent getJson_getContentItemsByCategoryId(@PathParam("contentcategoryid") String conCatID) {
+        return getContentItemsByCategoryID(conCatID);
+    }
+
+    /**
+     * GetContentItemByItemID
+     * @param contentItemID
+     * @return
+     */
+    @GET
+    @Path("/getbyitemid/rest/{rest}/contentitemid/{contentitemid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentItemByItemID", desc = "Retrieve's Particulat ContentItem Details", req_Params = {"ContentItemID;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_ByItemId(@PathParam("contentitemid") String contentItemID) {
+        return contentItemDetails(contentItemID);
+    }
+
+    /**
+     * GetContentItemByItemID
+     * @param contentItemID
+     * @return
+     */
+    @GET
+    @Path("/getbyitemid/json/{json}/contentitemid/{contentitemid}")
+    @Produces("application/json")
+    public TingcoContent getJson_ByItemId(@PathParam("contentitemid") String contentItemID) {
+        return contentItemDetails(contentItemID);
+    }
+
+    /**
+     * GetContentItemsByDeviceID
+     * @param deviceID
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemsbydeviceid/rest/{rest}/deviceid/{deviceid}/countryid/{countryid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentItemsByDeviceID", desc = "Used to Get ContentItems By DeviceID", req_Params = {"DeviceID;UUID", "countryId;int"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_getContentItemsByDeviceId(@PathParam("deviceid") String deviceId, @PathParam("countryid") int countryId) {
+        return getContentItemsByDeviceId(deviceId, countryId);
+    }
+
+    /**
+     * GetContentItemsByDeviceID
+     * @param deviceID
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemsbydeviceid/json/{json}/deviceid/{deviceid}/countryid/{countryid}")
+    @Produces("application/json")
+    public TingcoContent getJson_getContentItemsByDeviceId(@PathParam("deviceid") String deviceId, @PathParam("countryid") int countryId) {
+        return getContentItemsByDeviceId(deviceId, countryId);
+    }
+
+    /**
+     * GetLinkedContentItems
+     * @param contentItemId
+     * @return
+     */
+    @GET
+    @Path("/getlinkedcontentitems/rest/{rest}/contentitemid/{contentitemid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetLinkedContentItems", desc = "Used to Get Linked ContentItems", req_Params = {"ContentItemID;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_getLinkedContentItems(@PathParam("contentitemid") String contentItemId) {
+        return getLinkedContentItems(contentItemId);
+    }
+
+    /**
+     * GetLinkedContentItems
+     * @param contentItemId
+     * @return
+     */
+    @GET
+    @Path("/getlinkedcontentitems/json/{json}/contentitemid/{contentitemid}")
+    @Produces("application/json")
+    public TingcoContent getJson_getLinkedContentItems(@PathParam("contentitemid") String contentItemId) {
+        return getLinkedContentItems(contentItemId);
+    }
+
+    /**
+     * DeleteLinkedContentItem
+     * @param contentItemIdLeft
+     * @param contentItemIdRight
+     * @return
+     */
+    @GET
+    @Path("/deletelinkedcontentitem/rest/{rest}/contentitemidleft/{contentitemidleft}/contentitemidright/{contentitemidright}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "DeleteLinkedContentItem", desc = "Used to delete Linked ContentItems", req_Params = {"ContentItemIdLeft;UUID", "ContentItemIdRight;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_deleteLinkedContentItem(@PathParam("contentitemidleft") String contentItemIdleft, @PathParam("contentitemidright") String contentItemIdright) {
+        return deleteLinkedContentItem(contentItemIdleft, contentItemIdright);
+    }
+
+    /**
+     * DeleteLinkedContentItem
+     * @param contentItemIdLeft
+     * @param contentItemIdRight
+     * @return
+     */
+    @GET
+    @Path("/deletelinkedcontentitem/json/{json}/contentitemidleft/{contentitemidleft}/contentitemidright/{contentitemidright}")
+    @Produces("application/json")
+    public TingcoContent getJson_deleteLinkedContentItem(@PathParam("contentitemidleft") String contentItemIdleft, @PathParam("contentitemidright") String contentItemIdright) {
+        return deleteLinkedContentItem(contentItemIdleft, contentItemIdright);
+    }
+
+    /**
+     * GetContentItemAttributes
+     * @param contentItemId
+     * @param contentCategoryId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemattributes/rest/{rest}/contentitemid/{contentitemid}/contentcategoryid/{contentcategoryid}/countryid/{countryid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentItemAttributes", desc = "Used to Get ContentItemAttributesByContentCategoryId", req_Params = {"ContentItemID;UUID", "ContentCategoryId;UUID", "countryId;int"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_getContentItemAttributes(@PathParam("contentitemid") String contentItemId, @PathParam("contentcategoryid") String contentCategoryId, @PathParam("countryid") int countryId) {
+        return getContentItemAttributes(contentItemId, contentCategoryId, countryId);
+    }
+
+    /**
+     * GetContentItemAttributes
+     * @param contentItemId
+     * @param contentCategoryId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemattributes/json/{json}/contentitemid/{contentitemid}/contentcategoryid/{contentcategoryid}/countryid/{countryid}")
+    @Produces("application/json")
+    public TingcoContent getJson_getContentItemAttributes(@PathParam("contentitemid") String contentItemId, @PathParam("contentcategoryid") String contentCategoryId, @PathParam("countryid") int countryId) {
+        return getContentItemAttributes(contentItemId, contentCategoryId, countryId);
+    }
+
+    /**
+     * GetContentItemAttributesByContentCategoryId
+     * @param contentCategoryId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemattributesbycontentcategoryid/rest/{rest}/contentcategoryid/{contentcategoryid}/countryid/{countryid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentItemAttributesByContentCategoryId", desc = "Used to Get ContentItemAttributesByContentCategoryId", req_Params = {"ContentCategoryId;UUID", "countryId;int"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_getContentItemAttributesByContentCategoryId(@PathParam("contentcategoryid") String contentCategoryId, @PathParam("countryid") int countryId) {
+        return getContentItemAttributesByContentCategoryId(contentCategoryId, countryId);
+    }
+
+    /**
+     * GetContentItemAttributesByContentCategoryId
+     * @param contentCategoryId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemattributesbycontentcategoryid/json/{json}/contentcategoryid/{contentcategoryid}/countryid/{countryid}")
+    @Produces("application/json")
+    public TingcoContent getJson_getContentItemAttributesByContentCategoryId(@PathParam("contentcategoryid") String contentCategoryId, @PathParam("countryid") int countryId) {
+        return getContentItemAttributesByContentCategoryId(contentCategoryId, countryId);
+    }
+
+    /**
+     * AddContentItemLinks
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/addcontentitemlinks/rest/{rest}")
+    @RESTDoc(methodName = "AddContentItemLinks", desc = "Used to add ContentItemLinks", req_Params = {"rest;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoContent postXml_addContentItemLinks(String content) {
+        return addContentItemLinks(content);
+    }
+
+    /**
+     * AddContentItemLinks
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/addcontentitemlinks/json/{json}")
+    public TingcoContent postJson_addContentItemLinks(String content) {
+        return addContentItemLinks(content);
+    }
+
+    /**
+     * POST method for creating an instance of ContentItemssResource
+     * @param content representation for the new resource
+     * @return an HTTP response with content of the created resource
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    public Response postXml(String content) {
+        //TODO
+        return Response.created(context.getAbsolutePath()).build();
+    }
+
+    /**
+     * DeleteContentItem
+     * @param contentItemID
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Path("/deletecontentitem/rest/{rest}/contentitemid/{contentitemid}/deviceid/{deviceid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "DeleteContentItem", desc = "Delete ContentItemToDevice", req_Params = {"ContentItemID;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_DeleteContentItem(@PathParam("contentitemid") String contentItemID, @PathParam("deviceid") String deviceId) {
+        return deleteContentItem(contentItemID, deviceId);
+    }
+
+    /**
+     * DeleteContentItem
+     * @param contentItemID
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Path("/deletecontentitem/json/{json}/contentitemid/{contentitemid}/deviceid/{deviceid}")
+    @Produces("application/json")
+    public TingcoContent getJson_DeleteContentItem(@PathParam("contentitemid") String contentItemID, @PathParam("deviceid") String deviceId) {
+        return deleteContentItem(contentItemID, deviceId);
+    }
+
+    /**
+     * GetContentItems
+     * @param contentItemSubject
+     * @return
+     */
+    @GET
+    @Path("/getcontentitems/rest/{rest}/contentcategoryid/{contentcategoryid}{contentitemsubject:(/contentitemsubject/[^/]+?)?}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentItemsBySubject", desc = "GetContentItems", req_Params = {"contentitemsubject;String"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_GetContentItemsBySubject(@PathParam("contentcategoryid") String contentCategoryId, @PathParam("contentitemsubject") String contentItemSubject) {
+        return getContentItemsBySubject(contentItemSubject, contentCategoryId);
+    }
+
+    /**
+     * GetContentItems
+     * @param contentItemSubject
+     * @return
+     */
+    @GET
+    @Path("/getcontentitems/json/{json}/contentcategoryid/{contentcategoryid}{contentitemsubject:(/contentitemsubject/[^/]+?)?}")
+    @Produces("application/json")
+    public TingcoContent getJson_GetContentItemsBySubject(@PathParam("contentcategoryid") String contentCategoryId, @PathParam("contentitemsubject") String contentItemSubject) {
+        return getContentItemsBySubject(contentItemSubject, contentCategoryId);
+    }
+
+    /**
+     * GetContentItemDetailsByContentItemId
+     * @param contentItemId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemdetailsbycontentitemid/rest/{rest}/contentitemid/{contentitemid}/countryid/{countryid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentItemDetailsByContentItemId", desc = "GetContentItems", req_Params = {"contentitemid;String", "countryid;int"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_getContentItemDetailsByContentItemId(@PathParam("contentitemid") String contentItemId, @PathParam("countryid") int countryId) {
+        return getContentItemDetailsByContentItemId(contentItemId, countryId);
+    }
+
+    /**
+     * GetContentItemDetailsByContentItemId
+     * @param contentItemId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemdetailsbycontentitemid/json/{json}/contentitemid/{contentitemid}/countryid/{countryid}")
+    @Produces("application/json")
+    public TingcoContent getJson_getContentItemDetailsByContentItemId(@PathParam("contentitemid") String contentItemId, @PathParam("countryid") int countryId) {
+        return getContentItemDetailsByContentItemId(contentItemId, countryId);
+    }
+
+    /**
+     * GetContentItemAttributesByContentItemId
+     * @param contentItemId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemattributesbycontentitemid/rest/{rest}/contentitemid/{contentitemid}/countryid/{countryid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentItemAttributesByContentItemId", desc = "GetContentItemAttributesByContentItemId", req_Params = {"contentitemid;String", "countryid;int"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_GetContentItemAttributes(@PathParam("contentitemid") String contentItemId, @PathParam("countryid") int countryId) {
+        return getContentItemAttributesByContentItemId(contentItemId, countryId);
+    }
+
+    /**
+     * GetContentItemAttributesByContentItemId
+     * @param contentItemId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemattributesbycontentitemid/json/{json}/contentitemid/{contentitemid}/countryid/{countryid}")
+    @Produces("application/json")
+    public TingcoContent getJson_GetContentItemAttributes(@PathParam("contentitemid") String contentItemId, @PathParam("countryid") int countryId) {
+        return getContentItemAttributesByContentItemId(contentItemId, countryId);
+    }
+
+    /**
+     * AddExistingContentItem
+     * @param contentItemID
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Path("/addexistingcontentitem/rest/{rest}/contentitemid/{contentitemid}/deviceid/{deviceid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "AddExistingContentItem", desc = "Add Existing ContentItem", req_Params = {"contentitemid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_AddExistingContentItem(@PathParam("contentitemid") String contentItemID, @PathParam("deviceid") String deviceId) {
+        return addExistingContentItem(contentItemID, deviceId);
+    }
+
+    /**
+     * AddExistingContentItem
+     * @param contentItemID
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Path("/addexistingcontentitem/json/{json}/contentitemid/{contentitemid}/deviceid/{deviceid}")
+    @Produces("application/json")
+    public TingcoContent getJson_AddExistingContentItem(@PathParam("contentitemid") String contentItemID, @PathParam("deviceid") String deviceId) {
+        return addExistingContentItem(contentItemID, deviceId);
+    }
+
+    /**
+     * AddContentItemAttributes
+     * @param contentItemId
+     * @param ContentAttributeId
+     * @param contentAttributeValue
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/addcontentitemattribute/rest/{rest}/contentitemid/{contentitemid}/contentattributeid/{contentattributeid}/contentattributevalue/{contentattributevalue}/countryid/{countryid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "AddContentItemAttributes", desc = "Add ContentItemAttributes", req_Params = {"contentitemid;UUID", "contentAttributeId;string", "ContentAttributeValue;string", "countryId;int"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_addContentItemAttribute(@PathParam("contentitemid") String contentItemId, @PathParam("contentattributeid") String contentAttributeId, @PathParam("contentattributevalue") String contentAttributeValue, @PathParam("countryid") int countryId) {
+        return addContentItemAttribute(contentItemId, contentAttributeId, contentAttributeValue, countryId);
+    }
+
+    /**
+     * AddContentItemAttributes
+     * @param contentItemId
+     * @param ContentAttributeId
+     * @param contentAttributeValue
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/addcontentitemattribute/json/{json}/contentitemid/{contentitemid}/contentattributeid/{contentattributeid}/contentattributevalue/{contentattributevalue}/countryid/{countryid}")
+    @Produces("application/json")
+    public TingcoContent getJson_addContentItemAttribute(@PathParam("contentitemid") String contentItemId, @PathParam("contentattributeid") String contentAttributeId, @PathParam("contentattributevalue") String contentAttributeValue, @PathParam("countryid") int countryId) {
+        return addContentItemAttribute(contentItemId, contentAttributeId, contentAttributeValue, countryId);
+    }
+
+    /**
+     * UpdateContentItemAttributes
+     * @param contentItemId
+     * @param ContentAttributeId
+     * @param contentAttributeValue
+     * @return
+     */
+    @GET
+    @Path("/updatecontentitemattribute/rest/{rest}/contentitemid/{contentitemid}/contentattributeid/{contentattributeid}/contentattributevalue/{contentattributevalue}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "UpdateContentItemAttributes", desc = "Update ContentItemAttributes", req_Params = {"contentitemid;UUID", "contentAttributeId;string", "ContentAttributeValue;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_updateContentItemAttribute(@PathParam("contentitemid") String contentItemId, @PathParam("contentattributeid") String contentAttributeId, @PathParam("contentattributevalue") String contentAttributeValue) {
+        return updateContentItemAttribute(contentItemId, contentAttributeId, contentAttributeValue);
+    }
+
+    /**
+     * UpdateContentItemAttributes
+     * @param contentItemId
+     * @param ContentAttributeId
+     * @param contentAttributeValue
+     * @return
+     */
+    @GET
+    @Path("/updatecontentitemattribute/json/{json}/contentitemid/{contentitemid}/contentattributeid/{contentattributeid}/contentattributevalue/{contentattributevalue}")
+    @Produces("application/json")
+    public TingcoContent getJson_updateContentItemAttribute(@PathParam("contentitemid") String contentItemId, @PathParam("contentattributeid") String contentAttributeId, @PathParam("contentattributevalue") String contentAttributeValue) {
+        return updateContentItemAttribute(contentItemId, contentAttributeId, contentAttributeValue);
+    }
+
+    /**
+     * DeleteContentItemAttributes
+     * @param contentItemId
+     * @param ContentAttributeId
+     * @return
+     */
+    @GET
+    @Path("/deletecontentitemattribute/rest/{rest}/contentitemid/{contentitemid}/contentattributeid/{contentattributeid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "DeleteContentItemAttributes", desc = "Delete ContentItemAttributes", req_Params = {"contentitemid;UUID", "contentAttributeId;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_deleteContentItemAttribute(@PathParam("contentitemid") String contentItemId, @PathParam("contentattributeid") String contentAttributeId) {
+        return deleteContentItemAttribute(contentItemId, contentAttributeId);
+    }
+
+    /**
+     * DeleteContentItemAttributes
+     * @param contentItemId
+     * @param ContentAttributeId
+     * @return
+     */
+    @GET
+    @Path("/deletecontentitemattribute/json/{json}/contentitemid/{contentitemid}/contentattributeid/{contentattributeid}")
+    @Produces("application/json")
+    public TingcoContent getJson_deleteContentItemAttribute(@PathParam("contentitemid") String contentItemId, @PathParam("contentattributeid") String contentAttributeId) {
+        return deleteContentItemAttribute(contentItemId, contentAttributeId);
+    }
+
+    /**
+     * DeleteContentItemAndAttributes
+     * @param contentItemId
+     * @return
+     */
+    @GET
+    @Path("/deletecontentitemandattributes/rest/{rest}/contentitemid/{contentitemid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "DeleteContentItemAndAttributes", desc = "Delete ContentItem and Attributes", req_Params = {"contentitemid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_deleteContentItemAndAttributes(@PathParam("contentitemid") String contentItemId) {
+        return deleteContentItemAndAttributes(contentItemId);
+    }
+
+    /**
+     * DeleteContentItemAndAttributes
+     * @param contentItemId
+     * @return
+     */
+    @GET
+    @Path("/deletecontentitemandattributes/json/{json}/contentitemid/{contentitemid}")
+    @Produces("application/json")
+    public TingcoContent getJson_deleteContentItemAndAttributes(@PathParam("contentitemid") String contentItemId) {
+        return deleteContentItemAndAttributes(contentItemId);
+    }
+
+    /**
+     * UpdateContentItem
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/updatecontentitem/rest/{rest}")
+    public TingcoContent postXml_UpdateContentItem(String content) {
+        return updateContentItem(content);
+    }
+
+    /**
+     * AddNewContentItem
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/addnewcontentitem/rest/{rest}")
+    public TingcoContent postXml_AddNewContentItem(String content) {
+        return addNewContentItem(content);
+    }
+
+    /**
+     * AddNewContentItem
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/addnewcontentitem/json/{json}")
+    public TingcoContent postJson_AddNewContentItem(String content) {
+        return addNewContentItem(content);
+    }
+
+    /**
+     * AddContentItemAndContentItemAttributes
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/addcontentitemandcontentitemattributes/rest/{rest}")
+    public TingcoContent postXml_addContentItemAndContentItemAttributes(String content) {
+        return addContentItemAndContentItemAttributes(content);
+    }
+
+    /**
+     * AddContentItemAndContentItemAttributes
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/addcontentitemandcontentitemattributes/json/{json}")
+    public TingcoContent postJson_addContentItemAndContentItemAttributes(String content) {
+        return addContentItemAndContentItemAttributes(content);
+    }
+
+    /**
+     * GetContentGroupsbyContentItemId
+     * @param contentItemId
+     * @return
+     */
+    @GET
+    @Path("/getcontentgroupsbycontentitemid/rest/{rest}/contentitemid/{contentitemid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentGroupsbyContentItemId", desc = "Get ContentGroups by ContentItemId", req_Params = {"contentitemid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_GetContentGroupsbyContentItemId(@PathParam("contentitemid") String contentItemId) {
+        return getContentGroupsbyContentItemId(contentItemId);
+    }
+
+    /**
+     * GetContentGroupsbyContentItemId
+     * @param contentItemId
+     * @return
+     */
+    @GET
+    @Path("/getcontentgroupsbycontentitemid/json/{json}/contentitemid/{contentitemid}")
+    @Produces("application/json")
+    public TingcoContent getJson_GetContentGroupsbyContentItemId(@PathParam("contentitemid") String contentItemId) {
+        return getContentGroupsbyContentItemId(contentItemId);
+    }
+
+    /**
+     * DeleteContentGroupbyContentItemId
+     * @param contentItemId
+     * @param contentGroupId
+     * @return
+     */
+    @GET
+    @Path("/deletecontentgroupbycontentitemid/rest/{rest}/contentitemid/{contentitemid}/contentgroupid/{contentgroupid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "DeleteContentGroupbyContentItemId", desc = "Delete ContentGroup by ContentItemId", req_Params = {"contentitemid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_DeleteContentGroupbyContentItemId(@PathParam("contentitemid") String contentItemId, @PathParam("contentgroupid") String contentGroupId) {
+        return deleteContentGroupbyContentItemId(contentItemId, contentGroupId);
+    }
+
+    /**
+     * DeleteContentGroupbyContentItemId
+     * @param contentItemId
+     * @param contentGroupId
+     * @return
+     */
+    @GET
+    @Path("/deletecontentgroupbycontentitemid/json/{json}/contentitemid/{contentitemid}/contentgroupid/{contentgroupid}")
+    @Produces("application/json")
+    public TingcoContent getJson_DeleteContentGroupbyContentItemId(@PathParam("contentitemid") String contentItemId, @PathParam("contentgroupid") String contentGroupId) {
+        return deleteContentGroupbyContentItemId(contentItemId, contentGroupId);
+    }
+
+    /**
+     * GetAllContentGroups
+     * @return
+     */
+    @GET
+    @Path("/getallcontentgroups/rest/{rest}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetAllContentGroups", desc = "Get All ContentGroups", req_Params = {"rest;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_GetAllContentGroups() {
+        return getAllContentGroups();
+    }
+
+    /**
+     * GetAllContentGroups
+     * @return
+     */
+    @GET
+    @Path("/getallcontentgroups/json/{json}")
+    @Produces("application/json")
+    @RESTDoc(methodName = "GetAllContentGroups", desc = "Get All ContentGroups", req_Params = {"json;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getJson_GetAllContentGroups() {
+        return getAllContentGroups();
+    }
+
+    /**
+     * AddExistingContentGroupsForContentItem
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/addexistingcontentgroupsforcontentitem/rest/{rest}")
+    public TingcoContent postXml_AddExistingContentGroupsForContentItem(String content) {
+        return addExistingContentGroupsForContentItem(content);
+    }
+
+    /**
+     * AddExistingContentGroupsForContentItem
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/addexistingcontentgroupsforcontentitem/json/{json}")
+    public TingcoContent postJson_AddExistingContentGroupsForContentItem(String content) {
+        return addExistingContentGroupsForContentItem(content);
+    }
+
+    /**
+     * GetContentItemsList
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/getcontentitemslist/rest/{rest}")
+    public TingcoContent postXml_getContentItemsList(String content) {
+        return getContentItemsList(content);
+    }
+
+    /**
+     * GetContentItemsList
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/getcontentitemslist/json/{json}")
+    public TingcoContent postJson_getContentItemsList(String content) {
+        return getContentItemsList(content);
+    }
+
+    /**
+     * AddNewContentGroupForContentItem
+     * @param contentItemId
+     * @param contentGroupName
+     * @return
+     */
+    @GET
+    @Path("/addnewcontentgroupforcontentitem/rest/{rest}/contentitemid/{contentitemid}/contentgroupname/{contentgroupname}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "AddNewContentGroupForContentItem", desc = "Add New ContentGroup For ContentItem", req_Params = {"contentitemid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_AddNewContentGroupForContentItem(@PathParam("contentitemid") String contentItemId, @PathParam("contentgroupname") String contentGroupName) {
+        return addNewContentGroupForContentItem(contentItemId, contentGroupName);
+    }
+
+    /**
+     * AddNewContentGroupForContentItem
+     * @param contentItemId
+     * @param contentGroupName
+     * @return
+     */
+    @GET
+    @Path("/addnewcontentgroupforcontentitem/json/{json}/contentitemid/{contentitemid}/contentgroupname/{contentgroupname}")
+    @Produces("application/json")
+    public TingcoContent getJson_AddNewContentGroupForContentItem(@PathParam("contentitemid") String contentItemId, @PathParam("contentgroupname") String contentGroupName) {
+        return addNewContentGroupForContentItem(contentItemId, contentGroupName);
+    }
+
+    /**
+     * GetDetailsForAddNewContentItem
+     * @param deviceId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/getdetailsforaddnewcontentitem/rest/{rest}/deviceid/{deviceid}/countryid/{countryid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetDetailsForAddNewContentItem", desc = "Get Details For New ContentItem", req_Params = {"deviceid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_GetDetailsForAddNewContentItem(@PathParam("deviceid") String deviceId, @PathParam("countryid") Integer countryId) {
+        return getDetailsForAddNewContentItem(deviceId, countryId);
+    }
+
+    /**
+     * GetDetailsForAddNewContentItem
+     * @param deviceId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/getdetailsforaddnewcontentitem/json/{json}/deviceid/{deviceid}/countryid/{countryid}")
+    @Produces("application/json")
+    public TingcoContent getJson_GetDetailsForAddNewContentItem(@PathParam("deviceid") String deviceId, @PathParam("countryid") Integer countryId) {
+        return getDetailsForAddNewContentItem(deviceId, countryId);
+    }
+
+    /**
+     * GetContentItemsByGroupId
+     * @param groupId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemsbygroupid/rest/{rest}/groupid/{groupid}/countryid/{countryid}{contentitemsubject:(/contentitemsubject/[^/]+?)?}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentItemsByGroupId", desc = "Get ContentItems By GroupId", req_Params = {"groupid;string", "countryid;int"}, opt_Params = {"ContentItemSubject;string"}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_getContentItemsByGroupId(@PathParam("groupid") String groupId, @PathParam("contentitemsubject") String contentItemSubject, @PathParam("countryid") int countryId) {
+        return getContentItemsByGroupId(groupId, contentItemSubject, countryId);
+    }
+
+    /**
+     * GetContentItemsByGroupId
+     * @param groupId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemsbygroupid/json/{json}/groupid/{groupid}/countryid/{countryid}{contentitemsubject:(/contentitemsubject/[^/]+?)?}s")
+    @Produces("application/json")
+    public TingcoContent getJson_getContentItemsByGroupId(@PathParam("groupid") String groupId, @PathParam("contentitemsubject") String contentItemSubject, @PathParam("countryid") int countryId) {
+        return getContentItemsByGroupId(groupId, contentItemSubject, countryId);
+    }
+
+    /**
+     * GetContentItemCommands
+     * @param contentItemCommandId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemcommands/rest/{rest}/contentitemcommandid/{contentitemcommandid}/countryid/{countryid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentItemCommands", desc = "Used to Get ContentItemCommands", req_Params = {"contentItemCommandId;string", "countryId;int"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_getContentItemCommands(@PathParam("contentitemcommandid") String contentItemCommandId, @PathParam("countryid") int countryId) {
+        return getContentItemCommands(contentItemCommandId, countryId);
+    }
+
+    /**
+     * GetContentItemCommands
+     * @param contentItemCommandId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemcommands/json/{json}/contentitemcommandid/{contentitemcommandid}/countryid/{countryid}")
+    @Produces("application/json")
+    public TingcoContent getJson_getContentItemCommands(@PathParam("contentitemcommandid") String contentItemCommandId, @PathParam("countryid") int countryId) {
+        return getContentItemCommands(contentItemCommandId, countryId);
+    }
+
+    /**
+     * DeleteContentItemCommands
+     * @param contentItemCommandId
+     * @return
+     */
+    @GET
+    @Path("/deletecontentitemcommands/rest/{rest}/contentitemcommandid/{contentitemcommandid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "DeleteContentItemCommands", desc = "Delete ContentItemCommands", req_Params = {"contentItemCommandId;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_deleteContentItemCommands(@PathParam("contentitemcommandid") String contentItemCommandId) {
+        return deleteContentItemCommands(contentItemCommandId);
+    }
+
+    /**
+     * DeleteContentItemCommands
+     * @param contentItemCommandId
+     * @return
+     */
+    @GET
+    @Path("/deletecontentitemcommands/json/{json}/contentitemcommandid/{contentitemcommandid}")
+    @Produces("application/json")
+    public TingcoContent getJson_deleteContentItemCommands(@PathParam("contentitemcommandid") String contentItemCommandId) {
+        return deleteContentItemCommands(contentItemCommandId);
+    }
+
+    /**
+     * AddContentItemCommands
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/addcontentitemcommands/rest/{rest}")
+    @RESTDoc(methodName = "AddContentItemCommands", desc = "Used to add ContentItemCommands", req_Params = {"rest;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoContent postXml_addContentItemCommands(String content) {
+        return addContentItemCommands(content);
+    }
+
+    /**
+     * AddContentItemCommands
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/addcontentitemcommands/json/{json}")
+    public TingcoContent postJson_addContentItemCommands(String content) {
+        return addContentItemCommands(content);
+    }
+
+    /**
+     * UpdateContentItemCommands
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/updatecontentitemcommands/rest/{rest}")
+    @RESTDoc(methodName = "UpdateContentItemCommands", desc = "Used to update ContentItemCommands", req_Params = {"rest;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoContent postXml_updateContentItemCommands(String content) {
+        return updateContentItemCommands(content);
+    }
+
+    /**
+     * UpdateContentItemCommands
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/updatecontentitemcommands/json/{json}")
+    public TingcoContent postJson_updateContentItemCommands(String content) {
+        return updateContentItemCommands(content);
+    }
+
+    /**
+     * Sub-resource locator method for  {id}
+     */
+    @Path("{id}")
+    public ContentItemsResource getContentItemsResource() {
+        return new ContentItemsResource();
+    }
+
+    /**
+     * GetEventTypeNameDetailsForContentItemCommand
+     * @param countryid
+     * @param loggedInUserGroupId
+     * @return
+     */
+    @GET
+    @Path("/geteventtypenamedetailsforcontentitemcommand/rest/{rest}/countryid/{countryid}/loggedinusergroupid/{loggedinusergroupid}{searchstring:(/searchstring/[^/]+?)?}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetEventTypeNameDetailsForContentItemCommand", desc = "GetEventTypeNameDetailsForContentItemCommand", req_Params = {""}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_getEventTypeNameDetailsForContentItemCommand(@PathParam("countryid") int countryid, @PathParam("loggedinusergroupid") String loggedInUserGroupId, @PathParam("searchstring") String searchString) {
+        return getEventTypeNameDetailsForContentItemCommand(countryid, loggedInUserGroupId, searchString);
+    }
+
+    /**
+     * GetEventTypeNameDetailsForContentItemCommand
+     * @param countryid
+     * @param loggedInUserGroupId
+     * @return
+     */
+    @GET
+    @Path("/geteventtypenamedetailsforcontentitemcommand/json/{json}/countryid/{countryid}/loggedinusergroupid/{loggedinusergroupid}{searchstring:(/searchstring/[^/]+?)?}")
+    @Produces("application/json")
+    public TingcoContent getJson_getEventTypeNameDetailsForContentItemCommand(@PathParam("countryid") int countryid, @PathParam("loggedinusergroupid") String loggedInUserGroupId, @PathParam("searchstring") String searchString) {
+        return getEventTypeNameDetailsForContentItemCommand(countryid, loggedInUserGroupId, searchString);
+    }
+
+    /**
+     * GetDeviceTypeCommandsForContentItemCommand
+     * @param countryid
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Path("/getdevicetypecommandsforcontentitemcommand/rest/{rest}/countryid/{countryid}/deviceid/{deviceid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetDeviceTypeCommandsForContentItemCommand", desc = "Get DeviceTypeCommands For ContentItemCommand", req_Params = {""}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_GetDeviceTypeCommandsForContentItemCommand(@PathParam("countryid") int countryid, @PathParam("deviceid") String deviceId) {
+        return getDeviceTypeCommandsForContentItemCommand(countryid, deviceId);
+    }
+
+    /**
+     * GetDeviceTypeCommandsForContentItemCommand
+     * @param countryid
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Path("/getdevicetypecommandsforcontentitemcommand/json/{json}/countryid/{countryid}/deviceid/{deviceid}")
+    @Produces("application/json")
+    public TingcoContent getJson_GetDeviceTypeCommandsForContentItemCommand(@PathParam("countryid") int countryid, @PathParam("deviceid") String deviceId) {
+        return getDeviceTypeCommandsForContentItemCommand(countryid, deviceId);
+    }
+
+    /**
+     * GetContentItemCommandDetailsByContentItemId
+     * @param contentitemid
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemcommanddetailsbycontentitemid/rest/{rest}/contentitemid/{contentitemid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentItemCommandDetailsByContentItemId", desc = "GetContentItemCommandDetailsByContentItemId", req_Params = {""}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_GetContentItemCommandDetailsByContentItemId(@PathParam("contentitemid") String contentitemid) {
+        return getContentItemCommandDetailsByContentItemId(contentitemid);
+    }
+
+    /**
+     * GetContentItemCommandDetailsByContentItemId
+     * @param contentitemid
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemcommanddetailsbycontentitemid/json/{json}/contentitemid/{contentitemid}")
+    @Produces("application/json")
+    public TingcoContent getJson_GetContentItemCommandDetailsByContentItemId(@PathParam("contentitemid") String contentitemid) {
+        return getContentItemCommandDetailsByContentItemId(contentitemid);
+    }
+
+    /**
+     * GetContentItemDetails
+     * @param countryid
+     * @param loggedInUserGroupId
+     * @param searchstring
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemdetails/rest/{rest}/countryid/{countryid}/loggedinusergroupid/{loggedinusergroupid}{searchstring:(/searchstring/[^/]+?)?}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentItemDetails", desc = "GetContentItemDetails", req_Params = {""}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_GetContentItemDetails(@PathParam("countryid") int countryid, @PathParam("loggedinusergroupid") String loggedInUserGroupId, @PathParam("searchstring") String searchstring) {
+        return getContentItemDetails(countryid, loggedInUserGroupId, searchstring);
+    }
+
+    /**
+     * GetContentItemDetails
+     * @param countryid
+     * @param loggedInUserGroupId
+     * @param searchstring
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemdetails/json/{json}/countryid/{countryid}/loggedinusergroupid/{loggedinusergroupid}{searchstring:(/searchstring/[^/]+?)?}")
+    @Produces("application/json")
+    public TingcoContent getJson_GetContentItemDetails(@PathParam("countryid") int countryid, @PathParam("loggedinusergroupid") String loggedInUserGroupId, @PathParam("searchstring") String searchstring) {
+        return getContentItemDetails(countryid, loggedInUserGroupId, searchstring);
+    }
+
+    @GET
+    @Path("/updatelookupactions/rest/{rest}/contentitemcommandid/{contentitemcommandid}{subject:(/subject/[^/]+?)?}{message:(/message/[^/]+?)?}{worklogtext:(/worklogtext/[^/]+?)?}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentItemDetails", desc = "GetContentItemDetails", req_Params = {""}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_UpdateLookUpActions(@PathParam("contentitemid") String contentItemId, @PathParam("contentitemcommandid") String contentItemCommandId, @PathParam("subject") String subject,@PathParam("message") String message, @PathParam("worklogtext") String workLogText) {
+        return updateLookUpActions(contentItemCommandId,subject, message, 6, "lookup", workLogText);
+    }
+
+    @GET
+    @Path("/updatelookupactions/json/{json}/contentitemcommandid/{contentitemcommandid}{subject:(/subject/[^/]+?)?}{message:(/message/[^/]+?)?}{worklogtext:(/worklogtext/[^/]+?)?}")
+    @Produces("application/json")
+    @RESTDoc(methodName = "GetContentItemDetails", desc = "GetContentItemDetails", req_Params = {""}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getJson_UpdateLookUpActions(@PathParam("contentitemid") String contentItemId, @PathParam("contentitemcommandid") String contentItemCommandId, @PathParam("subject") String subject,@PathParam("message") String message, @PathParam("worklogtext") String workLogText) {
+        return updateLookUpActions(contentItemCommandId,subject, message, 6, "lookup", workLogText);
+    }
+
+    /**
+     * GetContentItemStatistics
+     * @param countryid
+     * @param contentitemid
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemstatistics/rest/{rest}/countryid/{countryid}/contentitemid/{contentitemid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetContentItemStatistics", desc = "GetContentItemStatistics", req_Params = {""}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_GetContentItemStatistics(@PathParam("countryid") int countryid, @PathParam("contentitemid") String contentitemid) {
+        return getContentItemStatistics(countryid, contentitemid);
+    }
+
+    /**
+     * GetContentItemStatistics
+     * @param countryid
+     * @param contentitemid
+     * @return
+     */
+    @GET
+    @Path("/getcontentitemstatistics/json/{json}/countryid/{countryid}/contentitemid/{contentitemid}")
+    @Produces("application/json")
+    public TingcoContent getJson_GetContentItemStatistics(@PathParam("countryid") int countryid, @PathParam("contentitemid") String contentitemid) {
+        return getContentItemStatistics(countryid, contentitemid);
+    }
+
+    /**
+     * GetDeviceTypeCommandTranslations
+     * @param countryid
+     * @param contentitemid
+     * @return
+     */
+    @GET
+    @Path("/getdevicetypecommandtranslations/rest/{rest}/devicetypecommandid/{devicetypecommandid}")
+    @Produces("application/xml")
+    @RESTDoc(methodName = "GetDeviceTypeCommandTranslations", desc = "GetDeviceTypeCommandTranslations", req_Params = {""}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoContent getXml_GetDeviceTypeCommandTranslations(@PathParam("devicetypecommandid") String deviceTypeCommandId) {
+        return getDeviceTypeCommandTranslations(deviceTypeCommandId);
+    }
+
+    /**
+     * GetDeviceTypeCommandTranslations
+     * @param countryid
+     * @param contentitemid
+     * @return
+     */
+    @GET
+    @Path("/getdevicetypecommandtranslations/json/{json}/devicetypecommandid/{devicetypecommandid}")
+    @Produces("application/json")
+    public TingcoContent getJson_GetDeviceTypeCommandTranslations(@PathParam("devicetypecommandid") String deviceTypeCommandId) {
+        return getDeviceTypeCommandTranslations(deviceTypeCommandId);
+    }
+
+    private TingcoContent getDeviceTypeCommandTranslations(String deviceTypeCommandId) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tingcoContent = null;
+        Session session = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ)) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+
+                    List<DeviceTypeCommandTranslations> deviceTypeCommandTranslationses = contentDAO.getDeviceTypeCommandTranslationsByDeviceTypeCommandID(deviceTypeCommandId, session);
+
+                    if (deviceTypeCommandTranslationses.isEmpty()) {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("No Data Found");
+                        return tingcoContent;
+                    } else {
+                        List<Country> countrys = new ArrayList<Country>();
+                        CountryDAO countryDAO = new CountryDAO();
+                        countrys = countryDAO.getAllCountries(session);
+                        tingcoContent = tingcoContentXML.buildGetDeviceTypeCommandTranslations(tingcoContent, deviceTypeCommandTranslationses, countrys);
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getContentItemStatistics(int countryid, String contentitemid) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        Session session = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.CONTENT, TCMUtil.READ)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    session = HibernateUtil.getSessionFactory().openSession();
+
+                    UserTimeZones2 userTimeZones2 = RestUtilDAO.getUserTimeZones2byUserId(sessions2.getUserId(), session);
+                    if (userTimeZones2 != null) {
+                        String timeZoneGMToffset = RestUtilDAO.getTimezoneById(userTimeZones2.getTimeZoneId(), session).getTimeZoneGmtoffset();
+                        Object contentObject = contentDAO.getContentItemsById(contentitemid, oprSession);
+                        ContentItems contentItems = (ContentItems) contentObject;
+                        if (contentItems != null) {
+                            Object objectCct = contentDAO.getContentCategoryTransByIds(contentItems.getContentCategoryId(), countryid, session);
+                            ContentCategoryTranslations contentCategoryTranslations = (ContentCategoryTranslations) objectCct;
+
+                            GroupTranslations gt = null;
+                            if (contentItems.getGroupId() != null) {
+                                gt = groupDAO.getGroupTranslationsByIds(contentItems.getGroupId(), countryid, session);
+                            }
+
+                            Object cisObject = contentDAO.getContentItemStatisticsById(contentItems.getContentItemId(), oprSession);
+                            ContentItemStatistics cis = (ContentItemStatistics) cisObject;
+
+                            List<ContentItemFeedback> cifs = contentDAO.getContentItemFeedbackByContentItemId(contentItems.getContentItemId(), oprSession, 200);
+
+                            tingcoContent = tingcoContentXML.buildGetContentItemStatistics(tingcoContent, contentItems, contentCategoryTranslations, gt, cis, cifs, timeZoneGMToffset);
+                        } else {
+                            tingcoContent.getMsgStatus().setResponseCode(-1);
+                            tingcoContent.getMsgStatus().setResponseText("No data Found");
+                            return tingcoContent;
+                        }
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("UserTimeZone Not Found");
+                        return tingcoContent;
+                    }
+
+
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent updateLookUpActions(String contentItemCommandId, String subject,String message, int countryId, String searchFilter, String workLogText) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        Session session = null;
+        Transaction txoper = null;
+        Transaction tx = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (!message.equals("")) {
+                message = message.split("/")[2];
+            } else {
+                message = null;
+            }
+            if (!workLogText.equals("")) {
+                workLogText = workLogText.split("/")[2];
+            } else {
+                workLogText = null;
+            }
+            if (!subject.equals("")) {
+                subject = subject.split("/")[2];
+            } else {
+                subject = null;
+            }
+            oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            txoper = oprSession.beginTransaction();
+            tx = session.beginTransaction();
+            se.info24.ismOperationsPojo.ContentItemCommands contentItemCommands = (se.info24.ismOperationsPojo.ContentItemCommands) oprSession.get(se.info24.ismOperationsPojo.ContentItemCommands.class, contentItemCommandId);
+
+            GregorianCalendar gc = new GregorianCalendar();
+            if (contentItemCommands == null) {
+                tingcoContent.getMsgStatus().setResponseCode(-1);
+                tingcoContent.getMsgStatus().setResponseText("Data Not Found.");
+                return tingcoContent;
+            }
+
+            List<ContentItemsToDevice> contentItemsToDevices = contentDAO.getContentItemsToDeviceByContentItemID(oprSession, contentItemCommands.getContentItemId());
+            if (contentItemCommands.getIsSendEmail() == 1) {
+                String emails = contentItemCommands.getSendEmailTo();
+                if (emails != null) {
+                    List<String> to = new ArrayList<String>();
+                    if (emails.contains(";")) {
+                        String[] toArray = emails.split(";");
+                        for (int i = 0; i < toArray.length; i++) {
+                            to.add(toArray[i]);
+                        }
+
+                        sendErrorsMail(to, subject, message);
+                    } else {
+                        to.add(emails);
+                        sendErrorsMail(to, subject, message);
+                    }
+                }
+            }
+
+            if (contentItemCommands.getIsSendEmailToDeviceContacts() == 1) {
+                
+                DeviceDAO deviceDAO = new DeviceDAO();
+                for (ContentItemsToDevice contentItemsToDevice : contentItemsToDevices) {
+                    List<ObjectContactMemberships> objectContactMem = deviceDAO.getObjectContactMemberships(contentItemsToDevice.getId().getDeviceId(), session);
+                    List<String> objectContactIdList = new ArrayList<String>();
+                    if (!objectContactMem.isEmpty()) {
+                        for (ObjectContactMemberships ocm : objectContactMem) {
+                            objectContactIdList.add(ocm.getId().getObjectContactId());
+                        }
+                    }
+                    List<ObjectContacts> objectContactsList = deviceDAO.getObjectContacts(objectContactIdList, session);
+                    List<String> to = new ArrayList<String>();
+                    for (ObjectContacts objectContacts : objectContactsList) {
+                        if (objectContacts.getContactEmail() != null) {
+                            to.add(objectContacts.getContactEmail());
+                        }
+                    }
+                    if (!to.isEmpty()) {
+                        sendErrorsMail(to, subject, message);
+
+                    }
+                }
+            }
+            if (contentItemCommands.getIsLogInWorklog() == 1) {
+                for (ContentItemsToDevice contentItemsToDevice : contentItemsToDevices) {
+
+                    ObjectComments objectComments = new ObjectComments();
+                    objectComments.setObjectCommentId(UUID.randomUUID().toString());
+                    objectComments.setObjectId(contentItemsToDevice.getId().getDeviceId());
+                    objectComments.setSubject(contentItemCommands.getCommandButtonText());
+                    if (contentItemCommands.getIsSendEmail() == 0) {
+                        if (contentItemCommands.getCommandDescription() != null) {
+                            objectComments.setBody(contentItemCommands.getCommandDescription());
+                        }
+                    } else if (contentItemCommands.getIsLogInWorklog() == 1) {
+                        if (workLogText != null) {
+                            objectComments.setBody(TCMUtil.convertHexToString(workLogText));
+                        }
+                    } else {
+                        if (message != null) {
+                            objectComments.setBody(TCMUtil.convertHexToString(message));
+                        }
+                    }
+                    objectComments.setCountryId(countryId);
+                    objectComments.setIsDeleted(0);
+                    List<Users2> list = session.getNamedQuery("getUsers2BySearchFilters").setString("firstName", "%" + searchFilter + "%").setString("lastName", "%" + searchFilter + "%").setString("userEmail", "%" + searchFilter + "%").list();
+                    if (list.isEmpty()) {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("Data Not Found.");
+                        return tingcoContent;
+                    }
+                    objectComments.setCreatedByUserId(list.get(0).getUserId());//Testing Purpose
+                    objectComments.setUpdatedDate(gc.getTime());
+                    objectComments.setCreatedDate(gc.getTime());
+                    oprSession.saveOrUpdate(objectComments);
+                }
+            }
+
+            if (contentItemCommands.getIsCreateSupportCase() == 1) {
+                SupportCasesDAO supportCasesDAO = new SupportCasesDAO();
+                SupportCases sc = new SupportCases();
+                String supportCaseid = UUID.randomUUID().toString();
+                sc.setSupportCaseId(supportCaseid);
+                sc.setSupportCaseSubject(contentItemCommands.getCommandButtonText());
+                List<String> sctId = new ArrayList<String>();
+                sctId.add("7B9B3DB7-D7B4-4A2D-BDC3-9B9E0329536C");
+                List<SupportCaseTypes> sctList = supportCasesDAO.getSupportCaseTypesByIds(session, sctId);
+                if (sctList.isEmpty()) {
+                    tingcoContent.getMsgStatus().setResponseCode(-1);
+                    tingcoContent.getMsgStatus().setResponseText("SupportCaseTypeID is not Valid");
+                    return tingcoContent;
+                }
+                sc.setSupportCaseTypes(sctList.get(0));
+                sctId.clear();
+                sctId.add("56E3AB77-1B53-4853-8BE8-D395C56FEE50");
+                List<SupportCaseImpacts> sciList = supportCasesDAO.getSupportCaseImpactsByIDs(session, sctId);
+                if (!sciList.isEmpty()) {
+                    sc.setSupportCaseImpacts(sciList.get(0));
+                }
+
+                sctId.clear();
+                sctId.add("118635C5-F75F-4B96-862F-E0F06FA43012");
+                List<SupportCasePriorities> scpList = supportCasesDAO.getSupportCasePrioritiesByIds(session, sctId);
+                if (!scpList.isEmpty()) {
+                    sc.setSupportCasePriorities(scpList.get(0));
+                }
+
+                sctId.clear();
+                sctId.add("1A6EBCBA-4634-4473-8A65-C74441822C5C");
+                List<SupportCaseStatuses> scsList = supportCasesDAO.getSupportCaseStatusesByIds(session, sctId);
+                if (!scsList.isEmpty()) {
+                    sc.setSupportCaseStatuses(scsList.get(0));
+                }
+
+
+                Groups groups = groupDAO.getGroupByGroupId(contentItemCommands.getGroupId(), session);
+                if (groups == null) {
+                    tingcoContent.getMsgStatus().setResponseCode(-1);
+                    tingcoContent.getMsgStatus().setResponseText("ImpactsGroupID is not Valid");
+                    return tingcoContent;
+                }
+                sc.setGroups(groups);
+                if (contentItemCommands.getIsSendEmail() == 0) {
+                    if (contentItemCommands.getCommandDescription() != null) {
+                        sc.setSupportCaseDescription(contentItemCommands.getCommandDescription());
+                    }
+                } else {
+                    if (message != null) {
+                        sc.setSupportCaseDescription(TCMUtil.convertHexToString(message));
+                    }
+                }
+                SupportOrganizations supportOrganizations = supportCasesDAO.getSupportOrganizationsById(contentItemCommands.getSupportOrganizationId(), session);
+                if (supportOrganizations == null) {
+                    tingcoContent.getMsgStatus().setResponseCode(-1);
+                    tingcoContent.getMsgStatus().setResponseText("AssignedToSupportOrganizationID is not Valid");
+                    return tingcoContent;
+                }
+                sc.setSupportOrganizations(supportOrganizations);
+                String strnull = null;
+                sc.setReportedDate(gc.getTime());
+                List<Users2> list = session.getNamedQuery("getUsers2BySearchFilters").setString("firstName", "%" + searchFilter + "%").setString("lastName", "%" + searchFilter + "%").setString("userEmail", "%" + searchFilter + "%").list();
+                if (list.isEmpty()) {
+                    tingcoContent.getMsgStatus().setResponseCode(-1);
+                    tingcoContent.getMsgStatus().setResponseText("Data Not Found.");
+                    return tingcoContent;
+                }
+                sc.setLastUpdatedByUserId(list.get(0).getUserId());// Testing Purpose only
+                sc.setUpdatedDate(gc.getTime());
+                sc.setCreatedDate(gc.getTime());
+                session.saveOrUpdate(sc);
+                for (ContentItemsToDevice contentItemsToDevice : contentItemsToDevices) {
+                    SupportCaseDeviceLinks scdl = null;
+                    List<SupportCaseDeviceLinks> scdlList = supportCasesDAO.getSupportCaseDeviceLinksBySupportCaseIdDeviceId(session, contentItemsToDevice.getId().getDeviceId(), supportCaseid);
+                    if (scdlList.isEmpty()) {
+                        scdl = new SupportCaseDeviceLinks();
+                        SupportCaseDeviceLinksId id = new SupportCaseDeviceLinksId(supportCaseid, contentItemsToDevice.getId().getDeviceId());
+                        scdl.setId(id);
+                        scdl.setLastUpdatedByUserId(list.get(0).getUserId());// Testing Purpose only
+                        scdl.setCreatedDate(gc.getTime());
+                        scdl.setUpdatedDate(gc.getTime());
+                    } else {
+                        scdl = scdlList.get(0);
+                        scdl.setUpdatedDate(gc.getTime());
+                    }
+                    session.saveOrUpdate(scdl);
+                }
+            }
+
+            if (contentItemCommands.getIsSendEvent() == 1) {
+                DeviceDAO deviceDAO = new DeviceDAO();
+                EventTypeTranslations eventTypeTranslations = deviceDAO.getEventTypeTranslations(contentItemCommands.getEventTypeId(), countryId, session);
+                for (ContentItemsToDevice contentItemsToDevice : contentItemsToDevices) {
+                    Device device = deviceDAO.getDeviceById(contentItemsToDevice.getId().getDeviceId(), session);
+                    EventMessageDocument emd = buildEvent(device, eventTypeTranslations, session);
+                    deviceDAO.sendEventMessage(emd, TingcoConstants.getEventTopic());
+                }
+            }
+
+            if (contentItemCommands.getIsControlDevice() == 1) {
+                ChargePointsResource chargePointResource = new ChargePointsResource();
+                if (contentItemCommands.getDeviceId() != null) {
+                    DeviceDAO deviceDAO = new DeviceDAO();
+                    se.info24.pojo.Device device = deviceDAO.getDeviceById(contentItemCommands.getDeviceId(), session);
+                    DeviceDataMessageDocument ddmDoc = DeviceDataMessageDocument.Factory.newInstance();
+                    DeviceDataMessage ddm = ddmDoc.addNewDeviceDataMessage();
+                    ddm.setCreateRef("Info24");
+                    ddm.setMsgVer(new BigDecimal("4.1"));
+                    ddm.setRegionalUnits("Metric");
+                    ddm.setTimeZone("UTC");
+                    ddm.setMsgID(UUID.randomUUID().toString().toUpperCase());
+                    ddm.setMsgTimeStamp(gc);
+                    gc = new GregorianCalendar();
+                    gc.add(Calendar.HOUR, 1);
+                    ddm.setMsgExpiryTime(gc);
+                    ddm.setMsgPriority(0);
+
+                    MsgSender sender = ddm.addNewMsgSender();
+                    LanguageString ls = sender.addNewSenderName();
+                    ls.setLanguage("SE");
+                    ls.setStringValue("Info24");
+                    sender.setGroupID(device.getGroups().getGroupId().toUpperCase());
+                    sender.setServiceID(TingcoConstants.getServiceID().toUpperCase());
+                    MsgReceivers receivers = ddm.addNewMsgReceivers();
+                    receivers.addServiceID("0");
+
+                    se.info24.pojo.DeviceDataItems deviceDataItems = new se.info24.pojo.DeviceDataItems();
+                    DeviceTypeCommands deviceTypeCommands = null;
+                    if (contentItemCommands.getDeviceTypeCommandId() != null) {
+                        deviceTypeCommands = (DeviceTypeCommands) deviceDAO.getDeviceTypeCommandsById(contentItemCommands.getDeviceTypeCommandId(), session);
+                    }
+                    List<String> deviceTypeCommandIdList = new ArrayList();
+                    deviceTypeCommandIdList.add(contentItemCommands.getDeviceTypeCommandId());
+                    List<DeviceTypeCommandTranslations> deviceTypeCommandTranslationses = deviceDAO.getDeviceTypeCommandTranslations(session, deviceTypeCommandIdList, 6);
+                    String dataItemValue = null;
+                    if (deviceTypeCommands != null) {
+                        deviceDataItems = (se.info24.pojo.DeviceDataItems) deviceDAO.getDeviceDataItemsByItemId(deviceTypeCommands.getDeviceDataItemId(), session);
+                        dataItemValue = deviceDataItems.getDeviceDataFieldName();
+                    }
+                    DataContainer dc = ddm.addNewDeviceData();
+                    DataSequence ds = dc.addNewDataSequence();
+                    ds.setDeviceID(device.getDeviceId());
+                    ds.setDeviceTypeID(device.getDeviceTypes().getDeviceTypeId());
+                    ds.setGroupID(device.getGroups().getGroupId());
+                    ds.setDataItemID(deviceTypeCommands.getDeviceDataItemId().toUpperCase());
+                    Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+                    ds.setDataItemTime(cal);
+                    DataGroup dg = ds.addNewDataGroup();
+                    dg.setGroupName(deviceDataItems.getDeviceDataGroupName().toUpperCase());
+                    DataField dataField = dg.addNewDataField();
+                    dataField.setFieldName(dataItemValue.toUpperCase());
+                    dataField.setStringValue(deviceTypeCommands.getDataItemValue());
+                    List<DeviceTypeChannels> deviceTypeChannelsList = deviceDAO.getDeviceTypeChannels(device.getDeviceTypes().getDeviceTypeId(), session);
+                    if (!deviceTypeChannelsList.isEmpty()) {
+                        for (DeviceTypeChannels dtc : deviceTypeChannelsList) {
+                            Channels c = deviceDAO.getChannels(dtc.getId().getChannelId(), session);
+                            System.out.println("channel is " + c.getChannelData());
+                            chargePointResource.sendDDM(ddmDoc, c.getChannelData());
+
+                        }
+                    }
+                }
+            }
+            txoper.commit();
+            tx.commit();
+//                } else {
+//                    tingcoContent.getMsgStatus().setResponseCode(-10);
+//                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+//                    return tingcoContent;
+//                }
+//            } else {
+//                tingcoContent.getMsgStatus().setResponseCode(-3);
+//                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+//                return tingcoContent;
+//            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            if (tx != null) {
+                tx.rollback();
+            }
+            if (txoper != null) {
+                txoper.rollback();
+            }
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private EventMessageDocument buildEvent(Device device, EventTypeTranslations eventTypeTranslations, Session ismSession) {
+        ServiceDAO servicedao = new ServiceDAO();
+        Services service = (Services) servicedao.getServicesbyServiceId(ismSession, TingcoConstants.getServiceID());
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+        EventMessageDocument emd = EventMessageDocument.Factory.newInstance();
+        EventMessage em = emd.addNewEventMessage();
+        em.setEventID(UUID.randomUUID().toString().toUpperCase());
+        em.setEventTypeID(eventTypeTranslations.getId().getEventTypeId());
+        em.setEventTypeName("Status Changed");
+        em.setEventTime(cal);
+        em.setEventClosedTime(cal);
+        if (eventTypeTranslations != null) {
+            em.setSubject(eventTypeTranslations.getEventTypeName());
+            em.setBody(eventTypeTranslations.getEventTypeDescription());
+        } else {
+            em.setSubject("");
+            em.setBody("");
+        }
+        em.setActive((short) 1);
+        em.setPriority((short) 0);
+        if (device != null) {
+            em.setSourceTypeID(device.getDeviceTypes().getDeviceTypeId());
+            em.setSourceTypeName(device.getDeviceTypes().getDeviceTypeName());
+            em.setSourceID(device.getDeviceId());
+            em.setSourceName(device.getDeviceName());
+            em.setTargetTypeID(service.getServiceTypes().getServiceTypeId());
+            em.setTargetTypeName(device.getDeviceTypes().getDeviceTypeName());
+            em.setTargetID(TingcoConstants.getServiceID());
+            em.setTargetName(service.getServiceTypes().getServiceTypeName());
+
+        }
+        return emd;
+    }
+
+    private boolean sendErrorsMail(List<String> toList, String subject, String body) {
+        try {
+
+            MimeMessage message = new MimeMessage(TingcoConstants.getMailSession());
+            message.setSubject(TCMUtil.convertHexToString(subject));
+            MimeBodyPart textPart = new MimeBodyPart();
+            textPart.setHeader("Content-Type", "text/plain; charset=\"utf-8\"");
+            if (body != null) {
+                textPart.setContent(TCMUtil.convertHexToString(body), "text/plain; charset=\"utf-8\"");
+                textPart.setText("\n" + TCMUtil.convertHexToString(body));
+            }
+            Multipart mp = new MimeMultipart();
+            mp.addBodyPart(textPart);
+            message.setContent(mp, "text/html");
+            message.setFrom(new InternetAddress("Info24"));
+            for (String to : toList) {
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            }
+            Transport transport = TingcoConstants.getMailSession().getTransport();
+            transport.connect(TingcoConstants.getEmailIp(), TingcoConstants.getEmailFrom(), TingcoConstants.getEmailPwd());
+            transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
+            transport.close();
+            return true;
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            return false;
+        }
+    }
+
+    private TingcoContent getContentItemDetails(int countryid, String loggedInUserGroupId, String searchstring) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        Session session = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (!searchstring.equals("")) {
+                searchstring = searchstring.split("/")[2];
+            } else {
+                searchstring = null;
+            }
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.CONTENT, TCMUtil.READ)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    session = HibernateUtil.getSessionFactory().openSession();
+
+                    Set<String> groupIdsset = groupDAO.getGroupsAndGroupTrusts(loggedInUserGroupId, session);
+                    List<ContentItems> contentItemsList = new ArrayList<ContentItems>();
+                    List<List<String>> splitList = TCMUtil.splitStringList(new ArrayList(groupIdsset), 2000);
+
+                    if (searchstring == null) {
+                        for (List<String> list : splitList) {
+                            List<ContentItems> contentItemsListTemp = contentDAO.getContentItemsByGroupIDs(new HashSet<String>(list), oprSession);
+                            if (contentItemsListTemp != null) {
+                                contentItemsList.addAll(contentItemsListTemp);
+                                if (contentItemsList.size() > 200) {
+                                    contentItemsList = contentItemsList.subList(0, 200);
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        for (List<String> list : splitList) {
+                            List<ContentItems> contentItemsListTemp = contentDAO.getContentItemsByGroupIDsAndSearchString(new HashSet<String>(list), searchstring, oprSession);
+                            if (contentItemsListTemp != null) {
+                                contentItemsList.addAll(contentItemsListTemp);
+                                if (contentItemsList.size() > 200) {
+                                    contentItemsList = contentItemsList.subList(0, 200);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (contentItemsList.isEmpty()) {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("No Data Found");
+                        return tingcoContent;
+                    } else {
+                        List<String> contentItemIDs = new ArrayList<String>();
+                        List<String> groupIDs = new ArrayList<String>();
+                        for (ContentItems ci : contentItemsList) {
+                            contentItemIDs.add(ci.getContentItemId());
+                            if (ci.getGroupId() != null) {
+                                groupIDs.add(ci.getGroupId());
+                            }
+                        }
+                        TCMUtil.loger(getClass().getName(), contentItemIDs.size() + "", "Info");
+                        List<ContentItems> filteredContentItemses = contentDAO.getContentItemsByIds(contentItemIDs, oprSession, 200);
+                        List<GroupTranslations> groupTranslationses = groupDAO.getGroupTranslationsById(groupIDs, countryid, session);
+
+                        tingcoContent = tingcoContentXML.buildGetContentItemDetails(tingcoContent, filteredContentItemses, groupTranslationses);
+                    }
+
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getContentItemCommandDetailsByContentItemId(String contentitemid) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.CONTENT, TCMUtil.READ)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    List<se.info24.ismOperationsPojo.ContentItemCommands> cics = contentDAO.getContentItemCommandsByContentItemId(contentitemid, oprSession);
+                    if (cics.isEmpty()) {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("No Data Found");
+                        return tingcoContent;
+                    } else {
+                        tingcoContent = tingcoContentXML.buildGetContentItemCommandDetailsByContentItemId(tingcoContent, cics);
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getDeviceTypeCommandsForContentItemCommand(int countryid, String deviceId) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tingcoContent = null;
+        Session session = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.CONTENT, TCMUtil.READ)) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    DeviceDAO deviceDAO = new DeviceDAO();
+                    PermissionDAO dao = new PermissionDAO();
+                    DbManager dbManager = new DbManager();
+
+                    Device device = deviceDAO.getDeviceById(deviceId, session);
+
+                    List<String> devicetypeCommand = new ArrayList<String>();
+                    List<DeviceTypeCommands> deviceTypeCommandsList = deviceDAO.getDeviceTypeCommands(device.getDeviceTypes().getDeviceTypeId(), session);
+                    for (DeviceTypeCommands deviceTypeCommands : deviceTypeCommandsList) {
+                        devicetypeCommand.add(deviceTypeCommands.getDeviceTypeCommandId());
+                    }
+                    if (devicetypeCommand.isEmpty()) {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("No Data Found");
+                        return tingcoContent;
+                    }
+
+                    List<UserRoleMemberships2> userRoleMemberships2 = dbManager.getUserRoleIdByUserId(session, sessions2.getUserId());
+                    List<String> userroleId = new ArrayList<String>();
+                    for (UserRoleMemberships2 userRoleMemberships21 : userRoleMemberships2) {
+                        userroleId.add(userRoleMemberships21.getId().getUserRoleId());
+                    }
+                    Set<String> deviceTypeCommandId = new HashSet<String>();
+                    List<UserRoleObjectPermissions2> userRoleObjectPermissions2s = dao.getUserRoleObjectPermissions2ByObjectIDsandUserRoleIDs(userroleId, devicetypeCommand, session);
+                    if (userRoleObjectPermissions2s == null) {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("No Data Found");
+                        return tingcoContent;
+                    }
+                    for (UserRoleObjectPermissions2 userRoleObjectPermissions2 : userRoleObjectPermissions2s) {
+                        List<PermissionOperations> permissionOperations = dbManager.getPermissionOperationsByPermissionID(session, userRoleObjectPermissions2.getId().getPermissionId());
+                        for (PermissionOperations po : permissionOperations) {
+                            if (po.getOperations().getOperationName().equalsIgnoreCase(TCMUtil.CONTROL)) {
+                                deviceTypeCommandId.add(userRoleObjectPermissions2.getId().getObjectId());
+                            }
+                        }
+                    }
+                    if (deviceTypeCommandId.isEmpty()) {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("No Data Found");
+                        return tingcoContent;
+                    }
+                    deviceTypeCommandsList = deviceDAO.getDeviceTypeCommandByIDS(deviceTypeCommandId, session);
+                    List<DeviceTypeCommandTranslations> deviceTypeCommandTranslationses = deviceDAO.getDeviceTypeCommandTranslationsOrderBycommandButtonText(session, devicetypeCommand, countryid);
+                    if (deviceTypeCommandsList != null) {
+                        tingcoContent = tingcoContentXML.buildGetDeviceTypeCommandsForContentItemCommand(tingcoContent, deviceTypeCommandsList, deviceTypeCommandTranslationses);
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("No Data Found");
+                        return tingcoContent;
+                    }
+
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getEventTypeNameDetailsForContentItemCommand(int countryid, String loggedInUserGroupId, String searchString) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tingcoContent = null;
+        Session session = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (!searchString.equals("")) {
+                    searchString = searchString.split("/")[2];
+                } else {
+                    searchString = null;
+                }
+                if (getPermission(sessions2.getUserId(), TCMUtil.CONTENT, TCMUtil.READ)) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    DeviceDAO deviceDAO = new DeviceDAO();
+                    List<se.info24.pojo.EventTypesInGroups> eventTypesInGroupses = deviceDAO.getEventTypesInGroups(loggedInUserGroupId, session);
+                    if (eventTypesInGroupses.isEmpty()) {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("No Data Found");
+                        return tingcoContent;
+
+                    } else {
+                        List<String> eventTypeIDs = new ArrayList<String>();
+                        for (se.info24.pojo.EventTypesInGroups etig : eventTypesInGroupses) {
+                            eventTypeIDs.add(etig.getId().getEventTypeId());
+                        }
+                        List<EventTypeTranslations> etts = new ArrayList<EventTypeTranslations>();
+                        if (searchString == null) {
+                            etts = deviceDAO.getEventTypeTranslations(eventTypeIDs, countryid, session);
+                        } else {
+                            if (TCMUtil.isValidUUID(searchString)) {
+                                etts.add(deviceDAO.getEventTypeTranslations(searchString, countryid, session));
+                            } else {
+                                etts = deviceDAO.getEventTypeTranslationsByIdsAndName(eventTypeIDs, countryid, searchString, session);
+                            }
+                        }
+                        if (etts.isEmpty()) {
+                            tingcoContent.getMsgStatus().setResponseCode(-1);
+                            tingcoContent.getMsgStatus().setResponseText("Data Not Found.");
+                            return tingcoContent;
+                        }
+                        tingcoContent = tingcoContentXML.buildGetEventTypeNameDetailsForContentItemCommand(tingcoContent, etts);
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent addContentItemAndContentItemAttributes(String content) {
+        long requestedTime = System.currentTimeMillis();
+
+        TingcoContent tingcoContent = null;
+        Transaction tx = null;
+        Session oprSession = null;
+        Session session = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.CONTENT, TCMUtil.ADD)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    tx = oprSession.beginTransaction();
+                    UserTimeZones2 userTimeZones2 = RestUtilDAO.getUserTimeZones2byUserId(sessions2.getUserId(), session);
+                    if (userTimeZones2 != null) {
+                        String timeZoneGMToffset = RestUtilDAO.getTimezoneById(userTimeZones2.getTimeZoneId(), session).getTimeZoneGmtoffset();
+                        se.info24.contentjaxb.TingcoContent tingcoContentPOST = (se.info24.contentjaxb.TingcoContent) JAXBManager.getInstance().unMarshall(content, se.info24.contentjaxb.TingcoContent.class);
+                        se.info24.contentjaxb.Content contentJaxb = tingcoContentPOST.getContent();
+                        se.info24.contentjaxb.ContentItem contentItemJaxb = contentJaxb.getContentItems().getContentItem().get(0);
+                        String newContentItemId = UUID.randomUUID().toString().toUpperCase();
+                        GregorianCalendar gc = new GregorianCalendar();
+                        contentDAO.saveContentItems(contentItemJaxb, newContentItemId, timeZoneGMToffset, gc, oprSession);
+                        tx.commit();
+                        if (contentItemJaxb.getAttributes() != null) {
+                            List<ContentAttribute> contentAttributesList = contentItemJaxb.getAttributes().getAttribute().get(0).getContentAttribute();
+                            for (ContentAttribute cia : contentAttributesList) {
+                                ContentItemAttributes contentItemAttributes = new ContentItemAttributes();
+                                contentItemAttributes.setId(new ContentItemAttributesId(newContentItemId, cia.getContentAttributeId()));
+                                contentItemAttributes.setContentAttributeValue(TCMUtil.convertHexToString(cia.getContentAttributeValue()));
+                                contentItemAttributes.setActiveFromDate(gc.getTime());
+                                contentItemAttributes.setLanguage(containerDAO.getCountryById(contentItemJaxb.getCountryID().getValue(), session).getLanguageCode());
+                                ContentAttributes contentAttributes = (ContentAttributes) contentDAO.getContentAttributes(cia.getContentAttributeId(), session);
+                                contentItemAttributes.setUnit(contentAttributes.getUnit());
+                                contentItemAttributes.setDataType("string");
+                                contentItemAttributes.setIsEncrypted(0);
+                                contentItemAttributes.setIsEnabled(1);
+                                contentItemAttributes.setCreatedDate(gc.getTime());
+                                contentItemAttributes.setUpdatedDate(gc.getTime());
+                                contentDAO.saveContentItemAttribute(oprSession, contentItemAttributes);
+                            }
+                        }
+                        tingcoContent = tingcoContentXML.buildAddNewContentItem(tingcoContent, newContentItemId);
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("TimeZone is not Found");
+                        return tingcoContent;
+                    }
+
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent addContentItemCommands(String content) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tingcoContent = null;
+        Session ismOperationsSession = null;
+        Session session = null;
+        Transaction tx = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.CONTENT, TCMUtil.ADD)) {
+                    se.info24.contentjaxb.TingcoContent contentXML = (se.info24.contentjaxb.TingcoContent) JAXBManager.getInstance().unMarshall(content, se.info24.contentjaxb.TingcoContent.class);
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    ismOperationsSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    tx = ismOperationsSession.beginTransaction();
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    GregorianCalendar gc = new GregorianCalendar();
+                    GregorianCalendar currentDateTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+                    UserTimeZones2 userTimeZones2 = RestUtilDAO.getUserTimeZones2byUserId(sessions2.getUserId(), session);
+                    String timeZoneGMToffset = RestUtilDAO.getTimezoneById(userTimeZones2.getTimeZoneId(), session).getTimeZoneGmtoffset();
+                    ContentItemCommands cicXML = contentXML.getContent().getContentItems().getContentItem().get(0).getContentItemCommands().get(0);
+                    se.info24.ismOperationsPojo.ContentItemCommands contentItemCommands = new se.info24.ismOperationsPojo.ContentItemCommands();
+                    String contentItemCommandId = UUID.randomUUID().toString();
+                    contentItemCommands.setContentItemCommandId(contentItemCommandId);
+                    contentItemCommands.setGroupId(cicXML.getGroupID().getValue());
+                    contentItemCommands.setContentItemId(cicXML.getContentItemID());
+                    if (cicXML.getCommandID() != null) {
+                        contentItemCommands.setCommandId(cicXML.getCommandID());
+                    }
+                    contentItemCommands.setCommandName(cicXML.getCommandName());
+                    contentItemCommands.setCommandButtonText(cicXML.getCommandButtonText());
+                    if (cicXML.getCommandDescription() != null) {
+                        contentItemCommands.setCommandDescription(cicXML.getCommandDescription());
+                    }
+
+                    if (cicXML.getIsEnabled() != null) {
+                        contentItemCommands.setIsEnabled(cicXML.getIsEnabled().intValue());
+                    }
+
+                    if (cicXML.getIsPublicCommand() != null) {
+                        contentItemCommands.setIsPublicCommand(cicXML.getIsPublicCommand().intValue());
+                    }
+
+                    if (cicXML.getIsPinCodeRequired() != null) {
+                        contentItemCommands.setIsPinCodeRequired(cicXML.getIsPinCodeRequired().intValue());
+                    }
+
+                    if (cicXML.getIsSendEmail() != null) {
+                        contentItemCommands.setIsSendEmail(cicXML.getIsSendEmail().intValue());
+                    }
+
+                    if (cicXML.getIsSendSMS() != null) {
+                        contentItemCommands.setIsSendSms(cicXML.getIsSendSMS().intValue());
+                    }
+
+                    if (cicXML.getIsCreateSupportCase() != null) {
+                        contentItemCommands.setIsCreateSupportCase(cicXML.getIsCreateSupportCase().intValue());
+                    }
+
+                    if (cicXML.getIsControlDevice() != null) {
+                        contentItemCommands.setIsControlDevice(cicXML.getIsControlDevice().intValue());
+                    }
+
+                    if (cicXML.getIsLogInWorklog() != null) {
+                        contentItemCommands.setIsLogInWorklog(cicXML.getIsLogInWorklog().intValue());
+                    }
+
+                    if (cicXML.getIsSendEmailToDeviceContacts() != null) {
+                        contentItemCommands.setIsSendEmailToDeviceContacts(cicXML.getIsSendEmailToDeviceContacts().intValue());
+                    }
+
+                    if (cicXML.getIsSendSMSToDeviceContacts() != null) {
+                        contentItemCommands.setIsSendSmstoDeviceContacts(cicXML.getIsSendSMSToDeviceContacts().intValue());
+                    }
+
+                    if (cicXML.getIsSendEvent() != null) {
+                        contentItemCommands.setIsSendEvent(cicXML.getIsSendEvent().intValue());
+                    }
+
+                    if (cicXML.getIsLinkToTIM() != null) {
+                        contentItemCommands.setIsLinkToTim(cicXML.getIsLinkToTIM().intValue());
+                    }
+
+                    if (cicXML.getActiveFromDate() != null) {
+//                        gc.setTime(dateFormat.parse(cicXML.getActiveFromDate()));
+                        gc.setTime(RestUtilDAO.convertUserLocalTimetoGMT(timeZoneGMToffset, dateFormat.parse(cicXML.getActiveFromDate())));
+                        System.out.println(cicXML.getActiveFromDate() + " activefrom " + gc.getTime());
+                        contentItemCommands.setActiveFromDate(gc.getTime());
+                    }
+
+                    if (cicXML.getActiveToDate() != null) {
+//                        gc.setTime(dateFormat.parse(cicXML.getActiveToDate()));
+                        gc.setTime(RestUtilDAO.convertUserLocalTimetoGMT(timeZoneGMToffset, dateFormat.parse(cicXML.getActiveToDate())));
+                        System.out.println(cicXML.getActiveToDate() + " activeto " + gc.getTime());
+                        contentItemCommands.setActiveToDate(gc.getTime());
+                    }
+
+                    if (cicXML.getPinCode() != null) {
+                        contentItemCommands.setPinCode(cicXML.getPinCode());
+                    }
+
+                    if (cicXML.getDescription() != null) {
+                        contentItemCommands.setDescription(cicXML.getDescription());
+                    }
+
+                    if (cicXML.getDisplayOrder() != null) {
+                        contentItemCommands.setDisplayOrder(cicXML.getDisplayOrder().intValue());
+                    }
+
+                    if (cicXML.getDeviceID() != null) {
+                        contentItemCommands.setDeviceId(cicXML.getDeviceID());
+                    }
+
+                    if (cicXML.getDeviceDataItemID() != null) {
+                        contentItemCommands.setDeviceDataItemId(cicXML.getDeviceDataItemID());
+                    }
+
+                    if (cicXML.getDeviceDataItemValue() != null) {
+                        contentItemCommands.setDeviceDataItemValue(cicXML.getDeviceDataItemValue());
+                    }
+
+                    if (cicXML.getDeviceTypeCommandID() != null) {
+                        contentItemCommands.setDeviceTypeCommandId(cicXML.getDeviceTypeCommandID());
+                    }
+
+                    if (cicXML.getSendEmailTo() != null) {
+                        contentItemCommands.setSendEmailTo(cicXML.getSendEmailTo());
+                    }
+
+                    if (cicXML.getSendSMSTo() != null) {
+                        contentItemCommands.setSendSmsto(cicXML.getSendSMSTo());
+                    }
+
+                    if (cicXML.getSupportOrganizationID() != null) {
+                        contentItemCommands.setSupportOrganizationId(cicXML.getSupportOrganizationID());
+                    }
+
+                    if (cicXML.getEventTypeID() != null) {
+                        contentItemCommands.setEventTypeId(cicXML.getEventTypeID());
+                    }
+
+                    if (cicXML.getLinkToPageURL() != null) {
+                        contentItemCommands.setLinkToPageUrl(cicXML.getLinkToPageURL());
+                    }
+
+                    contentItemCommands.setLastUpdatedByUserId(sessions2.getUserId());
+                    contentItemCommands.setCreatedDate(currentDateTime.getTime());
+                    contentItemCommands.setUpdatedDate(currentDateTime.getTime());
+                    ismOperationsSession.saveOrUpdate(contentItemCommands);
+                    tx.commit();
+                    Content contentJaxb = new Content();
+                    se.info24.contentjaxb.ContentItems contentItems = new se.info24.contentjaxb.ContentItems();
+                    ContentItem contentItem = new ContentItem();
+                    cicXML = new ContentItemCommands();
+                    cicXML.setContentItemCommandID(contentItemCommandId);
+                    contentItem.getContentItemCommands().add(cicXML);
+                    contentItems.getContentItem().add(contentItem);
+                    contentJaxb.setContentItems(contentItems);
+                    tingcoContent.setContent(contentJaxb);
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            if (tx != null) {
+                if (tx.wasCommitted()) {
+                    tx.rollback();
+                }
+            }
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+            return tingcoContent;
+        } finally {
+            if (ismOperationsSession != null) {
+                ismOperationsSession.close();
+            }
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent addContentItemLinks(String content) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tingcoContent = null;
+        Session ismOperationsSession = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ)) {
+                    se.info24.contentjaxb.TingcoContent contentItemXML = (se.info24.contentjaxb.TingcoContent) JAXBManager.getInstance().unMarshall(content, se.info24.contentjaxb.TingcoContent.class);
+                    ismOperationsSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    if (contentItemXML.getContent().getContentItems().getContentItem().size() > 0) {
+                        ContentItem contentItem = contentItemXML.getContent().getContentItems().getContentItem().get(0);
+                        ContentItemLinks contentItemLinks = null;
+                        GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+                        Transaction tx = ismOperationsSession.beginTransaction();
+                        int i = 1;
+                        int numberOfRecords = contentItem.getContentItemIDRight().size();
+                        for (String contentItemIDRight : contentItem.getContentItemIDRight()) {
+                            if (!contentItemIDRight.equalsIgnoreCase(contentItem.getContentItemID())) {
+                                contentItemLinks = new ContentItemLinks(new ContentItemLinksId(contentItem.getContentItemID(), contentItemIDRight), gc.getTime(), gc.getTime());
+                                ismOperationsSession.saveOrUpdate(contentItemLinks);
+                            } else if (contentItemIDRight.equalsIgnoreCase(contentItem.getContentItemID()) && numberOfRecords == 1) {
+                                tingcoContent.getMsgStatus().setResponseCode(-1);
+                                tingcoContent.getMsgStatus().setResponseText("Similar Ids Found");
+                                return tingcoContent;
+                            }
+                            i++;
+                            if (i % 20 == 0) {
+                                ismOperationsSession.flush();
+                                ismOperationsSession.clear();
+                            }
+                        }
+                        tx.commit();
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("Invalid ContentItem XML Found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+            return tingcoContent;
+        } finally {
+            if (ismOperationsSession != null) {
+                ismOperationsSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent deleteContentItemAndAttributes(String contentItemId) {
+        long requestedTime = System.currentTimeMillis();
+        Session oprSession = null;
+        TingcoContent tingcoContent = null;
+        Transaction tx = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.CONTENT, TCMUtil.DELETE)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    tx = oprSession.beginTransaction();
+                    List<ContentItemAttributes> ciaList = contentDAO.getContentItemAttributesByContentItemId(contentItemId, oprSession);
+                    Object contentItems = contentDAO.getContentItemsById(contentItemId, oprSession);
+                    if (!ciaList.isEmpty()) {
+                        int i = 1;
+                        for (ContentItemAttributes cia : ciaList) {
+                            oprSession.delete(cia);
+                            i++;
+                            if (i % 20 == 0) {
+                                oprSession.flush();
+                                oprSession.clear();
+                            }
+                        }
+                    }
+                    contentDAO.deleteObject(oprSession, contentItems);
+                    tx.commit();
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            if (tx != null) {
+                if (tx.wasCommitted()) {
+                    tx.rollback();
+                }
+            }
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent deleteContentItemCommands(String contentItemCommandId) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tingcoContent = null;
+        Session ismOperationsSession = null;
+        Transaction tx = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.CONTENT, TCMUtil.DELETE)) {
+                    ismOperationsSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    tx = ismOperationsSession.beginTransaction();
+                    Object object = ismOperationsSession.get(se.info24.ismOperationsPojo.ContentItemCommands.class, contentItemCommandId);
+                    if (object != null) {
+                        se.info24.ismOperationsPojo.ContentItemCommands contentItemCommands = (se.info24.ismOperationsPojo.ContentItemCommands) object;
+                        ismOperationsSession.delete(contentItemCommands);
+                        tx.commit();
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("No data found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            if (tx != null) {
+                if (tx.wasCommitted()) {
+                    tx.rollback();
+                }
+            }
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+            return tingcoContent;
+        } finally {
+            if (ismOperationsSession != null) {
+                ismOperationsSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getContentItemAttributesByContentCategoryId(String contentCategoryId, int countryId) {
+        long requestedTime = System.currentTimeMillis();
+        Session session = null;
+        TingcoContent tingcoContent = null;
+
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.CONTENT, TCMUtil.READ)) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<Object> objectList = contentDAO.getContentItemAttributesAndTranslations(contentCategoryId, countryId, session, 200);
+                    if (!objectList.isEmpty()) {
+                        tingcoContent = tingcoContentXML.buildContentItemAttributes(objectList, tingcoContent);
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("No data found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getContentItemCommands(String contentItemCommandId, int countryId) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tingcoContent = null;
+        Session ismOperationsSession = null;
+        Session session = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                boolean hasPermission = getPermission(sessions2.getUserId(), TCMUtil.CONTENT, TCMUtil.READ);
+                if (hasPermission) {
+                    ismOperationsSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    UserTimeZones2 userTimeZones2 = RestUtilDAO.getUserTimeZones2byUserId(sessions2.getUserId(), session);
+                    if (userTimeZones2 != null) {
+                        String timeZoneGMToffset = RestUtilDAO.getTimezoneById(userTimeZones2.getTimeZoneId(), session).getTimeZoneGmtoffset();
+                        Object object = contentDAO.getContentItemCommandsById(contentItemCommandId, ismOperationsSession);
+                        if (object != null) {
+                            se.info24.ismOperationsPojo.ContentItemCommands cic = (se.info24.ismOperationsPojo.ContentItemCommands) object;
+                            tingcoContent = tingcoContentXML.buildContentItemCommands(tingcoContent, cic, countryId, timeZoneGMToffset, session);
+                        } else {
+                            tingcoContent.getMsgStatus().setResponseCode(-1);
+                            tingcoContent.getMsgStatus().setResponseText("No Command found for the given input");
+                            return tingcoContent;
+                        }
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("UserTimeZone is not found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (ismOperationsSession != null) {
+                ismOperationsSession.close();
+            }
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getContentItemsByGroupId(String groupId, String contentItemSubject, int countryId) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        Session session = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                boolean hasPermission = getPermission(sessions2.getUserId(), TCMUtil.CONTENT, TCMUtil.READ);
+                if (hasPermission) {
+                    if (!contentItemSubject.equals("")) {
+                        contentItemSubject = contentItemSubject.split("/")[2];
+                    } else {
+                        contentItemSubject = null;
+                    }
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    Set<String> groupidsset = groupDAO.getGroupsAndGroupTrusts(groupId, session);
+                    List<ContentItems> contentItemsList = new ArrayList<ContentItems>();
+                    List<List<String>> listsplit = TCMUtil.splitStringList(new ArrayList(groupidsset), 2000);
+                    for (List<String> list : listsplit) {
+                        List<ContentItems> contentItemsListTemp = contentDAO.getContentItemsByGroupIds(oprSession, new HashSet<String>(list), contentItemSubject, 100);
+                        if (contentItemsListTemp != null) {
+                            contentItemsList.addAll(contentItemsListTemp);
+                        }
+                    }
+                    if (!contentItemsList.isEmpty()) {
+                        return tingcoContentXML.buildContentItemsWithCategoriesAndGroups(tingcoContent, contentItemsList, countryId, session);
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("Data not found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+    }
+
+    private TingcoContent getContentItemsList(String content) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tingcoContent = null;
+        Session ismOperationsSession = null;
+        Session session = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                boolean hasPermission = getPermission(sessions2.getUserId(), TCMUtil.CONTENT, TCMUtil.READ);
+                if (hasPermission) {
+                    se.info24.contentjaxb.TingcoContent contentItemXML = (se.info24.contentjaxb.TingcoContent) JAXBManager.getInstance().unMarshall(content, se.info24.contentjaxb.TingcoContent.class);
+                    ismOperationsSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    if (contentItemXML.getContent().getContentItems().getContentItem().size() > 0) {
+                        ContentItem contentItem = contentItemXML.getContent().getContentItems().getContentItem().get(0);
+                        UserTimeZones2 userTimeZones2 = RestUtilDAO.getUserTimeZones2byUserId(sessions2.getUserId(), session);
+                        if (userTimeZones2 != null) {
+                            String timeZoneGMToffset = RestUtilDAO.getTimezoneById(userTimeZones2.getTimeZoneId(), session).getTimeZoneGmtoffset();
+                            Set<String> groupIdsset = groupDAO.getGroupsAndGroupTrusts(contentItem.getGroupID().getValue(), session);
+                            List<ContentItems> contentItemsList = new ArrayList<ContentItems>();
+                            List<List<String>> splitList = TCMUtil.splitStringList(new ArrayList(groupIdsset), 2000);
+                            for (List<String> list : splitList) {
+                                List<ContentItems> contentItemsListTemp = contentDAO.getContentItemsList(new HashSet<String>(list), contentItem, 1000, ismOperationsSession, session);
+                                if (contentItemsListTemp != null) {
+                                    contentItemsList.addAll(contentItemsListTemp);
+                                }
+                            }
+                            if (!contentItemsList.isEmpty()) {
+                                tingcoContent = tingcoContentXML.buildContentItemDetailsByContentItemId(tingcoContent, contentItemsList, contentItem.getCountryID().getValue(), timeZoneGMToffset, session);
+                            } else {
+                                tingcoContent.getMsgStatus().setResponseCode(-1);
+                                tingcoContent.getMsgStatus().setResponseText("No data found");
+                                return tingcoContent;
+                            }
+                        } else {
+                            tingcoContent.getMsgStatus().setResponseCode(-1);
+                            tingcoContent.getMsgStatus().setResponseText("Invalid ContentItem XML Found");
+                            return tingcoContent;
+                        }
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("Invalid ContentItem XML Found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+            return tingcoContent;
+        } finally {
+            if (ismOperationsSession != null) {
+                ismOperationsSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getDetailsForAddNewContentItem(String deviceId, Integer countryId) {
+        long requestedTime = System.currentTimeMillis();
+
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        Session session = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                if (!TCMUtil.isValidUUID(deviceId) || deviceId.equals("")) {
+                    tingcoContent.getMsgStatus().setResponseCode(-1);
+                    tingcoContent.getMsgStatus().setResponseText("Data Not Valid");
+                    return tingcoContent;
+                }
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    DeviceDAO deviceDAO = new DeviceDAO();
+                    Device device = deviceDAO.getDeviceById(deviceId, session);
+                    Object obj = contentDAO.getDeviceTypeDefaultCategoryByDeviceTypeId(session, device.getDeviceTypes().getDeviceTypeId());
+                    DeviceTypeDefaultCategory deviceTypeDefaultCategory = null;
+                    if (obj != null) {
+                        deviceTypeDefaultCategory = (DeviceTypeDefaultCategory) obj;
+                    }
+                    GroupTranslations groupTranslations = groupDAO.getGroupTranslationsByIds(device.getGroups().getGroupId(), countryId, session);
+                    DeviceStatus deviceStatus = deviceDAO.getDeviceStatusByDeviceId(deviceId, oprSession);
+                    tingcoContent = tingcoContentXML.buildDetailsForAddNewContentItem(device, deviceTypeDefaultCategory, groupTranslations, deviceStatus);
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent addNewContentGroupForContentItem(String contentItemId, String contentGroupName) {
+        long requestedTime = System.currentTimeMillis();
+
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                if (!TCMUtil.isValidUUID(contentItemId) || contentItemId.equals("")) {
+                    tingcoContent.getMsgStatus().setResponseCode(-1);
+                    tingcoContent.getMsgStatus().setResponseText("Data Not Valid");
+                    return tingcoContent;
+                }
+                if (contentGroupName.equals("")) {
+                    tingcoContent.getMsgStatus().setResponseCode(-1);
+                    tingcoContent.getMsgStatus().setResponseText("contentGroupName should not be empty");
+                    return tingcoContent;
+                }
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.ADD)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+                    ContentGroups contentGroups = new ContentGroups();
+                    String newContentGroupsId = UUID.randomUUID().toString().toUpperCase();
+                    contentGroups.setContentGroupId(newContentGroupsId);
+                    contentGroups.setContentGroupName(contentGroupName);
+                    contentGroups.setCreatedDate(gc.getTime());
+                    contentGroups.setUpdatedDate(gc.getTime());
+                    ContentGroupItems contentGroupItems = new ContentGroupItems();
+                    contentGroupItems.setId(new ContentGroupItemsId(newContentGroupsId, contentItemId));
+                    contentGroupItems.setCreatedDate(gc.getTime());
+                    contentGroupItems.setUpdatedDate(gc.getTime());
+                    if (!contentDAO.saveContentGroupItemsAndContentGroups(oprSession, contentGroups, contentGroupItems)) {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("Error Occured While Adding");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent addExistingContentGroupsForContentItem(String content) {
+        long requestedTime = System.currentTimeMillis();
+
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.ADD)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    se.info24.contentjaxb.TingcoContent tingcoContentPOST = (se.info24.contentjaxb.TingcoContent) JAXBManager.getInstance().unMarshall(content, se.info24.contentjaxb.TingcoContent.class);
+                    se.info24.contentjaxb.Content contentJaxb = tingcoContentPOST.getContent();
+                    List<ContentGroupItems> contentGroupItemsList = new ArrayList<ContentGroupItems>();
+                    GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+                    for (se.info24.contentjaxb.ContentItem contentItemJaxb : contentJaxb.getContentItems().getContentItem()) {
+                        if (contentItemJaxb.getContentItemID() != null) {
+                            Object contentItemObj = contentDAO.getContentItemsById(contentItemJaxb.getContentItemID(), oprSession);
+                            if (contentItemObj == null) {
+                                tingcoContent.getMsgStatus().setResponseCode(-1);
+                                tingcoContent.getMsgStatus().setResponseText("ContentItemId Does Not Exists");
+                                return tingcoContent;
+                            }
+                            for (se.info24.contentjaxb.ContentGroups contentGroupsJaxb : contentItemJaxb.getContentGroups()) {
+                                if (contentGroupsJaxb.getContentGroupID() != null && TCMUtil.isValidUUID(contentGroupsJaxb.getContentGroupID())) {
+                                    Object contentGroupObj = contentDAO.getContentGroupsById(oprSession, contentGroupsJaxb.getContentGroupID());
+                                    if (contentGroupObj != null && contentDAO.getContentGroupItemsById(oprSession, contentItemJaxb.getContentItemID(), contentGroupsJaxb.getContentGroupID()) == null) {
+                                        ContentGroupItems contentGroupItems = new ContentGroupItems();
+                                        contentGroupItems.setId(new ContentGroupItemsId(contentGroupsJaxb.getContentGroupID(), contentItemJaxb.getContentItemID()));
+                                        contentGroupItems.setCreatedDate(gc.getTime());
+                                        contentGroupItems.setUpdatedDate(gc.getTime());
+                                        contentGroupItemsList.add(contentGroupItems);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    oprSession.flush();
+                    contentDAO.saveContentGroupItems(oprSession, contentGroupItemsList);
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getAllContentGroups() {
+        long requestedTime = System.currentTimeMillis();
+        Session oprSession = null;
+        TingcoContent tingcoContent = null;
+
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    List<se.info24.ismOperationsPojo.ContentGroups> contentGroupsList = contentDAO.getAllContentGroups(oprSession, 200);
+                    tingcoContent = tingcoContentXML.buildGetAllContentGroups(tingcoContent, contentGroupsList);
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent deleteContentGroupbyContentItemId(String contentItemId, String contentGroupId) {
+        long requestedTime = System.currentTimeMillis();
+        Session oprSession = null;
+        TingcoContent tingcoContent = null;
+
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                if (!TCMUtil.isValidUUID(contentItemId) || contentItemId.equals("")) {
+                    tingcoContent.getMsgStatus().setResponseCode(-1);
+                    tingcoContent.getMsgStatus().setResponseText("Data Not Valid");
+                    return tingcoContent;
+                }
+                if (!TCMUtil.isValidUUID(contentGroupId) || contentGroupId.equals("")) {
+                    tingcoContent.getMsgStatus().setResponseCode(-1);
+                    tingcoContent.getMsgStatus().setResponseText("Data Not Valid");
+                    return tingcoContent;
+                }
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.DELETE)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    Object obj = contentDAO.getContentGroupItemsById(oprSession, contentItemId, contentGroupId);
+                    if (obj != null) {
+                        ContentGroupItems contentGroupItems = (ContentGroupItems) obj;
+                        contentDAO.deleteContentGroupItems(oprSession, contentGroupItems);
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("Data Not Found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getContentGroupsbyContentItemId(String contentItemId) {
+        long requestedTime = System.currentTimeMillis();
+        Session oprSession = null;
+        TingcoContent tingcoContent = null;
+
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                if (!TCMUtil.isValidUUID(contentItemId) || contentItemId.equals("")) {
+                    tingcoContent.getMsgStatus().setResponseCode(-1);
+                    tingcoContent.getMsgStatus().setResponseText("Data Not Valid");
+                    return tingcoContent;
+                }
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    List<ContentGroupItems> contentGroupItemsList = contentDAO.getContentGroupItemsByContentItemId(oprSession, contentItemId);
+                    List<String> ids = new ArrayList<String>();
+                    for (ContentGroupItems cgi : contentGroupItemsList) {
+                        ids.add(cgi.getId().getContentGroupId());
+                    }
+                    if (!ids.isEmpty()) {
+                        List<ContentGroups> contentGroupsList = contentDAO.getContentGroupsByContentGroupId(oprSession, ids);
+                        tingcoContent = tingcoContentXML.buildContentGroupsbyContentItemId(tingcoContent, contentGroupsList);
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("Data Not Found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent addContentItemAttribute(String contentItemId, String contentAttributeId, String contentAttributeValue, int countryId) {
+        long requestedTime = System.currentTimeMillis();
+
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        Session session = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.ADD)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    ContentItemAttributes contentItemAttributes = new ContentItemAttributes();
+                    GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+                    contentItemAttributes.setId(new ContentItemAttributesId(contentItemId, contentAttributeId));
+                    contentItemAttributes.setContentAttributeValue(TCMUtil.convertHexToString(contentAttributeValue));
+                    contentItemAttributes.setActiveFromDate(gc.getTime());
+                    contentItemAttributes.setLanguage(containerDAO.getCountryById(countryId, session).getLanguageCode());
+                    ContentAttributes contentAttributes = (ContentAttributes) contentDAO.getContentAttributes(contentAttributeId, session);
+                    contentItemAttributes.setUnit(contentAttributes.getUnit());
+                    contentItemAttributes.setDataType("string");
+                    contentItemAttributes.setIsEncrypted(0);
+                    contentItemAttributes.setIsEnabled(1);
+                    contentItemAttributes.setCreatedDate(gc.getTime());
+                    contentItemAttributes.setUpdatedDate(gc.getTime());
+                    contentDAO.saveContentItemAttribute(oprSession, contentItemAttributes);
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent deleteContentItemAttribute(String contentItemId, String contentAttributeId) {
+        long requestedTime = System.currentTimeMillis();
+        Session oprSession = null;
+        TingcoContent tingcoContent = null;
+
+        Transaction tx = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.DELETE)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    tx = oprSession.beginTransaction();
+                    Object obj = contentDAO.getContentItemAttributesByIds(contentItemId, contentAttributeId, oprSession);
+                    contentDAO.deleteObject(oprSession, obj);
+                    tx.commit();
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent deleteLinkedContentItem(String contentItemIdleft, String contentItemIdright) {
+        long requestedTime = System.currentTimeMillis();
+        Session oprSession = null;
+        TingcoContent tingcoContent = null;
+
+        Transaction tx = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.DELETE)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    tx = oprSession.beginTransaction();
+                    Object obj = contentDAO.getContentItemLinkByIds(contentItemIdleft, contentItemIdright, oprSession);
+                    contentDAO.deleteObject(oprSession, obj);
+                    tx.commit();
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getContentItemAttributesByContentItemId(String contentItemId, int countryId) {
+        long requestedTime = System.currentTimeMillis();
+        Session session = null;
+        TingcoContent tingcoContent = null;
+
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ)) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<Object> objectlist = contentDAO.getContentItemAttributesAndTranslations(contentItemId, countryId, session);
+                    if (!objectlist.isEmpty()) {
+                        tingcoContent = tingcoContentXML.buildContentItemAttributes(objectlist, tingcoContent);
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("No data found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent addNewContentItem(String content) {
+        long requestedTime = System.currentTimeMillis();
+
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        Session session = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.ADD)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    UserTimeZones2 userTimeZones2 = RestUtilDAO.getUserTimeZones2byUserId(sessions2.getUserId(), session);
+                    if (userTimeZones2 != null) {
+                        String timeZoneGMToffset = RestUtilDAO.getTimezoneById(userTimeZones2.getTimeZoneId(), session).getTimeZoneGmtoffset();
+                        se.info24.contentjaxb.TingcoContent tingcoContentPOST = (se.info24.contentjaxb.TingcoContent) JAXBManager.getInstance().unMarshall(content, se.info24.contentjaxb.TingcoContent.class);
+                        se.info24.contentjaxb.Content contentJaxb = tingcoContentPOST.getContent();
+                        se.info24.contentjaxb.ContentItem contentItemJaxb = contentJaxb.getContentItems().getContentItem().get(0);
+                        ContentItems contentItems = new ContentItems();
+                        String newContentItemId = UUID.randomUUID().toString().toUpperCase();
+                        contentItems.setContentItemId(newContentItemId);
+                        if (contentItemJaxb.getBody() != null) {
+                            contentItems.setContentItemSubject(contentItemJaxb.getBody());
+                        } else {
+                            tingcoContent.getMsgStatus().setResponseCode(-1);
+                            tingcoContent.getMsgStatus().setResponseText("ContentItemSubject should not be empty");
+                            return tingcoContent;
+                        }
+                        if (contentItemJaxb.getContentCategoryID() != null) {
+                            contentItems.setContentCategoryId(contentItemJaxb.getContentCategoryID());
+                        }
+                        if (contentItemJaxb.getContentTypeID() != null) {
+                            contentItems.setContentTypeId(contentItemJaxb.getContentTypeID());
+                        }
+                        if (contentItemJaxb.getGroupID() != null) {
+                            if (contentItemJaxb.getGroupID().getValue() != null) {
+                                contentItems.setGroupId(contentItemJaxb.getGroupID().getValue());
+                            }
+                        }
+
+                        if (contentItemJaxb.getSourceName() != null) {
+                            contentItems.setSourceName(contentItemJaxb.getSourceName());
+                        }
+                        if (contentItemJaxb.getSourceReferenceID() != null) {
+                            contentItems.setSourceReferenceId(contentItemJaxb.getSourceReferenceID());
+                        }
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        contentItems.setIsEnabled(contentItemJaxb.getIsEnabled());
+                        GregorianCalendar gc = new GregorianCalendar();
+                        if (contentItemJaxb.getActiveFromDate() != null) {
+                            gc.setTime(RestUtilDAO.convertUserLocalTimetoGMT(timeZoneGMToffset, dateFormat.parse(contentItemJaxb.getActiveFromDate())));
+                            contentItems.setStartTime(gc.getTime());
+                        }
+                        if (contentItemJaxb.getActiveToDate() != null) {
+                            gc.setTime(RestUtilDAO.convertUserLocalTimetoGMT(timeZoneGMToffset, dateFormat.parse(contentItemJaxb.getActiveToDate())));
+                            contentItems.setStopTime(gc.getTime());
+                        }
+                        if (contentItemJaxb.getExpiryDate() != null) {
+                            gc.setTime(RestUtilDAO.convertUserLocalTimetoGMT(timeZoneGMToffset, dateFormat.parse(contentItemJaxb.getExpiryDate())));
+                            contentItems.setExpiryTime(gc.getTime());
+                        }
+                        if (contentItemJaxb.getGeometry() != null) {
+                            se.info24.contentjaxb.Point point = contentItemJaxb.getGeometry().getPoint();
+                            if (point != null) {
+                                if (point.getPosLatitude() != null) {
+                                    contentItems.setPosLatitude(Double.valueOf(point.getPosLatitude()));
+                                }
+                                if (point.getPosLongitude() != null) {
+                                    contentItems.setPosLongitude(Double.valueOf(point.getPosLongitude()));
+                                }
+                                if (point.getPosDepth() != null) {
+                                    contentItems.setPosDepth(Double.valueOf(point.getPosDepth()));
+                                }
+                            }
+                        }
+                        gc = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+                        contentItems.setCreatedDate(gc.getTime());
+                        contentItems.setUpdatedDate(gc.getTime());
+                        DeviceDAO deviceDAO = new DeviceDAO();
+                        Device device = deviceDAO.getDeviceById(contentItemJaxb.getDeviceID(), session);
+                        List<DeviceTypeContentAttributes> deviceTypeContentAttributesList = contentDAO.getDeviceTypeContentAttributesByDeviceTypeId(session, device.getDeviceTypes().getDeviceTypeId());
+                        List<ContentItemAttributes> contentItemAttributesList = new ArrayList<ContentItemAttributes>();
+                        if (!deviceTypeContentAttributesList.isEmpty()) {
+                            for (DeviceTypeContentAttributes dtca : deviceTypeContentAttributesList) {
+                                ContentItemAttributes contentItemAttributes = new ContentItemAttributes();
+                                contentItemAttributes.setId(new ContentItemAttributesId(newContentItemId, dtca.getId().getContentAttributeId()));
+                                if (dtca.getAttributeDefaultValue() != null) {
+                                    contentItemAttributes.setContentAttributeValue(dtca.getAttributeDefaultValue());
+                                }
+                                contentItemAttributes.setActiveFromDate(gc.getTime());
+                                if (dtca.getUnit() != null) {
+                                    contentItemAttributes.setUnit(dtca.getUnit());
+                                }
+                                if (dtca.getDataType() != null) {
+                                    contentItemAttributes.setDataType(dtca.getDataType());
+                                }
+                                contentItemAttributes.setLanguage(containerDAO.getCountryById(contentItemJaxb.getCountryID().getValue(), session).getLanguageCode());
+                                contentItemAttributes.setIsEncrypted(0);
+                                contentItemAttributes.setIsEnabled(1);
+
+                                contentItemAttributes.setCreatedDate(gc.getTime());
+                                contentItemAttributes.setUpdatedDate(gc.getTime());
+                                contentItemAttributesList.add(contentItemAttributes);
+                            }
+                        }
+                        ContentItemsToDevice contentItemsToDevice = new ContentItemsToDevice();
+                        contentItemsToDevice.setId(new ContentItemsToDeviceId(newContentItemId, device.getDeviceId()));
+                        contentItemsToDevice.setCreatedDate(gc.getTime());
+                        contentItemsToDevice.setUpdatedDate(gc.getTime());
+                        try {
+                            oprSession.beginTransaction();
+                            oprSession.saveOrUpdate(contentItems);
+                            oprSession.saveOrUpdate(contentItemsToDevice);
+                            for (ContentItemAttributes contentItemAttributes : contentItemAttributesList) {
+                                oprSession.saveOrUpdate(contentItemAttributes);
+                            }
+                            oprSession.getTransaction().commit();
+                        } catch (Exception ee) {
+                            if (oprSession.getTransaction().wasCommitted()) {
+                                oprSession.getTransaction().rollback();
+                            }
+                            TCMUtil.exceptionLog(getClass().getName(), ee);
+                            tingcoContent.getMsgStatus().setResponseCode(-1);
+                            tingcoContent.getMsgStatus().setResponseText("Error Occured While Adding");
+                            return tingcoContent;
+                        }
+                        tingcoContent = tingcoContentXML.buildAddNewContentItem(tingcoContent, newContentItemId);
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("TimeZone is not Found");
+                        return tingcoContent;
+                    }
+
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getContentItemAttributes(String contentItemId, String contentCategoryId, int countryId) {
+        long requestedTime = System.currentTimeMillis();
+        Session ismoperationssession = null;
+        Session session = null;
+        TingcoContent tingcoContent = null;
+
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ)) {
+                    ismoperationssession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<ContentItemAttributes> contentItemAttributesList = contentDAO.getContentItemAttributesByContentItemId(contentItemId, ismoperationssession);
+                    if (!contentItemAttributesList.isEmpty()) {
+                        List<String> contentAttributeIdsList = contentDAO.getcontentAttributeIdsList(contentItemAttributesList);
+                        List<Object> objectList = contentDAO.getNonLinkedContentItemAttributesAndTranslations(contentAttributeIdsList, contentCategoryId, countryId, session, 200);
+                        tingcoContent = tingcoContentXML.buildContentItemAttributes(objectList, tingcoContent);
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("No data found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            if (ismoperationssession != null) {
+                ismoperationssession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getContentItemsByCategoryID(String contentCategoryId) {
+        long requestedTime = System.currentTimeMillis();
+
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    List<String> contentItemIdsList = contentDAO.getContentItemsByContentCategoryid(contentCategoryId, oprSession);
+                    if (!contentItemIdsList.isEmpty()) {
+                        List<ContentItems> contentItemsList = contentDAO.getContentItemsByIds(contentItemIdsList, oprSession);
+                        tingcoContent = tingcoContentXML.buildContentItem(tingcoContent, contentItemsList);
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("No data found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getLinkedContentItems(String contentItemId) {
+        long requestedTime = System.currentTimeMillis();
+
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    List<String> linkedContentItemIdsList = contentDAO.getLinkedContentItems(contentItemId, oprSession);
+                    if (!linkedContentItemIdsList.isEmpty()) {
+                        List<ContentItems> contentItemsList = contentDAO.getContentItemsByIds(linkedContentItemIdsList, oprSession);
+                        tingcoContent = tingcoContentXML.buildContentItem(tingcoContent, contentItemsList);
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("No linked data found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent updateContentItem(String content) {
+        long requestedTime = System.currentTimeMillis();
+
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        Session session = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.UPDATE)) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    UserTimeZones2 userTimeZones2 = RestUtilDAO.getUserTimeZones2byUserId(sessions2.getUserId(), session);
+                    if (userTimeZones2 != null) {
+                        String timeZoneGMToffset = RestUtilDAO.getTimezoneById(userTimeZones2.getTimeZoneId(), session).getTimeZoneGmtoffset();
+                        se.info24.contentjaxb.TingcoContent tingcoContentPOST = (se.info24.contentjaxb.TingcoContent) JAXBManager.getInstance().unMarshall(content, se.info24.contentjaxb.TingcoContent.class);
+                        se.info24.contentjaxb.Content contentJaxb = tingcoContentPOST.getContent();
+                        se.info24.contentjaxb.ContentItem contentItemJaxb = contentJaxb.getContentItems().getContentItem().get(0);
+                        Object obj = contentDAO.getContentItemsById(contentItemJaxb.getContentItemID(), oprSession);
+                        if (obj != null) {
+                            ContentItems contentItems = (ContentItems) obj;
+                            if (contentItemJaxb.getBody() != null) {
+                                contentItems.setContentItemSubject(contentItemJaxb.getBody());
+                            }
+                            if (contentItemJaxb.getContentCategoryID() != null) {
+                                contentItems.setContentCategoryId(contentItemJaxb.getContentCategoryID());
+                            }
+                            if (contentItemJaxb.getContentTypeID() != null) {
+                                contentItems.setContentTypeId(contentItemJaxb.getContentTypeID());
+                            }
+                            if (contentItemJaxb.getGroupID() != null) {
+                                if (contentItemJaxb.getGroupID().getValue() != null) {
+                                    contentItems.setGroupId(contentItemJaxb.getGroupID().getValue());
+                                }
+                            }
+                            if (contentItemJaxb.getSourceName() != null) {
+                                contentItems.setSourceName(contentItemJaxb.getSourceName());
+                            } else {
+                                contentItems.setSourceName(null);
+                            }
+                            if (contentItemJaxb.getSourceReferenceID() != null) {
+                                contentItems.setSourceReferenceId(contentItemJaxb.getSourceReferenceID());
+                            } else {
+                                contentItems.setSourceReferenceId(null);
+                            }
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            if (contentItemJaxb.getIsEnabled() != null) {
+                                contentItems.setIsEnabled(contentItemJaxb.getIsEnabled());
+                            } else {
+                                contentItems.setIsEnabled(null);
+                            }
+                            GregorianCalendar gc = new GregorianCalendar();
+                            if (contentItemJaxb.getActiveFromDate() != null) {
+                                gc.setTime(RestUtilDAO.convertUserLocalTimetoGMT(timeZoneGMToffset, dateFormat.parse(contentItemJaxb.getActiveFromDate())));
+                                contentItems.setStartTime(gc.getTime());
+                            }
+                            if (contentItemJaxb.getActiveToDate() != null) {
+                                gc.setTime(RestUtilDAO.convertUserLocalTimetoGMT(timeZoneGMToffset, dateFormat.parse(contentItemJaxb.getActiveToDate())));
+                                contentItems.setStopTime(gc.getTime());
+                            }
+                            if (contentItemJaxb.getExpiryDate() != null) {
+                                gc.setTime(RestUtilDAO.convertUserLocalTimetoGMT(timeZoneGMToffset, dateFormat.parse(contentItemJaxb.getExpiryDate())));
+                                contentItems.setExpiryTime(gc.getTime());
+                            } else {
+                                contentItems.setExpiryTime(null);
+                            }
+                            if (contentItemJaxb.getGeometry() != null) {
+                                se.info24.contentjaxb.Point point = contentItemJaxb.getGeometry().getPoint();
+                                if (point != null) {
+                                    if (point.getPosLatitude() != null) {
+                                        contentItems.setPosLatitude(Double.valueOf(point.getPosLatitude()));
+                                    } else {
+                                        contentItems.setPosLatitude(null);
+                                    }
+                                    if (point.getPosLongitude() != null) {
+                                        contentItems.setPosLongitude(Double.valueOf(point.getPosLongitude()));
+                                    } else {
+                                        contentItems.setPosLongitude(null);
+                                    }
+                                    if (point.getPosDepth() != null) {
+                                        contentItems.setPosDepth(Double.valueOf(point.getPosDepth()));
+                                    } else {
+                                        contentItems.setPosDepth(null);
+                                    }
+                                }
+                            }
+                            gc = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+                            contentItems.setUpdatedDate(gc.getTime());
+                            if (!contentDAO.saveUpdateContentItems(oprSession, contentItems)) {
+                                tingcoContent.getMsgStatus().setResponseCode(-1);
+                                tingcoContent.getMsgStatus().setResponseText("Error Occured while update");
+                                return tingcoContent;
+                            }
+                        } else {
+                            tingcoContent.getMsgStatus().setResponseCode(-1);
+                            tingcoContent.getMsgStatus().setResponseText("Data Not Found");
+                            return tingcoContent;
+                        }
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("TimeZone is not Found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent addExistingContentItem(String contentItemID, String deviceId) {
+        long requestedTime = System.currentTimeMillis();
+
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                if (!TCMUtil.isValidUUID(deviceId)) {
+                    tingcoContent.getMsgStatus().setResponseCode(-1);
+                    tingcoContent.getMsgStatus().setResponseText("Data Not Valid");
+                    return tingcoContent;
+                }
+                if (!TCMUtil.isValidUUID(contentItemID)) {
+                    tingcoContent.getMsgStatus().setResponseCode(-1);
+                    tingcoContent.getMsgStatus().setResponseText("Data Not Valid");
+                    return tingcoContent;
+                }
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.ADD)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    ContentItemsToDevice contentItemsToDevice = null;
+                    if (contentDAO.getContentItemsToDeviceById(oprSession, contentItemID, deviceId) == null) {
+                        contentItemsToDevice = new ContentItemsToDevice();
+                        GregorianCalendar gregorianCalendar = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+                        ContentItemsToDeviceId contentItemsToDeviceId = new ContentItemsToDeviceId(contentItemID, deviceId);
+                        contentItemsToDevice.setId(contentItemsToDeviceId);
+                        contentItemsToDevice.setCreatedDate(gregorianCalendar.getTime());
+                        contentItemsToDevice.setUpdatedDate(gregorianCalendar.getTime());
+                        contentDAO.saveContentItemsToDevice(oprSession, contentItemsToDevice);
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("Data Already Exists");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getContentItemsBySubject(String contentItemSubject, String contentCategoryId) {
+        long requestedTime = System.currentTimeMillis();
+
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                if (contentCategoryId.equals("")) {
+                    tingcoContent.getMsgStatus().setResponseCode(-1);
+                    tingcoContent.getMsgStatus().setResponseText("contentCategoryId should not be empty");
+                    return tingcoContent;
+                }
+                if (!contentItemSubject.equals("")) {
+                    contentItemSubject = contentItemSubject.split("/")[2];
+                } else {
+                    contentItemSubject = null;
+                }
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    List<ContentItems> list = new ArrayList<ContentItems>();
+                    if (contentItemSubject != null) {
+                        if (TCMUtil.isValidUUID(contentItemSubject)) {
+                            Object obj = contentDAO.getContentItemsByIdAndContentCategoryId(contentItemSubject, contentCategoryId, oprSession);
+                            list.add((ContentItems) obj);
+                        } else {
+                            list = contentDAO.getContentItemsBySearchStringAndContentCategoryId(oprSession, contentItemSubject, contentCategoryId, 200);
+                        }
+                    } else {
+                        list = contentDAO.getContentItemsByCCID(oprSession, contentCategoryId, 200);
+                    }
+                    tingcoContent = tingcoContentXML.buildContentItemsXMl(list, tingcoContent);
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent deleteContentItem(String contentItemID, String deviceId) {
+        long requestedTime = System.currentTimeMillis();
+
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                if (!TCMUtil.isValidUUID(deviceId)) {
+                    tingcoContent.getMsgStatus().setResponseCode(-1);
+                    tingcoContent.getMsgStatus().setResponseText("Data Not Valid");
+                    return tingcoContent;
+                }
+                if (!TCMUtil.isValidUUID(contentItemID)) {
+                    tingcoContent.getMsgStatus().setResponseCode(-1);
+                    tingcoContent.getMsgStatus().setResponseText("Data Not Valid");
+                    return tingcoContent;
+                }
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.DELETE)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    ContentItemsToDevice contentItemsToDevice = contentDAO.getContentItemsToDeviceById(oprSession, contentItemID, deviceId);
+                    if (contentItemsToDevice == null) {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("Data Not Found");
+                        return tingcoContent;
+                    } else {
+                        contentDAO.deleteContentItemsToDevice(oprSession, contentItemsToDevice);
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent contentItemsByCategoryID(String conCatID) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tc = new TingcoContent();
+        Session session = null;
+        try {
+            TingcoContentXML conXML = new TingcoContentXML();
+            tc = conXML.buildTingcoContentTemplate();
+            session = HibernateUtil.getISMOperationsSessionFactory().openSession();
+            if (request.getAttribute("USERSESSION") != null) {
+                List<ContentItems> items = contentDAO.getContentItemDetailsByContentCategoryID(conCatID, session);
+                tc = conXML.buildContentItemDetails(tc, items);
+            } else {
+                tc.getMsgStatus().setResponseCode(-3);
+                tc.getMsgStatus().setResponseText("Session Expired");
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tc.getMsgStatus().setResponseCode(-1);
+            tc.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tc;
+    }
+
+    private TingcoContent contentItemDetails(String contentItemID) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tc = new TingcoContent();
+        Session session = null;
+        try {
+            TingcoContentXML conXML = new TingcoContentXML();
+            tc = conXML.buildTingcoContentTemplate();
+            session = HibernateUtil.getISMOperationsSessionFactory().openSession();
+            if (request.getAttribute("USERSESSION") != null) {
+                Object obj = contentDAO.getContentItemsById(contentItemID, session);
+                if (obj != null) {
+                    ContentItems items = (ContentItems) obj;
+                    List<ContentItems> contentItems = new ArrayList<ContentItems>();
+                    contentItems.add(items);
+                    tc = conXML.buildContentItemDetails(tc, contentItems);
+                } else {
+                    tc.getMsgStatus().setResponseCode(-1);
+                    tc.getMsgStatus().setResponseText("No data found");
+                }
+            } else {
+                tc.getMsgStatus().setResponseCode(-3);
+                tc.getMsgStatus().setResponseText("Session Expired");
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tc.getMsgStatus().setResponseCode(-1);
+            tc.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tc;
+    }
+
+    public void delayLog(long requestedTime) {
+        TCMUtil.loger(getClass().getName(), " [tingco API] [Request took " + (System.currentTimeMillis() - requestedTime) + "ms]", "Info");
+    }
+
+    private TingcoContent getContentItemsByDeviceId(String deviceId, int countryId) {
+        long requestedTime = System.currentTimeMillis();
+        Session ismoperationssession = null;
+        Session session = null;
+        TingcoContent tingcoContent = null;
+
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ)) {
+                    ismoperationssession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<ContentItems> contentItemsList = contentDAO.getContentItemsByDeviceId(ismoperationssession, deviceId);
+                    if (!contentItemsList.isEmpty()) {
+                        return tingcoContentXML.buildContentItemsWithCategoriesAndGroups(tingcoContent, contentItemsList, countryId, session);
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("Data not found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            if (ismoperationssession != null) {
+                ismoperationssession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent getContentItemDetailsByContentItemId(String contentItemId, int countryId) {
+        long requestedTime = System.currentTimeMillis();
+        Session ismoperationssession = null;
+        Session session = null;
+        TingcoContent tingcoContent = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                boolean hasPermission = getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ);
+                if (hasPermission) {
+                    ismoperationssession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    UserTimeZones2 userTimeZones2 = RestUtilDAO.getUserTimeZones2byUserId(sessions2.getUserId(), session);
+                    if (userTimeZones2 != null) {
+                        String timeZoneGMToffset = RestUtilDAO.getTimezoneById(userTimeZones2.getTimeZoneId(), session).getTimeZoneGmtoffset();
+                        Object obj = contentDAO.getContentItemsById(contentItemId, ismoperationssession);
+                        if (obj != null) {
+                            List<ContentItems> contentItems = new ArrayList<ContentItems>();
+                            contentItems.add((ContentItems) obj);
+                            return tingcoContentXML.buildContentItemDetailsByContentItemId(tingcoContent, contentItems, countryId, timeZoneGMToffset, session);
+                        } else {
+                            tingcoContent.getMsgStatus().setResponseCode(-1);
+                            tingcoContent.getMsgStatus().setResponseText("Data not found");
+                            return tingcoContent;
+                        }
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("UserTimeZone not found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            if (ismoperationssession != null) {
+                ismoperationssession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private TingcoContent updateContentItemAttribute(String contentItemId, String contentAttributeId, String contentAttributeValue) {
+        long requestedTime = System.currentTimeMillis();
+
+        TingcoContent tingcoContent = null;
+        Session oprSession = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.UPDATE)) {
+                    oprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    ContentItemAttributes contentItemAttributes = (ContentItemAttributes) contentDAO.getContentItemAttributesByIds(contentItemId, contentAttributeId, oprSession);
+                    GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+                    contentItemAttributes.setContentAttributeValue(TCMUtil.convertHexToString(contentAttributeValue));
+                    contentItemAttributes.setUpdatedDate(gc.getTime());
+                    contentDAO.saveContentItemAttribute(oprSession, contentItemAttributes);
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error Occured");
+            return tingcoContent;
+        } finally {
+            if (oprSession != null) {
+                oprSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+
+    private boolean getPermission(String userId, String functionarea, String operation) {
+        boolean hasPermission = false;
+        Hashtable<String, ArrayList> ht = (Hashtable<String, ArrayList>) User_LoginsResource.permissions.get(userId);
+        if (ht.containsKey(functionarea)) {
+            ArrayList<String> operations = ht.get(functionarea);
+            for (int i = 0; i < operations.size(); i++) {
+                if (operations.get(i).equalsIgnoreCase(operation)) {
+                    hasPermission = true;
+                    break;
+                }
+            }
+        }
+        return hasPermission;
+    }
+
+    private TingcoContent updateContentItemCommands(String content) {
+        long requestedTime = System.currentTimeMillis();
+        TingcoContent tingcoContent = null;
+        Session ismOperationsSession = null;
+        Session session = null;
+        Transaction tx = null;
+        try {
+            tingcoContent = tingcoContentXML.buildTingcoContentTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                if (getPermission(sessions2.getUserId(), TCMUtil.CONTENT, TCMUtil.UPDATE)) {
+                    se.info24.contentjaxb.TingcoContent contentXML = (se.info24.contentjaxb.TingcoContent) JAXBManager.getInstance().unMarshall(content, se.info24.contentjaxb.TingcoContent.class);
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    ismOperationsSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    tx = ismOperationsSession.beginTransaction();
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    GregorianCalendar gc = new GregorianCalendar();
+                    GregorianCalendar currentDateTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+                    UserTimeZones2 userTimeZones2 = RestUtilDAO.getUserTimeZones2byUserId(sessions2.getUserId(), session);
+                    String timeZoneGMToffset = RestUtilDAO.getTimezoneById(userTimeZones2.getTimeZoneId(), session).getTimeZoneGmtoffset();
+                    ContentItemCommands cicXML = contentXML.getContent().getContentItems().getContentItem().get(0).getContentItemCommands().get(0);
+                    Object object = ismOperationsSession.get(se.info24.ismOperationsPojo.ContentItemCommands.class, cicXML.getContentItemCommandID());
+                    if (object != null) {
+                        se.info24.ismOperationsPojo.ContentItemCommands contentItemCommands = (se.info24.ismOperationsPojo.ContentItemCommands) object;
+                        contentItemCommands.setGroupId(cicXML.getGroupID().getValue());
+                        contentItemCommands.setContentItemId(cicXML.getContentItemID());
+                        if (cicXML.getCommandID() != null) {
+                            contentItemCommands.setCommandId(cicXML.getCommandID());
+                        }
+                        contentItemCommands.setCommandName(cicXML.getCommandName());
+                        contentItemCommands.setCommandButtonText(cicXML.getCommandButtonText());
+                        if (cicXML.getCommandDescription() != null) {
+                            contentItemCommands.setCommandDescription(cicXML.getCommandDescription());
+                        } else {
+                            contentItemCommands.setCommandDescription(null);
+                        }
+
+                        if (cicXML.getIsEnabled() != null) {
+                            contentItemCommands.setIsEnabled(cicXML.getIsEnabled().intValue());
+                        } else {
+                            contentItemCommands.setIsEnabled(null);
+                        }
+
+                        if (cicXML.getIsPublicCommand() != null) {
+                            contentItemCommands.setIsPublicCommand(cicXML.getIsPublicCommand().intValue());
+                        }
+
+                        if (cicXML.getIsPinCodeRequired() != null) {
+                            contentItemCommands.setIsPinCodeRequired(cicXML.getIsPinCodeRequired().intValue());
+                        }
+
+                        if (cicXML.getIsSendEmail() != null) {
+                            contentItemCommands.setIsSendEmail(cicXML.getIsSendEmail().intValue());
+                        }
+
+                        if (cicXML.getIsSendSMS() != null) {
+                            contentItemCommands.setIsSendSms(cicXML.getIsSendSMS().intValue());
+                        }
+
+                        if (cicXML.getIsCreateSupportCase() != null) {
+                            contentItemCommands.setIsCreateSupportCase(cicXML.getIsCreateSupportCase().intValue());
+                        }
+
+                        if (cicXML.getIsControlDevice() != null) {
+                            contentItemCommands.setIsControlDevice(cicXML.getIsControlDevice().intValue());
+                        }
+
+                        if (cicXML.getIsLogInWorklog() != null) {
+                            contentItemCommands.setIsLogInWorklog(cicXML.getIsLogInWorklog().intValue());
+                        }
+
+                        if (cicXML.getIsSendEmailToDeviceContacts() != null) {
+                            contentItemCommands.setIsSendEmailToDeviceContacts(cicXML.getIsSendEmailToDeviceContacts().intValue());
+                        }
+
+                        if (cicXML.getIsSendSMSToDeviceContacts() != null) {
+                            contentItemCommands.setIsSendSmstoDeviceContacts(cicXML.getIsSendSMSToDeviceContacts().intValue());
+                        }
+
+                        if (cicXML.getIsSendEvent() != null) {
+                            contentItemCommands.setIsSendEvent(cicXML.getIsSendEvent().intValue());
+                        }
+
+                        if (cicXML.getIsLinkToTIM() != null) {
+                            contentItemCommands.setIsLinkToTim(cicXML.getIsLinkToTIM().intValue());
+                        }
+
+                        if (cicXML.getActiveFromDate() != null) {
+                            gc.setTime(dateFormat.parse(cicXML.getActiveFromDate()));
+                            gc.setTime(RestUtilDAO.convertUserLocalTimetoGMT(timeZoneGMToffset, gc.getTime()));
+                            contentItemCommands.setActiveFromDate(gc.getTime());
+                        }
+
+                        if (cicXML.getActiveToDate() != null) {
+                            gc.setTime(dateFormat.parse(cicXML.getActiveToDate()));
+                            gc.setTime(RestUtilDAO.convertUserLocalTimetoGMT(timeZoneGMToffset, gc.getTime()));
+                            contentItemCommands.setActiveToDate(gc.getTime());
+                        }
+
+                        if (cicXML.getPinCode() != null) {
+                            contentItemCommands.setPinCode(cicXML.getPinCode());
+                        } else {
+                            contentItemCommands.setPinCode(null);
+                        }
+
+                        if (cicXML.getDescription() != null) {
+                            contentItemCommands.setDescription(cicXML.getDescription());
+                        }
+
+                        if (cicXML.getDisplayOrder() != null) {
+                            contentItemCommands.setDisplayOrder(cicXML.getDisplayOrder().intValue());
+                        }
+
+                        if (cicXML.getDeviceID() != null) {
+                            contentItemCommands.setDeviceId(cicXML.getDeviceID());
+                        } else {
+                            contentItemCommands.setDeviceId(null);
+                        }
+
+                        if (cicXML.getDeviceDataItemID() != null) {
+                            contentItemCommands.setDeviceDataItemId(cicXML.getDeviceDataItemID());
+                        }
+
+                        if (cicXML.getDeviceDataItemValue() != null) {
+                            contentItemCommands.setDeviceDataItemValue(cicXML.getDeviceDataItemValue());
+                        }
+
+                        if (cicXML.getDeviceTypeCommandID() != null) {
+                            contentItemCommands.setDeviceTypeCommandId(cicXML.getDeviceTypeCommandID());
+                        } else {
+                            contentItemCommands.setDeviceTypeCommandId(null);
+                        }
+
+                        if (cicXML.getSendEmailTo() != null) {
+                            contentItemCommands.setSendEmailTo(cicXML.getSendEmailTo());
+                        } else {
+                            contentItemCommands.setSendEmailTo(null);
+                        }
+
+                        if (cicXML.getSendSMSTo() != null) {
+                            contentItemCommands.setSendSmsto(cicXML.getSendSMSTo());
+                        } else {
+                            contentItemCommands.setSendSmsto(null);
+                        }
+
+                        if (cicXML.getSupportOrganizationID() != null) {
+                            contentItemCommands.setSupportOrganizationId(cicXML.getSupportOrganizationID());
+                        } else {
+                            contentItemCommands.setSupportOrganizationId(null);
+                        }
+
+                        if (cicXML.getEventTypeID() != null) {
+                            contentItemCommands.setEventTypeId(cicXML.getEventTypeID());
+                        } else {
+                            contentItemCommands.setEventTypeId(null);
+                        }
+
+                        if (cicXML.getLinkToPageURL() != null) {
+                            contentItemCommands.setLinkToPageUrl(cicXML.getLinkToPageURL());
+                        }
+
+                        contentItemCommands.setLastUpdatedByUserId(sessions2.getUserId());
+                        contentItemCommands.setUpdatedDate(currentDateTime.getTime());
+                        ismOperationsSession.saveOrUpdate(contentItemCommands);
+                        tx.commit();
+                    } else {
+                        tingcoContent.getMsgStatus().setResponseCode(-1);
+                        tingcoContent.getMsgStatus().setResponseText("No data found");
+                        return tingcoContent;
+                    }
+                } else {
+                    tingcoContent.getMsgStatus().setResponseCode(-10);
+                    tingcoContent.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoContent;
+                }
+            } else {
+                tingcoContent.getMsgStatus().setResponseCode(-3);
+                tingcoContent.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoContent;
+            }
+        } catch (Exception ex) {
+            if (tx != null) {
+                if (tx.wasCommitted()) {
+                    tx.rollback();
+                }
+            }
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoContent.getMsgStatus().setResponseCode(-1);
+            tingcoContent.getMsgStatus().setResponseText("Error occured");
+            return tingcoContent;
+        } finally {
+            if (ismOperationsSession != null) {
+                ismOperationsSession.close();
+            }
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoContent;
+    }
+}

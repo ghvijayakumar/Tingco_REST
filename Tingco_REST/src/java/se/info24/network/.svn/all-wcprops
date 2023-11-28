@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/NB_2011/!svn/ver/2398/Tingco_REST/src/java/se/info24/network
+END
+NetworkResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/network/NetworkResource.java
+END
+NetworksResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2396/Tingco_REST/src/java/se/info24/network/NetworksResource.java
+END
+NetworkTypesResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/network/NetworkTypesResource.java
+END
+NetworkTypessResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/1821/Tingco_REST/src/java/se/info24/network/NetworkTypessResource.java
+END
+NetworkDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2398/Tingco_REST/src/java/se/info24/network/NetworkDAO.java
+END

@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/NB_2011/!svn/ver/2445/Tingco_REST/src/java/se/info24/util
+END
+HibernateUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/1705/Tingco_REST/src/java/se/info24/util/HibernateUtil.java
+END
+UtilDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/NB_2011/!svn/ver/2173/Tingco_REST/src/java/se/info24/util/UtilDAO.java
+END
+ObjectLogsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2173/Tingco_REST/src/java/se/info24/util/ObjectLogsResource.java
+END
+RESTDoc.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/util/RESTDoc.java
+END
+TCMGateway.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/2445/Tingco_REST/src/java/se/info24/util/TCMGateway.java
+END
+RSAPassword.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/1429/Tingco_REST/src/java/se/info24/util/RSAPassword.java
+END
+UserPermissions.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2198/Tingco_REST/src/java/se/info24/util/UserPermissions.java
+END
+GetMethodsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/util/GetMethodsResource.java
+END
+UserSessions2Daemon.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2095/Tingco_REST/src/java/se/info24/util/UserSessions2Daemon.java
+END
+JAXBManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/1436/Tingco_REST/src/java/se/info24/util/JAXBManager.java
+END
+ObjectLogResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2167/Tingco_REST/src/java/se/info24/util/ObjectLogResource.java
+END
+TingcoConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2296/Tingco_REST/src/java/se/info24/util/TingcoConstants.java
+END
+DbManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/2198/Tingco_REST/src/java/se/info24/util/DbManager.java
+END
+TCMUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/util/TCMUtil.java
+END
+API_PingsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2296/Tingco_REST/src/java/se/info24/util/API_PingsResource.java
+END
+SampleTopicConnectionFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/1429/Tingco_REST/src/java/se/info24/util/SampleTopicConnectionFactory.java
+END
+TopicConnectionPool.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1429/Tingco_REST/src/java/se/info24/util/TopicConnectionPool.java
+END
+ContextListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2296/Tingco_REST/src/java/se/info24/util/ContextListener.java
+END
+GetMethodssResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1417/Tingco_REST/src/java/se/info24/util/GetMethodssResource.java
+END
+API_PingResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/util/API_PingResource.java
+END

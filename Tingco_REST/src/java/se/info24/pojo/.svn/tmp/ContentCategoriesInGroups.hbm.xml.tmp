@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 11, 2014 11:24:04 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="se.info24.pojo.ContentCategoriesInGroups" table="ContentCategoriesInGroups" schema="dbo" catalog="ISM">
+        <composite-id name="id" class="se.info24.pojo.ContentCategoriesInGroupsId">
+            <key-property name="contentCategoryId" type="string">
+                <column name="ContentCategoryID" length="36" />
+            </key-property>
+            <key-property name="groupId" type="string">
+                <column name="GroupID" length="36" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="groups" class="se.info24.pojo.Groups" update="false" insert="false" fetch="select">
+            <column name="GroupID" length="36" not-null="true" />
+        </many-to-one>
+        <many-to-one name="contentCategories" class="se.info24.pojo.ContentCategories" update="false" insert="false" fetch="select">
+            <column name="ContentCategoryID" length="36" not-null="true" />
+        </many-to-one>
+        <property name="lastUpdatedByUserId" type="string">
+            <column name="LastUpdatedByUserID" length="36" not-null="true" />
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column name="CreatedDate" length="23" />
+        </property>
+        <property name="updatedDate" type="timestamp">
+            <column name="UpdatedDate" length="23" />
+        </property>
+    </class>
+<<<<<<< .mine
+    <query name="getContentCategoriesInGroupsByGroupId">
+        from ContentCategoriesInGroups where id.groupId = :groupId
+    </query>
+=======
+    <query name="getContentCategoriesInGroupsByGroupId">
+        from ContentCategoriesInGroups where id.groupId = :groupId order by createdDate desc
+    </query>
+>>>>>>> .r2172
+</hibernate-mapping>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 13, 2012 10:38:45 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.TimeGroups" schema="dbo" table="TimeGroups">
+    <cache usage="nonstrict-read-write"/>
+    <id name="timeGroupId" type="string">
+      <column length="36" name="TimeGroupID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="timeGroupName" type="string">
+      <column length="50" name="TimeGroupName" not-null="true"/>
+    </property>
+    <property name="timeGroupDescription" type="string">
+      <column length="200" name="TimeGroupDescription"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <!--<set name="scheduleses" inverse="true">
+            <key>
+                <column name="TimeGroupID" length="36" />
+            </key>
+            <one-to-many class="se.info24.pojo.Schedules" />
+        </set>-->
+    <set inverse="true" name="timeFrameGroupses">
+      <key>
+        <column length="36" name="TimeGroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.TimeFrameGroups"/>
+    </set>
+  </class>
+  <query name="getTimeGroupsByUserId">
+        from TimeGroups where userId = :userId
+   </query>
+</hibernate-mapping>

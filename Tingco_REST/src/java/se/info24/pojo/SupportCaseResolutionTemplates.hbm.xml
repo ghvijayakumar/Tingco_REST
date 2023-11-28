@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 5, 2013 11:23:34 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.SupportCaseResolutionTemplates" schema="dbo" table="SupportCaseResolutionTemplates">
+    <cache usage="nonstrict-read-write"/>
+    <id name="resolutionTemplateId" type="string">
+      <column length="36" name="ResolutionTemplateID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="resolutionSubject" type="string">
+      <column name="ResolutionSubject" not-null="true"/>
+    </property>
+    <property name="resolutionText" type="string">
+      <column name="ResolutionText" not-null="true"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="countryId" type="int">
+      <column name="CountryID" not-null="true"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getSupportCaseResolutionTemplatesByIds">
+        from SupportCaseResolutionTemplates where resolutionTemplateId in (:resolutionTemplateId) order by resolutionSubject
+    </query>
+  <query name="getSupportCaseResolutionTemplatesByIdsAnsSearch">
+        from SupportCaseResolutionTemplates where resolutionTemplateId in (:resolutionTemplateId) and resolutionSubject like '%'+:resolutionSubject+'%' order by resolutionSubject
+    </query>
+  <query name="getSupportCaseResolutionTemplatesByGroupId">
+        from SupportCaseResolutionTemplates where groupId =:groupId and countryId =:countryId order by createdDate
+    </query>
+</hibernate-mapping>

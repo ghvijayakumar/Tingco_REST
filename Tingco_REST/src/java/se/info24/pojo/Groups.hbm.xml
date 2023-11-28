@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 3:59:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Groups" schema="dbo" table="Groups">
+    <cache usage="nonstrict-read-write"/>
+    <id name="groupId" type="string">
+      <column length="36" name="GroupID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="groupParentId" type="string">
+      <column length="36" name="GroupParentID"/>
+    </property>
+    <property name="functionId" type="java.lang.Integer">
+      <column name="FunctionID"/>
+    </property>
+    <property name="displayOrder" type="java.lang.Integer">
+      <column name="DisplayOrder"/>
+    </property>
+    <property name="isWebShopUser" type="java.lang.Integer">
+      <column name="IsWebShopUser"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="groupTypeId" type="string">
+      <column length="36" name="GroupTypeId"/>
+    </property>
+    <property name="domainId" type="string">
+      <column length="36" name="DomainID"/>
+    </property>
+    <property name="organizationNumber" type="string">
+      <column name="OrganizationNumber"/>
+    </property>
+    <!--    <set cascade="save-update,delete" inverse="true" name="userGroupMemberships2s">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.UserGroupMemberships2"/>
+    </set>
+    <set inverse="true" name="userRolesInGroups2s">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.UserRolesInGroups2"/>
+    </set>
+    <set cascade="save-update,delete" inverse="true" name="userGroupMembershipses">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.UserGroupMemberships"/>
+    </set>-->
+    <set cascade="save-update,delete" inverse="true" name="groupTranslationses">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.GroupTranslations"/>
+    </set>
+    <set cascade="all" inverse="true" name="serviceClientLoginses">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ServiceClientLogins"/>
+    </set>
+    <set cascade="delete" inverse="true" name="groupAddresseses">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.GroupAddresses"/>
+    </set>
+    <set cascade="delete" inverse="true" name="devices">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Device"/>
+    </set>
+    <set cascade="delete" inverse="true" name="services">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Services"/>
+    </set>
+    <set cascade="delete" inverse="true" name="companies">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Company"/>
+    </set>
+    <set cascade="delete" inverse="true" name="measurementTypesInGroupses">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.MeasurementTypesInGroups"/>
+    </set>
+    <set cascade="delete" inverse="true" name="supportOrgVisibleToGroupses">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.SupportOrgVisibleToGroups"/>
+    </set>
+    <set cascade="delete" inverse="true" name="supportCaseses">
+      <key>
+        <column length="36" name="ImpactsGroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.SupportCases"/>
+    </set>
+    <set cascade="delete" inverse="true" name="networkSubscriptionses">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.NetworkSubscriptions"/>
+    </set>
+    <set cascade="delete" inverse="true" name="channelses">
+      <key>
+        <column length="36" name="GroupID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Channels"/>
+    </set>
+    <set cascade="delete" inverse="true" name="routingTables">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.RoutingTable"/>
+    </set>
+    <set inverse="true" name="listses">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Lists"/>
+    </set>
+    <set inverse="true" name="groupAliases">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.GroupAlias"/>
+    </set>
+    <set inverse="true" name="containers">
+      <key>
+        <column length="36" name="ContainerID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Containers"/>
+    </set>
+    <set inverse="true" name="contentCategoriesInGroupses">
+      <key>
+        <column length="36" name="GroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ContentCategoriesInGroups"/>
+    </set>
+  </class>
+  <query name="getGroupsById">
+        from Groups where groupID = :groupID
+    </query>
+  <query name="getAllGroupss">
+        from Groups
+    </query>
+  <query name="getDownstreamGroups">
+        from Groups where groupParentId = :groupParentId
+    </query>
+  <query name="getGroupsByUserId">
+        from Groups where userId = :userId
+    </query>
+  <query name="getGroupsByIdList">
+        from Groups where groupID in (:groupID) order by createdDate desc
+    </query>
+  <query name="getGroupsbyIdandOrganizationNumber">
+        from Groups where groupId in (:groupId) and organizationNumber like '%'+:organizationNumber+'%'
+    </query>
+  <query name="getGroupsByIDs">
+        from Groups where groupID in (:groupID)
+    </query>
+</hibernate-mapping>

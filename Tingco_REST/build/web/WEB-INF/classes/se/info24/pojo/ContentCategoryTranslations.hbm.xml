@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 18, 2011 3:54:18 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ContentCategoryTranslations" schema="dbo" table="ContentCategoryTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ContentCategoryTranslationsId" name="id">
+      <key-property name="contentCategoryId" type="string">
+        <column length="36" name="ContentCategoryID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Country" fetch="select" insert="false" name="country" update="false">
+      <column name="CountryID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ContentCategories" fetch="select" insert="false" name="contentCategories" update="false">
+      <column length="36" name="ContentCategoryID" not-null="true"/>
+    </many-to-one>
+    <property name="contentCategoryName" type="string">
+      <column length="50" name="ContentCategoryName" not-null="true"/>
+    </property>
+    <property name="contentCategoryDescription" type="string">
+      <column length="200" name="ContentCategoryDescription"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <sql-query callable="true" name="selectContentCategoryTranslations_SP">
+        <return alias="contentcategory" class="se.info24.pojo.ContentCategoryTranslations"/>
+{ call ContentCategoryTranslationsGetByID(:categoryid) }
+    </sql-query>
+  <query name="getContentCategoriesByCountryId">
+      from ContentCategoryTranslations where id.countryId = :countryId order by contentCategoryName asc
+    </query>
+  <query name="getContentCategoryTransByIdListAndCountryId">
+        from ContentCategoryTranslations where id.contentCategoryId in (:contentCategoryId) and id.countryId = :countryId order by contentCategoryName asc
+    </query>
+  <query name="getContentCategoryTransByIds">
+        from ContentCategoryTranslations where id.contentCategoryId = :contentCategoryId and id.countryId = :countryId
+    </query>
+  <query name="getContentCategoryTransByIdListAndCountryIdsearch">
+        from ContentCategoryTranslations where id.contentCategoryId in (:contentCategoryId) and id.countryId = :countryId and contentCategoryName like '%'+:contentCategoryName+'%'
+    </query>
+  <query name="getContentCategoryTransByCountryIdAndsearchString">
+        from ContentCategoryTranslations where id.countryId = :countryId and contentCategoryName like '%'+:contentCategoryName+'%' order by contentCategoryName asc
+    </query>
+</hibernate-mapping>

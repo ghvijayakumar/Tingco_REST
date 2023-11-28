@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 11, 2014 10:44:11 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.NewsCategoryTranslations" schema="dbo" table="NewsCategoryTranslations">
+    <composite-id class="se.info24.pojo.NewsCategoryTranslationsId" name="id">
+      <key-property name="newsCategoryId" type="string">
+        <column length="36" name="NewsCategoryID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Country" fetch="select" insert="false" name="country" update="false">
+      <column name="CountryID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.NewsCategories" fetch="select" insert="false" name="newsCategories" update="false">
+      <column length="36" name="NewsCategoryID" not-null="true"/>
+    </many-to-one>
+    <property name="categoryName" type="string">
+      <column name="CategoryName" not-null="true"/>
+    </property>
+    <property name="categoryDescription" type="string">
+      <column name="CategoryDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getNewsCategoryTranslationsBySearchString">
+        from NewsCategoryTranslations where country.countryId = (:countryId) and categoryName like '%'+:categoryName+'%' order by categoryName
+    </query>
+  <query name="getNewsCategoryTranslationsByIDs">
+        from NewsCategoryTranslations where country.countryId = (:countryId) and newsCategoryId in (:newsCategoryId) order by categoryName
+    </query>
+</hibernate-mapping>

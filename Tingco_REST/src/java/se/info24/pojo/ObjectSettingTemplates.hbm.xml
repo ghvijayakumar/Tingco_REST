@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 17, 2012 5:59:44 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ObjectSettingTemplates" schema="dbo" table="ObjectSettingTemplates">
+    <cache usage="nonstrict-read-write"/>
+    <id name="objectSettingTemplateId" type="string">
+      <column length="36" name="ObjectSettingTemplateID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.SettingDataType" fetch="select" name="settingDataType">
+      <column length="36" name="SettingDataTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="objectSettingTemplateParentId" type="string">
+      <column length="36" name="ObjectSettingTemplateParentID"/>
+    </property>
+    <property name="objectSettingName" type="string">
+      <column name="ObjectSettingName" not-null="true"/>
+    </property>
+    <property name="objectSettingDefaultValue" type="string">
+      <column name="ObjectSettingDefaultValue"/>
+    </property>
+    <property name="objectSettingDescription" type="string">
+      <column name="ObjectSettingDescription"/>
+    </property>
+    <property name="settingRequired" type="int">
+      <column name="SettingRequired" not-null="true"/>
+    </property>
+    <property name="settingValueValidationRegEx" type="string">
+      <column name="SettingValueValidationRegEx"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="groupSettingses">
+      <key>
+        <column length="36" name="ObjectSettingTemplateID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.GroupSettings"/>
+    </set>
+    <set inverse="true" name="objectSettingPackageTemplateses">
+      <key>
+        <column length="36" name="ObjectSettingTemplateID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ObjectSettingPackageTemplates"/>
+    </set>
+    <set inverse="true" name="objectTypeSettingTemplateses">
+      <key>
+        <column length="36" name="ObjectSettingTemplateID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ObjectTypeSettingTemplates"/>
+    </set>
+  </class>
+  <query name="getObjectSettingTemplatesByTemplateId">
+        from ObjectSettingTemplates where objectSettingTemplateId = :objectSettingTemplateId
+    </query>
+  <query name="getObjectSettingTemplatesByParentId">
+        from ObjectSettingTemplates where objectSettingTemplateParentId = :objectSettingTemplateParentId
+    </query>
+  <query name="getObjectSettingTemplates">
+        from ObjectSettingTemplates where objectSettingTemplateId in (:objectSettingTemplateId) order by objectSettingName
+    </query>
+  <query name="getObjectSettingTemplatesByName">
+        from ObjectSettingTemplates where objectSettingName = :objectSettingName
+    </query>
+</hibernate-mapping>

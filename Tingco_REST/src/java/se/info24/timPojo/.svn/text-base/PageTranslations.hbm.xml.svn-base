@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 5, 2013 3:09:03 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="timweb" name="se.info24.timPojo.PageTranslations" schema="dbo" table="PageTranslations">
+    <composite-id class="se.info24.timPojo.PageTranslationsId" name="id">
+      <key-property name="pageId" type="string">
+        <column length="36" name="PageID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.timPojo.Pages" fetch="select" insert="false" name="pages" update="false">
+      <column length="36" name="PageID" not-null="true"/>
+    </many-to-one>
+    <property name="pageName" type="string">
+      <column name="PageName"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 24, 2012 12:58:04 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.SupportOrganizations" schema="dbo" table="SupportOrganizations">
+    <cache usage="nonstrict-read-write"/>
+    <id name="supportOrganizationId" type="string">
+      <column length="36" name="SupportOrganizationID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="managedByGroupId" type="string">
+      <column length="36" name="ManagedByGroupID" not-null="true"/>
+    </property>
+    <property name="organizationName" type="string">
+      <column name="OrganizationName" not-null="true"/>
+    </property>
+    <property name="organizationDescription" type="string">
+      <column name="OrganizationDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="supportOrgVisibleToGroupses">
+      <key>
+        <column length="36" name="SupportOrganizationID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.SupportOrgVisibleToGroups"/>
+    </set>
+    <set inverse="true" name="supportCaseses">
+      <key>
+        <column length="36" name="AssignedToSupportOrganizationID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.SupportCases"/>
+    </set>
+  </class>
+  <query name="getSupportOrganizationsById">
+        from SupportOrganizations where supportOrganizationId = :supportOrganizationId
+    </query>
+  <query name="getSupportOrganizationsByManagedByGroupId">
+        from SupportOrganizations where managedByGroupId = :managedByGroupId
+    </query>
+  <query name="getSupportOrganizationsByIds">
+        from SupportOrganizations where supportOrganizationId in (:supportOrganizationId) order by organizationName
+    </query>
+  <query name="getSupportOrganizationsByIdsAndSearchString">
+        from SupportOrganizations where supportOrganizationId in (:supportOrganizationId) and organizationName like '%'+:organizationName+'%' order by organizationName
+    </query>
+  <query name="getSupportOrganizationsByOrgNamemanagedByGroupId">
+        from SupportOrganizations where managedByGroupId in (:managedByGroupId) and organizationName like '%'+:organizationName+'%' order by organizationName
+    </query>
+  <query name="getSupportOrganizationsBymanagedByGroupId">
+        from SupportOrganizations where managedByGroupId in (:managedByGroupId) order by organizationName
+    </query>
+  <query name="getSupportOrganizationsByIdAndTrustedGroupIDs">
+        from SupportOrganizations where supportOrganizationId = :supportOrganizationId and managedByGroupId in (:managedByGroupId)
+    </query>
+</hibernate-mapping>

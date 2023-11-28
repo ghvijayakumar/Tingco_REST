@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 8, 2013 3:53:44 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ProductVariantPrices" schema="dbo" table="ProductVariantPrices">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ProductVariantPricesId" name="id">
+      <key-property name="productVariantId" type="string">
+        <column length="36" name="ProductVariantID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.ProductVariants" fetch="select" insert="false" name="productVariants" update="false">
+      <column length="36" name="ProductVariantID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Country" fetch="select" insert="false" name="country" update="false">
+      <column name="CountryID" not-null="true"/>
+    </many-to-one>
+    <property name="pricePerUnitExclVat" type="big_decimal">
+      <column name="PricePerUnitExclVAT" not-null="true"/>
+    </property>
+    <property name="vatpercent" type="big_decimal">
+      <column name="VATPercent" not-null="true" precision="5"/>
+    </property>
+    <property name="quantityUnit" type="string">
+      <column name="QuantityUnit" not-null="true"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getProductVariantPricesByProductVariantIdAndCountryId">
+        from ProductVariantPrices where productVariantId in (:productVariantId) and countryId = :countryId
+    </query>
+  <query name="getProductVariantPricesByProductVariantId">
+        from ProductVariantPrices where productVariantId = :productVariantId
+    </query>
+  <query name="getProductVariantPricesByID">
+        from ProductVariantPrices where productVariantId =:productVariantId and countryId = :countryId
+    </query>
+</hibernate-mapping>

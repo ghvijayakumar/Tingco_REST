@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 3:59:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ApplicationSettings" schema="dbo" table="ApplicationSettings">
+    <cache usage="nonstrict-read-write"/>
+    <id name="applicationSettingId" type="string">
+      <column length="36" name="ApplicationSettingID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Applications" fetch="select" name="applications">
+      <column length="36" name="ApplicationID" not-null="true"/>
+    </many-to-one>
+    <property name="applicationSettingParentId" type="string">
+      <column length="36" name="ApplicationSettingParentID"/>
+    </property>
+    <property name="applicationSettingName" type="string">
+      <column length="50" name="ApplicationSettingName" not-null="true"/>
+    </property>
+    <property name="applicationSettingValue" type="string">
+      <column length="200" name="ApplicationSettingValue" not-null="true"/>
+    </property>
+    <property name="settingDataTypeId" type="string">
+      <column length="36" name="SettingDataTypeID"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getAppSettingValueByIDandName">
+        from ApplicationSettings where applications.applicationId=:appID and applicationSettingName =:appSetName
+   </query>
+  <query name="getAppSettingByAppID">
+        from ApplicationSettings where applications.applicationId=:appID
+   </query>
+  <query name="getAllAppSettings">
+        from ApplicationSettings
+   </query>
+</hibernate-mapping>

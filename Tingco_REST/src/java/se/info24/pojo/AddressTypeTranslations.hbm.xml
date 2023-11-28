@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2010 12:53:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.AddressTypeTranslations" schema="dbo" table="AddressTypeTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.AddressTypeTranslationsId" name="id">
+      <key-property name="addressTypeId" type="int">
+        <column name="AddressTypeID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Country" fetch="select" insert="false" name="country" update="false">
+      <column name="CountryID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.AddressType" fetch="select" insert="false" name="addressType" update="false">
+      <column name="AddressTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="addressTypeName" type="string">
+      <column length="50" name="AddressTypeName" not-null="true"/>
+    </property>
+    <property name="addressTypeDescription" type="string">
+      <column length="200" name="AddressTypeDescription"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getAddressTypeTranslationsByCountryId">
+        from AddressTypeTranslations where id.countryId = :countryId order by addressTypeName
+    </query>
+</hibernate-mapping>

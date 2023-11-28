@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/NB_2011/!svn/ver/2443/Tingco_REST/src/java/se/info24/jaxbUtil
+END
+TingcoContentXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoContentXML.java
+END
+TingcoUserXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2443/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoUserXML.java
+END
+TingcoDriversXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2113/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoDriversXML.java
+END
+TingcoNetworkSubscriptionsXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2396/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoNetworkSubscriptionsXML.java
+END
+TingcoMeasurementXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2397/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoMeasurementXML.java
+END
+TingcoVirtualGateXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2169/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoVirtualGateXML.java
+END
+TingcoHomeXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoHomeXML.java
+END
+TingcoGroupXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2385/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoGroupXML.java
+END
+TingcoReportsXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2432/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoReportsXML.java
+END
+TingcoDeviceXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2423/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoDeviceXML.java
+END
+TingcoUtilsXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2288/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoUtilsXML.java
+END
+TingcoServiceXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoServiceXML.java
+END
+TingcoPricePlansXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2410/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoPricePlansXML.java
+END
+TingcoProductsXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2280/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoProductsXML.java
+END
+TingcoApplicationXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2389/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoApplicationXML.java
+END
+TingcoContainersXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2442/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoContainersXML.java
+END
+TingcoSupportCaseXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2360/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoSupportCaseXML.java
+END
+TingcoAPIXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/jaxbUtil/TingcoAPIXML.java
+END

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 12, 2012 3:45:16 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ReportSendSchedules" schema="dbo" table="ReportSendSchedules">
+    <cache usage="nonstrict-read-write"/>
+    <id name="reportSendScheduleId" type="string">
+      <column length="36" name="ReportSendScheduleID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="reportId" type="string">
+      <column length="36" name="ReportID" not-null="true"/>
+    </property>
+    <property name="measurementTypeId" type="string">
+      <column length="36" name="MeasurementTypeID" not-null="true"/>
+    </property>
+    <property name="sendToEmail" type="string">
+      <column length="200" name="SendToEmail" not-null="true"/>
+    </property>
+    <property name="sendHourly" type="java.lang.Integer">
+      <column name="SendHourly"/>
+    </property>
+    <property name="sendDaily" type="java.lang.Integer">
+      <column name="SendDaily"/>
+    </property>
+    <property name="sendWeekly" type="java.lang.Integer">
+      <column name="SendWeekly"/>
+    </property>
+    <property name="sendMonthly" type="java.lang.Integer">
+      <column name="SendMonthly"/>
+    </property>
+    <property name="sendQuarterly" type="java.lang.Integer">
+      <column name="SendQuarterly"/>
+    </property>
+    <property name="sendYearly" type="java.lang.Integer">
+      <column name="SendYearly"/>
+    </property>
+    <property name="sendOnMinute" type="java.lang.Integer">
+      <column name="SendOnMinute"/>
+    </property>
+    <property name="sendOnHour" type="java.lang.Integer">
+      <column name="SendOnHour"/>
+    </property>
+    <property name="sendOnWeekday" type="java.lang.Integer">
+      <column name="SendOnWeekday"/>
+    </property>
+    <property name="sendOnDayOfMonth" type="java.lang.Integer">
+      <column name="SendOnDayOfMonth"/>
+    </property>
+    <property name="sendOnMonth" type="java.lang.Integer">
+      <column name="SendOnMonth"/>
+    </property>
+    <property name="sendAsPdf" type="java.lang.Integer">
+      <column name="SendAsPdf"/>
+    </property>
+    <property name="sendAsCsv" type="java.lang.Integer">
+      <column name="SendAsCsv"/>
+    </property>
+    <property name="sendAsExcel" type="java.lang.Integer">
+      <column name="SendAsExcel"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getReportSendSchedules">
+        from ReportSendSchedules rss where rss.reportId =:reportId and rss.groupId in (:groupId) and rss.measurementTypeId = :measurementTypeId
+    </query>
+  <query name="getAllReportSendSchedules">
+        from ReportSendSchedules
+    </query>
+  <query name="getReportSendSchedulesById">
+        from ReportSendSchedules where reportSendScheduleId = :reportSendScheduleId
+    </query>
+</hibernate-mapping>

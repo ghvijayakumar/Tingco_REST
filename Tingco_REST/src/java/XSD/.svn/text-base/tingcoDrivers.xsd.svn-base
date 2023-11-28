@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="tingcoDrivers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="MsgID"/>
+                <xs:element ref="MsgTimeStamp"/>
+                <xs:element ref="MsgStatus" minOccurs="0"/>
+                <xs:element ref="DriverLogs" />
+                <xs:element ref="JourneyTypeTranslations" />
+            </xs:sequence>
+            <xs:attribute name="TimeZone" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="UTC"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="RegionalUnits" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Metric"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="MsgVer" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:decimal"/>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="CreateRef" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Info24"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriverLogs">
+        <xs:complexType>
+            <xs:sequence>
+                 <xs:element ref="DriverLog" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriverLog">
+		<xs:complexType>
+			<xs:sequence>
+                <xs:element name="DriversLogItemID" type="xs:string"/>
+                <xs:element name="DeviceID" type="xs:string"/>
+                <xs:element name="DeviceGroupID" type="xs:string"/>
+                <xs:element name="DeviceName" type="xs:string"/>
+
+                <xs:element name="DriverUserID" type="xs:string"/>
+                <xs:element name="DriverName" type="xs:string"/>
+                <xs:element name="StartTime" type="xs:dateTime"/>
+                <xs:element name="StopTime" type="xs:dateTime"/>
+                <xs:element name="TotalTime" type="xs:int"/>
+
+                <xs:element name="StartOdometer" type="xs:int"/>
+                <xs:element name="StopOdometer" type="xs:int"/>
+                <xs:element name="TotalDistance" type="xs:float"/>
+                <xs:element name="StartLatitude" type="xs:float"/>
+
+                <xs:element name="StartLongitude" type="xs:float"/>
+                <xs:element name="StartAltitude" type="xs:float"/>
+                <xs:element name="StartHeading" type="xs:int"/>
+                <xs:element name="StartAddress" type="xs:string"/>
+
+                <xs:element name="StartCity" type="xs:string"/>
+                <xs:element name="StopLatitude" type="xs:float"/>
+                <xs:element name="StopLongitude" type="xs:float"/>
+                <xs:element name="StopAltitude" type="xs:float"/>
+                <xs:element name="StopHeading" type="xs:int"/>
+
+                <xs:element name="StopAddress" type="xs:string"/>
+                <xs:element name="StopCity" type="xs:string"/>
+                <xs:element name="JourneyTypeID" type="xs:string"/>
+                <xs:element name="JourneyPurpose" type="xs:string"/>
+
+                <xs:element name="JourneyAccount" type="xs:string"/>
+                <xs:element name="JourneyNote" type="xs:string"/>
+                <xs:element name="JourneyWorkOrder" type="xs:string"/>
+
+                <xs:element name="JourneyWorkOrderID" type="xs:string"/>
+                <xs:element name="IsDeleted" type="xs:int"/>
+                <xs:element name="IsReadyForExport" type="xs:int"/>
+                <xs:element name="IsExported" type="xs:int"/>
+                <xs:element name="ExportedDate" type="xs:dateTime"/>
+                <xs:element name="ExportedDateTCMV3" type="xs:string"/>
+
+                <xs:element name="AverageSpeed" type="xs:float"/>
+                <xs:element name="MaxSpeed" type="xs:float"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="CreatedDateTCMV3" type="xs:string"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+
+                <xs:element name="UserID" type="xs:string"/>
+                <xs:element name="JourneyTypeName" type="xs:string"/>
+
+            </xs:sequence>
+            <xs:attribute name="SeqNo" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:int"/>
+				</xs:simpleType>
+			</xs:attribute>
+       </xs:complexType>
+    </xs:element>
+    <xs:element name="JourneyTypeTranslations">
+        <xs:complexType>
+            <xs:sequence>
+                 <xs:element ref="JourneyTypeTranslation" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="JourneyTypeTranslation">
+		<xs:complexType>
+			<xs:sequence>
+                <xs:element name="JourneyTypeID" type="xs:string"/>
+                <xs:element name="CountryID" type="xs:int"/>
+                <xs:element name="JourneyTypeName" type="xs:string"/>
+                <xs:element name="JourneyTypeDescription" type="xs:string"/>
+
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+                </xs:sequence>
+            <xs:attribute name="SeqNo" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:int"/>
+				</xs:simpleType>
+			</xs:attribute>
+       </xs:complexType>
+    </xs:element>
+    <xs:element name="ResponseText">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ResponseCode" type="xs:int"/>
+    <xs:element name="MsgTimeStamp">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="MsgStatus">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ResponseCode"/>
+                <xs:element ref="ResponseText"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MsgID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+</xs:schema>

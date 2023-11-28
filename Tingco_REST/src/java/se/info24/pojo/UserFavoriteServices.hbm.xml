@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 24, 2011 3:27:30 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserFavoriteServices" schema="dbo" table="UserFavoriteServices">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.UserFavoriteServicesId" name="id">
+      <key-property name="userId" type="string">
+        <column length="36" name="UserID"/>
+      </key-property>
+      <key-property name="serviceId" type="string">
+        <column length="36" name="ServiceID"/>
+      </key-property>
+    </composite-id>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getUserFavoriteServices">
+      from UserFavoriteServices where id.userId = :userId
+  </query>
+</hibernate-mapping>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 23, 2013 10:58:19 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ObjectFieldData" schema="dbo" table="ObjectFieldData">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ObjectFieldDataId" name="id">
+      <key-property name="objectId" type="string">
+        <column length="36" name="ObjectID"/>
+      </key-property>
+      <key-property name="fieldId" type="string">
+        <column length="36" name="FieldID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Fields" fetch="select" insert="false" name="fields" update="false">
+      <column length="36" name="FieldID" not-null="true"/>
+    </many-to-one>
+    <!-- <many-to-one name="device" class="se.info24.pojo.Device" fetch="select">
+            <column name="DeviceID" length="36" not-null="true" />
+        </many-to-one>-->
+    <property name="fieldValue" type="string">
+      <column name="FieldValue" not-null="true"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getObjectFieldDataByID">
+        from ObjectFieldData where id.objectId = :objectId and id.fieldId = :fieldId
+    </query>
+</hibernate-mapping>

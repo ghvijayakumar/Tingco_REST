@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 18, 2013 11:55:16 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.RecurringPurchases" schema="dbo" table="RecurringPurchases">
+    <cache usage="nonstrict-read-write"/>
+    <id name="recurringPurchaseId" type="string">
+      <column length="36" name="RecurringPurchaseID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.ProductVariants" fetch="select" name="productVariants">
+      <column length="36" name="ProductVariantID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Providers" fetch="select" name="providers">
+      <column length="36" name="ProviderID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.RecurrenceTypes" fetch="select" name="recurrenceTypes">
+      <column length="36" name="RecurrenceTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="deviceId" type="string">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </property>
+    <property name="userAliasId" type="string">
+      <column length="36" name="UserAliasID" not-null="true"/>
+    </property>
+    <property name="quantity" type="int">
+      <column name="Quantity" not-null="true"/>
+    </property>
+    <property name="description" type="string">
+      <column name="Description"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate"/>
+    </property>
+    <property name="numberOfOccurances" type="string">
+      <column name="NumberOfOccurances" not-null="false"/>
+    </property>
+    <property name="lastRunDate" type="timestamp">
+      <column length="23" name="LastRunDate"/>
+    </property>
+    <property name="nextRunDate" type="timestamp">
+      <column length="23" name="NextRunDate" not-null="true"/>
+    </property>
+    <property name="recurrenceMinute" type="java.lang.Integer">
+      <column name="RecurrenceMinute"/>
+    </property>
+    <property name="recurrenceHour" type="java.lang.Integer">
+      <column name="RecurrenceHour"/>
+    </property>
+    <property name="recurrenceDayOfMonth" type="java.lang.Integer">
+      <column name="RecurrenceDayOfMonth"/>
+    </property>
+    <property name="recurrenceMonday" type="java.lang.Integer">
+      <column name="RecurrenceMonday"/>
+    </property>
+    <property name="recurrenceTuesday" type="java.lang.Integer">
+      <column name="RecurrenceTuesday"/>
+    </property>
+    <property name="recurrenceWednesday" type="java.lang.Integer">
+      <column name="RecurrenceWednesday"/>
+    </property>
+    <property name="recurrenceThursday" type="java.lang.Integer">
+      <column name="RecurrenceThursday"/>
+    </property>
+    <property name="recurrenceFriday" type="java.lang.Integer">
+      <column name="RecurrenceFriday"/>
+    </property>
+    <property name="recurrenceSaturday" type="java.lang.Integer">
+      <column name="RecurrenceSaturday"/>
+    </property>
+    <property name="recurrenceSunday" type="java.lang.Integer">
+      <column name="RecurrenceSunday"/>
+    </property>
+    <property name="recurrenceMonth" type="java.lang.Integer">
+      <column name="RecurrenceMonth"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getRecurringPurchasesByID">
+        from RecurringPurchases where recurringPurchaseId = :recurringPurchaseId
+    </query>
+  <query name="getRecurringPurchasesByDeviceId">
+        from RecurringPurchases where deviceId = :deviceId
+    </query>
+</hibernate-mapping>

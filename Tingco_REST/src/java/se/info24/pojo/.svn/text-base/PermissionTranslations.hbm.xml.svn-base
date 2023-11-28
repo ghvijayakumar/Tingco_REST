@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 3:59:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.PermissionTranslations" schema="dbo" table="PermissionTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.PermissionTranslationsId" name="id">
+      <key-property name="permissionId" type="string">
+        <column length="36" name="PermissionID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Permissions" fetch="select" insert="false" name="permissions" update="false">
+      <column length="36" name="PermissionID" not-null="true"/>
+    </many-to-one>
+    <property name="permissionName" type="string">
+      <column length="50" name="PermissionName" not-null="true" unique="true"/>
+    </property>
+    <property name="permissionDescription" type="string">
+      <column length="200" name="PermissionDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getPermissionTranslationsById">
+      from PermissionTranslations as pt where pt.id.countryId = :countryID order by permissionName
+  </query>
+  <query name="getPermissionTranslations">
+      from PermissionTranslations as pt where pt.id.permissionId = :permissionId and pt.id.countryId = :countryID
+  </query>
+  <query name="getPermissionTranslationsByIdsAndCountry">
+      from PermissionTranslations as pt where pt.id.permissionId in (:permissionId) and pt.id.countryId = :countryID
+  </query>
+</hibernate-mapping>

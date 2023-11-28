@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 23, 2011 12:47:45 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ServiceTypes" schema="dbo" table="ServiceTypes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="serviceTypeId" type="string">
+      <column length="36" name="ServiceTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="serviceTypeName" type="string">
+      <column length="50" name="ServiceTypeName" not-null="true"/>
+    </property>
+    <property name="serviceTypeDescription" type="string">
+      <column length="200" name="ServiceTypeDescription"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <!-- <set name="serviceses" inverse="true">
+            <key>
+                <column name="ServiceTypeID" length="36" not-null="true" />
+            </key>
+            <one-to-many class="se.info24.pojo.Services" />
+        </set> -->
+    <set inverse="true" name="serviceTypeBundleses">
+      <key>
+        <column length="36" name="ServiceTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ServiceTypeBundles"/>
+    </set>
+  </class>
+  <query name="getServiceTypesById">
+        from ServiceTypes as st where st.serviceTypeId =:serviceTypeId order by serviceTypeName asc
+    </query>
+  <query name="getAllServiceTypes">
+        from ServiceTypes order by serviceTypeName
+    </query>
+  <query name="getAllServiceTypesBySearchCreteria">
+        from ServiceTypes where serviceTypeName like '%'+:serviceTypeName+'%'order by serviceTypeName
+    </query>
+</hibernate-mapping>

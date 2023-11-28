@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 28, 2012 11:17:07 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.EventTypes" schema="dbo" table="EventTypes">
+    <id name="eventTypeId" type="string">
+      <column length="36" name="EventTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set cascade="delete" inverse="true" name="eventTypesInGroups">
+      <key>
+        <column length="36" name="EventTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.EventTypesInGroups"/>
+    </set>
+    <set cascade="delete" inverse="true" name="eventTypesInTypes">
+      <key>
+        <column length="36" name="EventTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.EventTypesInTypes"/>
+    </set>
+    <set cascade="delete" inverse="true" name="eventTypeTranslations">
+      <key>
+        <column length="36" name="EventTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.EventTypeTranslations"/>
+    </set>
+  </class>
+</hibernate-mapping>

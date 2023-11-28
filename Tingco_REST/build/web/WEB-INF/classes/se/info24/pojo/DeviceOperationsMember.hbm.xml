@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2010 12:53:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DeviceOperationsMember" schema="dbo" table="DeviceOperationsMember">
+    <cache usage="nonstrict-read-write"/>
+    <id name="deviceOperationsMemberId" type="string">
+      <column length="36" name="DeviceOperationsMemberID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.DeviceOperationsStatus" fetch="select" name="deviceOperationsStatus">
+      <column length="36" name="DeviceOperationsStatusID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Device" fetch="select" name="device">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </many-to-one>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getDeviceOperationsMember">
+      from DeviceOperationsMember where device.deviceId = :deviceId
+  </query>
+</hibernate-mapping>

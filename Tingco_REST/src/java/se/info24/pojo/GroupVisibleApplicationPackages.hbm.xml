@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 13, 2012 2:28:59 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.GroupVisibleApplicationPackages" schema="dbo" table="GroupVisibleApplicationPackages">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.GroupVisibleApplicationPackagesId" name="id">
+      <key-property name="groupId" type="string">
+        <column length="36" name="GroupID"/>
+      </key-property>
+      <key-property name="applicationPackageId" type="string">
+        <column length="36" name="ApplicationPackageID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.ApplicationPackages" fetch="select" insert="false" name="applicationPackages" update="false">
+      <column length="36" name="ApplicationPackageID" not-null="true"/>
+    </many-to-one>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getGroupVisibleApplicationPackagesByGroupId">
+        from GroupVisibleApplicationPackages where id.groupId = :groupId
+    </query>
+  <query name="getGroupVisibleApplicationPackagesByAppPakgId">
+        from GroupVisibleApplicationPackages where id.applicationPackageId = :applicationPackageId
+    </query>
+  <query name="getGroupVisibleApplicationPackages">
+        from GroupVisibleApplicationPackages where id.groupId = :groupId and id.applicationPackageId in (:applicationPackageId)
+    </query>
+  <query name="getGroupVisibleApplicationPackagesbyIds">
+        from GroupVisibleApplicationPackages where id.groupId = :groupId and id.applicationPackageId = :applicationPackageId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,437 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/NB_2011/!svn/ver/2374/Tingco_REST/src/java/se/info24/devicejaxbPost
+END
+EventTypeTranslation.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/EventTypeTranslation.java
+END
+DeviceAttributeTranslation.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceAttributeTranslation.java
+END
+TingcoDevice.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/TingcoDevice.java
+END
+ObjectSettingPackages.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/ObjectSettingPackages.java
+END
+DeviceCountReport.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2095/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceCountReport.java
+END
+DeviceDetails.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceDetails.java
+END
+EventTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/EventTypes.java
+END
+DeviceDataItemScaling.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceDataItemScaling.java
+END
+UserPermissions.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/UserPermissions.java
+END
+ServiceClientLogins.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2318/Tingco_REST/src/java/se/info24/devicejaxbPost/ServiceClientLogins.java
+END
+DeviceStatusDataItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceStatusDataItem.java
+END
+ObjectUsageRecords.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/1994/Tingco_REST/src/java/se/info24/devicejaxbPost/ObjectUsageRecords.java
+END
+Scaling.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/Scaling.java
+END
+WarningLevels.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/WarningLevels.java
+END
+BillingCategoryTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/NB_2011/!svn/ver/2244/Tingco_REST/src/java/se/info24/devicejaxbPost/BillingCategoryTranslations.java
+END
+LastUpdatedByUserID.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/LastUpdatedByUserID.java
+END
+ObjectSettingPackageTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/ObjectSettingPackageTranslations.java
+END
+Devices.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/Devices.java
+END
+AgreementID.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/AgreementID.java
+END
+FieldTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/FieldTranslations.java
+END
+DeviceTypeAttribute.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceTypeAttribute.java
+END
+ObjectTags.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2203/Tingco_REST/src/java/se/info24/devicejaxbPost/ObjectTags.java
+END
+DeviceDataItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2167/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceDataItems.java
+END
+DeviceDataItemScalings.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceDataItemScalings.java
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2374/Tingco_REST/src/java/se/info24/devicejaxbPost/ObjectFactory.java
+END
+RecurrenceTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/NB_2011/!svn/ver/1722/Tingco_REST/src/java/se/info24/devicejaxbPost/RecurrenceTypeTranslations.java
+END
+DeviceStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceStatus.java
+END
+MediaFileTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/MediaFileTypes.java
+END
+AddressTypeID.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/AddressTypeID.java
+END
+DataItemTranslation.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DataItemTranslation.java
+END
+AlarmLevels.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/AlarmLevels.java
+END
+DeviceTypeAttributes.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceTypeAttributes.java
+END
+SettingDataType.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/SettingDataType.java
+END
+Connectors.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/1989/Tingco_REST/src/java/se/info24/devicejaxbPost/Connectors.java
+END
+DeviceTypeID.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceTypeID.java
+END
+DeviceSettingsPackages.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceSettingsPackages.java
+END
+Services.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/Services.java
+END
+DeviceTypeCommands.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2374/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceTypeCommands.java
+END
+DeviceAttributeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceAttributeTranslations.java
+END
+DeviceAgreementMemberships.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceAgreementMemberships.java
+END
+BillingCategories.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2246/Tingco_REST/src/java/se/info24/devicejaxbPost/BillingCategories.java
+END
+DeviceMessages.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceMessages.java
+END
+DeviceTypeManufacturerID.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceTypeManufacturerID.java
+END
+DeviceSetting.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceSetting.java
+END
+ProductLink.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/ProductLink.java
+END
+Device.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2374/Tingco_REST/src/java/se/info24/devicejaxbPost/Device.java
+END
+Service.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/Service.java
+END
+MediaFiles.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2221/Tingco_REST/src/java/se/info24/devicejaxbPost/MediaFiles.java
+END
+DeviceTypeCommandTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/NB_2011/!svn/ver/2374/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceTypeCommandTranslations.java
+END
+DeviceMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceMessage.java
+END
+ObjectMediaFile.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/ObjectMediaFile.java
+END
+ObjectStateControl.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/ObjectStateControl.java
+END
+DeviceSettingsPackageID.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceSettingsPackageID.java
+END
+DeviceSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceSettings.java
+END
+ItemConnectionStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/1889/Tingco_REST/src/java/se/info24/devicejaxbPost/ItemConnectionStatus.java
+END
+DeviceDetail.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceDetail.java
+END
+TransactionResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2095/Tingco_REST/src/java/se/info24/devicejaxbPost/TransactionResult.java
+END
+MsgStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/MsgStatus.java
+END
+EventDatas.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/EventDatas.java
+END
+ServiceType.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/ServiceType.java
+END
+OGMDevice.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/OGMDevice.java
+END
+DeviceAddress.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DeviceAddress.java
+END
+Fields.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/Fields.java
+END
+GroupID.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/GroupID.java
+END
+RecurringPurchases.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/1723/Tingco_REST/src/java/se/info24/devicejaxbPost/RecurringPurchases.java
+END
+CountryID.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/CountryID.java
+END
+DataItemTranslationsPerDevice.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/DataItemTranslationsPerDevice.java
+END
+RecurrenceTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1722/Tingco_REST/src/java/se/info24/devicejaxbPost/RecurrenceTypes.java
+END
+ObjectSettingTemplates.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/ObjectSettingTemplates.java
+END
+ObjectMediaFiles.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1549/Tingco_REST/src/java/se/info24/devicejaxbPost/ObjectMediaFiles.java
+END
+Connector.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1989/Tingco_REST/src/java/se/info24/devicejaxbPost/Connector.java
+END
+DataItemTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2167/Tingco_REST/src/java/se/info24/devicejaxbPost/DataItemTranslations.java
+END

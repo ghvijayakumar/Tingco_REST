@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2011 10:43:34 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ApplicationDomainMemberships" schema="dbo" table="ApplicationDomainMemberships">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ApplicationDomainMembershipsId" name="id">
+      <key-property name="applicationId" type="string">
+        <column length="36" name="ApplicationID"/>
+      </key-property>
+      <key-property name="domainId" type="string">
+        <column length="36" name="DomainID"/>
+      </key-property>
+    </composite-id>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getApplicationByAppIDandDomainID">
+        from ApplicationDomainMemberships adm where adm.id.applicationId = :appID and adm.id.domainId = :domainID
+    </query>
+</hibernate-mapping>

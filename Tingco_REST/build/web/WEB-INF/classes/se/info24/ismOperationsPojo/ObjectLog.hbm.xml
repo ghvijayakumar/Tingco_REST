@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 16, 2014 3:27:53 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISMOperations" name="se.info24.ismOperationsPojo.ObjectLog" schema="dbo" table="ObjectLog">
+    <id column="ObjectID" name="objectId"/>
+    <!--<property name="objectId" type="string">
+            <column name="ObjectID" length="36" />
+           
+        </property>-->
+    <property name="message" type="string">
+      <column name="Message" not-null="true"/>
+    </property>
+    <property name="messageCode" type="string">
+      <column name="MessageCode"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+  </class>
+  <query name="getObjectLogByObjectId">
+        from ObjectLog where objectId = :objectId
+    </query>
+</hibernate-mapping>

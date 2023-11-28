@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="tingcoCustomer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="MsgID"/>
+                <xs:element ref="MsgTimeStamp"/>
+                <xs:element ref="MsgStatus" minOccurs="0"/>
+                <xs:element ref="ProviderTypeTranslations"/>
+                <xs:element ref="Users"/>
+                <xs:element ref="Transactions"/>
+                <xs:element ref="ProviderTypes"/>
+            </xs:sequence>
+            <xs:attribute name="TimeZone" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="UTC"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="RegionalUnits" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Metric"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="MsgVer" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:decimal"/>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="CreateRef" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Info24"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ProviderTypeTranslations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ProviderTypeTranslation" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Transactions">
+        <xs:complexType>
+            <xs:sequence>
+				<xs:element ref="TransactionResult" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="TransactionResult">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="TransactionID" type="xs:string"/>
+                <xs:element name="TransactionParentID" type="xs:string"/>
+                <xs:element name="TransactionStartTime" type="xs:dateTime"/>
+                <xs:element name="DataItemID" type="xs:string"/>
+                <xs:element name="ExternalTransactionID" type="xs:string"/>
+                <xs:element name="Amount" type="xs:decimal"/>
+                <xs:element name="CurrencyID" type="xs:int"/>
+                <xs:element name="UserAliasID" type="xs:string"/>
+                <xs:element name="UserAlias" type="xs:string"/>
+                <xs:element name="FirstName" type="xs:string"/>
+				<xs:element name="LastName" type="xs:string"/>
+                <xs:element name="UserGroupID" type="xs:string"/>
+				<xs:element name="UserAliasTypeID" type="xs:string"/>
+                <xs:element name="UserAliasTypeName" type="xs:string"/>
+				<xs:element name="ProviderID" type="xs:string"/>
+                <xs:element name="ProviderName" type="xs:string"/>
+				<xs:element name="DeviceID" type="xs:string"/>
+                <xs:element name="DeviceGroupID" type="xs:string"/>
+				<xs:element name="DeviceName" type="xs:string"/>
+                <xs:element name="TransactionPurpose" type="xs:string"/>
+                <xs:element name="TransactionAccount" type="xs:string"/>
+				<xs:element name="TransactionNote" type="xs:string"/>
+				<xs:element name="IsPurchase" type="xs:int"/>
+				<xs:element name="IsPayment" type="xs:int"/>
+				<xs:element name="IsInvoiced" type="xs:int"/>
+				<xs:element name="IsPaid" type="xs:int"/>
+                <xs:element name="Status" type="xs:string"/>
+                <xs:element name="LastUpdatedByUSerID" type="xs:string"/>
+                <xs:element name="NumberOfProduct" type="xs:string"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+				<xs:element ref="Currency" maxOccurs="unbounded"/>
+            </xs:sequence>
+			<xs:attribute name="SeqNo">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Currency">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="CurrencyID" type="xs:int"/>
+                <xs:element name="CurrencyISOCode" type="xs:string"/>
+                <xs:element name="CurrencyISOCharCode" type="xs:string"/>
+                <xs:element name="CurrencyName" type="xs:string"/>
+                <xs:element name="CurrencyDescription" type="xs:string"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ProviderTypeTranslation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ProviderTypeID" type="xs:string"/>
+                <xs:element name="ProviderTypeName" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ProviderTypes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ProviderType" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="SeqNo" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ProviderType">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ProviderTypeID" type="xs:string"/>
+                <xs:element name="ObjectCode" type="xs:string"/>
+
+                <xs:element ref="UserProviderTypeReferences"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="UserProviderTypeReferences">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="UserProviderReference1" type="xs:string"/>
+                <xs:element name="Status" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Users">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="User" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="SeqNo" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="User">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="UserID" type="xs:string"/>
+                <xs:element name="ApplicationID" type="xs:string"/>
+                <xs:element name="DomainID" type="xs:string"/>
+                <xs:element name="GroupID" type="xs:string"/>
+                <xs:element name="LoginName" type="xs:string"/>
+                <xs:element name="NickName" type="xs:string"/>
+                <xs:element name="FirstName" type="xs:string"/>
+                <xs:element name="LastName" type="xs:string"/>
+                <xs:element name="UserEmail" type="xs:string"/>
+                <xs:element name="UserMobilePhone" type="xs:string"/>
+                <xs:element ref="Address"/>
+                <xs:element name="CountryID" type="xs:int"/>
+                <xs:element name="ActiveFromDate" type="xs:dateTime"/>
+                <xs:element name="ActiveToDate" type="xs:dateTime"/>
+                <xs:element name="IsLockedOut" type="xs:int"/>
+                <xs:element name="ChangePwdRequired" type="xs:int"/>
+                <xs:element name="UserSmallImageURL" type="xs:string"/>
+                <xs:element name="LastLoginDate" type="xs:dateTime"/>
+                <xs:element name="LockedOutDate" type="xs:dateTime"/>
+                 <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+                <xs:element name="SocialSecurityNumber" type="xs:string"/>
+                <xs:element name="UserAlias" type="xs:string"/>
+                <xs:element name="UserTypeID" type="xs:string"/>
+                <xs:element name="UserAliasTypeID" type="xs:string"/>
+                <xs:element name="ObjectGroupID" type="xs:string"/>
+                <xs:element name="OrganizationAlias" type="xs:string"/>
+                <xs:element name="Password" type="xs:string"/>
+                <xs:element name="TimeZone" type="xs:string"/>
+                <xs:element ref="Groups"/>
+            </xs:sequence>
+            <xs:attribute name="SeqNo" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Address">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="AddressID" type="xs:string"/>
+                <xs:element name="AddressName" type="xs:string"/>
+                <xs:element name="AddressDesc" type="xs:string"/>
+                <xs:element name="AddressTypeID" type="xs:int"/>
+                <xs:element name="AddressRegion" type="xs:string"/>
+                <xs:element name="AddressStreet" type="xs:string"/>
+                <xs:element name="AddressStreet2" type="xs:string"/>
+                <xs:element name="AddressSuite" type="xs:string"/>
+                <xs:element name="AddressZip" type="xs:string"/>
+                <xs:element name="AddressCity" type="xs:string"/>
+                <xs:element name="CountryID" type="xs:int"/>
+                <xs:element name="CountryStateID" type="xs:string"/>
+                <xs:element name="AddressPhone" type="xs:string"/>
+                <xs:element name="AddressMobile" type="xs:string"/>
+                <xs:element name="AddressFax" type="xs:string"/>
+                <xs:element name="AddressEmail" type="xs:string"/>
+                <xs:element name="AddressWeb" type="xs:string"/>
+                <xs:element name="AddressIM" type="xs:string"/>
+                <xs:element name="AddressLatitude" type="xs:float"/>
+                <xs:element name="AddressLongitude" type="xs:float"/>
+                <xs:element name="AddressDepth" type="xs:float"/>
+                <xs:element name="ObjectID" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+            
+    <xs:element name="ResponseCode" type="xs:int"/>
+    <xs:element name="MsgTimeStamp">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="MsgStatus">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ResponseCode" type="xs:int"/>
+                <xs:element name="ResponseText" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MsgID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="CreatedDate">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="UpdatedDate">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="Groups">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="GroupID" type="xs:string"/>
+                <xs:element name="GroupParentID" type="xs:string"/>
+                <xs:element name="GroupTypeID" type="xs:string"/>
+                <xs:element ref="ITrustGroups"/>
+            </xs:sequence>
+            <xs:attribute name="SeqNo" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ITrustGroups">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ITrustGroupID" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 8, 2014 4:03:11 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.DeviceTypeBillingCategories" schema="dbo" table="DeviceTypeBillingCategories">
+    <composite-id class="se.info24.pojo.DeviceTypeBillingCategoriesId" name="id">
+      <key-property name="deviceTypeId" type="string">
+        <column length="36" name="DeviceTypeID"/>
+      </key-property>
+      <key-property name="billingCategoryId" type="string">
+        <column length="36" name="BillingCategoryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.DeviceTypes" fetch="select" insert="false" name="deviceTypes" update="false">
+      <column length="36" name="DeviceTypeID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.BillingCategories" fetch="select" insert="false" name="billingCategories" update="false">
+      <column length="36" name="BillingCategoryID" not-null="true"/>
+    </many-to-one>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getDeviceTypeBillingCategoriesByDeviceTypeID">
+        from DeviceTypeBillingCategories where id.deviceTypeId = :deviceTypeId
+    </query>
+  <query name="getDeviceTypeBillingCategoriesByDeviceTypeIDAndBillingCategoryID">
+        from DeviceTypeBillingCategories where id.deviceTypeId = :deviceTypeId and id.billingCategoryId = :billingCategoryId
+    </query>
+</hibernate-mapping>

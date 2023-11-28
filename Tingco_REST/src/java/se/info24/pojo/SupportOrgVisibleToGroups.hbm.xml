@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 24, 2012 12:58:04 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.SupportOrgVisibleToGroups" schema="dbo" table="SupportOrgVisibleToGroups">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.SupportOrgVisibleToGroupsId" name="id">
+      <key-property name="supportOrganizationId" type="string">
+        <column length="36" name="SupportOrganizationID"/>
+      </key-property>
+      <key-property name="groupId" type="string">
+        <column length="36" name="GroupID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Groups" fetch="select" insert="false" name="groups" update="false">
+      <column length="36" name="GroupID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.SupportOrganizations" fetch="select" insert="false" name="supportOrganizations" update="false">
+      <column length="36" name="SupportOrganizationID" not-null="true"/>
+    </many-to-one>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getSupportOrgVisibleToGroupsByGroupId">
+        from SupportOrgVisibleToGroups where groups.groupId = :groupId
+    </query>
+  <query name="getSupportOrgVisibleToGroupsById">
+        from SupportOrgVisibleToGroups where id.supportOrganizationId = :supportOrganizationId
+    </query>
+  <query name="getSupportOrgVisibleToGroupsByGroupIds">
+        from SupportOrgVisibleToGroups where id.supportOrganizationId = :supportOrganizationId and id.groupId in(:groupId) order by createdDate desc
+    </query>
+  <query name="getSupportOrgVisibleToGroupsByIds">
+        from SupportOrgVisibleToGroups where id.supportOrganizationId = :supportOrganizationId and id.groupId = :groupId
+    </query>
+</hibernate-mapping>

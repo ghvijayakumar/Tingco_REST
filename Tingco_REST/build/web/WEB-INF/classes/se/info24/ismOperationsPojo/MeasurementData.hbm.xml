@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 30, 2012 2:46:01 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.MeasurementData" schema="dbo" table="MeasurementData">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.ismOperationsPojo.MeasurementDataId" name="id">
+      <key-property name="dataItemId" type="string">
+        <column length="36" name="DataItemID"/>
+      </key-property>
+      <key-property name="measurementTypeId" type="string">
+        <column length="36" name="MeasurementTypeID"/>
+      </key-property>
+    </composite-id>
+    <property name="dataItemTime" type="timestamp">
+      <column length="23" name="DataItemTime" not-null="true"/>
+    </property>
+    <property name="objectId" type="string">
+      <column length="36" name="ObjectID" not-null="true"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID"/>
+    </property>
+    <property name="measurementValue" type="big_decimal">
+      <column name="MeasurementValue" not-null="true"/>
+    </property>
+    <property name="measurementMinValue" type="big_decimal">
+      <column name="MeasurementMinValue"/>
+    </property>
+    <property name="measurementMaxValue" type="big_decimal">
+      <column name="MeasurementMaxValue"/>
+    </property>
+    <property name="measurementStandardDeviation" type="big_decimal">
+      <column name="MeasurementStandardDeviation"/>
+    </property>
+    <property name="year" type="java.lang.Short">
+      <column name="Year"/>
+    </property>
+    <property name="month" type="java.lang.Short">
+      <column name="Month"/>
+    </property>
+    <property name="day" type="java.lang.Short">
+      <column name="Day"/>
+    </property>
+    <property name="hour" type="java.lang.Short">
+      <column name="Hour"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getMeasurementData">
+        select md.objectId,case when :dataCal = 'sum' then sum(md.measurementValue) else avg(md.measurementValue) end as measurement from MeasurementData md where md.id.measurementTypeId = :measurementTypeId and md.groupId in (:groupId) and (:deviceId is null or md.objectId = :deviceId) and (md.createdDate between :fromDate and :toDate) group by md.objectId 
+    </query>
+  <query name="getMeasurementDataByYear">
+        select case when :dataCal = 'sum' then sum(md.measurementValue) else avg(md.measurementValue) end as measurement,md.year as displayorder from MeasurementData md where md.id.measurementTypeId = :measurementTypeId and md.groupId in (:groupId) and (:deviceId is null or md.objectId = :deviceId) and (md.createdDate between :fromDate and :toDate) group by md.year order by md.year
+    </query>
+  <query name="getMeasurementDataByMonth">
+        select case when :dataCal = 'sum' then sum(md.measurementValue) else avg(md.measurementValue) end as measurement,md.month as displayorder from MeasurementData md where md.id.measurementTypeId = :measurementTypeId and md.groupId in (:groupId) and (:deviceId is null or md.objectId = :deviceId) and (md.createdDate between :fromDate and :toDate) group by md.month order by md.month
+    </query>
+  <query name="getMeasurementDataByDay">
+        select case when :dataCal = 'sum' then sum(md.measurementValue) else avg(md.measurementValue) end as measurement,md.year,md.month,md.day from MeasurementData md where md.id.measurementTypeId = :measurementTypeId and md.groupId in (:groupId) and (:deviceId is null or md.objectId = :deviceId) and (md.createdDate between :fromDate and :toDate) group by md.year,md.month,md.day order by md.year,md.month,md.day
+    </query>
+  <query name="getMeasurementDataByHour">
+        select case when :dataCal = 'sum' then sum(md.measurementValue) else avg(md.measurementValue) end as measurement,md.hour as displayorder from MeasurementData md where md.id.measurementTypeId = :measurementTypeId and md.groupId in (:groupId) and (:deviceId is null or md.objectId = :deviceId) and (md.createdDate between :fromDate and :toDate) group by md.hour order by md.hour
+    </query>
+  <query name="getMeasurementDatabyIdandDeviceIdTop100">
+        from MeasurementData where id.measurementTypeId in (:measurementTypeId) and objectId = :deviceId order by dataItemTime desc
+    </query>
+  <query name="getMeasurementDatabyIdandDeviceId">
+        from MeasurementData where id.measurementTypeId in (:measurementTypeId) and objectId = :deviceId and (dataItemTime between :fromDate and :toDate) order by dataItemTime desc
+    </query>
+  <query name="getMeasurementDataByYearDemo">
+        from MeasurementData md where md.id.measurementTypeId = :measurementTypeId and md.groupId = :groupId and (:deviceId is null or md.objectId = :deviceId) and (md.createdDate between :fromDate and :toDate) order by md.year
+    </query>
+  <query name="getMeasurementDataByMonthDemo">
+        from MeasurementData md where md.id.measurementTypeId = :measurementTypeId and md.groupId = :groupId and (:deviceId is null or md.objectId = :deviceId) and (md.createdDate between :fromDate and :toDate)  order by md.month
+    </query>
+  <query name="getMeasurementDataByDayDemo">
+        from MeasurementData md where md.id.measurementTypeId = :measurementTypeId and md.groupId = :groupId and (:deviceId is null or md.objectId = :deviceId) and (md.createdDate between :fromDate and :toDate)  order by md.year,md.month,md.day
+    </query>
+  <query name="getMeasurementDataByHourDemo">
+        from MeasurementData md where md.id.measurementTypeId = :measurementTypeId and md.groupId = :groupId and (:deviceId is null or md.objectId = :deviceId) and (md.createdDate between :fromDate and :toDate) order by md.hour
+    </query>
+</hibernate-mapping>

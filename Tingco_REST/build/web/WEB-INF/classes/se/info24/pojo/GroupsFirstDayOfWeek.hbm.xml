@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 17, 2012 5:59:44 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.GroupsFirstDayOfWeek" schema="dbo" table="GroupsFirstDayOfWeek">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.GroupsFirstDayOfWeekId" name="id">
+      <key-property name="groupId" type="string">
+        <column length="36" name="GroupID"/>
+      </key-property>
+      <key-property name="weekdayId" type="string">
+        <column length="36" name="WeekdayID"/>
+      </key-property>
+    </composite-id>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getGroupsFirstDayOfWeekbyGroupId">
+        from GroupsFirstDayOfWeek where id.groupId = :groupId
+    </query>
+</hibernate-mapping>

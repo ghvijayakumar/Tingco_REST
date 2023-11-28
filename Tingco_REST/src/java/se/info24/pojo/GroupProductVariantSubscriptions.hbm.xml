@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2012 12:18:32 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.GroupProductVariantSubscriptions" schema="dbo" table="GroupProductVariantSubscriptions">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.GroupProductVariantSubscriptionsId" name="id">
+      <key-property name="groupId" type="string">
+        <column length="36" name="GroupID"/>
+      </key-property>
+      <key-property name="productVariantId" type="string">
+        <column length="36" name="ProductVariantID"/>
+      </key-property>
+      <key-property name="serviceClientLoginId" type="string">
+        <column length="36" name="ServiceClientLoginID"/>
+      </key-property>
+      <key-property name="serviceSubscriptionAclid" type="string">
+        <column length="36" name="ServiceSubscriptionACLID"/>
+      </key-property>
+    </composite-id>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getGroupProductVariantSubscriptionsByLoginIDandACLID">
+        from GroupProductVariantSubscriptions where serviceClientLoginId = :serviceClientLoginId and serviceSubscriptionAclid = :serviceSubscriptionAclid
+    </query>
+  <query name="getGroupProductVariantSubscriptionsByGroupID">
+        from GroupProductVariantSubscriptions where id.groupId = :groupId order by createdDate desc
+    </query>
+</hibernate-mapping>

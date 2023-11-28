@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 3:59:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.SystemMessageTranslations" schema="dbo" table="SystemMessageTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.SystemMessageTranslationsId" name="id">
+      <key-property name="systemMessageId" type="string">
+        <column length="36" name="SystemMessageID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Country" fetch="select" insert="false" name="country" update="false">
+      <column name="CountryID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.SystemMessages" fetch="select" insert="false" name="systemMessages" update="false">
+      <column length="36" name="SystemMessageID" not-null="true"/>
+    </many-to-one>
+    <property name="systemMessageText" type="string">
+      <column length="1000" name="SystemMessageText" not-null="true"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getSystemMessageTextByCountryId">
+      from SystemMessageTranslations smt where smt.id.systemMessageId=:systemMessageId and smt.id.countryId=:countryId
+  </query>
+</hibernate-mapping>

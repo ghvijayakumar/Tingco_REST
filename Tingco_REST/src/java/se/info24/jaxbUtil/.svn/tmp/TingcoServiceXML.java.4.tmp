@@ -1,0 +1,872 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package se.info24.jaxbUtil;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TimeZone;
+import java.util.UUID;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import org.hibernate.Session;
+import se.info24.ismOperationsPojo.BundleFiles;
+import se.info24.pojo.BundleCategoryTranslations;
+import se.info24.pojo.BundleLog;
+import se.info24.pojo.BundleTypeTranslations;
+import se.info24.pojo.BundleVersions;
+import se.info24.pojo.Channels;
+import se.info24.pojo.ContentCategoriesInGroups;
+import se.info24.pojo.Device;
+import se.info24.pojo.DeviceServices;
+import se.info24.pojo.DeviceServicesActiveBundles;
+import se.info24.pojo.DeviceTypeServices;
+import se.info24.pojo.GroupTranslations;
+import se.info24.pojo.Groups;
+import se.info24.pojo.ServiceClientLogins;
+import se.info24.pojo.ServiceContentSubscriptions;
+import se.info24.pojo.ServiceDeviceSettings;
+import se.info24.pojo.ServiceDeviceSubscriptions;
+import se.info24.pojo.BundleDetails;
+import se.info24.pojo.ContentCategoryTranslations;
+import se.info24.pojo.ServiceStatusDetails;
+import se.info24.pojo.ServiceTypes;
+import se.info24.pojo.ServicesChannels;
+import se.info24.pojo.Users2;
+import se.info24.restUtil.RestUtilDAO;
+import se.info24.service.ServiceDAO;
+import se.info24.servicejaxb.Bundle;
+import se.info24.servicejaxb.BundleVersion;
+import se.info24.servicejaxb.Bundles;
+import se.info24.servicejaxb.ChannelType;
+import se.info24.servicejaxb.ContentCategory;
+import se.info24.servicejaxb.DeviceTypes;
+import se.info24.servicejaxb.GroupID;
+import se.info24.servicejaxb.LastUpdatedByUserID;
+import se.info24.servicejaxb.MsgStatus;
+import se.info24.servicejaxb.ObjectFactory;
+import se.info24.servicejaxb.ObjectSettingTemplates;
+import se.info24.servicejaxb.Service;
+import se.info24.servicejaxb.ServiceContentSubscription;
+import se.info24.servicejaxb.ServiceDeviceSubscription;
+import se.info24.servicejaxb.ServiceSetting;
+import se.info24.servicejaxb.ServiceSettings;
+import se.info24.servicejaxb.ServiceStatus;
+import se.info24.servicejaxb.ServiceType;
+import se.info24.servicejaxb.Services;
+import se.info24.servicejaxb.SettingDataType;
+import se.info24.servicejaxb.ServicesChannel;
+import se.info24.servicejaxb.TingcoService;
+import se.info24.util.TCMUtil;
+
+/**
+ *
+ * @author Sekhar
+ */
+public class TingcoServiceXML {
+
+    private TingcoService tingcoService;
+    ObjectFactory objectFactory;
+
+    public TingcoServiceXML() {
+        objectFactory = new ObjectFactory();
+    }
+
+    public TingcoService buildContentCategories(List<ContentCategoriesInGroups> ccigList, int countryId) {
+        Services services = new Services();
+        Service service = new Service();
+        ServiceContentSubscription serviceContentSubs = new ServiceContentSubscription();
+        Set<ContentCategoryTranslations> ccts = new HashSet<ContentCategoryTranslations>();
+        for (ContentCategoriesInGroups ccig : ccigList) {
+            ccts = ccig.getContentCategories().getContentCategoryTranslationses();
+            for (ContentCategoryTranslations cct : ccts) {
+                if (cct.getId().getCountryId() == countryId) {
+                    ContentCategory contentCategory = new ContentCategory();
+                    contentCategory.setContentCategoryId(cct.getId().getContentCategoryId());
+                    contentCategory.setContentCategoryName(cct.getContentCategoryName());
+                    contentCategory.setContentCategoryDescription(cct.getContentCategoryDescription());
+                    serviceContentSubs.getContentCategory().add(contentCategory);
+                }
+            }
+        }
+        service.getServiceContentSubscription().add(serviceContentSubs);
+        services.getService().add(service);
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildDeviceServicesActiveBundles(TingcoService tingcoService, List<DeviceServicesActiveBundles> deviceServicesActiveBundlesList, String timeZoneGMToffset) {
+        GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+        SimpleDateFormat lFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Services services = new Services();
+        for (DeviceServicesActiveBundles dsab : deviceServicesActiveBundlesList) {
+            Service service = new Service();
+            service.setServiceID(dsab.getServices().getServiceId());
+            service.setServiceName(dsab.getServices().getServiceName());
+            Bundles bundles = new Bundles();
+            Bundle bundle = new Bundle();
+            bundle.setBundleID(dsab.getBundleVersions().getBundle().getBundleId());
+            bundle.setBundleName(dsab.getBundleVersions().getBundle().getBundleName());
+            gc.setTime(RestUtilDAO.convertGMTtoUserLocalTime(timeZoneGMToffset, dsab.getCreatedDate()));
+            bundle.setCreatedDateTCMV3(lFormat.format(gc.getTime()));
+            se.info24.servicejaxb.BundleVersions bundleVersions = new se.info24.servicejaxb.BundleVersions();
+            BundleVersion bundleVersion = new BundleVersion();
+            bundleVersion.setVersion(dsab.getBundleVersions().getMajor() + "." + dsab.getBundleVersions().getMinor() + "." + dsab.getBundleVersions().getMicro());
+            bundleVersions.setBundleVersion(bundleVersion);
+            bundle.getBundleVersions().add(bundleVersions);
+            bundles.getBundle().add(bundle);
+            service.setBundles(bundles);
+            services.getService().add(service);
+        }
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+//    public TingcoService buildServicesFromDeviceServicesActiveBundles(TingcoService tingcoService, List<DeviceServicesActiveBundles> deviceServicesActiveBundlesList) {
+//        Services services = new Services();
+//        for (DeviceServicesActiveBundles dsab : deviceServicesActiveBundlesList) {
+//            Service service = new Service();
+//            service.setServiceID(dsab.getServices().getServiceId());
+//            service.setServiceName(dsab.getServices().getServiceName());
+//            services.getService().add(service);
+//        }
+//        tingcoService.setServices(services);
+//        return tingcoService;
+//    }
+
+    public TingcoService buildGetServiceChannelDetailsById(TingcoService tingcoService, ServicesChannels sch) {
+        Services services = new Services();
+        Service service = new Service();
+        se.info24.servicejaxb.ServicesChannels scJaxb = new se.info24.servicejaxb.ServicesChannels();
+        se.info24.servicejaxb.ServicesChannel schjaxb = new ServicesChannel();
+//        ChannelDirection,ChannelTag
+        schjaxb.setChannelDirection(sch.getChannelDirection());
+        if (sch.getChannelTag() != null) {
+            schjaxb.setChannelTag(sch.getChannelTag());
+        }
+
+        scJaxb.getServicesChannel().add(schjaxb);
+        service.setServicesChannels(scJaxb);
+        services.getService().add(service);
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildServiceDeviceSettings(TingcoService tingcoService, List<ServiceDeviceSubscriptions> subscriptionsList, List<ServiceDeviceSettings> settingsList) {
+        Services services = new Services();
+        int seqNo = 1;
+        for (ServiceDeviceSubscriptions sds : subscriptionsList) {
+            se.info24.pojo.Services service = sds.getServices();
+            Service s = new Service();
+            s.setSeqNo(seqNo++);
+            s.setServiceID(service.getServiceId());
+            s.setServiceName(service.getServiceName());
+            if (service.getServiceDescription() != null) {
+                s.setServiceDescription(service.getServiceDescription());
+            }
+            ServiceClientLogins scl = sds.getServiceClientLogins();
+            se.info24.servicejaxb.ServiceClientLogins serviceClientLogins = new se.info24.servicejaxb.ServiceClientLogins();
+            serviceClientLogins.setServiceClientLoginID(scl.getServiceClientLoginId());
+            serviceClientLogins.setServiceClientLoginName(scl.getServiceClientLoginName());
+            ServiceDeviceSubscription subscription = new ServiceDeviceSubscription();
+            subscription.setServiceDeviceSubscriptionID(sds.getServiceDeviceSubscriptionId());
+            int seqNum = 1;
+            for (ServiceDeviceSettings sdSettings : settingsList) {
+                if ((sdSettings.getServiceDeviceSubscriptions().getServiceDeviceSubscriptionId()).equals(sds.getServiceDeviceSubscriptionId())) {
+                    if (sdSettings.getServiceDeviceSettingParentID() == null) {
+                        se.info24.servicejaxb.ServiceDeviceSettings sdss = new se.info24.servicejaxb.ServiceDeviceSettings();
+                        sdss.setSeqNo(seqNum++);
+                        sdss.setServiceDeviceSettingID(sdSettings.getServiceDeviceSettingId());
+                        sdss.setServiceDeviceSettingName(sdSettings.getServiceDeviceSettingName());
+                        sdss.setServiceDeviceSettingValue(sdSettings.getServiceDeviceSettingValue());
+                        if (sdSettings.getObjectSettingTemplateId() != null) {
+                            ObjectSettingTemplates ost = new ObjectSettingTemplates();
+                            ost.setObjectSettingTemplateID(sdSettings.getObjectSettingTemplateId());
+                            sdss.getObjectSettingTemplates().add(ost);
+                        }
+                        subscription.getServiceDeviceSettings().add(sdss);
+                    }
+                }
+            }
+            s.getServiceDeviceSubscription().add(subscription);
+            s.getServiceClientLogins().add(serviceClientLogins);
+            services.getService().add(s);
+        }
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildServiceSettings(TingcoService tingcoService, List<se.info24.pojo.ServiceSettings> serviceSettingsList) {
+        Services services = new Services();
+        Service service = new Service();
+        se.info24.servicejaxb.ServiceSettings serviceSettings = new se.info24.servicejaxb.ServiceSettings();
+        for (se.info24.pojo.ServiceSettings ss : serviceSettingsList) {
+            ServiceSetting serviceSetting = new ServiceSetting();
+            serviceSetting.setServiceSettingID(ss.getServiceSettingId());
+            if (ss.getServiceSettings() != null) {
+                serviceSetting.setServiceSettingParentID(ss.getServiceSettings().getServiceSettingId());
+            }
+            serviceSetting.setServiceSettingName(ss.getServiceSettingName());
+            serviceSetting.setServiceSettingValue(ss.getServiceSettingValue());
+            serviceSettings.getServiceSetting().add(serviceSetting);
+            service.setServiceSettings(serviceSettings);
+        }
+        services.getService().add(service);
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildServiceStatusDetails(TingcoService tingcoService, List<ServiceStatusDetails> serviceStatusDetails, String timeZoneGMToffset) {
+        SimpleDateFormat lFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+        Services services = new Services();
+        int onlineCount = 0;
+        int offlineCount = 0;
+        for (ServiceStatusDetails ssd : serviceStatusDetails) {
+            Service service = new Service();
+            service.setServiceID(ssd.getServiceId());
+            service.setServiceName(ssd.getServiceName());
+            GroupID id = new GroupID();
+            id.setGroupName(ssd.getGroupName());
+            id.setValue(ssd.getGroupId());
+            service.setGroupID(id);
+            se.info24.servicejaxb.Device device = new se.info24.servicejaxb.Device();
+            device.setDeviceID(ssd.getDeviceId());
+            device.setDeviceName(ssd.getDeviceName());
+
+            DeviceTypes deviceTypes = new DeviceTypes();
+            deviceTypes.setDeviceTypeID(ssd.getDeviceTypeId());
+            deviceTypes.setDeviceTypeName(ssd.getDeviceTypeName());
+
+            ServiceStatus serviceStatus = new ServiceStatus();
+            if (ssd.getIsOnline() == 1) {
+                onlineCount++;
+            } else {
+                offlineCount++;
+            }
+            serviceStatus.setIsOnline(ssd.getIsOnline());
+//            serviceStatus.setOnlineCount(onlineCount / serviceStatusDetails.size() * 100);
+//            serviceStatus.setOfflineCount(offlineCount / serviceStatusDetails.size() * 100);
+            serviceStatus.setObjectStateCode(ssd.getObjectStateCode());
+            gc.setTime(RestUtilDAO.convertGMTtoUserLocalTime(timeZoneGMToffset, ssd.getIsOnlineChangedDate()));
+            serviceStatus.setIsOnlineChangedDate(lFormat.format(gc.getTime()));
+            gc.setTime(RestUtilDAO.convertGMTtoUserLocalTime(timeZoneGMToffset, ssd.getObjectStateChangedDate()));
+            serviceStatus.setObjectStateChangedDate(lFormat.format(gc.getTime()));
+
+            device.setDeviceTypes(deviceTypes);
+            service.getDevice().add(device);
+            service.getServiceStatus().add(serviceStatus);
+            services.getService().add(service);
+        }
+        float onlineCountFinal = (onlineCount * 100) / serviceStatusDetails.size();
+        float offlineCountFinal = 100 - onlineCountFinal;
+        services.setServiceStatusOnlineCount(onlineCountFinal+"" );
+        services.setServiceStatusOfflineCount(offlineCountFinal+"");
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildServiceTypeBundlesByServiceTypeId(TingcoService tingcoService, List<BundleDetails> serviceTypeBundlesList) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+            Services services = new Services();
+            Service service = new Service();
+            Bundles bundles = new Bundles();
+            for (BundleDetails stb : serviceTypeBundlesList) {
+                Bundle bundle = new Bundle();
+                bundle.setBundleID(stb.getBundleId());
+                bundle.setBundleName(stb.getBundleName());
+                bundle.setBundleCategoryID(stb.getBundleCategoryId());
+                bundle.setBundleCategoryName(stb.getBundleCategoryName());
+                bundle.setBundleTypeID(stb.getBundleTypeId());
+                bundle.setBundleTypeName(stb.getBundleTypeName());
+                GroupID groupId = new GroupID();
+                groupId.setGroupName(stb.getGroupName());
+                groupId.setValue(stb.getGroupId());
+                bundle.setGroupID(groupId);
+                String dateString = dateFormat.format(stb.getBundleCreatedDate());
+                gc.setTime(dateFormat.parse(dateString));
+                bundle.setCreatedDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(gc));
+                bundle.setCreatedDateTCMV3(dateFormat.format(gc.getTime()));
+                bundles.getBundle().add(bundle);
+            }
+            service.setBundles(bundles);
+            services.getService().add(service);
+            tingcoService.setServices(services);
+            return tingcoService;
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error Occured");
+            return tingcoService;
+        }
+    }
+
+    public TingcoService buildBundleByBundleCategoryAndSearchString(TingcoService tingcoService, List<BundleDetails> serviceTypeBundlesList) {
+        try {
+            Services services = new Services();
+            Service service = new Service();
+            Bundles bundles = new Bundles();
+            for (BundleDetails stb : serviceTypeBundlesList) {
+                Bundle bundle = new Bundle();
+                bundle.setBundleID(stb.getBundleId());
+                bundle.setBundleName(stb.getBundleName());
+                bundle.setBundleCategoryID(stb.getBundleCategoryId());
+                bundle.setBundleCategoryName(stb.getBundleCategoryName());
+                GroupID groupId = new GroupID();
+                groupId.setGroupName(stb.getGroupName());
+                groupId.setValue(stb.getGroupId());
+                bundle.setGroupID(groupId);
+                bundles.getBundle().add(bundle);
+            }
+            service.setBundles(bundles);
+            services.getService().add(service);
+            tingcoService.setServices(services);
+            return tingcoService;
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error Occured");
+            return tingcoService;
+        }
+    }
+
+    public TingcoService buildServicesAndDevices(List<se.info24.pojo.Services> servicesList, int countryId, Session session) {
+        Services services = new Services();
+        int seqNo = 1;
+        Service service;
+        Set<GroupTranslations> gtList;
+        ServiceDAO serviceDAO = new ServiceDAO();
+        DeviceServices deviceServices;
+        for (se.info24.pojo.Services s : servicesList) {
+            service = new Service();
+            service.setSeqNo(seqNo++);
+            service.setServiceID(s.getServiceId());
+            service.setServiceName(s.getServiceName());
+            if (s.getServiceDescription() != null) {
+                service.setServiceDescription(s.getServiceDescription());
+            }
+            if (s.getServiceEnabled() != null) {
+                service.setServiceEnabled(s.getServiceEnabled());
+                if (s.getServiceEnabled() == 1) {
+                    service.setServiceEnabledTCMV3("Yes");
+                } else {
+                    service.setServiceEnabledTCMV3("No");
+
+                }
+            }
+            if (s.getReplicates() != null) {
+                service.setReplicates(s.getReplicates());
+                Object obj = serviceDAO.getServicesbyServiceId(session, s.getReplicates());
+                if (obj != null) {
+                    se.info24.pojo.Services servicereplica = (se.info24.pojo.Services) obj;
+                    service.setReplicatesName(servicereplica.getServiceName());
+                }
+
+            }
+            ServiceType serviceType = objectFactory.createServiceType();
+            serviceType.setServiceTypeID(s.getServiceTypes().getServiceTypeId());
+            serviceType.setServiceTypeName(s.getServiceTypes().getServiceTypeName());
+            service.setServiceType(serviceType);
+
+            gtList = s.getGroups().getGroupTranslationses();
+            for (GroupTranslations gt : gtList) {
+                if ((s.getGroups().getGroupId().equalsIgnoreCase(gt.getId().getGroupId()) && (gt.getId().getCountryId() == countryId))) {
+                    GroupID groupID = objectFactory.createGroupID();
+                    groupID.setValue(s.getGroups().getGroupId());
+                    groupID.setGroupName(gt.getGroupName());
+                    service.setGroupID(groupID);
+                    break;
+                }
+            }
+            if (!s.getDeviceServiceses().isEmpty()) {
+                deviceServices = (DeviceServices) s.getDeviceServiceses().toArray()[0];
+                se.info24.servicejaxb.Device device = objectFactory.createDevice();
+                device.setDeviceID(deviceServices.getDevice().getDeviceId());
+                device.setDeviceName(deviceServices.getDevice().getDeviceName());
+                service.getDevice().add(device);
+            }
+
+            services.getService().add(service);
+        }
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildTingcoAllServices(TingcoService tingcoService, List<se.info24.pojo.Services> servicesList, Device device, String deviceTypeId) {
+        Services services = new Services();
+        boolean flag = false;
+        if (device == null) {
+            for (se.info24.pojo.Services s : servicesList) {
+                Set<DeviceTypeServices> dtsList = s.getDeviceTypeServiceses();
+                for (DeviceTypeServices dtss : dtsList) {
+                    if (dtss.getDeviceTypes().getDeviceTypeId().equalsIgnoreCase(deviceTypeId)) {
+                        Service service = new Service();
+                        service.setServiceID(s.getServiceId());
+                        service.setServiceName(s.getServiceName());
+                        service.setServiceDescription(s.getServiceDescription());
+                        se.info24.servicejaxb.DeviceTypeServices deviceTypeServices = new se.info24.servicejaxb.DeviceTypeServices();
+                        deviceTypeServices.setIsDefault(String.valueOf(dtss.getIsDefault()));
+                        service.setDeviceTypeServices(deviceTypeServices);
+                        services.getService().add(service);
+                        flag = true;
+                    }
+                }
+            }
+        } else if (deviceTypeId == null) {
+            for (se.info24.pojo.Services s : servicesList) {
+                Set<DeviceTypeServices> dtsList = s.getDeviceTypeServiceses();
+                for (DeviceTypeServices dtss : dtsList) {
+                    if (dtss.getId().getDeviceTypeId().equalsIgnoreCase(device.getDeviceTypes().getDeviceTypeId())) {
+                        Service service = new Service();
+                        service.setServiceID(s.getServiceId());
+                        service.setServiceName(s.getServiceName());
+                        service.setServiceDescription(s.getServiceDescription());
+                        se.info24.servicejaxb.DeviceTypeServices deviceTypeServices = new se.info24.servicejaxb.DeviceTypeServices();
+                        deviceTypeServices.setIsDefault(String.valueOf(dtss.getIsDefault()));
+                        service.setDeviceTypeServices(deviceTypeServices);
+                        services.getService().add(service);
+                        flag = true;
+                    }
+                }
+            }
+        }
+        if (!flag) {
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("No groups found in the given groupId");
+            return tingcoService;
+        }
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildTingcoServiceTemplate() throws DatatypeConfigurationException {
+        tingcoService = objectFactory.createTingcoService();
+        tingcoService.setCreateRef("Info24");
+        tingcoService.setMsgVer(new BigDecimal("1.0"));
+        tingcoService.setRegionalUnits("Metric");
+        tingcoService.setTimeZone("UTC");
+
+        tingcoService.setMsgID(UUID.randomUUID().toString());
+        tingcoService.setMsgTimeStamp(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar(TimeZone.getTimeZone("GMT"))));
+
+        MsgStatus msgStatus = new MsgStatus();
+        msgStatus.setResponseCode(0);
+        msgStatus.setResponseText("OK");
+
+        tingcoService.setMsgStatus(msgStatus);
+        return tingcoService;
+    }
+
+    public TingcoService buildServiceTypes(TingcoService tingcoService, List<ServiceTypes> stList, HashMap<String, Users2> userMap) throws DatatypeConfigurationException {
+        Services services = new Services();
+        Service service;
+        int seqNo = 1;
+        Users2 user = null;
+
+        for (ServiceTypes st : stList) {
+            service = new Service();
+            service.setSeqNo(seqNo++);
+
+            ServiceType serviceType = objectFactory.createServiceType();
+            serviceType.setServiceTypeID(st.getServiceTypeId());
+            serviceType.setServiceTypeName(st.getServiceTypeName());
+            if (st.getServiceTypeDescription() != null) {
+                serviceType.setServiceTypeDesc(st.getServiceTypeDescription());
+            }
+
+            service.setServiceType(serviceType);
+
+            if (userMap.get(st.getUserId()) != null) {
+                user = userMap.get(st.getUserId());
+            }
+
+            if (user != null) {
+                LastUpdatedByUserID updatedUser = objectFactory.createLastUpdatedByUserID();
+                updatedUser.setUserFullName(user.getFirstName() + " " + user.getLastName());
+                updatedUser.setValue(user.getUserId());
+                serviceType.setLastUpdatedByUserID(updatedUser);
+            }
+            GregorianCalendar gc = new GregorianCalendar();
+            gc.setTime(st.getCreatedDate());
+            serviceType.setCreatedDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(gc));
+            gc.setTime(st.getUpdatedDate());
+            serviceType.setUpdatedDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(gc));
+            services.getService().add(service);
+        }
+
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildChannelInfo(TingcoService tingcoService, List<Channels> channelList, HashMap<String, Users2> userMap, HashMap<String, Groups> groupMap, int countryId) throws DatatypeConfigurationException {
+        Services services = new Services();
+        Service service;
+        int seqNo = 1;
+        Users2 user = null;
+        for (Channels channel : channelList) {
+            service = new Service();
+            service.setSeqNo(seqNo++);
+            ChannelType ct = objectFactory.createChannelType();
+            ct.setChannelID(channel.getChannelId());
+            ct.setChannelName(channel.getChannelName());
+            ct.setChannelData(channel.getChannelData());
+            GroupID group = objectFactory.createGroupID();
+            Set<GroupTranslations> groupTrans = groupMap.get(channel.getGroups().getGroupId()).getGroupTranslationses();
+            for (GroupTranslations gt : groupTrans) {
+                if (gt.getCountry().getCountryId() == countryId) {
+                    group.setGroupName(gt.getGroupName());
+                    group.setValue(gt.getId().getGroupId());
+                    break;
+                }
+            }
+            ct.setGroupID(group);
+            if (channel.getChannelDescription() != null) {
+                ct.setChannelDesc(channel.getChannelDescription());
+            }
+            ct.setChannelEnabled(channel.getChannelEnabled());
+
+            if (userMap.get(channel.getUserId()) != null) {
+                user = userMap.get(channel.getUserId());
+            }
+
+            if (user != null) {
+                LastUpdatedByUserID updatedUser = objectFactory.createLastUpdatedByUserID();
+                updatedUser.setUserFullName(user.getFirstName() + " " + user.getLastName());
+                updatedUser.setValue(user.getUserId());
+                ct.setLastUpdatedByUserID(updatedUser);
+            }
+            GregorianCalendar gc = new GregorianCalendar();
+            gc.setTime(channel.getCreatedDate());
+            ct.setCreatedDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(gc));
+            gc.setTime(channel.getUpdatedDate());
+            ct.setUpdatedDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(gc));
+            service.setChannelType(ct);
+            services.getService().add(service);
+        }
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildServiceType(TingcoService tingcoService, List<ServiceTypes> servicetypelist) {
+        Services services = new Services();
+        Service service;
+        int seqNo = 1;
+        for (ServiceTypes serviceTypes : servicetypelist) {
+            service = new Service();
+            service.setSeqNo(seqNo++);
+            ServiceType servicetype = objectFactory.createServiceType();
+            servicetype.setServiceTypeID(serviceTypes.getServiceTypeId());
+            servicetype.setServiceTypeName(serviceTypes.getServiceTypeName());
+            service.setServiceType(servicetype);
+            services.getService().add(service);
+        }
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildServices(TingcoService tingcoService, List<se.info24.pojo.Services> servicesList) {
+        Services services = new Services();
+        int seqNo = 1;
+        Service service;
+        for (se.info24.pojo.Services s : servicesList) {
+            service = new Service();
+            service.setSeqNo(seqNo++);
+            service.setServiceID(s.getServiceId());
+            service.setServiceName(s.getServiceName());
+            services.getService().add(service);
+        }
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildGetServiceSettingInfo(TingcoService tingcoService, se.info24.pojo.ServiceSettings serviceSettings, Users2 users2, String timeZoneGMToffset) throws DatatypeConfigurationException {
+        Services services = new Services();
+        Service service = new Service();
+        ServiceSetting serviceSettingJaxb = new ServiceSetting();
+        SimpleDateFormat lFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        ServiceSettings serviceSettingsJaxb = new ServiceSettings();
+        if (serviceSettings.getSettingDataType() != null) {
+            SettingDataType settingDataTypeJaxb = new SettingDataType();
+            settingDataTypeJaxb.setSettingDataTypeID(serviceSettings.getSettingDataType().getSettingDataTypeId());
+            settingDataTypeJaxb.setSettingDataType(serviceSettings.getSettingDataType().getSettingDataType());
+            serviceSettingJaxb.getSettingDataType().add(settingDataTypeJaxb);
+        }
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(RestUtilDAO.convertGMTtoUserLocalTime(timeZoneGMToffset, serviceSettings.getActiveFromDate()));
+        serviceSettingJaxb.setActiveFromDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(gc));
+        serviceSettingJaxb.setActiveFromDateTCMV3(lFormat.format(gc.getTime()));
+        if (users2 != null) {
+            serviceSettingJaxb.setLastUpdatedUser(users2.getFirstName() + " " + users2.getLastName());
+        }
+        serviceSettingsJaxb.getServiceSetting().add(serviceSettingJaxb);
+        service.setServiceSettings(serviceSettingsJaxb);
+        services.getService().add(service);
+        tingcoService.setServices(services);
+
+        return tingcoService;
+    }
+
+    public TingcoService buildGetServiceChannelList(TingcoService tingcoService, List<Channels> channelList, List<ServicesChannels> servicesChannelseList) {
+        Services services = new Services();
+        Service service = new Service();
+        se.info24.servicejaxb.ServicesChannels scJaxb = new se.info24.servicejaxb.ServicesChannels();
+        se.info24.servicejaxb.ServicesChannel schjaxb = null;
+
+        for (Channels channel : channelList) {
+            for (ServicesChannels servicesChannels : servicesChannelseList) {
+                if (servicesChannels.getChannels().getChannelId().equalsIgnoreCase(channel.getChannelId())) {
+                    schjaxb = new ServicesChannel();
+                    schjaxb.setServiceChannelID(servicesChannels.getServiceChannelId());
+                    schjaxb.setChannelID(servicesChannels.getChannels().getChannelId());
+                    schjaxb.setChannelDirection(servicesChannels.getChannelDirection());
+                    if (servicesChannels.getChannelTag() != null) {
+                        schjaxb.setChannelTag(servicesChannels.getChannelTag());
+                    }
+                    schjaxb.setChannelName(channel.getChannelName());
+                    schjaxb.setChannelData(channel.getChannelData());
+                    scJaxb.getServicesChannel().add(schjaxb);
+                }
+            }
+        }
+
+
+        service.setServicesChannels(scJaxb);
+        services.getService().add(service);
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildGetBundleTypes(TingcoService tingcoService, List<BundleTypeTranslations> bundleTypeTranslations) {
+        Services services = new Services();
+        Service service = new Service();
+        Bundles bundles = new Bundles();
+        for (BundleTypeTranslations bundleTypeTranslations1 : bundleTypeTranslations) {
+            Bundle bundle = new Bundle();
+            bundle.setBundleTypeID(bundleTypeTranslations1.getId().getBundleTypeId());
+            bundle.setBundleTypeName(bundleTypeTranslations1.getBundleTypeName());
+            bundles.getBundle().add(bundle);
+        }
+        service.setBundles(bundles);
+        services.getService().add(service);
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildGetBundleCayegories(TingcoService tingcoService, List<BundleCategoryTranslations> bundleCategoryTranslations) {
+        Services services = new Services();
+        Service service = new Service();
+        Bundles bundles = new Bundles();
+        for (BundleCategoryTranslations bundleCategoryTranslations1 : bundleCategoryTranslations) {
+            Bundle bundle = new Bundle();
+            bundle.setBundleCategoryID(bundleCategoryTranslations1.getId().getBundleCategoryId());
+            bundle.setBundleCategoryName(bundleCategoryTranslations1.getBundleCategoryName());
+            bundles.getBundle().add(bundle);
+        }
+        service.setBundles(bundles);
+        services.getService().add(service);
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildGetBundleList(TingcoService tingcoService, List<se.info24.pojo.Bundle> bundlesPojo) {
+        Services services = new Services();
+        Service service = new Service();
+        Bundles bundles = new Bundles();
+        for (se.info24.pojo.Bundle bundle : bundlesPojo) {
+            Bundle bundleJaxb = new Bundle();
+            bundleJaxb.setBundleID(bundle.getBundleId());
+            bundleJaxb.setBundleName(bundle.getBundleName());
+            bundles.getBundle().add(bundleJaxb);
+        }
+        service.setBundles(bundles);
+        services.getService().add(service);
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildGetBundleLogDetails(TingcoService tingcoService, List<BundleLog> bundleLogs, List<BundleVersions> bundleVersionses, String timeZoneGMToffset, List<se.info24.pojo.Bundle> bundlesPojo) {
+        Services services = new Services();
+        Service service = new Service();
+        Bundles bundles = new Bundles();
+        Bundle bundle = new Bundle();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        GregorianCalendar gc = new GregorianCalendar();
+        for (BundleLog bl : bundleLogs) {
+
+            se.info24.servicejaxb.BundleLog bundleLogJaxb = new se.info24.servicejaxb.BundleLog();
+            bundleLogJaxb.setBundleID(bl.getBundleId());
+            bundleLogJaxb.setMessage(bl.getMessage());
+            if (bl.getMessageCode() != null) {
+                bundleLogJaxb.setMessageCode(bl.getMessageCode());
+            }
+            if (bl.getCreatedDate() != null) {
+                gc.setTime(RestUtilDAO.convertGMTtoUserLocalTime(timeZoneGMToffset, bl.getCreatedDate()));
+                bundleLogJaxb.setCreatedDate(dateFormat.format(gc.getTime()));
+            }
+            for (se.info24.pojo.Bundle bundle1 : bundlesPojo) {
+                if (bundle1.getBundleId().equalsIgnoreCase(bl.getBundleId())) {
+                    bundleLogJaxb.setBundleName(bundle1.getBundleName());
+                }
+            }
+            if (bl.getBundleVersionId() != null) {
+                for (BundleVersions bv : bundleVersionses) {
+                    if (bv.getBundleVersionId().equalsIgnoreCase(bl.getBundleVersionId())) {
+                        BundleVersion bundleVersionJaxb = new BundleVersion();
+//                        String version  = null;
+                        bundleVersionJaxb.setBundleVersionID(bv.getBundleVersionId());
+                        bundleVersionJaxb.setMajor(new BigInteger(bv.getMajor() + ""));
+                        bundleVersionJaxb.setMicro(new BigInteger(bv.getMicro() + ""));
+                        bundleVersionJaxb.setMinor(new BigInteger(bv.getMinor() + ""));
+                        bundleVersionJaxb.setVersion(bv.getMajor() + "." + bv.getMicro() + "." + bv.getMinor());
+                        bundleLogJaxb.getBundleVersion().add(bundleVersionJaxb);
+                        break;
+                    }
+                }
+            }
+            bundle.getBundleLog().add(bundleLogJaxb);
+        }
+
+        bundles.getBundle().add(bundle);
+        service.setBundles(bundles);
+        services.getService().add(service);
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildGetBundleDetailsById(TingcoService tingcoService, se.info24.pojo.Bundle bundle, BundleCategoryTranslations bundleCategoryTranslations, BundleTypeTranslations bundleTypeTranslations, GroupTranslations groupTranslations, Session session) {
+        Services services = new Services();
+        Service service = new Service();
+        Bundles bundles = new Bundles();
+        Bundle bundleJaxb = new Bundle();
+        bundleJaxb.setBundleID(bundle.getBundleId());
+        bundleJaxb.setBundleName(bundle.getBundleName());
+        if (bundle.getBundleSymbolicName() != null) {
+            bundleJaxb.setBundleSymbolicName(bundle.getBundleSymbolicName());
+        }
+        if (bundle.getBundleDescription() != null) {
+            bundleJaxb.setBundleDescription(bundle.getBundleDescription());
+        }
+        GroupID groupID = new GroupID();
+        groupID.setGroupName(groupTranslations.getGroupName());
+        groupID.setValue(groupTranslations.getId().getGroupId());
+        bundleJaxb.setGroupID(groupID);
+
+        if (bundleCategoryTranslations != null) {
+            bundleJaxb.setBundleCategoryID(bundleCategoryTranslations.getId().getBundleCategoryId());
+            bundleJaxb.setBundleCategoryName(bundleCategoryTranslations.getBundleCategoryName());
+        }
+        if (bundleTypeTranslations != null) {
+            bundleJaxb.setBundleTypeID(bundleTypeTranslations.getId().getBundleTypeId());
+            bundleJaxb.setBundleTypeName(bundleTypeTranslations.getBundleTypeName());
+        }
+        if (bundle.getBundleIconUrl() != null) {
+            bundleJaxb.setBundleIconURL(bundle.getBundleIconUrl());
+        }
+        bundles.getBundle().add(bundleJaxb);
+        service.setBundles(bundles);
+        services.getService().add(service);
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildGetBundleVersionsListByBundleID(TingcoService tingcoService, se.info24.pojo.Bundle bundle, List<BundleFiles> bundleFileses, List<BundleVersions> bundleVersionses, List<Users2> usersDetails, String timeZoneGMToffset) {
+        Services services = new Services();
+        Service service = new Service();
+        Bundles bundles = new Bundles();
+        Bundle bundleJaxb = new Bundle();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for (BundleVersions bv : bundleVersionses) {
+            se.info24.servicejaxb.BundleVersions bundleVersionsJaxb = new se.info24.servicejaxb.BundleVersions();
+            BundleVersion bundleVersionJaxb = new BundleVersion();
+            bundleVersionJaxb.setBundleVersionID(bv.getBundleVersionId());
+            bundleVersionJaxb.setMajor(new BigInteger(bv.getMajor() + ""));
+            bundleVersionJaxb.setMicro(new BigInteger(bv.getMicro() + ""));
+            bundleVersionJaxb.setMinor(new BigInteger(bv.getMinor() + ""));
+            if (bv.getChangeLog() != null) {
+                bundleVersionJaxb.setChangeLog(bv.getChangeLog());
+            }
+            for (BundleFiles bf : bundleFileses) {
+                if (bf.getBundleVersionId().equalsIgnoreCase(bv.getBundleVersionId())) {
+                    se.info24.servicejaxb.BundleFiles bundleFilesJaxb = new se.info24.servicejaxb.BundleFiles();
+                    bundleFilesJaxb.setBundleFileName(bf.getBundleFileName());
+                    bundleFilesJaxb.setBundleFileLength(new BigInteger(bf.getBundleFileLength() + ""));
+                    bundleVersionJaxb.setBundleFiles(bundleFilesJaxb);
+                    break;
+                }
+            }
+            for (Users2 users : usersDetails) {
+                if (users.getUserId().equalsIgnoreCase(bv.getLastUpdatedByUserId())) {
+                    bundleVersionJaxb.setFullName(users.getFirstName() + " " + users.getLastName());
+                    break;
+                }
+            }
+            if (bv.getCreatedDate() != null) {
+                GregorianCalendar gc = new GregorianCalendar();
+                gc.setTime(RestUtilDAO.convertGMTtoUserLocalTime(timeZoneGMToffset, bv.getCreatedDate()));
+                bundleVersionJaxb.setCreatedDateTCMV3(dateFormat.format(gc.getTime()));
+            }
+            bundleVersionsJaxb.setBundleVersion(bundleVersionJaxb);
+            bundleJaxb.getBundleVersions().add(bundleVersionsJaxb);
+        }
+        bundles.getBundle().add(bundleJaxb);
+        service.setBundles(bundles);
+        services.getService().add(service);
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+
+    public TingcoService buildGetContentSubscriptionDetails(TingcoService tingcoService, List<se.info24.pojo.Services> serviceses, List<ServiceClientLogins> serviceClientLogins, List<ContentCategoryTranslations> contentCategoryTranslations, List<ServiceContentSubscriptions> serviceContentSubscriptionses) {
+        Services services = new Services();
+
+
+
+        for (ContentCategoryTranslations ContentCategoryTranslation : contentCategoryTranslations) {
+            for (ServiceContentSubscriptions serviceContentSubscriptions : serviceContentSubscriptionses) {
+                if (serviceContentSubscriptions.getContentCategoryId().equalsIgnoreCase(ContentCategoryTranslation.getId().getContentCategoryId())) {
+                    for (se.info24.pojo.Services servicePojo : serviceses) {
+                        if (serviceContentSubscriptions.getServiceId().equalsIgnoreCase(servicePojo.getServiceId())) {
+                            Service service = new Service();
+                            service.setServiceID(servicePojo.getServiceId());
+                            service.setServiceName(servicePojo.getServiceName());
+
+                            ServiceContentSubscription serviceContentSubscription = new ServiceContentSubscription();
+                            serviceContentSubscription.setServiceContentSubscriptionID(serviceContentSubscriptions.getServiceContentSubscriptionId());
+                            ContentCategory contentCategory = new ContentCategory();
+                            contentCategory.setContentCategoryId(ContentCategoryTranslation.getId().getContentCategoryId());
+                            contentCategory.setContentCategoryName(ContentCategoryTranslation.getContentCategoryName());
+                            serviceContentSubscription.getContentCategory().add(contentCategory);
+                            service.getServiceContentSubscription().add(serviceContentSubscription);
+
+                            for (ServiceClientLogins serviceClientLogin : serviceClientLogins) {
+                                if (serviceContentSubscriptions.getServiceClientLoginId().equalsIgnoreCase(serviceClientLogin.getServiceClientLoginId())) {
+                                    se.info24.servicejaxb.ServiceClientLogins clientLogins = new se.info24.servicejaxb.ServiceClientLogins();
+                                    clientLogins.setServiceClientLoginID(serviceClientLogin.getServiceClientLoginId());
+                                    clientLogins.setServiceClientLoginName(serviceClientLogin.getServiceClientLoginName());
+                                    service.getServiceClientLogins().add(clientLogins);
+                                }
+                            }
+//                    for (ContentCategoryTranslations ContentCategoryTranslation : contentCategoryTranslations) {
+//                        if (serviceContentSubscriptions.getContentCategoryId().equalsIgnoreCase(ContentCategoryTranslation.getId().getContentCategoryId())) {
+
+//                        }
+//                    }
+                            services.getService().add(service);
+                        }
+                    }
+                }
+            }
+        }
+        tingcoService.setServices(services);
+        return tingcoService;
+    }
+}

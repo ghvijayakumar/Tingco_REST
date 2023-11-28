@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 13, 2012 10:38:45 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Weekdays" schema="dbo" table="Weekdays">
+    <cache usage="nonstrict-read-write"/>
+    <id name="weekdayId" type="string">
+      <column length="36" name="WeekdayID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="timeFrameses">
+      <key>
+        <column length="36" name="WeekdayID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.TimeFrames"/>
+    </set>
+    <set inverse="true" name="weekdayTranslationses">
+      <key>
+        <column length="36" name="WeekdayID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.WeekdayTranslations"/>
+    </set>
+  </class>
+  <query name="getWeekdaysByUserId">
+        from Weekdays where userId = :userId
+   </query>
+</hibernate-mapping>

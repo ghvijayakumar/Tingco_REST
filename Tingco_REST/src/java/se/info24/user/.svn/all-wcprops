@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/NB_2011/!svn/ver/2447/Tingco_REST/src/java/se/info24/user
+END
+UserAliasResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/866/Tingco_REST/src/java/se/info24/user/UserAliasResource.java
+END
+User_LoginsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2445/Tingco_REST/src/java/se/info24/user/User_LoginsResource.java
+END
+UserDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/NB_2011/!svn/ver/2447/Tingco_REST/src/java/se/info24/user/UserDAO.java
+END
+TingcoUserXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2423/Tingco_REST/src/java/se/info24/user/TingcoUserXML.java
+END
+KeyssResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2388/Tingco_REST/src/java/se/info24/user/KeyssResource.java
+END
+UserManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/user/UserManager.java
+END
+UserGroupssResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2122/Tingco_REST/src/java/se/info24/user/UserGroupssResource.java
+END
+UsersResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/user/UsersResource.java
+END
+User_RegistersResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1897/Tingco_REST/src/java/se/info24/user/User_RegistersResource.java
+END
+UserRoleObjectPermissionssResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/1819/Tingco_REST/src/java/se/info24/user/UserRoleObjectPermissionssResource.java
+END
+UserApplicationSettingssResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/1435/Tingco_REST/src/java/se/info24/user/UserApplicationSettingssResource.java
+END
+User_LoginResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/user/User_LoginResource.java
+END
+UserSession.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/user/UserSession.java
+END
+KeysResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/user/KeysResource.java
+END
+UserAddressesResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2432/Tingco_REST/src/java/se/info24/user/UserAddressesResource.java
+END
+UserGroupsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/user/UserGroupsResource.java
+END
+CountryDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/1887/Tingco_REST/src/java/se/info24/user/CountryDAO.java
+END
+UserAliasesResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2446/Tingco_REST/src/java/se/info24/user/UserAliasesResource.java
+END
+UserSession2DAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/1429/Tingco_REST/src/java/se/info24/user/UserSession2DAO.java
+END
+User_RegisterResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/user/User_RegisterResource.java
+END
+UserRoleObjectPermissionsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/user/UserRoleObjectPermissionsResource.java
+END
+UserApplicationSettingsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/user/UserApplicationSettingsResource.java
+END
+UserAddressResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/user/UserAddressResource.java
+END
+UserssResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2433/Tingco_REST/src/java/se/info24/user/UserssResource.java
+END

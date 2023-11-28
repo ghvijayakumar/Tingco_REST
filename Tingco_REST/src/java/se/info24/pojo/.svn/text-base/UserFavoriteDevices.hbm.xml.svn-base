@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 24, 2011 3:27:30 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserFavoriteDevices" schema="dbo" table="UserFavoriteDevices">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.UserFavoriteDevicesId" name="id">
+      <key-property name="userId" type="string">
+        <column length="36" name="UserID"/>
+      </key-property>
+      <key-property name="deviceId" type="string">
+        <column length="36" name="DeviceID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Device" fetch="select" insert="false" name="device" update="false">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </many-to-one>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="deleteFavoriteDevicesByDeviceId">
+        delete from UserFavoriteDevices userfav where userfav.id.userId = :userid and userfav.id.deviceId = :deviceid
+    </query>
+  <query name="deleteFavoriteDevicesByUserId">
+        delete from UserFavoriteDevices userfav where userfav.id.userId = :userid
+    </query>
+  <query name="getUserFavoriteDevicesById">
+        from UserFavoriteDevices ufd where ufd.id.userId = :userId
+    </query>
+</hibernate-mapping>

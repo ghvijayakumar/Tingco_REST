@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+      <!--<property name="hibernate.connection.url">jdbc:sqlserver://192.168.1.42:1433;databaseName=timweb</property>
+    <property name="hibernate.connection.username">sa</property>
+    <property name="hibernate.connection.password">kathi</property>>-->
+  <property name="hibernate.connection.url">jdbc:sqlserver://192.168.1.244:1319;databaseName=timweb</property>
+    <property name="hibernate.connection.username">sa</property>
+    <property name="hibernate.connection.password">java123$</property>
+    <mapping resource="se/info24/timPojo/SiteMenuTranslations.hbm.xml"/>
+    <mapping resource="se/info24/timPojo/UserRoleObjects.hbm.xml"/>
+    <mapping resource="se/info24/timPojo/SiteMenus.hbm.xml"/>
+    <mapping resource="se/info24/timPojo/Pages.hbm.xml"/>
+    <mapping resource="se/info24/timPojo/PageTranslations.hbm.xml"/>
+    <mapping resource="se/info24/timPojo/ApplicationModuleObjects.hbm.xml"/>
+    <mapping resource="se/info24/timPojo/Sysdiagrams.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

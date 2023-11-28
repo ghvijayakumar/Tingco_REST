@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 9, 2013 11:22:55 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.AccessLog" schema="dbo" table="AccessLog">
+    <cache usage="nonstrict-read-write"/>
+    <id name="accessLogRowId" type="string">
+      <column length="36" name="AccessLogRowID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="accessTime" type="timestamp">
+      <column length="23" name="AccessTime" not-null="true"/>
+    </property>
+    <property name="deviceId" type="string">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </property>
+    <property name="deviceGroupId" type="string">
+      <column length="36" name="DeviceGroupID" not-null="true"/>
+    </property>
+    <property name="deviceName" type="string">
+      <column name="DeviceName" not-null="true"/>
+    </property>
+    <property name="resource" type="string">
+      <column name="Resource"/>
+    </property>
+    <property name="userAliasId" type="string">
+      <column length="36" name="UserAliasID"/>
+    </property>
+    <property name="userAlias" type="string">
+      <column name="UserAlias" not-null="true"/>
+    </property>
+    <property name="firstName" type="string">
+      <column name="FirstName"/>
+    </property>
+    <property name="lastName" type="string">
+      <column name="LastName"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="userGroupId" type="string">
+      <column length="36" name="UserGroupID" not-null="true"/>
+    </property>
+    <property name="userAliasTypeId" type="string">
+      <column length="36" name="UserAliasTypeID" not-null="true"/>
+    </property>
+    <property name="userAliasTypeName" type="string">
+      <column name="UserAliasTypeName"/>
+    </property>
+    <property name="eventTypeId" type="string">
+      <column length="36" name="EventTypeID" not-null="true"/>
+    </property>
+    <property name="eventSubject" type="string">
+      <column name="EventSubject" not-null="true"/>
+    </property>
+    <property name="posLatitude" type="string">
+      <column name="PosLatitude" precision="10" scale="7"/>
+    </property>
+    <property name="posLongitude" type="string">
+      <column name="PosLongitude" precision="10" scale="7"/>
+    </property>
+    <property name="posAltitude" type="string">
+      <column name="PosAltitude" precision="8" scale="1"/>
+    </property>
+    <property name="posHeading" type="java.lang.Integer">
+      <column name="PosHeading"/>
+    </property>
+    <property name="coordinateSystemId" type="string">
+      <column name="CoordinateSystemID"/>
+    </property>
+    <property name="location" type="string">
+      <column name="Location"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getAccessLogById">
+        from AccessLog where accessLogRowId = :accessLogRowId
+    </query>
+</hibernate-mapping>

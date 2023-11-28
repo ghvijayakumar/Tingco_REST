@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2011 11:59:54 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Users2" schema="dbo" table="Users2">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.Users2Id" name="id">
+      <key-property name="loginName" type="string">
+        <column length="200" name="LoginName"/>
+      </key-property>
+      <key-property name="domainId" type="string">
+        <column length="36" name="DomainID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.UserTypes2" fetch="select" name="userTypes2">
+      <column length="36" name="UserTypeID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Domains" fetch="select" insert="false" name="domains" update="false">
+      <column length="36" name="DomainID" not-null="true"/>
+    </many-to-one>
+    <property name="userId" type="string">
+      <column length="36" name="UserID" not-null="true" unique="true"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="password" type="string">
+      <column length="200" name="Password"/>
+    </property>
+    <property name="firstName" type="string">
+      <column length="200" name="FirstName" not-null="true"/>
+    </property>
+    <property name="lastName" type="string">
+      <column length="200" name="LastName" not-null="true"/>
+    </property>
+    <property name="userEmail" type="string">
+      <column length="200" name="UserEmail" not-null="true"/>
+    </property>
+    <property name="userMobilePhone" type="string">
+      <column length="50" name="UserMobilePhone"/>
+    </property>
+    <property name="countryId" type="int">
+      <column name="CountryID" not-null="true"/>
+    </property>
+    <property name="isLockedOut" type="int">
+      <column name="IsLockedOut" not-null="true"/>
+    </property>
+    <property name="changePwdRequired" type="int">
+      <column name="ChangePwdRequired" not-null="true"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate" not-null="true"/>
+    </property>
+    <property name="userSmallImageUrl" type="string">
+      <column length="200" name="UserSmallImageURL"/>
+    </property>
+    <property name="lastLoginDate" type="timestamp">
+      <column length="23" name="LastLoginDate"/>
+    </property>
+    <property name="lockedOutDate" type="timestamp">
+      <column length="23" name="LockedOutDate"/>
+    </property>
+    <property name="lastPasswordChangedDate" type="timestamp">
+      <column length="23" name="LastPasswordChangedDate"/>
+    </property>
+    <property name="failedPasswordAttemptCount" type="java.lang.Integer">
+      <column name="FailedPasswordAttemptCount"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="nickName" type="string">
+      <column length="50" name="NickName"/>
+    </property>
+    <!-- <set name="userProviderTypeses" inverse="true" cascade="delete">
+            <key>
+                <column name="UserID" length="36" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="se.info24.pojo.UserProviderTypes" />
+        </set> -->
+    <!--  <set name="userFavoriteDataItemses" inverse="true">
+            <key>
+                <column name="UserID" length="36" not-null="true" />
+            </key>
+            <one-to-many class="se.info24.pojo.UserFavoriteDataItems" />
+        </set> 
+        <set name="bundleVersionses" inverse="true">
+            <key>
+                <column name="LastUpdatedByUserID" length="36" not-null="true" />
+            </key>
+            <one-to-many class="se.info24.pojo.BundleVersions" />
+        </set> -->
+  </class>
+  <query name="getUsers2">
+        from Users2 order by firstName,lastName asc
+    </query>
+  <query name="getUsers2ById">
+        from Users2 where userId = :userID order by createdDate desc
+    </query>
+  <query name="getAllUsersByDomainID">
+        from Users2 where domains.domainId = :domainID 
+    </query>
+  <query name="getUsersByEmailID">
+        from Users2 where userEmail = :email
+    </query>
+  <query name="getUserByLoginNameandDomainId">
+        from Users2 where loginName = :loginName  and domains.domainId = :domainID
+    </query>
+  <query name="getUserByUserIDandDomainId">
+        from Users2 where userId = :userID  and domains.domainId = :domainID
+    </query>
+  <query name="getUsers2ByGroupId">
+        from Users2 where groupId = :groupId order by createdDate desc
+    </query>
+  <query name="getUsers2ByUserIdShorted">
+        from Users2 where userId in (:userID) order by firstName,lastName
+    </query>
+  <query name="getUsers2ByGroupIdList">
+        from Users2 where groupId in (:groupId) order by createdDate desc
+    </query>
+  <query name="getUsers2ByUserId">
+        from Users2 where userId = :userId
+    </query>
+  <query name="getUsers2BySearchFilter">
+        from Users2 where userId in (:userId) and (firstName like :firstName or lastName like :lastName or loginName like :loginName or userEmail like :userEmail or userMobilePhone like :userMobilePhone) order by createdDate desc
+    </query>
+  <query name="getUsers2InSortedOrder">
+        from Users2 where userId in (:userID) order by firstName asc, lastName asc
+    </query>
+  <query name="getUsers2BySearchFilters">
+        from Users2 where (firstName like :firstName or lastName like :lastName or userEmail like :userEmail) order by createdDate desc
+    </query>
+  <query name="getUsers2BySearchFiltersAndGroup">
+        from Users2 where (firstName like :firstName or lastName like :lastName or userEmail like :userEmail) and  groupId in (:groupId) order by createdDate desc
+    </query>
+  <query name="getUsers2BySearchstring">
+        from Users2 where userId in (:userId) and (firstName like :firstName or lastName like :lastName) order by firstName,lastName asc
+    </query>
+  <query name="getUsers2ByUserIdList">
+        from Users2 where userId in (:userId)
+    </query>
+  <query name="getUsers2BySearchstrings">
+        from Users2 where groupId in (:groupId) and (userId like :searchString or firstName like '%'+:searchString+'%' or lastName like '%'+:searchString+'%' or userEmail like :searchString or userMobilePhone like '%'+:searchString+'%' ) order by firstName,lastName asc
+    </query>
+  <query name="getUsers2ByGroupIdListorderByFirstNameLastName">
+        from Users2 where groupId in (:groupId) order by firstName,lastName
+    </query>
+  <query name="getUsers2BySearchstringConcat">
+        from Users2 where userId in (:userId) and (firstName+' '+lastName) like '%'+:searchString+'%' order by firstName,lastName asc
+    </query>
+  <query name="getUsers2ByGroupIdUsingCriteria">
+        from Users2 where groupId = :groupId and (firstName+' '+lastName) like '%'+:searchString+'%' order by createdDate desc
+    </query>
+</hibernate-mapping>

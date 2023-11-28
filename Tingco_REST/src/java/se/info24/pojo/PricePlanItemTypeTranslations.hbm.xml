@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 26, 2012 3:24:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.PricePlanItemTypeTranslations" schema="dbo" table="PricePlanItemTypeTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.PricePlanItemTypeTranslationsId" name="id">
+      <key-property name="pricePlanItemTypeId" type="string">
+        <column length="36" name="PricePlanItemTypeID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.PricePlanItemTypes" fetch="select" insert="false" name="pricePlanItemTypes" update="false">
+      <column length="36" name="PricePlanItemTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="pricePlanItemTypeName" type="string">
+      <column length="50" name="PricePlanItemTypeName" not-null="true"/>
+    </property>
+    <property name="pricePlanItemTypeDescription" type="string">
+      <column length="200" name="PricePlanItemTypeDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getPricePlanItemTypeTranslations">
+        from PricePlanItemTypeTranslations where pricePlanItemTypeId = :pricePlanItemTypeId and countryId = :countryId
+    </query>
+  <query name="getPricePlanItemTypeTranslationsByCountryId">
+        from PricePlanItemTypeTranslations where countryId = :countryId order by pricePlanItemTypeName
+    </query>
+</hibernate-mapping>

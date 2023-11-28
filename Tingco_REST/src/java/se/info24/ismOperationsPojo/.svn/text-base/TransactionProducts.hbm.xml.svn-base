@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 26, 2012 5:25:15 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class catalog="ISMOperations" name="se.info24.ismOperationsPojo.TransactionProducts" schema="dbo" table="TransactionProducts">
+        <cache usage="nonstrict-read-write"/>
+        <composite-id class="se.info24.ismOperationsPojo.TransactionProductsId" name="id">
+            <key-property name="transactionId" type="string">
+                <column length="36" name="TransactionID"/>
+            </key-property>
+            <key-property name="productVariantId" type="string">
+                <column length="36" name="ProductVariantID"/>
+            </key-property>
+        </composite-id>
+        <property name="productVariantSku" type="string">
+            <column name="ProductVariantSKU"/>
+        </property>
+        <property name="productVariantName" type="string">
+            <column name="ProductVariantName"/>
+        </property>
+        <property name="type" type="string">
+            <column length="36" name="Type"/>
+        </property>
+        <property name="chargeType" type="string">
+            <column length="36" name="ChargeType"/>
+        </property>
+        <property name="transactionType" type="string">
+            <column length="36" name="TransactionType"/>
+        </property>
+        <property name="ppu" type="java.lang.Integer">
+            <column name="PPU"/>
+        </property>
+        <property name="vat" type="big_decimal">
+            <column name="VAT" precision="18"/>
+        </property>
+        <property name="quantity" type="java.lang.Integer">
+            <column name="Quantity"/>
+        </property>
+        <property name="bayNumber" type="java.lang.Integer">
+            <column name="BayNumber"/>
+        </property>
+        <property name="quantityUnit" type="string">
+            <column name="QuantityUnit"/>
+        </property>
+        <property name="lastUpdatedByUserId" type="string">
+            <column length="36" name="LastUpdatedByUserID"/>
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column length="23" name="CreatedDate"/>
+        </property>
+        <property name="updateDate" type="timestamp">
+            <column length="23" name="UpdateDate"/>
+        </property>
+        <property name="amountInclVat" type="java.lang.Long">
+            <column name="AmountInclVAT" precision="18" scale="0" />
+        </property>
+        <property name="amountExclVat" type="java.lang.Long">
+            <column name="AmountExclVAT" precision="18" scale="0" />
+        </property>
+        <property name="amountVat" type="java.lang.Long">
+            <column name="AmountVAT" precision="18" scale="0" />
+        </property>
+    </class>
+    <query name="getTransactionProductsByTransactionId">
+        from TransactionProducts where id.transactionId = :transactionId order by createdDate desc, productVariantName asc
+    </query>
+    <query name="getTransactionProductsByIds">
+        from TransactionProducts where id.transactionId = :transactionId and id.productVariantId = :productVariantId
+    </query>
+    <query name="getTransactionProductsByTransactionIds">
+        from TransactionProducts where id.transactionId in(:transactionId) order by productVariantName
+    </query>
+    <query name="getTransactionProductsByTransactionIdsCreatedDate">
+        from TransactionProducts where id.transactionId in(:transactionId) order by createdDate desc
+    </query>
+</hibernate-mapping>

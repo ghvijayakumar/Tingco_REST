@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 27, 2013 2:19:13 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.GroupDefaultUserAlias" schema="dbo" table="GroupDefaultUserAlias">
+    <cache usage="nonstrict-read-write"/>
+    <id name="groupId" type="string">
+      <column length="36" name="GroupID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="userAliasId" type="string">
+      <column length="36" name="UserAliasID" not-null="true"/>
+    </property>
+    <property name="costCenterId" type="string">
+      <column length="36" name="CostCenterID" not-null="true"/>
+    </property>
+    <property name="companyPaymentEnabled" type="java.lang.Integer">
+      <column name="CompanyPaymentEnabled"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getGroupDefaultUserAliasByGroupId">
+      from GroupDefaultUserAlias where groupId = :groupId
+    </query>
+  <query name="getGroupDefaultUserAliasByIdandCostCenterId">
+        from GroupDefaultUserAlias where groupId = :groupId and costCenterId = :costCenterId
+    </query>
+</hibernate-mapping>

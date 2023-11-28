@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 5, 2013 3:09:03 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="timweb" name="se.info24.timPojo.UserRoleObjects" schema="dbo" table="UserRoleObjects">
+    <composite-id class="se.info24.timPojo.UserRoleObjectsId" name="id">
+      <key-property name="userRoleId" type="string">
+        <column length="36" name="UserRoleID"/>
+      </key-property>
+      <key-property name="objectId" type="string">
+        <column length="36" name="ObjectID"/>
+      </key-property>
+    </composite-id>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 3, 2013 5:40:32 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.MediaFiles" schema="dbo" table="MediaFiles">
+    <cache usage="nonstrict-read-write"/>
+    <id name="mediaFileId" type="string">
+      <column length="36" name="MediaFileID"/>
+      <generator class="assigned"/>
+    </id>
+    <version name="version" type="java.lang.Integer">
+      <column name="Version"/>
+    </version>
+    <property name="mediaFileName" type="string">
+      <column name="MediaFileName" not-null="true"/>
+    </property>
+    <property name="mediaFileDescription" type="string">
+      <column name="MediaFileDescription"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="mediaFileUrl" type="string">
+      <column name="MediaFileURL"/>
+    </property>
+    <property name="mediaFileBlob" type="binary">
+      <column name="MediaFileBlob"/>
+    </property>
+    <property name="mediaFileLength" type="long">
+      <column name="MediaFileLength" not-null="true"/>
+    </property>
+    <property name="mediaFileExtension" type="string">
+      <column name="MediaFileExtension" not-null="true"/>
+    </property>
+    <property name="mediaFileCountryId" type="java.lang.Integer">
+      <column name="MediaFileCountryID"/>
+    </property>
+    <property name="mediaFileTypeId" type="string">
+      <column length="36" name="MediaFileTypeID"/>
+    </property>
+    <property name="checksumSha1" type="string">
+      <column name="ChecksumSHA1"/>
+    </property>
+    <property name="checksumMd5" type="string">
+      <column name="ChecksumMD5"/>
+    </property>
+    <property name="copyright" type="string">
+      <column name="Copyright"/>
+    </property>
+    <property name="posLatitude" type="big_decimal">
+      <column name="PosLatitude" precision="10" scale="7"/>
+    </property>
+    <property name="posLongitude" type="big_decimal">
+      <column name="PosLongitude" precision="10" scale="7"/>
+    </property>
+    <property name="posAltitude" type="big_decimal">
+      <column name="PosAltitude" precision="8" scale="1"/>
+    </property>
+    <property name="posHeading" type="java.lang.Integer">
+      <column name="PosHeading"/>
+    </property>
+    <property name="tags" type="serializable">
+      <column name="Tags"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getMediaFiles">
+        from MediaFiles order by createdDate desc
+    </query>
+  <query name="getMediaFilesByIds">
+        from MediaFiles where mediaFileId in (:mediaFileId)order by createdDate desc
+    </query>
+  <query name="getMediaFilesById">
+        from MediaFiles where mediaFileId in (:mediaFileId)order by mediaFileName
+    </query>
+  <query name="getMediaFilesByGroupId">
+        from MediaFiles where groupId in(:groupId) order by mediaFileName
+    </query>
+  <query name="getMediaFilesByGroupIdandFileName">
+        from MediaFiles where groupId in(:groupId) and (mediaFileName like '%'+:searchField+'%' or mediaFileDescription like '%'+:searchField+'%' ) order by mediaFileName
+    </query>
+  <query name="getMediaFilesByGroupIdandId">
+        from MediaFiles where groupId in(:groupId) and mediaFileId = :mediaFileId order by mediaFileName
+    </query>
+  <query name="getMediaFilesByMediaFileID">
+        from MediaFiles where mediaFileId =:mediaFileId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 19, 2011 3:40:19 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserAddresses" schema="dbo" table="UserAddresses">
+    <cache usage="nonstrict-read-write"/>
+    <id name="userAddressId" type="int">
+      <column name="UserAddressID"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Addresses" fetch="select" name="addresses">
+      <column length="36" name="AddressID" not-null="true"/>
+    </many-to-one>
+    <property name="userId" type="string">
+      <column length="36" name="UserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getUserAddressByUserID">
+       from UserAddresses where UserID=:userId
+   </query>
+</hibernate-mapping>

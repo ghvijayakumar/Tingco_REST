@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 30, 2012 12:34:44 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DeviceTypeServices" schema="dbo" table="DeviceTypeServices">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.DeviceTypeServicesId" name="id">
+      <key-property name="deviceTypeId" type="string">
+        <column length="36" name="DeviceTypeID"/>
+      </key-property>
+      <key-property name="serviceId" type="string">
+        <column length="36" name="ServiceID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Services" fetch="select" insert="false" name="services" update="false">
+      <column length="36" name="ServiceID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.DeviceTypes" fetch="select" insert="false" name="deviceTypes" update="false">
+      <column length="36" name="DeviceTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="isDefault" type="java.lang.Integer">
+      <column name="IsDefault"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getDeviceTypeServicesbyIds">
+        from DeviceTypeServices where id.serviceId in (:serviceId) and id.deviceTypeId = :deviceTypeId
+    </query>
+  <query name="getDeviceTypeServicesbyIdsisdefault">
+        from DeviceTypeServices where id.deviceTypeId = :deviceTypeId and isDefault =1
+    </query>
+  <query name="getDeviceTypeServicesByDeviceTypeID">
+        from DeviceTypeServices where id.deviceTypeId = :deviceTypeId
+    </query>
+  <query name="getDeviceTypeServicesByDeviceTypeIDAndServiceID">
+        from DeviceTypeServices where id.deviceTypeId = :deviceTypeId and id.serviceId = :serviceId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 26, 2012 3:24:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.PricePlans" schema="dbo" table="PricePlans">
+    <cache usage="nonstrict-read-write"/>
+    <id name="pricePlanId" type="string">
+      <column length="36" name="PricePlanID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.PricePlanTypes" fetch="select" name="pricePlanTypes">
+      <column length="36" name="PricePlanTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="pricePlanName" type="string">
+      <column length="50" name="PricePlanName" not-null="true"/>
+    </property>
+    <property name="pricePlanDescription" type="string">
+      <column length="200" name="PricePlanDescription"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate" not-null="true"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set cascade="all" inverse="true" name="pricePlanVersionses">
+      <key>
+        <column length="36" name="PricePlanID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.PricePlanVersions"/>
+    </set>
+    <set cascade="delete" inverse="true" name="pricePlansInGroupses">
+      <key>
+        <column length="36" name="PricePlanID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.PricePlansInGroups"/>
+    </set>
+    <set cascade="delete" inverse="true" name="agreementItemses">
+      <key>
+        <column length="36" name="PricePlanID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.AgreementItems"/>
+    </set>
+  </class>
+  <query name="getPricePlansByGroupId">
+        from PricePlans where groupId in (:groupId) and pricePlanName like :pricePlanName order by createdDate
+    </query>
+  <query name="getPricePlans">
+        from PricePlans where pricePlanId = :pricePlanId
+    </query>
+  <query name="getPricePlansByIDS">
+        from PricePlans where pricePlanId in (:pricePlanId) order by pricePlanName
+    </query>
+  <query name="getPricePlansById">
+        from PricePlans where groupId in (:groupId) and isEnabled = 1 order by createdDate
+    </query>
+  <query name="getPricePlansByGroupIdAndSearchString">
+        from PricePlans where groupId in (:groupId) and pricePlanName like '%'+:searchField+'%' order by createdDate desc
+    </query>
+  <query name="getPricePlansByGivenGroupId">
+        from PricePlans where groupId in (:groupId) order by createdDate desc
+    </query>
+  <query name="getPricePlansByIdAndIsEnabled">
+        from PricePlans where pricePlanId = :pricePlanId and isEnabled = 1
+    </query>
+</hibernate-mapping>

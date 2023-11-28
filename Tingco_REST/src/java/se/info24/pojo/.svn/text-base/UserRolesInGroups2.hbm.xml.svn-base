@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 3:59:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserRolesInGroups2" schema="dbo" table="UserRolesInGroups2">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.UserRolesInGroups2Id" name="id">
+      <key-property name="userRoleId" type="string">
+        <column length="36" name="UserRoleID"/>
+      </key-property>
+      <key-property name="groupId" type="string">
+        <column length="36" name="GroupID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.UserRoles2" fetch="select" insert="false" name="userRoles2" update="false">
+      <column length="36" name="UserRoleID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Groups" fetch="select" insert="false" name="groups" update="false">
+      <column length="36" name="GroupID" not-null="true"/>
+    </many-to-one>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getUserRolesInGroups2ByGroupID">
+      from UserRolesInGroups2 where GroupID = :groupID order by userRoles2.userRoleName
+  </query>
+  <query name="getUserRolesInGroups2ByRoleAndGroupID">
+      from UserRolesInGroups2 as urg where urg.id.userRoleId = :userRoleID and urg.id.groupId = :groupID
+  </query>
+</hibernate-mapping>

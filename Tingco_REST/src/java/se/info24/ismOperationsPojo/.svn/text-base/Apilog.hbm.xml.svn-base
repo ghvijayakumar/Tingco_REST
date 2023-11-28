@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 30, 2010 1:32:29 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.Apilog" schema="dbo" table="APILog">
+    <cache usage="nonstrict-read-write"/>
+    <id name="apilogId" type="string">
+      <column length="36" name="APILogID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="apimethodName" type="string">
+      <column length="50" name="APIMethodName" not-null="true"/>
+    </property>
+    <property name="apiparameters" type="string">
+      <column length="1073741823" name="APIParameters"/>
+    </property>
+    <property name="urlReferrer" type="string">
+      <column length="200" name="UrlReferrer"/>
+    </property>
+    <property name="userAgent" type="string">
+      <column length="200" name="UserAgent"/>
+    </property>
+    <property name="userLanguages" type="string">
+      <column length="50" name="UserLanguages"/>
+    </property>
+    <property name="userIp" type="string">
+      <column length="50" name="UserIP" not-null="true"/>
+    </property>
+    <property name="userLoggedIn" type="int">
+      <column name="UserLoggedIn" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="50" name="UserID"/>
+    </property>
+  </class>
+</hibernate-mapping>

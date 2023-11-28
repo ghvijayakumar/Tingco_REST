@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 28, 2014 4:47:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.BundleVersions" schema="dbo" table="BundleVersions">
+    <id name="bundleVersionId" type="string">
+      <column length="36" name="BundleVersionID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one cascade="save-update,delete" class="se.info24.pojo.Bundle" fetch="select" name="bundle">
+      <column length="36" name="BundleID" not-null="true"/>
+    </many-to-one>
+    <!-- <many-to-one name="users2" class="se.info24.pojo.Users2" fetch="select">
+            <column name="LastUpdatedByUserID" length="36" not-null="true" />
+        </many-to-one> -->
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="major" type="int">
+      <column name="Major" not-null="true"/>
+    </property>
+    <property name="minor" type="int">
+      <column name="Minor" not-null="true"/>
+    </property>
+    <property name="micro" type="int">
+      <column name="Micro" not-null="true"/>
+    </property>
+    <property name="qualifier" type="string">
+      <column length="50" name="Qualifier"/>
+    </property>
+    <property name="changeLog" type="string">
+      <column name="ChangeLog"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <set inverse="true" name="deviceServicesActiveBundleses">
+      <key>
+        <column length="36" name="BundleVersionID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceServicesActiveBundles"/>
+    </set>
+    <set inverse="true" name="deviceServicesAvailableBundleses">
+      <key>
+        <column length="36" name="BundleVersionID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceServicesAvailableBundles"/>
+    </set>
+    <set inverse="true" name="deviceServicesAllowedBundleses">
+      <key>
+        <column length="36" name="BundleVersionID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceServicesAllowedBundles"/>
+    </set>
+  </class>
+  <query name="getBundleVersionByBundleVersionID">
+        from BundleVersions where bundleVersionId in (:bundleVersionId)
+    </query>
+  <query name="getBundleVersionByBundleID">
+        from BundleVersions where bundle.bundleId =:bundleId order by createdDate desc
+    </query>
+</hibernate-mapping>

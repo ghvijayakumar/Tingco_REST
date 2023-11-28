@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 23, 2013 10:58:19 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ObjectStateCodeTranslations" schema="dbo" table="ObjectStateCodeTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ObjectStateCodeTranslationsId" name="id">
+      <key-property name="objectStateCodeId" type="string">
+        <column length="36" name="ObjectStateCodeID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <property name="stateCodeName" type="string">
+      <column name="StateCodeName" not-null="true"/>
+    </property>
+    <property name="stateCodeDescription" type="string">
+      <column name="StateCodeDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getObjectStateCodeTranslationsByCountryId">
+        from ObjectStateCodeTranslations where id.countryId = :countryId and id.objectStateCodeId = :objectStateCodeId
+    </query>
+</hibernate-mapping>

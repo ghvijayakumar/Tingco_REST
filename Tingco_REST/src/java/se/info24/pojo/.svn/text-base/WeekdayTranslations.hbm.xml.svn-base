@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 13, 2012 10:38:45 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.WeekdayTranslations" schema="dbo" table="WeekdayTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.WeekdayTranslationsId" name="id">
+      <key-property name="weekdayId" type="string">
+        <column length="36" name="WeekdayID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Weekdays" fetch="select" insert="false" name="weekdays" update="false">
+      <column length="36" name="WeekdayID" not-null="true"/>
+    </many-to-one>
+    <property name="weekdayName" type="string">
+      <column length="50" name="WeekdayName" not-null="true"/>
+    </property>
+    <property name="weekdayDescription" type="string">
+      <column length="200" name="WeekdayDescription"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getWeekDays">
+        from WeekdayTranslations wdt where wdt.id.countryId = :countryId
+    </query>
+  <query name="getWeekDaysById">
+        from WeekdayTranslations wdt where wdt.id.countryId = :countryId and wdt.id.weekdayId = :weekdayId
+    </query>
+  <query name="getWeekDaysByUserId">
+        from WeekdayTranslations wdt where wdt.userId = :userId
+    </query>
+</hibernate-mapping>

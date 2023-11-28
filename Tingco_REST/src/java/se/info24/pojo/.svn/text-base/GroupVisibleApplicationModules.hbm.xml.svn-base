@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 13, 2012 2:28:59 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.GroupVisibleApplicationModules" schema="dbo" table="GroupVisibleApplicationModules">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.GroupVisibleApplicationModulesId" name="id">
+      <key-property name="groupId" type="string">
+        <column length="36" name="GroupID"/>
+      </key-property>
+      <key-property name="applicationModuleId" type="string">
+        <column length="36" name="ApplicationModuleID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.ApplicationModules" fetch="select" insert="false" name="applicationModules" update="false">
+      <column length="36" name="ApplicationModuleID" not-null="true"/>
+    </many-to-one>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getGroupVisibleApplicationModulesByGroupId">
+        from GroupVisibleApplicationModules where id.groupId = :groupId
+    </query>
+  <query name="getGroupVisibleApplicationModulesByAppModuleId">
+        from GroupVisibleApplicationModules where id.applicationModuleId = :applicationModuleId
+    </query>
+  <query name="getGroupVisibleApplicationModules">
+        from GroupVisibleApplicationModules where id.applicationModuleId in (:applicationModuleId) and groupId = :groupId
+    </query>
+</hibernate-mapping>

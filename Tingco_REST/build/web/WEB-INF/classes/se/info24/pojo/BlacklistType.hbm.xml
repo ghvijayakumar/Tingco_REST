@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 28, 2014 4:47:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.BlacklistType" schema="dbo" table="BlacklistType">
+    <id name="blacklistTypeId" type="string">
+      <column length="36" name="BlacklistTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="userAliasTypeId" type="string">
+      <column length="36" name="UserAliasTypeID" not-null="true"/>
+    </property>
+    <property name="allowsRangeChecks" type="java.lang.Byte">
+      <column name="AllowsRangeChecks"/>
+    </property>
+    <property name="comparePattern" type="string">
+      <column name="ComparePattern"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+</hibernate-mapping>

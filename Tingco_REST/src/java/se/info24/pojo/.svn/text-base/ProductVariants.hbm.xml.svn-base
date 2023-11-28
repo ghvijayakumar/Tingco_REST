@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2012 3:24:33 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ProductVariants" schema="dbo" table="ProductVariants">
+    <cache usage="nonstrict-read-write"/>
+    <id name="productVariantId" type="string">
+      <column length="36" name="ProductVariantID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Products" fetch="select" name="products">
+      <column length="36" name="ProductID" not-null="true"/>
+    </many-to-one>
+    <!--<property name="productId" type="string">
+            <column length="36" name="ProductID" not-null="true"/>
+        </property>-->
+    <property name="isDefault" type="java.lang.Integer">
+      <column name="IsDefault"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="displayInWebShop" type="java.lang.Integer">
+      <column name="DisplayInWebShop"/>
+    </property>
+    <property name="deleted" type="java.lang.Integer">
+      <column name="Deleted"/>
+    </property>
+    <property name="serviceId" type="string">
+      <column length="36" name="ServiceID"/>
+    </property>
+    <property name="searchHitsIncluded" type="java.lang.Integer">
+      <column name="SearchHitsIncluded"/>
+    </property>
+    <property name="numberOfAccessDaysIncluded" type="java.lang.Integer">
+      <column name="NumberOfAccessDaysIncluded"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="productVariantSKU" type="string">
+      <column length="50" name="ProductVariantSKU"/>
+    </property>
+    <set inverse="true" name="productVariantServiceses">
+      <key>
+        <column length="36" name="ProductVariantID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ProductVariantServices"/>
+    </set>
+    <set inverse="true" name="productVariantTranslationses">
+      <key>
+        <column length="36" name="ProductVariantID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ProductVariantTranslations"/>
+    </set>
+    <set inverse="true" name="productVariantDeviceses">
+      <key>
+        <column length="36" name="ProductVariantID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ProductVariantDevices"/>
+    </set>
+    <set inverse="true" name="productVariantPriceses">
+      <key>
+        <column length="36" name="ProductVariantID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ProductVariantPrices"/>
+    </set>
+    <set inverse="true" name="productVariantComponentses">
+      <key>
+        <column length="36" name="ProductVariantID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ProductVariantComponents"/>
+    </set>
+    <set inverse="true" name="productVariantMeasurementTypeses">
+      <key>
+        <column length="36" name="ProductVariantID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ProductVariantMeasurementTypes"/>
+    </set>
+    <set inverse="true" name="recurringPurchaseses">
+      <key>
+        <column length="36" name="ProductVariantID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.RecurringPurchases"/>
+    </set>
+    <set inverse="true" name="connectorses">
+      <key>
+        <column length="36" name="ProductVariantID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Connectors"/>
+    </set>
+  </class>
+  <query name="getProductVariants">
+        from ProductVariants
+    </query>
+  <query name="getProductVariantsById">
+        from ProductVariants where productVariantId in (:productVariantId)
+    </query>
+  <query name="getProductVariantsByProductId">
+        from ProductVariants where productId = :productId
+    </query>
+  <query name="getProductVariantsByProductIdList">
+        from ProductVariants where productId in (:productId) and isEnabled = 1 and deleted = 0 order by createdDate desc
+    </query>
+  <query name="getProductVariantsByProductidList">
+        from ProductVariants where productId in (:productId) order by createdDate desc
+    </query>
+  <query name="getProductVariantsByProductVariantId">
+        from ProductVariants where productVariantId = :productVariantId
+    </query>
+</hibernate-mapping>

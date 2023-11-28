@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 23, 2011 12:47:45 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ContentTypes" schema="dbo" table="ContentTypes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="contentTypeId" type="string">
+      <column length="36" name="ContentTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <!--  <set inverse="true" name="userContentTypeses">
+      <key>
+        <column length="36" name="ContentTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.UserContentTypes"/>
+    </set> -->
+    <set cascade="save-update,delete" inverse="true" name="contentTypeTranslationses">
+      <key>
+        <column length="36" name="ContentTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ContentTypeTranslations"/>
+    </set>
+  </class>
+  <query name="getContentTypesById">
+      from ContentTypes as ct where ct.contentTypeId =:contentTypeId
+  </query>
+  <query name="getAllContentTypes">
+      from ContentTypes
+  </query>
+</hibernate-mapping>

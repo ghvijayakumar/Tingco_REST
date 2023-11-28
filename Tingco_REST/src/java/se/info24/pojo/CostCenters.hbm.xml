@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 26, 2013 11:55:15 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.CostCenters" schema="dbo" table="CostCenters">
+    <cache usage="nonstrict-read-write"/>
+    <id name="costCenterId" type="string">
+      <column length="36" name="CostCenterID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="costCenterName" type="string">
+      <column name="CostCenterName" not-null="true"/>
+    </property>
+    <property name="costCenterDescription" type="string">
+      <column name="CostCenterDescription"/>
+    </property>
+    <property name="costCenterNumber" type="int">
+      <column name="CostCenterNumber" not-null="true"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="displayInWebShop" type="java.lang.Integer">
+      <column name="DisplayInWebShop"/>
+    </property>
+    <property name="displayOrder" type="java.lang.Integer">
+      <column name="DisplayOrder"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="containerses">
+      <key>
+        <column length="36" name="CostCenterID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Containers"/>
+    </set>
+  </class>
+  <query name="getCostCenterById">
+      from CostCenters where costCenterId = :costCenterId
+    </query>
+  <query name="getCostCenterByIds">
+      from CostCenters where costCenterId in(:costCenterId)
+    </query>
+  <query name="getCostCenterByGroupIdForDropDown">
+      from CostCenters where groupId = :groupId order by costCenterName, createdDate desc
+    </query>
+  <query name="getCostCenterByCostCenterNameAndGroupId">
+      from CostCenters where costCenterName = :costCenterName and groupId = :groupId
+    </query>
+  <query name="getCostCenterByCostCenterNumberAndGroupId">
+      from CostCenters where costCenterNumber = :costCenterNumber and groupId = :groupId
+    </query>
+  <query name="getCostCenterByCostCenterIdAndGroupId">
+      from CostCenters where costCenterId = :costCenterId and groupId = :groupId
+    </query>
+  <query name="getCostCenterByGroupIdForDropDownSearchString">
+      from CostCenters where groupId = :groupId and costCenterName like '%'+:costCenterName+'%' order by costCenterName, createdDate desc
+    </query>
+</hibernate-mapping>

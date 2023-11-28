@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="ST_UserID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ST_LastUpdatedByUserID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ST_GroupName">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ST_GroupDescription">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ST_DeviceGroupID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ST_UserGroupID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:simpleType name="ST_CountryID">
+        <xs:restriction base="xs:int"/>
+    </xs:simpleType>
+    <xs:element name="tingcoVirtualGate">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="MsgID"/>
+                <xs:element ref="MsgTimeStamp"/>
+                <xs:element ref="MsgStatus" minOccurs="0"/>
+                <xs:element ref="VirtualGates" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="TimeZone" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="UTC"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="RegionalUnits" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Metric"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="MsgVer" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:decimal"/>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="CreateRef" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Info24"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UserID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_UserID">
+                    <xs:attribute name="UserFullName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CreatedDate">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="UpdatedDate">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ResponseText">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ResponseCode">
+        <xs:simpleType>
+            <xs:restriction base="xs:int"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="Operation">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="MsgTimeStamp">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="MsgStatus">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ResponseCode"/>
+                <xs:element ref="ResponseText"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MsgID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="LastName">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="FirstName">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="CountryID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_CountryID">
+                    <xs:attribute name="CountryName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="LastUpdatedByUserID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_LastUpdatedByUserID">
+                    <xs:attribute name="UserFullName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="VirtualGates">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="VirtualGate" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="VirtualGate">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ObjectGroups" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="UserAliases" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ProductVariantDevices" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="CountofValidTickets" type="xs:string"/>
+            </xs:sequence>
+            <xs:attribute name="SeqNo">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ObjectGroups">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ObjectGroupID" type="xs:string"/>
+                <xs:element name="ObjectGroupParentID" type="xs:string"/>
+                <xs:element name="GroupId" type="xs:string"/>
+                <xs:element name="GroupName" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+                <xs:element ref="ObjectGroupTranslations" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ObjectGroupTranslations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ObjectGroupID" type="xs:string"/>
+                <xs:element name="CountryID" type="xs:int"/>
+                <xs:element name="ObjectGroupName" type="xs:string"/>
+                <xs:element name="ObjectGroupDescription" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="UserAliases">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="UserAliasID" type="xs:string"/>
+                <xs:element name="UserAlias" type="xs:string"/>
+                <xs:element name="UserAliasTypeID" type="xs:string"/>
+                <xs:element name="UserAliasTypeName" type="xs:string"/>
+                <xs:element ref="UserID" />
+                <xs:element ref="CountryID"/>
+                <xs:element name="GroupID" type="xs:string"/>
+                <xs:element name="GroupName" type="xs:string"/>
+                <xs:element name="ObjectGroup" type="xs:string"/>
+                <xs:element ref="FirstName" />
+                <xs:element ref="LastName" />
+                <xs:element name="UserAliasFullName" type="xs:string"/>
+                <xs:element name="UserFullName" type="xs:string"/>
+                <xs:element name="UserEmail" type="xs:string"/>
+                <xs:element name="UserMobilePhone" type="xs:string"/>
+                <xs:element name="SocialSecurityNumber" type="xs:string"/>
+                <xs:element name="IsEnabled" type="xs:int" />
+                <xs:element name="ActiveFromDate" type="xs:string"/>
+                <xs:element name="ActiveToDate" type="xs:string"/>
+                <xs:element name="ISOTrack" type="xs:string"/>
+                <xs:element name="ProductVariantID" type="xs:string"/>
+                <xs:element name="FirstUseDate" type="xs:dateTime"/>
+                <xs:element name="LastUseDate" type="xs:dateTime"/>
+                <xs:element name="CreditAmount" type="xs:decimal"/>
+                <xs:element name="CreditAmountCurrencyID" type="xs:decimal"/>
+                <xs:element name="Credits" type="xs:decimal"/>
+                <xs:element name="ExtVerify" type="xs:dateTime"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element ref="CreatedDate" />
+                <xs:element ref="UpdatedDate" />
+                <xs:element name="CurrencyISOCharCode" type="xs:string" />
+                <xs:element ref="UserAliasDetails" maxOccurs="unbounded"/>
+                <xs:element ref="ObjectGroupTranslations" maxOccurs="unbounded"/>
+                <xs:element ref="OGMUserAlias" maxOccurs="unbounded"/>
+                <xs:element ref="UserAliasTypes" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="SeqNo" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UserAliasDetails">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="UserAliasID" type="xs:string"/>
+                <xs:element name="IsCreditCard" type="xs:int"/>
+                <xs:element name="IsServiceKey" type="xs:int"/>
+                <xs:element name="CreditLimitTotal" type="xs:string"/>
+                <xs:element name="CreditLimitPerPurchase" type="xs:string"/>
+                <xs:element name="CreditLimitPerDay" type="xs:string"/>
+                <xs:element name="BlockedReason" type="xs:string"/>
+                <xs:element name="IApproveTermsOfBusiness" type="xs:int"/>
+                <xs:element name="IApproveSendingMarketingInfo" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OGMUserAlias">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="UserAliasID" type="xs:string"/>
+                <xs:element name="ObjectGroupID" type="xs:string" maxOccurs="unbounded"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UserAliasTypes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="UserAliasTypeID"  type="xs:string"/>
+                <xs:element name="UserAliasTypeName" type="xs:string"/>
+                <xs:element name="UserAliasTypeDescription" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ProductVariantDevices">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ProductVariantID" type="xs:string"/>
+                <xs:element name="DeviceID" type="xs:string"/>
+                <xs:element name="IsEnabled" type="xs:int"/>
+                <xs:element name="ActiveFromDate" type="xs:dateTime"/>
+                <xs:element name="ActiveToDate" type="xs:dateTime"/>
+                <xs:element name="ActiveFromDateTCMV3" type="xs:string"/>
+                <xs:element name="ActiveToDateTCMV3" type="xs:string"/>
+                <xs:element name="DisplayOrder" type="xs:int"/>
+                <xs:element name="BayNumber" type="xs:int"/>
+                <xs:element ref="UserID"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

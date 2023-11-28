@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 19, 2011 3:40:19 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.Addresses" schema="dbo" table="Addresses">
+    <cache usage="nonstrict-read-write"/>
+    <id name="addressId" type="string">
+      <column length="36" name="AddressID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Country" fetch="select" name="country">
+      <column name="CountryID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.AddressType" fetch="select" name="addressType">
+      <column name="AddressTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="addressName" type="string">
+      <column length="50" name="AddressName"/>
+    </property>
+    <property name="addressDescription" type="string">
+      <column length="200" name="AddressDescription"/>
+    </property>
+    <property name="addressRegion" type="string">
+      <column length="50" name="AddressRegion"/>
+    </property>
+    <property name="addressStreet" type="string">
+      <column length="200" name="AddressStreet"/>
+    </property>
+    <property name="addressStreet2" type="string">
+      <column length="200" name="AddressStreet2"/>
+    </property>
+    <property name="addressSuite" type="string">
+      <column length="50" name="AddressSuite"/>
+    </property>
+    <property name="addressZip" type="string">
+      <column length="50" name="AddressZip"/>
+    </property>
+    <property name="addressCity" type="string">
+      <column length="50" name="AddressCity"/>
+    </property>
+    <property name="countryStateId" type="string">
+      <column length="36" name="CountryStateID"/>
+    </property>
+    <property name="addressPhone" type="string">
+      <column length="50" name="AddressPhone"/>
+    </property>
+    <property name="addressMobile" type="string">
+      <column length="20" name="AddressMobile"/>
+    </property>
+    <property name="addressFax" type="string">
+      <column length="50" name="AddressFax"/>
+    </property>
+    <property name="addressEmail" type="string">
+      <column length="200" name="AddressEmail"/>
+    </property>
+    <property name="addressWeb" type="string">
+      <column length="200" name="AddressWeb"/>
+    </property>
+    <property name="addressIm" type="string">
+      <column length="200" name="AddressIM"/>
+    </property>
+    <property name="addressLatitude" type="java.lang.Double">
+      <column name="AddressLatitude" precision="53" scale="0"/>
+    </property>
+    <property name="addressLongitude" type="java.lang.Double">
+      <column name="AddressLongitude" precision="53" scale="0"/>
+    </property>
+    <property name="addressDepth" type="java.lang.Double">
+      <column name="AddressDepth" precision="53" scale="0"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set cascade="all" inverse="true" name="userAddresseses">
+      <key>
+        <column length="36" name="AddressID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.UserAddresses"/>
+    </set>
+    <set inverse="true" name="containerses">
+      <key>
+        <column length="36" name="AddressID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Containers"/>
+    </set>
+    <set inverse="true" name="devices">
+      <key>
+        <column length="36" name="AddressID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Device"/>
+    </set>
+  </class>
+  <query name="getAddressById">
+      from Addresses  where AddressID = :addressID
+    </query>
+  <query name="getAddressByAddressCity">
+      from Addresses  where addressCity like '%'+:searchField+'%'
+    </query>
+  <query name="getAddressByCountryID">
+      from Addresses  where country.countryId = :countryId
+    </query>
+</hibernate-mapping>

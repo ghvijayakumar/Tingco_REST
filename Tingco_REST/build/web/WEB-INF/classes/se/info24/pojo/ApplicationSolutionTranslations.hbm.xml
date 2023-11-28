@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 13, 2012 2:28:59 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ApplicationSolutionTranslations" schema="dbo" table="ApplicationSolutionTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ApplicationSolutionTranslationsId" name="id">
+      <key-property name="applicationSolutionId" type="string">
+        <column length="36" name="ApplicationSolutionID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.ApplicationSolutions" fetch="select" insert="false" name="applicationSolutions" update="false">
+      <column length="36" name="ApplicationSolutionID" not-null="true"/>
+    </many-to-one>
+    <property name="applicationSolutionName" type="string">
+      <column name="ApplicationSolutionName" not-null="true"/>
+    </property>
+    <property name="applicationSolutionDescription" type="string">
+      <column name="ApplicationSolutionDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getApplicationSolutionTranslations">
+        from ApplicationSolutionTranslations
+    </query>
+  <query name="getApplicationSolutionTranslationsByIdandcountryId">
+        from ApplicationSolutionTranslations where id.applicationSolutionId = :applicationSolutionId and id.countryId = :countryId
+    </query>
+  <query name="getApplicationSolutionTranslationsByIds">
+        from ApplicationSolutionTranslations where id.applicationSolutionId in (:applicationSolutionId) and id.countryId = :countryId order by applicationSolutions.displayOrder asc
+    </query>
+  <query name="getApplicationSolutionTranslationsById">
+        from ApplicationSolutionTranslations where id.applicationSolutionId in (:applicationSolutionId)
+    </query>
+</hibernate-mapping>

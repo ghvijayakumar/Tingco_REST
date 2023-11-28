@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 3:59:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.GroupTypeTranslations" schema="dbo" table="GroupTypeTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.GroupTypeTranslationsId" name="id">
+      <key-property name="groupTypeId" type="string">
+        <column length="36" name="GroupTypeID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <property name="groupTypeName" type="string">
+      <column length="50" name="GroupTypeName" not-null="true"/>
+    </property>
+    <property name="groupTypeDescription" type="string">
+      <column length="200" name="GroupTypeDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getGroupTypeTranslationsById">
+      from GroupTypeTranslations as gtt where gtt.id.countryId = :countryId order by groupTypeName
+  </query>
+  <query name="getGroupTypeTranslationsByGroupTypeId">
+      from GroupTypeTranslations as gtt where gtt.id.groupTypeId = :groupTypeId and gtt.id.countryId = :countryId
+  </query>
+  <query name="getGroupTypeTranslationsByGroupTypeIdList">
+      from GroupTypeTranslations as gtt where gtt.id.groupTypeId in (:groupTypeId) and gtt.id.countryId = :countryId
+  </query>
+</hibernate-mapping>

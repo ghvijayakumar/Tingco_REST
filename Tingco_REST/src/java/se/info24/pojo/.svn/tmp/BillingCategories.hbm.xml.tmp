@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 8, 2014 4:03:11 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="se.info24.pojo.BillingCategories" table="BillingCategories" schema="dbo" catalog="ISM">
+        <id name="billingCategoryId" type="string">
+            <column name="BillingCategoryID" length="36" />
+            <generator class="assigned" />
+        </id>
+        <property name="objectCode" type="string">
+            <column name="ObjectCode" not-null="true" unique="true" />
+        </property>
+        <property name="sku" type="string">
+            <column name="SKU" not-null="true" />
+        </property>
+        <property name="groupId" type="string">
+            <column name="GroupID" length="36" not-null="true" />
+        </property>
+        <property name="lastUpdatedByUserId" type="string">
+            <column name="LastUpdatedByUserID" length="36" not-null="true" />
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column name="CreatedDate" length="23" />
+        </property>
+        <property name="updatedDate" type="timestamp">
+            <column name="UpdatedDate" length="23" />
+        </property>
+        <set name="deviceBillingCategorieses" inverse="true">
+            <key>
+                <column name="BillingCategoryID" length="36" not-null="true" />
+            </key>
+            <one-to-many class="se.info24.pojo.DeviceBillingCategories" />
+        </set>
+        <set name="deviceTypeBillingCategorieses" inverse="true">
+            <key>
+                <column name="BillingCategoryID" length="36" not-null="true" />
+            </key>
+            <one-to-many class="se.info24.pojo.DeviceTypeBillingCategories" />
+        </set>
+        <set name="billingCategoryTranslationses" inverse="true">
+            <key>
+                <column name="BillingCategoryID" length="36" not-null="true" />
+            </key>
+            <one-to-many class="se.info24.pojo.BillingCategoryTranslations" />
+        </set>
+    </class>
+<<<<<<< .mine
+    <query name="getBillingCategories">
+        from BillingCategories where billingCategoryId = :billingCategoryId
+    </query>
+=======
+    <query name="getBillingCategoriesByBillingCategoryIDAndGroupID">
+        from BillingCategories where billingCategoryId in(:billingCategoryId) and groupId in(:groupId)
+    </query>
+    <query name="getBillingCategoriesByBillingCategoryID">
+        from BillingCategories where billingCategoryId in(:billingCategoryId) order by createdDate desc
+    </query>
+    <query name="getBillingCategoriesByGroupIDs">
+        from BillingCategories where groupId in(:groupId)
+    </query>
+>>>>>>> .r2247
+</hibernate-mapping>

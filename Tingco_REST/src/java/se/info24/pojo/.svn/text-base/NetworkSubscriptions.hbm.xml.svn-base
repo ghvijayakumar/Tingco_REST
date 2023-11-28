@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 19, 2013 12:34:15 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.NetworkSubscriptions" schema="dbo" table="NetworkSubscriptions">
+    <cache usage="nonstrict-read-write"/>
+    <id name="networkSubscriptionId" type="string">
+      <column length="36" name="NetworkSubscriptionID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Agreements" fetch="select" name="agreements">
+      <column length="36" name="AgreementID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.NetworkSubscriptionStatuses" fetch="select" name="networkSubscriptionStatuses">
+      <column length="36" name="NetworkSubscriptionStatusID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Groups" fetch="select" name="groups">
+      <column length="36" name="GroupID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.NetworkTypes" fetch="select" name="networkTypes">
+      <column length="36" name="NetworkType"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Networks" fetch="select" name="networks">
+      <column length="36" name="NetworkID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Device" fetch="select" name="device">
+      <column length="36" name="DeviceID"/>
+    </many-to-one>
+    <property insert="false" name="deviceId" type="string" update="false">
+      <column name="DeviceID" not-null="true"/>
+    </property>
+    <property insert="false" name="groupId" type="string" update="false">
+      <column name="GroupID" not-null="true"/>
+    </property>
+    <property name="networkSubscriptionName" type="string">
+      <column name="NetworkSubscriptionName" not-null="true"/>
+    </property>
+    <property name="networkSubscriptionDescription" type="string">
+      <column name="NetworkSubscriptionDescription"/>
+    </property>
+    <property name="subscriptionEnabled" type="java.lang.Integer">
+      <column name="SubscriptionEnabled"/>
+    </property>
+    <property name="invoiceSubscription" type="java.lang.Integer">
+      <column name="InvoiceSubscription"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate" not-null="true"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="subscriptionNumber" type="string">
+      <column name="SubscriptionNumber"/>
+    </property>
+    <property name="subscriptionNumberTypeId" type="string">
+      <column length="36" name="SubscriptionNumberTypeID"/>
+    </property>
+    <property name="subscriptionPassword" type="string">
+      <column name="SubscriptionPassword"/>
+    </property>
+    <property name="ipv4" type="string">
+      <column name="IPV4"/>
+    </property>
+    <property name="ipv6" type="string">
+      <column name="IPV6"/>
+    </property>
+    <property name="billingAccount" type="string">
+      <column name="BillingAccount"/>
+    </property>
+    <property name="subscriptionUser" type="string">
+      <column name="SubscriptionUser"/>
+    </property>
+    <property name="costCenterId" type="string">
+      <column length="36" name="CostCenterID"/>
+    </property>
+    <property name="iccid" type="string">
+      <column name="ICCID"/>
+    </property>
+    <property name="apn" type="string">
+      <column name="APN"/>
+    </property>
+  </class>
+  <query name="getNetworkSubscriptionsBydeviceId">
+        from NetworkSubscriptions where device.deviceId = :deviceId and SubscriptionNumber != null and SubscriptionNumber !='' order by createdDate desc
+    </query>
+  <query name="getNetworkSubscriptionsByIds">
+        from NetworkSubscriptions where networkSubscriptionId in(:networkSubscriptionId) order by subscriptionNumber
+    </query>
+  <query name="getNetworkSubscriptionsByGroupIdAnddDeviceId">
+        from NetworkSubscriptions where groups.groupId in (:groupId) and device.deviceId = null and SubscriptionNumber != null order by subscriptionNumber,networkSubscriptionName
+    </query>
+  <query name="getNetworkSubscriptionsByGroupId">
+        from NetworkSubscriptions where groups.groupId = :groupId
+    </query>
+  <query name="getNetworkSubscriptionsByIdAnddDeviceIds">
+        from NetworkSubscriptions where networkSubscriptionId = :networkSubscriptionId and device.deviceId =:deviceId
+    </query>
+  <query name="getNetworkSubscriptionsBySearchString">
+        from NetworkSubscriptions where groups.groupId in (:groupId) and (networkSubscriptionName like '%'+:SearchString+'%' or networkSubscriptionDescription like '%'+:SearchString+'%'
+             or subscriptionNumber like '%'+:SearchString+'%' or ipv4 like '%'+:SearchString+'%' or ipv6 like '%'+:SearchString+'%') order by networkSubscriptionName
+    </query>
+  <query name="getNetworkSubscriptionsByGroupIDs">
+        from NetworkSubscriptions where groups.groupId in (:groupId) order by networkSubscriptionName
+    </query>
+  <query name="getNetworkSubscriptionsOrderByNetworkSubscriptionName">
+        from NetworkSubscriptions where networkSubscriptionId in(:networkSubscriptionId) order by networkSubscriptionName
+    </query>
+</hibernate-mapping>

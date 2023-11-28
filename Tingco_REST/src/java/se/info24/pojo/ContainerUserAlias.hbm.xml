@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 9, 2014 12:42:58 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.ContainerUserAlias" schema="dbo" table="ContainerUserAlias">
+    <composite-id class="se.info24.pojo.ContainerUserAliasId" name="id">
+      <key-property name="containerId" type="string">
+        <column length="36" name="ContainerID"/>
+      </key-property>
+      <key-property name="userAliasId" type="string">
+        <column length="36" name="UserAliasID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Containers" fetch="select" insert="false" name="containers" update="false">
+      <column length="36" name="ContainerID" not-null="true"/>
+    </many-to-one>
+    <property name="userAlias" type="string">
+      <column name="UserAlias"/>
+    </property>
+    <property name="checkInDate" type="timestamp">
+      <column length="23" name="CheckInDate"/>
+    </property>
+    <property name="checkinInDateDevice" type="timestamp">
+      <column length="23" name="CheckinInDateDevice"/>
+    </property>
+    <property name="checkInDeviceId" type="string">
+      <column length="36" name="CheckInDeviceID"/>
+    </property>
+    <property name="checkinDeviceName" type="string">
+      <column name="CheckinDeviceName"/>
+    </property>
+    <property name="checkinDeviceGroupId" type="string">
+      <column length="36" name="CheckinDeviceGroupID"/>
+    </property>
+    <property name="checkinDeviceTypeId" type="string">
+      <column length="36" name="CheckinDeviceTypeID"/>
+    </property>
+    <property name="checkinDeviceAgreementId" type="string">
+      <column length="36" name="CheckinDeviceAgreementID"/>
+    </property>
+    <property name="checkInServiceId" type="string">
+      <column length="36" name="CheckInServiceID"/>
+    </property>
+    <property name="visitingHost" type="string">
+      <column name="VisitingHost"/>
+    </property>
+    <property name="visitingHostUserId" type="string">
+      <column length="36" name="VisitingHostUserID"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getContainerUserAliasByIds">
+        from ContainerUserAlias where id.containerId = :containerId and id.userAliasId = :userAliasId
+    </query>
+  <query name="getContainerUserAliasBycontainerId">
+        from ContainerUserAlias where id.containerId = :containerId
+    </query>
+</hibernate-mapping>

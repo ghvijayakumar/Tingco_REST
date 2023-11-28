@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 19, 2013 10:34:50 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.NetworkSubscriptionSettings" schema="dbo" table="NetworkSubscriptionSettings">
+    <cache usage="nonstrict-read-write"/>
+    <id name="networkSubscriptionSettingId" type="string">
+      <column length="36" name="NetworkSubscriptionSettingID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.SettingDataType" fetch="select" name="settingDataType">
+      <column length="36" name="SettingDataTypeID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.NetworkSubscriptions" fetch="select" name="networkSubscriptions">
+      <column length="36" name="NetworkSubscriptionID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.NetworkSubscriptionSettings" fetch="select" name="networkSubscriptionSettings">
+      <column length="36" name="NetworkSubscriptionSettingParentID"/>
+    </many-to-one>
+    <property name="networkSubscriptionSettingName" type="string">
+      <column name="NetworkSubscriptionSettingName" not-null="true"/>
+    </property>
+    <property name="networkSubscriptionSettingValue" type="string">
+      <column name="NetworkSubscriptionSettingValue" not-null="true"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="networkSubscriptionSettingses">
+      <key>
+        <column length="36" name="NetworkSubscriptionSettingParentID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.NetworkSubscriptionSettings"/>
+    </set>
+  </class>
+  <query name="getNetworkSubscriptionSettingsBySubscriptionID">
+        from NetworkSubscriptionSettings where networkSubscriptions.networkSubscriptionId = :networkSubscriptionId order by networkSubscriptionSettingName
+    </query>
+  <query name="getNetworkSubscriptionSettingsByID">
+        from NetworkSubscriptionSettings where networkSubscriptionSettingId = :networkSubscriptionSettingId
+    </query>
+</hibernate-mapping>

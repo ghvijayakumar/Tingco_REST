@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2010 12:53:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DeviceTypes" schema="dbo" table="DeviceTypes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="deviceTypeId" type="string">
+      <column length="36" name="DeviceTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.DeviceManufacturers" fetch="select" name="deviceManufacturers">
+      <column length="36" name="DeviceManufacturerID" not-null="true"/>
+    </many-to-one>
+    <property name="deviceTypeName" type="string">
+      <column length="50" name="DeviceTypeName" not-null="true"/>
+    </property>
+    <property name="deviceTypeDescription" type="string">
+      <column length="200" name="DeviceTypeDescription"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set cascade="delete" inverse="true" name="deviceDetailsTemplates">
+      <key>
+        <column length="36" name="DeviceTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceDetailsTemplate"/>
+    </set>
+    <set cascade="delete" inverse="true" name="devices">
+      <key>
+        <column length="36" name="DeviceTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Device"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceTypeDataitemses">
+      <key>
+        <column length="36" name="DeviceTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypeDataitems"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceSettingsPackageses">
+      <key>
+        <column length="36" name="DeviceTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceSettingsPackages"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceTypeServiceses">
+      <key>
+        <column length="36" name="DeviceTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypeServices"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceTypeContentAttributeses">
+      <key>
+        <column length="36" name="DeviceTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypeContentAttributes"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceTypeDefaultCategories">
+      <key>
+        <column length="36" name="DeviceTypeID" not-null="true" unique="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypeDefaultCategory"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceTypeBillingCategorieses">
+      <key>
+        <column length="36" name="DeviceTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypeBillingCategories"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceTypesInServiceses">
+      <key>
+        <column length="36" name="DeviceTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypesInServices"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceTypesInGroupses">
+      <key>
+        <column length="36" name="DeviceTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypesInGroups"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceTypeChannelses">
+      <key>
+        <column length="36" name="DeviceTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypeChannels"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceTypeCommandses">
+      <key>
+        <column length="36" name="DeviceTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypeCommands"/>
+    </set>
+    <set cascade="delete" inverse="true" name="deviceTypeMeasurementTypeses">
+      <key>
+        <column length="36" name="DeviceTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypeMeasurementTypes"/>
+    </set>
+  </class>
+  <query name="getDeviceTypesById">
+      from DeviceTypes as dt where dt.deviceTypeId = :deviceTypeId
+    </query>
+  <query name="getAllDeviceTypes">
+      from DeviceTypes order by deviceTypeName asc
+    </query>
+  <query name="getDeviceTypesByIdsList">
+      from DeviceTypes as dt where dt.deviceTypeId in (:deviceTypeId) order by deviceTypeName asc
+    </query>
+  <query name="getDeviceTypesByIdsListAndDeviceTypeName">
+      from DeviceTypes as dt where dt.deviceTypeId in (:deviceTypeId) and dt.deviceTypeName like '%'+:deviceTypeName+'%' order by deviceTypeName asc
+    </query>
+</hibernate-mapping>

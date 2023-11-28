@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 18, 2013 11:55:16 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.AgreementItemTypeTranslations" schema="dbo" table="AgreementItemTypeTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.AgreementItemTypeTranslationsId" name="id">
+      <key-property name="agreementItemTypeId" type="string">
+        <column length="36" name="AgreementItemTypeID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.AgreementItemTypes" fetch="select" insert="false" name="agreementItemTypes" update="false">
+      <column length="36" name="AgreementItemTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="agreementItemTypeName" type="string">
+      <column name="AgreementItemTypeName" not-null="true"/>
+    </property>
+    <property name="agreementItemTypeDescription" type="string">
+      <column name="AgreementItemTypeDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getAgreementItemTypeTranslationsByCountryId">
+      from AgreementItemTypeTranslations  where id.countryId = :countryId order by agreementItemTypeName
+    </query>
+  <query name="getAgreementItemTypeTranslationsByID">
+      from AgreementItemTypeTranslations where id.agreementItemTypeId = :agreementItemTypeId and id.countryId = :countryId
+    </query>
+  <query name="getAgreementItemTypeTranslationsByIDs">
+      from AgreementItemTypeTranslations where id.agreementItemTypeId in (:agreementItemTypeId) and id.countryId = :countryId
+    </query>
+</hibernate-mapping>

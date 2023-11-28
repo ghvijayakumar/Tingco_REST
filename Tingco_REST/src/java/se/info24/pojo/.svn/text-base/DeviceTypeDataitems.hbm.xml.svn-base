@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2010 12:53:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DeviceTypeDataitems" schema="dbo" table="DeviceTypeDataitems">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.DeviceTypeDataitemsId" name="id">
+      <key-property name="deviceTypeId" type="string">
+        <column length="36" name="DeviceTypeID"/>
+      </key-property>
+      <key-property name="deviceDataItemId" type="string">
+        <column length="36" name="DeviceDataItemID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.DeviceTypes" fetch="select" insert="false" name="deviceTypes" update="false">
+      <column length="36" name="DeviceTypeID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.DeviceDataItems" fetch="select" insert="false" name="deviceDataItems" update="false">
+      <column length="36" name="DeviceDataItemID" not-null="true"/>
+    </many-to-one>
+    <property name="dataItemDefaultValue" type="string">
+      <column length="1073741823" name="DataItemDefaultValue"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="50" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getDeviceTypeDataItemsById">
+      from DeviceTypeDataitems as dtdi where dtdi.id.deviceTypeId =:deviceTypeId and dtdi.id.deviceDataItemId=:deviceDataItemId
+  </query>
+  <query name="getDeviceTypeDataItemsByDeviceTypeID">
+      from DeviceTypeDataitems as dtdi where dtdi.id.deviceTypeId =:deviceTypeId
+  </query>
+</hibernate-mapping>

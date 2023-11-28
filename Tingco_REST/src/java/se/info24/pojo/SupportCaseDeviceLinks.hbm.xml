@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 13, 2013 1:26:54 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.SupportCaseDeviceLinks" schema="dbo" table="SupportCaseDeviceLinks">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.SupportCaseDeviceLinksId" name="id">
+      <key-property name="supportCaseId" type="string">
+        <column length="36" name="SupportCaseID"/>
+      </key-property>
+      <key-property name="deviceId" type="string">
+        <column length="36" name="DeviceID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.SupportCases" fetch="select" insert="false" name="supportCases" update="false">
+      <column length="36" name="SupportCaseID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Device" fetch="select" insert="false" name="device" update="false">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </many-to-one>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getSupportCaseDeviceLinksByDeviceID">
+        from SupportCaseDeviceLinks where id.deviceId in (:deviceId)
+    </query>
+  <query name="getSupportCaseDeviceLinksBySupportCaseId">
+        from SupportCaseDeviceLinks where id.supportCaseId = :supportCaseId order by updatedDate desc
+    </query>
+  <query name="getSupportCaseDeviceLinksBySupportCaseIdDeviceId">
+        from SupportCaseDeviceLinks where id.supportCaseId = :supportCaseId and id.deviceId = :deviceId
+    </query>
+</hibernate-mapping>

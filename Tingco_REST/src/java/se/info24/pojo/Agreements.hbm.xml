@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 10, 2013 11:00:25 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Agreements" schema="dbo" table="Agreements">
+    <cache usage="nonstrict-read-write"/>
+    <id name="agreementId" type="string">
+      <column length="36" name="AgreementID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.AgreementStatuses" fetch="select" name="agreementStatuses">
+      <column length="36" name="AgreementStatusID"/>
+    </many-to-one>
+    <!-- <many-to-one name="company" class="se.info24.pojo.Company" fetch="select">
+            <column name="CompanyID" length="36" />
+        </many-to-one> -->
+    <many-to-one class="se.info24.pojo.Agreements" fetch="select" name="agreements">
+      <column length="36" name="AgreementParentID"/>
+    </many-to-one>
+    <property name="agreementName" type="string">
+      <column name="AgreementName" not-null="true"/>
+    </property>
+    <property name="agreementDescription" type="string">
+      <column name="AgreementDescription"/>
+    </property>
+    <property name="customerCompanyId" type="string">
+      <column length="36" name="CustomerCompanyID"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="startDate" type="timestamp">
+      <column length="23" name="StartDate"/>
+    </property>
+    <property name="endDate" type="timestamp">
+      <column length="23" name="EndDate"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="basedOnTemplateAgreementId" type="string">
+      <column length="36" name="BasedOnTemplateAgreementID"/>
+    </property>
+    <property name="agreementTypeId" type="string">
+      <column length="36" name="AgreementTypeID"/>
+    </property>
+    <property name="isTemplate" type="java.lang.Integer">
+      <column name="IsTemplate"/>
+    </property>
+    <property name="agreementOwnerGroupId" type="string">
+      <column length="36" name="AgreementOwnerGroupID"/>
+    </property>
+    <property name="agreementNumber" type="string">
+      <column name="AgreementNumber"/>
+    </property>
+    <property name="agreementVersion" type="java.lang.Integer">
+      <column name="AgreementVersion"/>
+    </property>
+    <set inverse="true" name="deviceAgreementMembershipses">
+      <key>
+        <column length="36" name="AgreementID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceAgreementMemberships"/>
+    </set>
+    <set inverse="true" name="devices">
+      <key>
+        <column length="36" name="AgreementID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Device"/>
+    </set>
+    <set inverse="true" name="agreementses">
+      <key>
+        <column length="36" name="AgreementParentID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Agreements"/>
+    </set>
+    <set inverse="true" name="serviceDeviceSubscriptionses">
+      <key>
+        <column length="36" name="AgreementID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ServiceDeviceSubscriptions"/>
+    </set>
+    <set inverse="true" name="containerses">
+      <key>
+        <column length="36" name="AgreementID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Containers"/>
+    </set>
+    <set inverse="true" name="networkSubscriptionses">
+      <key>
+        <column length="36" name="AgreementID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.NetworkSubscriptions"/>
+    </set>
+    <set inverse="true" name="agreementRoleses">
+      <key>
+        <column length="36" name="AgreementID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.AgreementRoles"/>
+    </set>
+    <set inverse="true" name="agreementItemses">
+      <key>
+        <column length="36" name="AgreementID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.AgreementItems"/>
+    </set>
+    <set inverse="true" name="buildingses">
+      <key>
+        <column length="36" name="AgreementID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Buildings"/>
+    </set>
+    <set inverse="true" name="roomses">
+      <key>
+        <column length="36" name="AgreementID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Rooms"/>
+    </set>
+  </class>
+  <query name="getAgreements">
+      from Agreements where agreementId in (:agreementId) order by agreementName asc
+    </query>
+  <query name="getAllAgreements">
+      from Agreements
+    </query>
+  <query name="getAgreementsByIdandSearchString">
+      from Agreements where agreementId in (:agreementId) and agreementName like '%'+:agreementName+'%' order by agreementName asc
+    </query>
+  <query name="getAgreementsByIdandSearchNameAndNumber">
+      from Agreements where agreementId in (:agreementId) and (agreementName like '%'+:searchString+'%' or agreementNumber like '%'+:searchString+'%') order by agreementName asc
+    </query>
+  <query name="getAgreementsById">
+      from Agreements where agreementId =:agreementId
+    </query>
+  <query name="getAgreementsByAgreementOwnerGroupID">
+      from Agreements where agreementOwnerGroupID =:agreementOwnerGroupID order by agreementName asc
+    </query>
+  <query name="getAgreementsByAgreementOwnerGroupIds">
+      from Agreements where agreementOwnerGroupId in (:agreementOwnerGroupId) or agreementOwnerGroupId =:groupId order by agreementName asc
+    </query>
+  <query name="getAgreementsByAgreementParentId">
+      from Agreements where agreements.agreementId =:agreementParentId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/2123/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb
+END
+ObjectGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2115/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb/ObjectGroups.java
+END
+ProductVariantDevices.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/NB_2011/!svn/ver/2115/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb/ProductVariantDevices.java
+END
+VirtualGates.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2115/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb/VirtualGates.java
+END
+UserAliasTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/2115/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb/UserAliasTypes.java
+END
+UserAliases.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2123/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb/UserAliases.java
+END
+CountryID.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2115/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb/CountryID.java
+END
+LastUpdatedByUserID.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/NB_2011/!svn/ver/2115/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb/LastUpdatedByUserID.java
+END
+ObjectGroupTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/NB_2011/!svn/ver/2115/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb/ObjectGroupTranslations.java
+END
+VirtualGate.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2115/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb/VirtualGate.java
+END
+MsgStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2115/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb/MsgStatus.java
+END
+UserID.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2115/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb/UserID.java
+END
+TingcoVirtualGate.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/2115/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb/TingcoVirtualGate.java
+END
+OGMUserAlias.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2115/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb/OGMUserAlias.java
+END
+UserAliasDetails.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2115/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb/UserAliasDetails.java
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2115/Tingco_REST/src/java/se/info24/tingcovirtualgatejaxb/ObjectFactory.java
+END

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 7, 2013 5:45:30 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.ContainerData" schema="dbo" table="ContainerData">
+    <cache usage="nonstrict-read-write"/>
+    <id name="dataItemId" type="string">
+      <column length="36" name="DataItemID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="dataItemTime" type="timestamp">
+      <column length="23" name="DataItemTime" not-null="true"/>
+    </property>
+    <property name="containerId" type="string">
+      <column length="36" name="ContainerID" not-null="true"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="fillLevel" type="big_decimal">
+      <column name="FillLevel" not-null="true"/>
+    </property>
+    <property name="fillLevelPercent" type="java.lang.Integer">
+      <column name="FillLevelPercent"/>
+    </property>
+    <property name="freeLevel" type="big_decimal">
+      <column name="FreeLevel"/>
+    </property>
+    <property name="freeLevelPercent" type="java.lang.Integer">
+      <column name="FreeLevelPercent"/>
+    </property>
+    <property name="containerMinLevel" type="big_decimal">
+      <column name="ContainerMinLevel"/>
+    </property>
+    <property name="containerEmptyLevel" type="big_decimal">
+      <column name="ContainerEmptyLevel"/>
+    </property>
+    <property name="containerFullLevel" type="big_decimal">
+      <column name="ContainerFullLevel"/>
+    </property>
+    <property name="containerMaxLevel" type="big_decimal">
+      <column name="ContainerMaxLevel"/>
+    </property>
+    <property name="year" type="java.lang.Short">
+      <column name="Year"/>
+    </property>
+    <property name="month" type="java.lang.Short">
+      <column name="Month"/>
+    </property>
+    <property name="day" type="java.lang.Short">
+      <column name="Day"/>
+    </property>
+    <property name="hour" type="java.lang.Short">
+      <column name="Hour"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getContainerDataByContainerIdandDataItemTime">
+        from ContainerData where containerId = :containerId and dataItemTime between :fromDate and :toDate order by dataItemTime desc
+    </query>
+  <query name="getContainerDataByContainerId">
+        from ContainerData where containerId = :containerId
+    </query>
+</hibernate-mapping>

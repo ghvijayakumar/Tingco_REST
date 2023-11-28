@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 10, 2012 11:26:52 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserLoginResetRequests" schema="dbo" table="UserLoginResetRequests">
+    <cache usage="nonstrict-read-write"/>
+    <id name="loginResetRequestId" type="string">
+      <column length="36" name="LoginResetRequestID"/>
+      <generator class="assigned"/>
+    </id>
+    <!--<many-to-one name="users2" class="se.info24.pojo.Users2" fetch="select">
+            <column name="UserID" length="36" not-null="true" />
+        </many-to-one>-->
+    <property name="userId" type="string">
+      <column length="36" name="UserID" not-null="true"/>
+    </property>
+    <property name="loginResetRequestCode" type="string">
+      <column length="36" name="LoginResetRequestCode" not-null="true"/>
+    </property>
+    <property name="requestExpiryDate" type="timestamp">
+      <column length="23" name="RequestExpiryDate" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="isMailSent" type="int">
+      <column name="IsMailSent"/>
+    </property>
+    <property name="applicationID" type="string">
+      <column length="36" name="ApplicationID" not-null="true"/>
+    </property>
+  </class>
+  <query name="getuserpasswordresetReqbyExpirydate">
+        from UserLoginResetRequests where requestExpiryDate between :requestExpiryDatestart and :requestExpiryDate
+    </query>
+  <query name="getuserpasswordresetReq">
+        from UserLoginResetRequests where loginResetRequestId = :loginResetRequestId and loginResetRequestCode = :loginResetRequestCode
+    </query>
+  <query name="getAlluserpasswordresetReq">
+        from UserLoginResetRequests where isMailSent = 0
+    </query>
+</hibernate-mapping>

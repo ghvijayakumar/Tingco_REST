@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 26, 2014 1:32:31 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISMOperations" name="se.info24.ismOperationsPojo.ServiceStatus" schema="dbo" table="ServiceStatus">
+    <composite-id class="se.info24.ismOperationsPojo.ServiceStatusId" name="id">
+      <key-property name="serviceId" type="string">
+        <column length="36" name="ServiceID"/>
+      </key-property>
+      <key-property name="deviceId" type="string">
+        <column length="36" name="DeviceID"/>
+      </key-property>
+    </composite-id>
+    <property name="isOnline" type="java.lang.Integer">
+      <column name="IsOnline"/>
+    </property>
+    <property name="isOnlineChangedDate" type="timestamp">
+      <column length="23" name="IsOnlineChangedDate"/>
+    </property>
+    <property name="objectStateCode" type="string">
+      <column name="ObjectStateCode"/>
+    </property>
+    <property name="objectStateChangedDate" type="timestamp">
+      <column length="23" name="ObjectStateChangedDate"/>
+    </property>
+    <property name="statusText" type="string">
+      <column name="StatusText"/>
+    </property>
+    <property name="errorText" type="string">
+      <column name="ErrorText"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+</hibernate-mapping>

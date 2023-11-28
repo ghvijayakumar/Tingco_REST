@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 28, 2014 5:12:00 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class catalog="ISMOperations" name="se.info24.ismOperationsPojo.Blacklist" schema="dbo" table="Blacklist">
+        <id name="blacklistId" type="string">
+            <column length="36" name="BlacklistID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="blacklistTypeId" type="string">
+            <column length="36" name="BlacklistTypeID" not-null="true"/>
+        </property>
+        <property name="startValue" type="string">
+            <column name="StartValue" not-null="true"/>
+        </property>
+        <property name="endValue" type="string">
+            <column name="EndValue"/>
+        </property>
+        <property name="activeFrom" type="timestamp">
+            <column length="23" name="ActiveFrom"/>
+        </property>
+        <property name="activeTo" type="timestamp">
+            <column length="23" name="ActiveTo"/>
+        </property>
+        <property name="description" type="string">
+            <column name="Description"/>
+        </property>
+        <property name="userId" type="string">
+            <column length="36" name="UserID"/>
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column length="23" name="CreatedDate"/>
+        </property>
+        <property name="updatedDate" type="timestamp">
+            <column length="23" name="UpdatedDate"/>
+        </property>
+    </class>
+    <query name="getBlacklistByBlacklistID">
+        from Blacklist where blacklistId = :blacklistId
+    </query>
+    <query name="getBlacklistByStartValue">
+        from Blacklist where startValue = :userAlias
+    </query>
+</hibernate-mapping>

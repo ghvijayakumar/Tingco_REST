@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 21, 2014 12:56:47 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.RoomTypeTranslations" schema="dbo" table="RoomTypeTranslations">
+    <composite-id class="se.info24.pojo.RoomTypeTranslationsId" name="id">
+      <key-property name="roomTypeId" type="string">
+        <column length="36" name="RoomTypeID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.RoomTypes" fetch="select" insert="false" name="roomTypes" update="false">
+      <column length="36" name="RoomTypeID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Country" fetch="select" insert="false" name="country" update="false">
+      <column name="CountryID" not-null="true"/>
+    </many-to-one>
+    <property name="roomTypeName" type="string">
+      <column name="RoomTypeName" not-null="true"/>
+    </property>
+    <property name="roomTypeDescription" type="string">
+      <column name="RoomTypeDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getRoomTypeTranslationsByCountryIds">
+      from RoomTypeTranslations where id.countryId = :countryId order by roomTypeName asc
+    </query>
+</hibernate-mapping>

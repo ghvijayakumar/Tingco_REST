@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 30, 2014 3:00:50 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.ObjectUsageTypes" schema="dbo" table="ObjectUsageTypes">
+    <id name="usageTypeId" type="string">
+      <column length="36" name="UsageTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="usageTypeName" type="string">
+      <column name="UsageTypeName" not-null="true"/>
+    </property>
+    <property name="usageTypeDescription" type="string">
+      <column name="UsageTypeDescription"/>
+    </property>
+    <property name="parentDataFieldName" type="string">
+      <column name="ParentDataFieldName"/>
+    </property>
+    <property name="dataGroupName" type="string">
+      <column name="DataGroupName"/>
+    </property>
+    <property name="dataFieldName" type="string">
+      <column name="DataFieldName"/>
+    </property>
+    <property name="usageUnitId" type="string">
+      <column length="36" name="UsageUnitID"/>
+    </property>
+    <property name="typeCode" type="string">
+      <column name="TypeCode"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getAllObjectUsageTypesOrderByUsageTypeName">
+      from ObjectUsageTypes order by usageTypeName
+    </query>
+</hibernate-mapping>

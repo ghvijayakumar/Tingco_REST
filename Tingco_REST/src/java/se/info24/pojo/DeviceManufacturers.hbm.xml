@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2010 12:53:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DeviceManufacturers" schema="dbo" table="DeviceManufacturers">
+    <cache usage="nonstrict-read-write"/>
+    <id name="deviceManufacturerId" type="string">
+      <column length="36" name="DeviceManufacturerID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="deviceManufacturerName" type="string">
+      <column length="50" name="DeviceManufacturerName" not-null="true"/>
+    </property>
+    <property name="deviceManufacturerDescription" type="string">
+      <column length="200" name="DeviceManufacturerDescription"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="deviceTypeses">
+      <key>
+        <column length="36" name="DeviceManufacturerID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypes"/>
+    </set>
+  </class>
+  <query name="getDeviceManufacturersById">
+      from DeviceManufacturers as dm where dm.deviceManufacturerId = :deviceManufacturerID
+  </query>
+  <query name="getDeviceManufacturersByIds">
+      from DeviceManufacturers as dm where dm.deviceManufacturerId in (:deviceManufacturerID) order by deviceManufacturerName
+  </query>
+  <query name="getAllDeviceManufacturers">
+      from DeviceManufacturers order by createdDate desc
+  </query>
+  <query name="getAllDeviceManufacturersBySearchString">
+      from DeviceManufacturers where deviceManufacturerName like '%'+:searchString+'%' order by deviceManufacturerName
+  </query>
+</hibernate-mapping>

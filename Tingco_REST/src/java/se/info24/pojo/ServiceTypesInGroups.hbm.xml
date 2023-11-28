@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 13, 2012 11:55:14 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ServiceTypesInGroups" schema="dbo" table="ServiceTypesInGroups">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ServiceTypesInGroupsId" name="id">
+      <key-property name="serviceTypeId" type="string">
+        <column length="36" name="ServiceTypeID"/>
+      </key-property>
+      <key-property name="groupId" type="string">
+        <column length="36" name="GroupID"/>
+      </key-property>
+    </composite-id>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getServiceTypesByGroupId">
+        from ServiceTypesInGroups as stg where stg.id.groupId =:groupId
+    </query>
+</hibernate-mapping>

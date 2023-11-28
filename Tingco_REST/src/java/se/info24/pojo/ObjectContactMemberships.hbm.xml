@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 22, 2012 5:50:04 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ObjectContactMemberships" schema="dbo" table="ObjectContactMemberships">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ObjectContactMembershipsId" name="id">
+      <key-property name="objectId" type="string">
+        <column length="36" name="ObjectID"/>
+      </key-property>
+      <key-property name="objectContactId" type="string">
+        <column length="36" name="ObjectContactID"/>
+      </key-property>
+    </composite-id>
+    <property name="isDefaultContact" type="java.lang.Integer">
+      <column name="IsDefaultContact"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getObjectContactMemberships">
+        from ObjectContactMemberships where id.objectId = :objectId and isDefaultContact = 1
+    </query>
+  <query name="getObjectContactMembershipsByObjectId">
+        from ObjectContactMemberships where id.objectId = :objectId
+    </query>
+  <!--<query name="getObjectContactMembershipsByIdandContactId">
+        from ObjectContactMemberships where id.objectId = :objectId and id.objectContactId = :objectContactId and isDefaultContact = 1
+    </query>-->
+  <query name="getObjectContactMembershipsByIdandContactId">
+        from ObjectContactMemberships where id.objectId = :objectId and id.objectContactId = :objectContactId
+    </query>
+</hibernate-mapping>

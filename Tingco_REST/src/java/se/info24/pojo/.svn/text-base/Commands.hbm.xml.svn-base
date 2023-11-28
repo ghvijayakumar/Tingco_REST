@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 23, 2013 12:51:02 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Commands" schema="dbo" table="Commands">
+    <cache usage="nonstrict-read-write"/>
+    <id name="commandId" type="string">
+      <column length="36" name="CommandID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.CommandTypes" fetch="select" name="commandTypes">
+      <column length="36" name="CommandTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="commandParentId" type="string">
+      <column length="36" name="CommandParentID"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="objectCode" type="string">
+      <column name="ObjectCode" not-null="true" unique="true"/>
+    </property>
+    <property name="commandTemplateId" type="string">
+      <column length="36" name="CommandTemplateID"/>
+    </property>
+    <property name="sendToChannelId" type="string">
+      <column length="36" name="SendToChannelID"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="regExPattern" type="string">
+      <column name="RegExPattern"/>
+    </property>
+    <property name="reverseCommandId" type="string">
+      <column length="36" name="ReverseCommandID"/>
+    </property>
+    <set inverse="true" name="commandTranslationses">
+      <key>
+        <column length="36" name="CommandID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.CommandTranslations"/>
+    </set>
+    <set inverse="true" name="commandParseTargetses">
+      <key>
+        <column length="36" name="CommandID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.CommandParseTargets"/>
+    </set>
+  </class>
+</hibernate-mapping>

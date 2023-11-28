@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2012 12:18:32 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ServiceSubscriptionAcl" schema="dbo" table="ServiceSubscriptionACL">
+    <cache usage="nonstrict-read-write"/>
+    <id name="serviceSubscriptionAclid" type="string">
+      <column length="36" name="ServiceSubscriptionACLID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate"/>
+    </property>
+    <property name="searchHitsLeftToUse" type="java.lang.Integer">
+      <column name="SearchHitsLeftToUse"/>
+    </property>
+    <property name="searchHitsStartValue" type="java.lang.Integer">
+      <column name="SearchHitsStartValue"/>
+    </property>
+    <property name="limitByDate" type="java.lang.Integer">
+      <column name="LimitByDate"/>
+    </property>
+    <property name="limitByHits" type="java.lang.Integer">
+      <column name="LimitByHits"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getServiceSubscriptionAcl">
+        from ServiceSubscriptionAcl where serviceSubscriptionAclid = :serviceSubscriptionAclid
+    </query>
+  <query name="getServiceSubscriptionAclById">
+        from ServiceSubscriptionAcl where serviceSubscriptionAclid in (:serviceSubscriptionAclid)
+    </query>
+</hibernate-mapping>

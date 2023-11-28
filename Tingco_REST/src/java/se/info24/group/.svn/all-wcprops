@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/NB_2011/!svn/ver/2404/Tingco_REST/src/java/se/info24/group
+END
+GroupDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/2387/Tingco_REST/src/java/se/info24/group/GroupDAO.java
+END
+FavoriteGroupResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/group/FavoriteGroupResource.java
+END
+GroupResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/group/GroupResource.java
+END
+GroupTrustResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/group/GroupTrustResource.java
+END
+FavoriteGroupsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1897/Tingco_REST/src/java/se/info24/group/FavoriteGroupsResource.java
+END
+GroupsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2404/Tingco_REST/src/java/se/info24/group/GroupsResource.java
+END
+GroupTrustsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2316/Tingco_REST/src/java/se/info24/group/GroupTrustsResource.java
+END

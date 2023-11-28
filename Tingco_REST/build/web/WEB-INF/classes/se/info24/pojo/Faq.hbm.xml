@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 29, 2014 12:19:33 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.Faq" schema="dbo" table="FAQ">
+    <id name="faqid" type="string">
+      <column length="36" name="FAQID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="question" type="string">
+      <column name="Question" not-null="true"/>
+    </property>
+    <property name="answer" type="string">
+      <column name="Answer" not-null="true"/>
+    </property>
+    <property name="countryId" type="int">
+      <column name="CountryID" not-null="true"/>
+    </property>
+    <property name="category" type="string">
+      <column name="Category"/>
+    </property>
+    <property name="tags" type="string">
+      <column name="Tags"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getFAQById">
+      from Faq where faqid = :faqid
+    </query>
+</hibernate-mapping>

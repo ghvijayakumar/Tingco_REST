@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 3:59:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.SystemMessages" schema="dbo" table="SystemMessages">
+    <cache usage="nonstrict-read-write"/>
+    <id name="systemMessageId" type="string">
+      <column length="36" name="SystemMessageID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.SystemMessageStatuses" fetch="select" name="systemMessageStatuses">
+      <column length="36" name="SystemMessageStatusID" not-null="true"/>
+    </many-to-one>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate" not-null="true"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="systemMessagesToApplicationses">
+      <key>
+        <column length="36" name="SystemMessageID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.SystemMessagesToApplications"/>
+    </set>
+    <set inverse="true" name="systemMessageTranslationses">
+      <key>
+        <column length="36" name="SystemMessageID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.SystemMessageTranslations"/>
+    </set>
+  </class>
+  <query name="getTopOneActiveSystemMessage">
+     from SystemMessages sm where sm.activeFromDate &lt;= :activeFromDate and sm.activeToDate &gt;= :activeToDate and sm.isEnabled = :isEnabled order by sm.activeFromDate asc
+  </query>
+</hibernate-mapping>

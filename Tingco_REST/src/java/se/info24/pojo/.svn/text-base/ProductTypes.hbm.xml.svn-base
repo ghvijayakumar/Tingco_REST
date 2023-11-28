@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2012 12:18:32 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ProductTypes" schema="dbo" table="ProductTypes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="productTypeId" type="string">
+      <column length="36" name="ProductTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="productTypeName" type="string">
+      <column name="ProductTypeName" not-null="true"/>
+    </property>
+    <property name="productTypeDescription" type="string">
+      <column name="ProductTypeDescription"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="productses">
+      <key>
+        <column length="36" name="ProductTypeID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Products"/>
+    </set>
+  </class>
+  <query name="getProductTypes">
+        from ProductTypes  order by productTypeName
+    </query>
+  <query name="getProductTypesByProductTypeID">
+        from ProductTypes where productTypeId =:productTypeId order by productTypeName
+    </query>
+  <query name="getProductTypesByProductTypeNameSearchString">
+        from ProductTypes where productTypeName like '%'+:searchField+'%' order by productTypeName
+    </query>
+</hibernate-mapping>

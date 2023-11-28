@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 28, 2014 4:47:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.Connectors" schema="dbo" table="Connectors">
+    <id name="connectorId" type="string">
+      <column length="36" name="ConnectorID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.ProductVariants" fetch="select" name="productVariants">
+      <column length="36" name="ProductVariantID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.DeviceDataItems" fetch="select" name="deviceDataItems">
+      <column length="36" name="DeviceDataItemID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ConnectorTypes" fetch="select" name="connectorTypes">
+      <column length="36" name="ConnectorTypeID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ConnectorAcdc" fetch="select" name="connectorAcdc">
+      <column length="36" name="ConnectorACDCID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ConnectorCurrents" fetch="select" name="connectorCurrents">
+      <column length="36" name="ConnectorCurrentID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ConnectorModes" fetch="select" name="connectorModes">
+      <column length="36" name="ConnectorModeID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ConnectorVoltages" fetch="select" name="connectorVoltages">
+      <column length="36" name="ConnectorVoltageID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Device" fetch="select" insert="false" name="device" update="false">
+      <column length="36" name="DeviceID"/>
+    </many-to-one>
+    <property name="deviceId" type="string">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </property>
+    <property name="connectorName" type="string">
+      <column name="ConnectorName" not-null="true"/>
+    </property>
+    <property name="connectorDescription" type="string">
+      <column name="ConnectorDescription"/>
+    </property>
+    <property name="sortOrder" type="int">
+      <column name="SortOrder" not-null="true"/>
+    </property>
+    <property name="connectorTypeCode" type="string">
+      <column name="ConnectorTypeCode"/>
+    </property>
+    <property name="connectorModeCode" type="string">
+      <column name="ConnectorModeCode"/>
+    </property>
+    <property name="connectorVoltageCode" type="string">
+      <column name="ConnectorVoltageCode"/>
+    </property>
+    <property name="connectorCurrentCode" type="string">
+      <column name="ConnectorCurrentCode"/>
+    </property>
+    <property name="connectorAcdccode" type="string">
+      <column name="ConnectorACDCCode"/>
+    </property>
+    <property name="loadBalanceId" type="string">
+      <column length="36" name="LoadBalanceID"/>
+    </property>
+    <property name="isEnabled" type="int">
+      <column name="IsEnabled" not-null="true"/>
+    </property>
+    <property name="isVisibleInApi" type="int">
+      <column name="IsVisibleInAPI" not-null="true"/>
+    </property>
+    <property name="publicComment1" type="string">
+      <column name="PublicComment1"/>
+    </property>
+    <property name="publicComment2" type="string">
+      <column name="PublicComment2"/>
+    </property>
+    <property name="internalComment" type="string">
+      <column name="InternalComment"/>
+    </property>
+    <property name="connectorImageUrl" type="string">
+      <column name="ConnectorImageURL"/>
+    </property>
+    <property name="floor" type="string">
+      <column name="Floor"/>
+    </property>
+    <property name="building" type="string">
+      <column name="Building"/>
+    </property>
+    <property name="searchTags" type="string">
+      <column name="SearchTags"/>
+    </property>
+    <property name="connectorTemplateId" type="string">
+      <column length="36" name="ConnectorTemplateID"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getConnectorsByDeviceId">
+        from Connectors where deviceId = :deviceId
+    </query>
+  <query name="getConnectorsByDeviceIds">
+        from Connectors where deviceId in(:deviceId) order by device.deviceName asc
+    </query>
+  <query name="getConnectorsByDeviceIdAndDeviceDataItemId">
+        from Connectors where deviceId = :deviceId and deviceDataItems.deviceDataItemId = :deviceDataItemId
+    </query>
+  <query name="getConnectorsByDeviceIdSortedByConnectorName">
+        from Connectors where deviceId = :deviceId order by connectorName
+    </query>
+  <query name="getConnectorsByConnectorID">
+        from Connectors where connectorId = :connectorId
+    </query>
+</hibernate-mapping>

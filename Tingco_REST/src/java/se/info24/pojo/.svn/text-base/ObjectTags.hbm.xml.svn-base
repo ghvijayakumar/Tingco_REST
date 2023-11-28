@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 29, 2014 1:24:24 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class catalog="ISM" name="se.info24.pojo.ObjectTags" schema="dbo" table="ObjectTags">
+        <id name="objectId" type="string">
+            <column length="36" name="ObjectID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="searchTags" type="string">
+            <column name="SearchTags" not-null="true"/>
+        </property>
+        <property name="lastUpdatedByUserId" type="string">
+            <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column length="23" name="CreatedDate"/>
+        </property>
+        <property name="updatedDate" type="timestamp">
+            <column length="23" name="UpdatedDate"/>
+        </property>
+    </class>
+    <query name="getObjectTagsByObjectId">
+    from ObjectTags where objectId = :userAliasID
+    </query>
+</hibernate-mapping>

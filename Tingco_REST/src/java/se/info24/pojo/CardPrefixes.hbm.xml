@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 5, 2014 11:46:28 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.CardPrefixes" schema="dbo" table="CardPrefixes">
+    <id name="cardPrefixId" type="string">
+      <column length="36" name="CardPrefixID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="cardPrefixName" type="string">
+      <column name="CardPrefixName" not-null="true"/>
+    </property>
+    <property name="cardPrefixDescription" type="string">
+      <column name="CardPrefixDescription"/>
+    </property>
+    <property name="brandName" type="string">
+      <column name="BrandName"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="startPrefixBin" type="long">
+      <column name="StartPrefixBIN" not-null="true" precision="18" scale="0"/>
+    </property>
+    <property name="endPrefixBin" type="java.lang.Long">
+      <column name="EndPrefixBIN" precision="18" scale="0"/>
+    </property>
+    <property name="accountNumberLength" type="java.lang.Integer">
+      <column name="AccountNumberLength"/>
+    </property>
+    <property name="highestAccountNumber" type="java.lang.Long">
+      <column name="HighestAccountNumber" precision="18" scale="0"/>
+    </property>
+    <property name="startChar" type="string">
+      <column name="StartChar"/>
+    </property>
+    <property name="endChar" type="string">
+      <column name="EndChar"/>
+    </property>
+    <property name="fieldSeparatorChar" type="string">
+      <column name="FieldSeparatorChar"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 28, 2014 4:47:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.BundleCategoryTranslations" schema="dbo" table="BundleCategoryTranslations">
+    <composite-id class="se.info24.pojo.BundleCategoryTranslationsId" name="id">
+      <key-property name="bundleCategoryId" type="string">
+        <column length="36" name="BundleCategoryID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.BundleCategories" fetch="select" insert="false" name="bundleCategories" update="false">
+      <column length="36" name="BundleCategoryID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Country" fetch="select" insert="false" name="country" update="false">
+      <column name="CountryID" not-null="true"/>
+    </many-to-one>
+    <property name="bundleCategoryName" type="string">
+      <column name="BundleCategoryName" not-null="true"/>
+    </property>
+    <property name="bundleCategoryDescription" type="string">
+      <column name="BundleCategoryDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getBundleCategoryTranslations">
+        from BundleCategoryTranslations where id.countryId =:countryId order by bundleCategoryName
+    </query>
+  <query name="getBundleCategoryTranslationsByName">
+        from BundleCategoryTranslations where id.countryId =:countryId and bundleCategoryName like '%'+:bundleCategoryName+'%' order by bundleCategoryName
+    </query>
+  <query name="getBundleCategoryTranslationsByID">
+        from BundleCategoryTranslations where id.countryId =:countryId and id.bundleCategoryId = :bundleCategoryId
+    </query>
+</hibernate-mapping>

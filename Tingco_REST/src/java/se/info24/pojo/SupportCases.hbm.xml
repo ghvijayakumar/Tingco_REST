@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 6, 2013 12:23:38 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.SupportCases" schema="dbo" table="SupportCases">
+    <cache usage="nonstrict-read-write"/>
+    <id name="supportCaseId" type="string">
+      <column length="36" name="SupportCaseID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.SupportCasePriorities" fetch="select" name="supportCasePriorities">
+      <column length="36" name="SupportCasePriorityID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.SupportCaseStatuses" fetch="select" name="supportCaseStatuses">
+      <column length="36" name="SupportCaseStatusID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.SupportCaseTypes" fetch="select" name="supportCaseTypes">
+      <column length="36" name="SupportCaseTypeID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Groups" fetch="select" name="groups">
+      <column length="36" name="ImpactsGroupID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.SupportOrganizations" fetch="select" name="supportOrganizations">
+      <column length="36" name="AssignedToSupportOrganizationID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.SupportCaseImpacts" fetch="select" name="supportCaseImpacts">
+      <column length="36" name="SupportCaseImpactID"/>
+    </many-to-one>
+    <property name="supportCaseSubject" type="string">
+      <column name="SupportCaseSubject" not-null="true"/>
+    </property>
+    <property name="reportedByUserId" type="string">
+      <column length="36" name="ReportedByUserID"/>
+    </property>
+    <property name="reportedByUserName" type="string">
+      <column name="ReportedByUserName"/>
+    </property>
+    <property name="reportedByEmail" type="string">
+      <column name="ReportedByEmail"/>
+    </property>
+    <property name="reportedByPhone" type="string">
+      <column name="ReportedByPhone"/>
+    </property>
+    <property name="assignedToUserId" type="string">
+      <column length="36" name="AssignedToUserID"/>
+    </property>
+    <property name="reportedDate" type="timestamp">
+      <column length="23" name="ReportedDate" not-null="true"/>
+    </property>
+    <property name="dueDate" type="timestamp">
+      <column length="23" name="DueDate"/>
+    </property>
+    <property name="startDate" type="timestamp">
+      <column length="23" name="StartDate"/>
+    </property>
+    <property name="completionDate" type="timestamp">
+      <column length="23" name="CompletionDate"/>
+    </property>
+    <property name="supportCaseDescription" type="string">
+      <column name="SupportCaseDescription" not-null="true"/>
+    </property>
+    <property name="reproduceSteps" type="string">
+      <column name="ReproduceSteps"/>
+    </property>
+    <property name="resolutionText" type="string">
+      <column name="ResolutionText"/>
+    </property>
+    <property name="durationEstimated" type="java.lang.Integer">
+      <column name="DurationEstimated"/>
+    </property>
+    <property name="durationActual" type="java.lang.Integer">
+      <column name="DurationActual"/>
+    </property>
+    <property name="isUpdated" type="java.lang.Integer">
+      <column name="IsUpdated"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property insert="false" name="supportCaseNumber" type="long" unique="true" update="false">
+      <column name="SupportCaseNumber" not-null="true"/>
+    </property>
+    <property name="costCenterId" type="string">
+      <column length="36" name="CostCenterID"/>
+    </property>
+    <set cascade="delete" inverse="true" name="supportCaseDeviceLinkses">
+      <key>
+        <column length="36" name="SupportCaseID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.SupportCaseDeviceLinks"/>
+    </set>
+    <set cascade="delete" inverse="true" name="supportCaseContentLinkses">
+      <key>
+        <column length="36" name="SupportCaseID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.SupportCaseContentLinks"/>
+    </set>
+    <set cascade="delete" inverse="true" name="supportCaseServiceLinkses">
+      <key>
+        <column length="36" name="SupportCaseID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.SupportCaseServiceLinks"/>
+    </set>
+    <set cascade="delete" inverse="true" name="supportCaseNoteses">
+      <key>
+        <column length="36" name="SupportCaseID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.SupportCaseNotes"/>
+    </set>
+  </class>
+  <query name="getSupportCasesByGroupId">
+        from SupportCases where groups.groupId = :groupId order by supportCaseNumber desc
+    </query>
+  <query name="getSupportCasesByGroupIdList">
+        from SupportCases where groups.groupId in (:groupId) order by supportCaseNumber desc
+    </query>
+  <query name="getSupportCasesById">
+        from SupportCases where supportCaseId = :supportCaseId
+    </query>
+  <query name="getSupportCasesByIds">
+        from SupportCases where supportCaseId in (:supportCaseId) order by supportCaseNumber desc
+    </query>
+  <query name="getSupportCasesByAssignedToUserId">
+        from SupportCases where assignedToUserId = :assignedToUserId order by supportCaseNumber desc
+    </query>
+</hibernate-mapping>

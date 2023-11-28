@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 2, 2011 2:39:53 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.FunctionAreas" schema="dbo" table="FunctionAreas">
+    <cache usage="nonstrict-read-write"/>
+    <id name="functionAreaId" type="string">
+      <column length="36" name="FunctionAreaID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="functionAreaParentId" type="string">
+      <column length="36" name="FunctionAreaParentID"/>
+    </property>
+    <property name="functionAreaTechName" type="string">
+      <column length="50" name="FunctionAreaTechName" not-null="true"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="functionAreaTranslationses">
+      <key>
+        <column length="36" name="FunctionAreaID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.FunctionAreaTranslations"/>
+    </set>
+    <set inverse="true" name="agreementItemses">
+      <key>
+        <column length="36" name="FunctionAreaID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.AgreementItems"/>
+    </set>
+  </class>
+  <query name="getFunctionAreasByObjectID">
+        from FunctionAreas fa where fa.functionAreaId = :objectID
+    </query>
+  <query name="getFunctionAreasByObjectIDs">
+        from FunctionAreas fa where fa.functionAreaId in (:objectID) order by functionAreaTechName
+    </query>
+  <query name="getAllFunctionAreas">
+        from FunctionAreas order by functionAreaTechName
+    </query>
+  <query name="getFunctionAreasByFunctionAreaTechName">
+        from FunctionAreas fa where fa.functionAreaTechName = :functionAreaTechName
+    </query>
+</hibernate-mapping>

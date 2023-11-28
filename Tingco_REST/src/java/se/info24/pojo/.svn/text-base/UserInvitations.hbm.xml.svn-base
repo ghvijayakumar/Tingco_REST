@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2011 12:46:17 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserInvitations" schema="dbo" table="UserInvitations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.UserInvitationsId" name="id">
+      <key-property name="invitedByUserId" type="string">
+        <column length="36" name="InvitedByUserID"/>
+      </key-property>
+      <key-property name="invitedToUserId" type="string">
+        <column length="36" name="InvitedToUserID"/>
+      </key-property>
+      <key-property name="applicationId" type="string">
+        <column length="36" name="ApplicationID"/>
+      </key-property>
+      <key-property name="domainId" type="string">
+        <column length="36" name="DomainID"/>
+      </key-property>
+    </composite-id>
+    <property name="invitationLink" type="string">
+      <column length="100" name="InvitationLink"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate"/>
+    </property>
+    <property name="isActive" type="java.lang.Boolean">
+      <column name="IsActive"/>
+    </property>
+    <property name="IsMailSent" type="java.lang.Boolean">
+      <column name="IsMailSent"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+  </class>
+  <query name="getAllUserInvitations">
+        from UserInvitations
+</query>
+  <query name="getAllUnsentMails_UI">
+        from UserInvitations where IsMailSent = '0'
+    </query>
+  <query name="getUserInviteByInvitedTo">
+        from UserInvitations where  InvitedToUserID= :invitedTo
+</query>
+</hibernate-mapping>

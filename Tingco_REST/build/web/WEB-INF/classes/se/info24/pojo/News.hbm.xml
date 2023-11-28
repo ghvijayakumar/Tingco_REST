@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 11, 2014 10:44:11 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.News" schema="dbo" table="News">
+    <id name="newsId" type="string">
+      <column length="36" name="NewsID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.NewsCategories" fetch="select" name="newsCategories">
+      <column length="36" name="NewsCategoryID" not-null="true"/>
+    </many-to-one>
+    <property name="subject" type="string">
+      <column name="Subject" not-null="true"/>
+    </property>
+    <property name="body" type="string">
+      <column name="Body"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="isVisibleToAllGroups" type="java.lang.Integer">
+      <column name="IsVisibleToAllGroups"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="newsVisibleInGroupses">
+      <key>
+        <column length="36" name="NewsID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.NewsVisibleInGroups"/>
+    </set>
+  </class>
+  <query name="getNewsByGroupIDAndDate">
+        from News where (newsId in (:newsId) or isVisibleToAllGroups = 1)  and (:timenow between activeFromDate and activeToDate) and isEnabled =1 order by activeFromDate desc
+    </query>
+  <query name="getNewsByIsVisibleToAllGroupsAndDate">
+        from News where isVisibleToAllGroups = 1 and (:timenow between activeFromDate and activeToDate) and isEnabled =1 order by activeFromDate desc
+    </query>
+  <query name="getNewsByNewsID">
+        from News where newsId =:newsId
+    </query>
+</hibernate-mapping>

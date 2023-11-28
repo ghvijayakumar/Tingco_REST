@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 4, 2013 5:50:32 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.SupportCaseNotes" schema="dbo" table="SupportCaseNotes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="noteId" type="string">
+      <column length="36" name="NoteID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.SupportCases" fetch="select" name="supportCases">
+      <column length="36" name="SupportCaseID" not-null="true"/>
+    </many-to-one>
+    <property name="noteText" type="string">
+      <column name="NoteText" not-null="true"/>
+    </property>
+    <property name="noteCreatedByUserId" type="string">
+      <column length="36" name="NoteCreatedByUserID" not-null="true"/>
+    </property>
+    <property name="isVisibleToReportingUser" type="java.lang.Integer">
+      <column name="IsVisibleToReportingUser"/>
+    </property>
+    <property name="isVisibleToPublic" type="java.lang.Integer">
+      <column name="IsVisibleToPublic"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+</hibernate-mapping>

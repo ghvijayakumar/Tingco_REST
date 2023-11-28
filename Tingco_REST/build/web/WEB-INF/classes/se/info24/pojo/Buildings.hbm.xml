@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 21, 2014 12:56:47 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.Buildings" schema="dbo" table="Buildings">
+    <id name="buildingId" type="string">
+      <column length="36" name="BuildingID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Agreements" fetch="select" name="agreements">
+      <column length="36" name="AgreementID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Country" fetch="select" name="country">
+      <column name="CountryID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.BuildingTypes" fetch="select" name="buildingTypes">
+      <column length="36" name="BuildingTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="buildingParentId" type="string">
+      <column length="36" name="BuildingParentID"/>
+    </property>
+    <property name="buildingName" type="string">
+      <column name="BuildingName" not-null="true"/>
+    </property>
+    <property name="buildingDescription" type="string">
+      <column name="BuildingDescription"/>
+    </property>
+    <property name="ownerGroupId" type="string">
+      <column length="36" name="OwnerGroupID" not-null="true"/>
+    </property>
+    <property name="usedByGroupId" type="string">
+      <column length="36" name="UsedByGroupID"/>
+    </property>
+    <property name="containerId" type="string">
+      <column length="36" name="ContainerID"/>
+    </property>
+    <property name="propertyCode" type="string">
+      <column name="PropertyCode"/>
+    </property>
+    <property name="buildingNumber" type="string">
+      <column name="BuildingNumber"/>
+    </property>
+    <property name="buildingCode" type="string">
+      <column name="BuildingCode"/>
+    </property>
+    <property name="shareOfParent" type="java.lang.Integer">
+      <column name="ShareOfParent"/>
+    </property>
+    <property name="floorLevel" type="string">
+      <column name="FloorLevel"/>
+    </property>
+    <property name="area" type="big_decimal">
+      <column name="Area"/>
+    </property>
+    <property name="areaUnit" type="string">
+      <column name="AreaUnit"/>
+    </property>
+    <property name="volume" type="big_decimal">
+      <column name="Volume"/>
+    </property>
+    <property name="volumeUnit" type="string">
+      <column name="VolumeUnit"/>
+    </property>
+    <property name="rating" type="java.lang.Integer">
+      <column name="Rating"/>
+    </property>
+    <property name="isNonSmoking" type="java.lang.Integer">
+      <column name="IsNonSmoking"/>
+    </property>
+    <property name="isPublicAccess" type="java.lang.Integer">
+      <column name="IsPublicAccess"/>
+    </property>
+    <property name="isOpen" type="java.lang.Integer">
+      <column name="IsOpen"/>
+    </property>
+    <property name="isInEmergencyMode" type="java.lang.Integer">
+      <column name="IsInEmergencyMode"/>
+    </property>
+    <property name="isPetsAllowed" type="java.lang.Integer">
+      <column name="IsPetsAllowed"/>
+    </property>
+    <property name="userCanChangeClimatePricePref" type="java.lang.Integer">
+      <column name="UserCanChangeClimatePricePref"/>
+    </property>
+    <property name="street1" type="string">
+      <column name="Street1"/>
+    </property>
+    <property name="street2" type="string">
+      <column name="Street2"/>
+    </property>
+    <property name="zipCode" type="string">
+      <column name="ZipCode"/>
+    </property>
+    <property name="city" type="string">
+      <column name="City"/>
+    </property>
+    <property name="state" type="string">
+      <column name="State"/>
+    </property>
+    <property name="region" type="string">
+      <column name="Region"/>
+    </property>
+    <property name="latitude" type="big_decimal">
+      <column name="Latitude" precision="10" scale="7"/>
+    </property>
+    <property name="longitude" type="big_decimal">
+      <column name="Longitude" precision="10" scale="7"/>
+    </property>
+    <property name="altitude" type="big_decimal">
+      <column name="Altitude" precision="8" scale="1"/>
+    </property>
+    <property name="layoutImageUrl" type="string">
+      <column name="LayoutImageURL"/>
+    </property>
+    <property name="websiteUrl" type="string">
+      <column name="WebsiteURL"/>
+    </property>
+    <property name="climatePricePreference" type="java.lang.Integer">
+      <column name="ClimatePricePreference"/>
+    </property>
+    <property name="energyMeterDeviceId" type="string">
+      <column length="36" name="EnergyMeterDeviceID"/>
+    </property>
+    <property name="heatMeterDeviceId" type="string">
+      <column length="36" name="HeatMeterDeviceID"/>
+    </property>
+    <property name="waterMeterDeviceId" type="string">
+      <column length="36" name="WaterMeterDeviceID"/>
+    </property>
+    <property name="gasMeterDeviceId" type="string">
+      <column length="36" name="GasMeterDeviceID"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="roomses">
+      <key>
+        <column length="36" name="BuildingID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Rooms"/>
+    </set>
+    <set inverse="true" name="buildingDeviceses">
+      <key>
+        <column length="36" name="BuildingID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.BuildingDevices"/>
+    </set>
+  </class>
+  <query name="getBuildingsById">
+        from Buildings where buildingId = :buildingId
+    </query>
+  <query name="getBuildingsByOwnerGroupId">
+        from Buildings where ownerGroupId in (:ownerGroupId) order by createdDate desc
+    </query>
+  <query name="getBuildingsByIdAndOwnerGroupId">
+        from Buildings where ownerGroupId in (:ownerGroupId) and buildingId = :buildingId order by createdDate desc
+    </query>
+  <query name="getBuildingsByNameAndOwnerGroupId">
+        from Buildings where ownerGroupId in (:ownerGroupId) and  buildingName like '%'+:buildingName+'%' order by buildingName asc
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 5, 2013 3:09:03 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="timweb" name="se.info24.timPojo.SiteMenuTranslations" schema="dbo" table="SiteMenuTranslations">
+    <composite-id class="se.info24.timPojo.SiteMenuTranslationsId" name="id">
+      <key-property name="siteMenuNodeId" type="string">
+        <column length="36" name="SiteMenuNodeID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.timPojo.SiteMenus" fetch="select" insert="false" name="siteMenus" update="false">
+      <column length="36" name="SiteMenuNodeID" not-null="true"/>
+    </many-to-one>
+    <property name="siteMenuNodeName" type="string">
+      <column name="SiteMenuNodeName" not-null="true"/>
+    </property>
+    <property name="lastUpdatedByUseId" type="string">
+      <column length="36" name="LastUpdatedByUseID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getSiteMenuTranslationsById">
+      from SiteMenuTranslations  where id.siteMenuNodeId = :siteMenuNodeId and id.countryId =:countryId
+    </query>
+</hibernate-mapping>

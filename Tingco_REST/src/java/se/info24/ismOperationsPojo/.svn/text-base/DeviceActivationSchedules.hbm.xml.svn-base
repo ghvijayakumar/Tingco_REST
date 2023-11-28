@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 30, 2010 1:32:29 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.DeviceActivationSchedules" schema="dbo" table="DeviceActivationSchedules">
+    <cache usage="nonstrict-read-write"/>
+    <id name="deviceActivationId" type="string">
+      <column length="36" name="DeviceActivationID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="deviceId" type="string">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </property>
+    <property name="userAlias" type="string">
+      <column length="200" name="UserAlias" not-null="true"/>
+    </property>
+    <property name="userAliasTypeId" type="string">
+      <column length="36" name="UserAliasTypeID"/>
+    </property>
+    <property name="deviceTypeId" type="string">
+      <column length="36" name="DeviceTypeID" not-null="true"/>
+    </property>
+    <property name="dataItemGroup" type="string">
+      <column name="DataItemGroup"/>
+    </property>
+    <property name="dataItem" type="string">
+      <column length="200" name="DataItem" not-null="true"/>
+    </property>
+    <property name="dataItemValue" type="string">
+      <column length="200" name="DataItemValue" not-null="true"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="startTime" type="timestamp">
+      <column length="23" name="StartTime" not-null="true"/>
+    </property>
+    <property name="stopTime" type="timestamp">
+      <column length="23" name="StopTime"/>
+    </property>
+    <property name="actualStartTime" type="timestamp">
+      <column length="23" name="ActualStartTime"/>
+    </property>
+    <property name="actualStopTime" type="timestamp">
+      <column length="23" name="ActualStopTime"/>
+    </property>
+    <property name="transactionId" type="string">
+      <column length="36" name="TransactionID"/>
+    </property>
+    <property name="dahState" type="java.lang.Byte">
+      <column name="DAH_State"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getDeviceActivationSchedules">
+      from DeviceActivationSchedules where deviceActivationId in (select das.deviceActivationId from DeviceActivationSchedules das where das.dataItem = :dataItem and das.deviceId = :deviceId)
+    </query>
+  <query name="getDeviceActivationSchedulesByDeviceId">
+      from DeviceActivationSchedules where deviceId = :deviceId order by createdDate desc
+    </query>
+  <query name="getDeviceActivationSchedulesByDeviceIdAndFieldName">
+      from DeviceActivationSchedules where deviceId = :deviceId and dataItem = :fieldName
+    </query>
+  <query name="getDeviceActivationSchedulesByActivationId">
+      from DeviceActivationSchedules where deviceActivationId = :deviceActivationId
+    </query>
+  <query name="getChargePointStatusWidgetDetails">
+      from DeviceActivationSchedules where deviceId in(:deviceId) and dataItem in(:dataItem) and dataItemGroup in(:dataItemGroup)
+  </query>
+</hibernate-mapping>

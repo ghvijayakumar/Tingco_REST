@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 26, 2012 3:24:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.PricePlanTypeTranslations" schema="dbo" table="PricePlanTypeTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.PricePlanTypeTranslationsId" name="id">
+      <key-property name="pricePlanTypeId" type="string">
+        <column length="36" name="PricePlanTypeID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.PricePlanTypes" fetch="select" insert="false" name="pricePlanTypes" update="false">
+      <column length="36" name="PricePlanTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="pricePlanTypeName" type="string">
+      <column length="50" name="PricePlanTypeName" not-null="true"/>
+    </property>
+    <property name="pricePlanTypeDescription" type="string">
+      <column length="200" name="PricePlanTypeDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getPricePlanTypeTranslationsByCountryId">
+        from PricePlanTypeTranslations where id.countryId = :countryId order by pricePlanTypeName
+    </query>
+  <query name="getPricePlanTypeTranslationsByID">
+        from PricePlanTypeTranslations where id.pricePlanTypeId in (:pricePlanTypeId) and id.countryId = :countryId order by pricePlanTypeName
+    </query>
+  <query name="getPricePlanTypeTranslationsByCountryAndPricePlanTypeID">
+        from PricePlanTypeTranslations where id.pricePlanTypeId =:pricePlanTypeId and id.countryId = :countryId
+    </query>
+</hibernate-mapping>

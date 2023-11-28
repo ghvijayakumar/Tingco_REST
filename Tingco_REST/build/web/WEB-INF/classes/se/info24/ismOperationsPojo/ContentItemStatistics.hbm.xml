@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 19, 2013 4:49:18 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.ContentItemStatistics" schema="dbo" table="ContentItemStatistics">
+    <id name="contentItemId" type="string">
+      <column length="36" name="ContentItemID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="countLikes" type="java.lang.Integer">
+      <column name="CountLikes"/>
+    </property>
+    <property name="countDislikes" type="java.lang.Integer">
+      <column name="CountDislikes"/>
+    </property>
+    <property name="hits" type="java.lang.Long">
+      <column name="Hits"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDat" type="timestamp">
+      <column length="23" name="UpdatedDat"/>
+    </property>
+  </class>
+  <query name="getContentItemStatisticsById">
+        from ContentItemStatistics where contentItemId = :contentItemID
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,189 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package se.info24.tingcovirtualgate;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Hashtable;
+import java.util.TimeZone;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.POST;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Path;
+import javax.ws.rs.GET;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import org.hibernate.Session;
+import se.info24.devicejaxb.TingcoDevice;
+import se.info24.ismOperationsPojo.ObjectConnectedState;
+import se.info24.pojo.UserSessions2;
+import se.info24.tingcovirtualgatejaxb.TingcoVirtualGate;
+import se.info24.user.User_LoginsResource;
+import se.info24.util.HibernateUtil;
+import se.info24.util.RESTDoc;
+import se.info24.util.TCMUtil;
+import se.info24.util.TingcoConstants;
+
+/**
+ * REST Web Service
+ *
+ * @author Vijayakumar
+ */
+@Path("/tingcovirtualgates")
+public class TingcoVirtualGatesResource {
+
+<<<<<<< .mine
+@Path("/tingcovirtualgates")
+public class TingcoVirtualGatesResource {
+=======
+>>>>>>> .r2117
+    @Context
+    private UriInfo context;
+    @Context
+    private HttpServletRequest request;
+    GregorianCalendar currentDateTime = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+
+    /** Creates a new instance of TingcoVirtualGatesResource */
+    public TingcoVirtualGatesResource() {
+    }
+
+    /**
+     * CheckTingcoAPIConnected
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/checktingcoapiconnected/rest/{rest}/deviceid/{deviceid}")
+    @RESTDoc(methodName = "CheckTingcoAPIConnected", desc = "Used to Check TingcoAPI is Connected or not in Tingco Virtual Gate", req_Params = {"DeviceID;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoVirtualGate getXml_checkTingcoAPIConnected(@PathParam("deviceid") String deviceId) {
+        return checkTingcoAPIConnected(deviceId);
+    }
+
+    /**
+     * CheckTingcoAPIConnected
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/checktingcoapiconnected/json/{json}/deviceid/{deviceid}")
+    public TingcoVirtualGate getJson_checkTingcoAPIConnected(@PathParam("deviceid") String deviceId) {
+        return checkTingcoAPIConnected(deviceId);
+    }
+
+
+     
+
+    /**
+     * POST method for creating an instance of TingcoVirtualGatesResource
+     * @param content representation for the new resource
+     * @return an HTTP response with content of the created resource
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    public Response postXml(String content) {
+        //TODO
+        return Response.created(context.getAbsolutePath()).build();
+    }
+
+    /**
+     * Sub-resource locator method for  {id}
+     */
+    @Path("{id}")
+    public TingcoVirtualGateResource getTingcoVirtualGateResource() {
+        return new TingcoVirtualGateResource();
+    }
+
+    private TingcoVirtualGate checkTingcoAPIConnected(String deviceId) {
+        long requestedTime = System.currentTimeMillis();
+        Session ismOperationsession = null;
+        TingcoVirtualGate tingcoVirtualGate = null;
+        boolean hasPermission = false;
+        TingcoVirtualGateDAO virtualGateDAO = new TingcoVirtualGateDAO();
+        GregorianCalendar gc = new GregorianCalendar();
+        try {
+//            tingcoDevice = tingcoDeviceXML.buildTingcoDeviceTemplate();
+            if (deviceId.equals("")) {
+                tingcoVirtualGate.getMsgStatus().setResponseCode(-1);
+                tingcoVirtualGate.getMsgStatus().setResponseText("DeviceId should not empty");
+                return tingcoVirtualGate;
+            }
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.ACCESS, TCMUtil.ADD);
+                if (hasPermission) {
+                    ismOperationsession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    ObjectConnectedState objectConnectedState = null;
+                    Object objectConnectedStateObject = virtualGateDAO.getObjectConnectedStateByObjectIdAndServiceId(deviceId, TingcoConstants.getServiceID(), ismOperationsession);
+                    if (objectConnectedStateObject != null) {
+                        objectConnectedState = (ObjectConnectedState) objectConnectedStateObject;
+                        objectConnectedState.setLastContactTime(currentDateTime.getTime());
+                        objectConnectedState.setLastContactMessage("PING");
+                        gc.add(Calendar.SECOND, 130);
+                        objectConnectedState.setConnectedExpiryTime(gc.getTime());
+                        objectConnectedState.setIsConnected(1);
+                        objectConnectedState.setLastUpdatedByUserId(sessions2.getUserId());
+                        objectConnectedState.setUpdatedDate(currentDateTime.getTime());
+                    } else {
+                        objectConnectedState = new ObjectConnectedState();
+                        objectConnectedState.setObjectId(deviceId);
+                        objectConnectedState.setLastContactServiceId(TingcoConstants.getServiceID());
+                        objectConnectedState.setLastContactTime(currentDateTime.getTime());
+                        objectConnectedState.setLastContactMessage("PING");
+                        gc.add(Calendar.SECOND, 130);
+                        objectConnectedState.setConnectedExpiryTime(gc.getTime());
+                        objectConnectedState.setIsConnected(1);
+                        objectConnectedState.setLastUpdatedByUserId(sessions2.getUserId());
+                        objectConnectedState.setCreatedDate(currentDateTime.getTime());
+                        objectConnectedState.setUpdatedDate(currentDateTime.getTime());
+                    }
+                } else {
+                    tingcoVirtualGate.getMsgStatus().setResponseCode(-10);
+                    tingcoVirtualGate.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoVirtualGate;
+                }
+            } else {
+                tingcoVirtualGate.getMsgStatus().setResponseCode(-3);
+                tingcoVirtualGate.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoVirtualGate;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoVirtualGate.getMsgStatus().setResponseCode(-1);
+            tingcoVirtualGate.getMsgStatus().setResponseText("Error occured");
+        } finally {
+            if (ismOperationsession != null) {
+                ismOperationsession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoVirtualGate;
+    }
+
+    private boolean getPermission(String userId, String functionarea, String operation) {
+        boolean hasPermission = false;
+        Hashtable<String, ArrayList> ht = (Hashtable<String, ArrayList>) User_LoginsResource.permissions.get(userId);
+        if (ht.containsKey(functionarea)) {
+            ArrayList<String> operations = ht.get(functionarea);
+            for (int i = 0; i < operations.size(); i++) {
+                if (operations.get(i).equalsIgnoreCase(operation)) {
+                    hasPermission = true;
+                    break;
+                }
+            }
+        }
+        return hasPermission;
+    }
+
+    public void delayLog(long requestedTime) {
+        TCMUtil.loger(getClass().getName(), " [tingco API] [Request took " + (System.currentTimeMillis() - requestedTime) + "ms]", "Info");
+    }
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 12, 2012 12:03:14 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.EventItems" schema="dbo" table="EventItems">
+    <cache usage="nonstrict-read-write"/>
+    <id name="eventItemId" type="string">
+      <column length="36" name="EventItemID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="itemId" type="string">
+      <column length="36" name="ItemID" not-null="true"/>
+    </property>
+    <property name="eventTypeId" type="string">
+      <column length="36" name="EventTypeID" not-null="true"/>
+    </property>
+    <property name="targetId" type="string">
+      <column length="36" name="TargetID"/>
+    </property>
+    <property name="ackRequired" type="java.lang.Integer">
+      <column name="AckRequired"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+  </class>
+  <query name="getEventItemsByID">
+        from EventItems where itemId = :ItemID AND eventTypeId = :EventTypeID
+    </query>
+  <query name="getEventItemsByItemID">
+        from EventItems where itemId = :ItemID
+    </query>
+  <query name="getEventItemsById">
+      from EventItems as ei where ei.eventItemId = :eventItemId
+    </query>
+</hibernate-mapping>

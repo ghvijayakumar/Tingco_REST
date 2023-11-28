@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 5, 2013 11:23:34 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.SupportCaseSubjectTemplates" schema="dbo" table="SupportCaseSubjectTemplates">
+    <cache usage="nonstrict-read-write"/>
+    <id name="supportCaseSubjectId" type="string">
+      <column length="36" name="SupportCaseSubjectID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="countryId" type="int">
+      <column name="CountryID" not-null="true"/>
+    </property>
+    <property name="supportCaseSubject" type="string">
+      <column name="SupportCaseSubject" not-null="true"/>
+    </property>
+    <property name="supportCaseDescription" type="string">
+      <column name="SupportCaseDescription"/>
+    </property>
+    <property name="supportCaseImpactId" type="string">
+      <column length="36" name="SupportCaseImpactID"/>
+    </property>
+    <property name="supportCasePriorityId" type="string">
+      <column length="36" name="SupportCasePriorityID"/>
+    </property>
+    <property name="supportCaseTypeId" type="string">
+      <column length="36" name="SupportCaseTypeID"/>
+    </property>
+    <property name="supportCaseStatusId" type="string">
+      <column length="36" name="SupportCaseStatusID"/>
+    </property>
+    <property name="reproduceSteps" type="string">
+      <column name="ReproduceSteps"/>
+    </property>
+    <property name="resolutionText" type="string">
+      <column name="ResolutionText"/>
+    </property>
+    <property name="costCenterId" type="string">
+      <column length="36" name="CostCenterID"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getSupportCaseSubjectTemplatesByGroupId">
+        from SupportCaseSubjectTemplates where groupId = :groupId and countryId = :countryId order by supportCaseSubject
+    </query>
+  <query name="getSupportCaseSubjectTemplatesByGroupIdSearch">
+        from SupportCaseSubjectTemplates where groupId = :groupId and countryId = :countryId and supportCaseSubject like '%'+:supportCaseSubject+'%' order by supportCaseSubject
+    </query>
+  <query name="getSupportCaseSubjectTemplatesById">
+        from SupportCaseSubjectTemplates where supportCaseSubjectId = :supportCaseSubjectId
+    </query>
+</hibernate-mapping>

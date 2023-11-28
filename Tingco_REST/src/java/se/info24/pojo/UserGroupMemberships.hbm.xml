@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 3:59:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserGroupMemberships" schema="dbo" table="UserGroupMemberships">
+    <cache usage="nonstrict-read-write"/>
+    <id name="userGroupMembershipId" type="int">
+      <column name="UserGroupMembershipID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Groups" fetch="select" name="groups">
+      <column length="36" name="GroupID" not-null="true"/>
+    </many-to-one>
+    <property name="userId" type="string">
+      <column length="36" name="UserID" not-null="true"/>
+    </property>
+    <property name="membershipDescription" type="string">
+      <column length="200" name="MembershipDescription"/>
+    </property>
+    <property name="createdBy" type="string">
+      <column length="36" name="CreatedBy"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getUserGroupMembershipsbyGroupId">
+      from UserGroupMemberships where groups.groupId = :groupId
+  </query>
+</hibernate-mapping>

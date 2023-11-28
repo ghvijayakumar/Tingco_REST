@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 24, 2012 2:20:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.MessageItems" schema="dbo" table="MessageItems">
+    <cache usage="nonstrict-read-write"/>
+    <id name="messageItemId" type="string">
+      <column length="36" name="MessageItemID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.MessageItemDataTypes" fetch="select" name="messageItemDataTypes">
+      <column length="36" name="MessageItemDataTypeID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.MessageTypes" fetch="select" name="messageTypes">
+      <column length="36" name="MessageTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="messageItemName" type="string">
+      <column name="MessageItemName" not-null="true"/>
+    </property>
+    <property name="searchExpression" type="string">
+      <column name="SearchExpression" not-null="true"/>
+    </property>
+    <property name="repeatNode" type="string">
+      <column name="RepeatNode"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="routingTables">
+      <key>
+        <column length="36" name="MessageItemID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.RoutingTable"/>
+    </set>
+  </class>
+</hibernate-mapping>

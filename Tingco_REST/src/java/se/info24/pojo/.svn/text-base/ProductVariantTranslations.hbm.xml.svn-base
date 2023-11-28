@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2012 3:24:33 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ProductVariantTranslations" schema="dbo" table="ProductVariantTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ProductVariantTranslationsId" name="id">
+      <key-property name="productVariantId" type="string">
+        <column length="36" name="ProductVariantID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.ProductVariants" fetch="select" insert="false" name="productVariants" update="false">
+      <column length="36" name="ProductVariantID" not-null="true"/>
+    </many-to-one>
+    <property name="productVariantName" type="string">
+      <column length="50" name="ProductVariantName" not-null="true"/>
+    </property>
+    <property name="productVariantDescription" type="string">
+      <column length="50" name="ProductVariantDescription"/>
+    </property>
+    <property name="productVariantSummary" type="string">
+      <column length="50" name="ProductVariantSummary"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getProductVariantTranslations">
+        from ProductVariantTranslations where productVariantId in (:productVariantId) and countryId = :countryId order by productVariantName
+    </query>
+  <query name="getProductVariantTranslationsBySearchString">
+        from ProductVariantTranslations where productVariantId in (:productVariantId) and countryId = :countryId and productVariantName like '%'+:searchString+'%' order by productVariantName
+    </query>
+  <query name="getProductVariantTranslationsorderByCreatedDate">
+        from ProductVariantTranslations where productVariantId in (:productVariantId) and countryId = :countryId order by createdDate
+    </query>
+  <query name="getProductVariantTranslationsByIds">
+        from ProductVariantTranslations where productvariantid = :productvariantid and countryId = :countryId
+    </query>
+  <query name="getProductVariantTranslationsByProductVariantID">
+        from ProductVariantTranslations where productvariantid = :productvariantid
+    </query>
+</hibernate-mapping>

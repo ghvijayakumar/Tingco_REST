@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/NB_2011/!svn/ver/2402/Tingco_REST/src/java/se/info24/content
+END
+ContentCategoryResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/content/ContentCategoryResource.java
+END
+ContentItemsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/content/ContentItemsResource.java
+END
+ContentAttributeResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/content/ContentAttributeResource.java
+END
+ContentCategoryAttributesResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/content/ContentCategoryAttributesResource.java
+END
+ContentItemssResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2402/Tingco_REST/src/java/se/info24/content/ContentItemssResource.java
+END
+ContentTypesResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/content/ContentTypesResource.java
+END
+ContentCategoriesResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2260/Tingco_REST/src/java/se/info24/content/ContentCategoriesResource.java
+END
+FavoriteContentCategoriesResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/content/FavoriteContentCategoriesResource.java
+END
+ContentAttributesResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2250/Tingco_REST/src/java/se/info24/content/ContentAttributesResource.java
+END
+ContentCategoryAttributessResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/NB_2011/!svn/ver/2266/Tingco_REST/src/java/se/info24/content/ContentCategoryAttributessResource.java
+END
+ContentTypessResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/1614/Tingco_REST/src/java/se/info24/content/ContentTypessResource.java
+END
+FavoriteContentCategoriessResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/NB_2011/!svn/ver/2255/Tingco_REST/src/java/se/info24/content/FavoriteContentCategoriessResource.java
+END
+ContentDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2381/Tingco_REST/src/java/se/info24/content/ContentDAO.java
+END

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2011 10:43:34 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserSessions2" schema="dbo" table="UserSessions2">
+    <cache usage="nonstrict-read-write"/>
+    <id name="userSessionId" type="string">
+      <column length="36" name="UserSessionID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="userId" type="string">
+      <column length="36" name="UserID" not-null="true"/>
+    </property>
+    <property name="domainId" type="string">
+      <column length="36" name="DomainID" not-null="true"/>
+    </property>
+    <property name="applicationId" type="string">
+      <column length="36" name="ApplicationID" not-null="true"/>
+    </property>
+    <property name="authenticationToken" type="string">
+      <column length="200" name="AuthenticationToken" not-null="true" unique="true"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getUserSessionByToken">
+        from UserSessions2 as us where us.authenticationToken = :authenticationToken 
+    </query>
+  <query name="getAllUserSessions2">
+        from UserSessions2
+    </query>
+  <query name="getUserSessions2ByUserId">
+        from UserSessions2 where userId = :userId
+    </query>
+</hibernate-mapping>

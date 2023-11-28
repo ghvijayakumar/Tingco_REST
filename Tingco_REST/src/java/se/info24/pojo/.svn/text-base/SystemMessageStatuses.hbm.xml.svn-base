@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 3:59:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.SystemMessageStatuses" schema="dbo" table="SystemMessageStatuses">
+    <cache usage="nonstrict-read-write"/>
+    <id name="systemMessageStatusId" type="string">
+      <column length="36" name="SystemMessageStatusID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="statusName" type="string">
+      <column length="50" name="StatusName" not-null="true"/>
+    </property>
+    <property name="statusDescription" type="string">
+      <column length="200" name="StatusDescription"/>
+    </property>
+    <property name="statusIconImageUrl" type="string">
+      <column length="200" name="StatusIconImageURL"/>
+    </property>
+    <property name="statusColourCode" type="string">
+      <column length="50" name="StatusColourCode"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="systemMessageses">
+      <key>
+        <column length="36" name="SystemMessageStatusID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.SystemMessages"/>
+    </set>
+  </class>
+</hibernate-mapping>

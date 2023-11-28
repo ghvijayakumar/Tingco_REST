@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/NB_2011/!svn/ver/2248/Tingco_REST/src/java/se/info24/networkjaxb
+END
+NetworkSubscriptionStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/NetworkSubscriptionStatus.java
+END
+NetworkSettingsTemplate.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/NetworkSettingsTemplate.java
+END
+ContactGroup.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/ContactGroup.java
+END
+NetworkSubscriptionsPendingDelete.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/NetworkSubscriptionsPendingDelete.java
+END
+GroupID.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/GroupID.java
+END
+NetworkSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/NetworkSettings.java
+END
+Networks.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/Networks.java
+END
+NetworkTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/NetworkTypes.java
+END
+NetworkSubscriptionSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/NetworkSubscriptionSettings.java
+END
+NetworkSubscriptions.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/NetworkSubscriptions.java
+END
+AgreementID.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/AgreementID.java
+END
+TingcoNetworkSubscriptions.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/TingcoNetworkSubscriptions.java
+END
+NetworkSubscriptionStatuses.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/NetworkSubscriptionStatuses.java
+END
+MsgStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/MsgStatus.java
+END
+ContactGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/ContactGroups.java
+END
+Costcenters.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1329/Tingco_REST/src/java/se/info24/networkjaxb/Costcenters.java
+END
+NetworkSubscription.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2248/Tingco_REST/src/java/se/info24/networkjaxb/NetworkSubscription.java
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/1977/Tingco_REST/src/java/se/info24/networkjaxb/ObjectFactory.java
+END

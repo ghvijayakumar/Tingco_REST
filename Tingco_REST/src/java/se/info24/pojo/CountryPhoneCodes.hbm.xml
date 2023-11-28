@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 16, 2012 4:45:57 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.CountryPhoneCodes" schema="dbo" table="CountryPhoneCodes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="countryCallingCodeId" type="string">
+      <column length="36" name="CountryCallingCodeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="countryCallingCode" type="string">
+      <column length="10" name="CountryCallingCode" not-null="true"/>
+    </property>
+    <property name="countryName" type="string">
+      <column length="50" name="CountryName" not-null="true"/>
+    </property>
+    <property name="countryId" type="java.lang.Integer">
+      <column name="CountryID"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getCountryPhoneCodes">
+        from CountryPhoneCodes
+    </query>
+</hibernate-mapping>

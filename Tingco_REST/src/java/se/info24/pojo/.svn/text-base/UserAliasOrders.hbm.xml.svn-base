@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 15, 2011 4:24:27 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserAliasOrders" schema="dbo" table="UserAliasOrders">
+    <cache usage="nonstrict-read-write"/>
+    <id name="userAliasOrderId" type="string">
+      <column length="36" name="UserAliasOrderID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="userId" type="string">
+      <column length="36" name="UserID" not-null="true"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="orderDate" type="timestamp">
+      <column length="23" name="OrderDate" not-null="true"/>
+    </property>
+    <property name="orderedUserAlias" type="java.lang.Integer">
+      <column name="OrderedUserAlias"/>
+    </property>
+    <property name="orderComment" type="string">
+      <column length="200" name="OrderComment"/>
+    </property>
+    <property name="isDelivered" type="java.lang.Integer">
+      <column name="IsDelivered"/>
+    </property>
+    <property name="firstName" type="string">
+      <column length="50" name="FirstName"/>
+    </property>
+    <property name="lastName" type="string">
+      <column length="50" name="LastName"/>
+    </property>
+    <property name="deliveryAddressRow1" type="string">
+      <column length="100" name="DeliveryAddressRow1"/>
+    </property>
+    <property name="deliveryAddressRow2" type="string">
+      <column length="100" name="DeliveryAddressRow2"/>
+    </property>
+    <property name="deliveryZipCode" type="string">
+      <column length="10" name="DeliveryZipCode"/>
+    </property>
+    <property name="deliveryCity" type="string">
+      <column length="50" name="DeliveryCity"/>
+    </property>
+    <property name="deliveryCountry" type="string">
+      <column length="50" name="DeliveryCountry"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="socialSecurityNumber" type="string">
+      <column length="50" name="SocialSecurityNumber"/>
+    </property>
+    <property name="product" type="string">
+      <column length="50" name="Product"/>
+    </property>
+  </class>
+  <query name="GetOrderedKeysByUserID">
+      from UserAliasOrders where UserId = :userID
+    </query>
+  <query name="GetUserAliasOrderByIds">
+      from UserAliasOrders where userAliasOrderId in (:userAliasOrderId) order by orderDate desc
+    </query>
+  <query name="GetUserAliasOrderByGroupIdsAndIsDelivered">
+      from UserAliasOrders where groupId in (:groupId) and isDelivered = :isDelivered order by createdDate desc
+    </query>
+  <query name="GetUserAliasOrderByGroupIdsAndIsDeliveredSearch">
+      from UserAliasOrders where groupId in (:groupId) and isDelivered = :isDelivered and orderComment like '%'+:searchField+'%' order by createdDate desc
+    </query>
+  <query name="GetUserAliasOrderByGroupIdsSearch">
+      from UserAliasOrders where groupId in (:groupId) and orderComment like '%'+:searchField+'%' order by createdDate desc
+    </query>
+  <query name="GetUserAliasOrderByGroupIds">
+      from UserAliasOrders where groupId in (:groupId) order by createdDate desc
+    </query>
+  <query name="GetUserAliasOrderById">
+      from UserAliasOrders where userAliasOrderId = :userAliasOrderId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/NB_2011/!svn/ver/1821/Tingco_REST/src/java/se/info24/roles
+END
+UserRolesInGroup2Resource.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/roles/UserRolesInGroup2Resource.java
+END
+RolePermissionResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/roles/RolePermissionResource.java
+END
+UserRoleMembershipResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/roles/UserRoleMembershipResource.java
+END
+RoleDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/NB_2011/!svn/ver/1436/Tingco_REST/src/java/se/info24/roles/RoleDAO.java
+END
+RolePermissionsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/1583/Tingco_REST/src/java/se/info24/roles/RolePermissionsResource.java
+END
+UserRoleMembershipsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/1787/Tingco_REST/src/java/se/info24/roles/UserRoleMembershipsResource.java
+END
+UserRolesInGroups2sResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/1583/Tingco_REST/src/java/se/info24/roles/UserRolesInGroups2sResource.java
+END
+RoleResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/roles/RoleResource.java
+END
+RoleManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/1787/Tingco_REST/src/java/se/info24/roles/RoleManager.java
+END
+RolesResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/1821/Tingco_REST/src/java/se/info24/roles/RolesResource.java
+END

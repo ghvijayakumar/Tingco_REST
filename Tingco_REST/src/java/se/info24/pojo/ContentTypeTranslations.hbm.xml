@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 23, 2011 12:47:45 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ContentTypeTranslations" schema="dbo" table="ContentTypeTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ContentTypeTranslationsId" name="id">
+      <key-property name="contentTypeId" type="string">
+        <column length="36" name="ContentTypeID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Country" fetch="select" insert="false" name="country" update="false">
+      <column name="CountryID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ContentTypes" fetch="select" insert="false" name="contentTypes" update="false">
+      <column length="36" name="ContentTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="contentTypeName" type="string">
+      <column length="50" name="ContentTypeName"/>
+    </property>
+    <property name="contentTypeDescription" type="string">
+      <column length="200" name="ContentTypeDescription"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getContentTypeTranslationsByIds">
+      from ContentTypeTranslations where id.contentTypeId = :contentTypeId and id.countryId = :countryId
+  </query>
+  <query name="getContentTypeTranslationsByIdsAndCountryId">
+      from ContentTypeTranslations where id.contentTypeId in (:contentTypeId) and id.countryId = :countryId order by contentTypeName
+  </query>
+  <query name="getContentTypeTranslationsByCountryId">
+      from ContentTypeTranslations where id.countryId = :countryId order by contentTypeName
+  </query>
+</hibernate-mapping>

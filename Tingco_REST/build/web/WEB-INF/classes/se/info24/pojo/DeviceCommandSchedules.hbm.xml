@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2013 11:41:58 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DeviceCommandSchedules" schema="dbo" table="DeviceCommandSchedules">
+    <cache usage="nonstrict-read-write"/>
+    <id name="deviceCommandScheduleId" type="string">
+      <column length="36" name="DeviceCommandScheduleID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Schedules" fetch="select" name="schedules">
+      <column length="36" name="ScheduleID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.DeviceTypeCommands" fetch="select" name="deviceTypeCommands">
+      <column length="36" name="DeviceTypeCommandID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.DeviceCommandSchedules" fetch="select" insert="false" name="deviceCommandSchedules" update="false">
+      <column length="36" name="DeviceCommandScheduleID" not-null="true" unique="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Device" fetch="select" name="device">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </many-to-one>
+    <property name="dataItemValue" type="string">
+      <column name="DataItemValue"/>
+    </property>
+    <property name="isEnabled" type="int">
+      <column name="IsEnabled" not-null="true"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate" not-null="true"/>
+    </property>
+    <property name="sendMonday" type="java.lang.Integer">
+      <column name="SendMonday"/>
+    </property>
+    <property name="sendTuesday" type="java.lang.Integer">
+      <column name="SendTuesday"/>
+    </property>
+    <property name="sendWednesday" type="java.lang.Integer">
+      <column name="SendWednesday"/>
+    </property>
+    <property name="sendThursday" type="java.lang.Integer">
+      <column name="SendThursday"/>
+    </property>
+    <property name="sendFriday" type="java.lang.Integer">
+      <column name="SendFriday"/>
+    </property>
+    <property name="sendSaturday" type="java.lang.Integer">
+      <column name="SendSaturday"/>
+    </property>
+    <property name="sendSunday" type="java.lang.Integer">
+      <column name="SendSunday"/>
+    </property>
+    <property name="sendTime" type="timestamp">
+      <column length="23" name="SendTime" not-null="true"/>
+    </property>
+    <property name="lastSent" type="timestamp">
+      <column length="23" name="LastSent"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="deviceCommandScheduleses">
+      <key>
+        <column length="36" name="DeviceCommandScheduleID" not-null="true" unique="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceCommandSchedules"/>
+    </set>
+  </class>
+  <query name="getDeviceCommandSchedulesByDeviceId">
+      from DeviceCommandSchedules where device.deviceId = :deviceId order by CreatedDate desc
+    </query>
+  <query name="getDeviceCommandSchedulesById">
+      from DeviceCommandSchedules where deviceCommandScheduleId = :deviceCommandScheduleId
+    </query>
+  <query name="getDeviceCommandSchedulesByTypeId">
+      from DeviceCommandSchedules where deviceTypeCommands.deviceTypeCommandId = :deviceTypeCommandId
+    </query>
+</hibernate-mapping>

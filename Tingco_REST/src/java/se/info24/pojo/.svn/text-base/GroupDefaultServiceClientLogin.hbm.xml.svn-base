@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 18, 2014 2:25:42 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.GroupDefaultServiceClientLogin" schema="dbo" table="GroupDefaultServiceClientLogin">
+    <id name="groupId" type="string">
+      <column length="36" name="GroupID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.ServiceClientLogins" fetch="select" name="serviceClientLogins">
+      <column length="36" name="ServiceClientLoginID" not-null="true"/>
+    </many-to-one>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getGroupDefaultServiceClientLoginByGroupID">
+        from GroupDefaultServiceClientLogin where groupId =:groupId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 26, 2013 12:17:21 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.ContentItemLinks" schema="dbo" table="ContentItemLinks">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.ismOperationsPojo.ContentItemLinksId" name="id">
+      <key-property name="contentItemIdleft" type="string">
+        <column length="36" name="ContentItemIDLeft"/>
+      </key-property>
+      <key-property name="contentItemIdright" type="string">
+        <column length="36" name="ContentItemIDRight"/>
+      </key-property>
+    </composite-id>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getContentItemLinksByIds">
+        from ContentItemLinks where id.contentItemIdleft = :contentItemIdleft and id.contentItemIdright = :contentItemIdright
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 5, 2013 3:09:03 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="timweb" name="se.info24.timPojo.SiteMenus" schema="dbo" table="SiteMenus">
+    <id name="siteMenuNodeId" type="string">
+      <column length="36" name="SiteMenuNodeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="siteMenuNodeParentId" type="string">
+      <column length="36" name="SiteMenuNodeParentID"/>
+    </property>
+    <property name="showInMenu" type="java.lang.Boolean">
+      <column name="ShowInMenu"/>
+    </property>
+    <property name="pageId" type="string">
+      <column length="36" name="PageID"/>
+    </property>
+    <property name="sortingWeight" type="java.lang.Integer">
+      <column name="SortingWeight"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="nodeIconUrl" type="string">
+      <column name="NodeIconURL"/>
+    </property>
+    <set inverse="true" name="siteMenuTranslationses">
+      <key>
+        <column length="36" name="SiteMenuNodeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.timPojo.SiteMenuTranslations"/>
+    </set>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/NB_2011/!svn/ver/2361/Tingco_REST/src/java/se/info24/restUtil
+END
+CountryStatesResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/restUtil/CountryStatesResource.java
+END
+RestUtilDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2280/Tingco_REST/src/java/se/info24/restUtil/RestUtilDAO.java
+END
+CurrencyResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/restUtil/CurrencyResource.java
+END
+WeekDayssResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/1435/Tingco_REST/src/java/se/info24/restUtil/WeekDayssResource.java
+END
+NewssResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2280/Tingco_REST/src/java/se/info24/restUtil/NewssResource.java
+END
+TimezonessResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1821/Tingco_REST/src/java/se/info24/restUtil/TimezonessResource.java
+END
+CurrenciesResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1821/Tingco_REST/src/java/se/info24/restUtil/CurrenciesResource.java
+END
+UtilityResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/restUtil/UtilityResource.java
+END
+CountryResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/restUtil/CountryResource.java
+END
+UserLogsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/1663/Tingco_REST/src/java/se/info24/restUtil/UserLogsResource.java
+END
+CityResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/restUtil/CityResource.java
+END
+CountryStatessResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1435/Tingco_REST/src/java/se/info24/restUtil/CountryStatessResource.java
+END
+CountriesResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2288/Tingco_REST/src/java/se/info24/restUtil/CountriesResource.java
+END
+UtilitiesResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2361/Tingco_REST/src/java/se/info24/restUtil/UtilitiesResource.java
+END
+NewsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/restUtil/NewsResource.java
+END
+WeekDaysResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/419/Tingco_REST/src/java/se/info24/restUtil/WeekDaysResource.java
+END
+TimezonesResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/restUtil/TimezonesResource.java
+END
+UserLogResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/restUtil/UserLogResource.java
+END
+CitiesResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1435/Tingco_REST/src/java/se/info24/restUtil/CitiesResource.java
+END

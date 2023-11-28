@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 28, 2012 11:17:07 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.EventTypesInGroups" schema="dbo" table="EventTypesInGroups">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.EventTypesInGroupsId" name="id">
+      <key-property name="eventTypeId" type="string">
+        <column length="36" name="EventTypeID"/>
+      </key-property>
+      <key-property name="groupId" type="string">
+        <column length="36" name="GroupID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.EventTypes" fetch="select" insert="false" name="eventTypes" update="false">
+      <column length="36" name="EventTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getEventTypesInGroupsbyGroupId">
+        from EventTypesInGroups where id.groupId = :groupId
+    </query>
+  <query name="getEventTypesInGroupsbyGroupIdandeventTypeId">
+        from EventTypesInGroups where id.groupId = :groupId and id.eventTypeId = :eventTypeId
+    </query>
+  <query name="getEventTypesInGroupsbyGroupIDs">
+        from EventTypesInGroups where id.groupId in (:groupId)
+    </query>
+</hibernate-mapping>

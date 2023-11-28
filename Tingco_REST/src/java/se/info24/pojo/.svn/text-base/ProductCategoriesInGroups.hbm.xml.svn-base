@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 13, 2012 12:50:38 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ProductCategoriesInGroups" schema="dbo" table="ProductCategoriesInGroups">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ProductCategoriesInGroupsId" name="id">
+      <key-property name="productCategoryId" type="string">
+        <column length="36" name="ProductCategoryID"/>
+      </key-property>
+      <key-property name="groupId" type="string">
+        <column length="36" name="GroupID"/>
+      </key-property>
+    </composite-id>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getProductCategoriesInGroupsByGroupId">
+        from ProductCategoriesInGroups where groupId = :groupId
+    </query>
+  <query name="getProductCategoriesInGroupsByGroupIdAndProductCategoryID">
+        from ProductCategoriesInGroups where groupId = :groupId and productCategoryID = :productCategoryID
+    </query>
+</hibernate-mapping>

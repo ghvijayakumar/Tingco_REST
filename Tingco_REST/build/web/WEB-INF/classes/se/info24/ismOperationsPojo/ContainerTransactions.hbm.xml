@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 28, 2014 4:50:12 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.ContainerTransactions" schema="dbo" table="ContainerTransactions">
+    <id name="containerTransactionId" type="string">
+      <column length="36" name="ContainerTransactionID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="transactionStartTime" type="timestamp">
+      <column length="23" name="TransactionStartTime" not-null="true"/>
+    </property>
+    <!-- <property name="transactionCounter" type="long">
+            <column name="TransactionCounter"/>
+        </property>-->
+    <property name="containerId" type="string">
+      <column length="36" name="ContainerID" not-null="true"/>
+    </property>
+    <property name="containerName" type="string">
+      <column name="ContainerName" not-null="true"/>
+    </property>
+    <property name="containerNumber" type="string">
+      <column name="ContainerNumber"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="groupName" type="string">
+      <column name="GroupName"/>
+    </property>
+    <property name="volume" type="big_decimal">
+      <column name="Volume" not-null="true"/>
+    </property>
+    <property name="oldFillLevel" type="big_decimal">
+      <column name="OldFillLevel" not-null="true"/>
+    </property>
+    <property name="newFillLevel" type="big_decimal">
+      <column name="NewFillLevel" not-null="true"/>
+    </property>
+    <property name="productVariantId" type="string">
+      <column length="36" name="ProductVariantID"/>
+    </property>
+    <property name="productVariantName" type="string">
+      <column name="ProductVariantName"/>
+    </property>
+    <property name="productVariantUnit" type="string">
+      <column name="ProductVariantUnit"/>
+    </property>
+    <property name="transactionTypeId" type="string">
+      <column length="36" name="TransactionTypeID" not-null="true"/>
+    </property>
+    <property name="transactionPurpose" type="string">
+      <column name="TransactionPurpose"/>
+    </property>
+    <property name="transactionAccount" type="string">
+      <column name="TransactionAccount"/>
+    </property>
+    <property name="transactionNote" type="string">
+      <column name="TransactionNote"/>
+    </property>
+    <property name="externalTransactionId" type="string">
+      <column name="ExternalTransactionID"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+</hibernate-mapping>

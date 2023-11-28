@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 25, 2011 3:25:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.ContentGroupSubscriptions" schema="dbo" table="ContentGroupSubscriptions">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.ismOperationsPojo.ContentGroupSubscriptionsId" name="id">
+      <key-property name="contentGroupId" type="string">
+        <column length="36" name="ContentGroupID"/>
+      </key-property>
+      <key-property name="serviceClientLoginId" type="string">
+        <column length="36" name="ServiceClientLoginID"/>
+      </key-property>
+    </composite-id>
+    <property name="serviceSubscriptionAclid" type="string">
+      <column length="36" name="ServiceSubscriptionACLID"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+</hibernate-mapping>

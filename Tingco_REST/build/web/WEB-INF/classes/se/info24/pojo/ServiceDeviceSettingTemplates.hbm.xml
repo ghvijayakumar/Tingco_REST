@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 30, 2012 12:10:18 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ServiceDeviceSettingTemplates" schema="dbo" table="ServiceDeviceSettingTemplates">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ServiceDeviceSettingTemplatesId" name="id">
+      <key-property name="objectSettingTemplateId" type="string">
+        <column length="36" name="ObjectSettingTemplateID"/>
+      </key-property>
+      <key-property name="serviceId" type="string">
+        <column length="36" name="ServiceID"/>
+      </key-property>
+      <key-property name="deviceTypeId" type="string">
+        <column length="36" name="DeviceTypeID"/>
+      </key-property>
+    </composite-id>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getServiceDeviceSettingTemplatesbyIds">
+        from ServiceDeviceSettingTemplates where serviceId = :serviceId and deviceTypeId =:DeviceTypeId
+    </query>
+</hibernate-mapping>

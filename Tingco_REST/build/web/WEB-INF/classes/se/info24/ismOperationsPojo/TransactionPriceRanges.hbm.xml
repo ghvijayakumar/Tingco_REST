@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 19, 2014 12:37:34 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="se.info24.pojo.TransactionPriceRanges" table="TransactionPriceRanges" schema="dbo" catalog="ISMOperations">
+        <id name="id" type="string">
+            <column name="ID" length="36" />
+            <generator class="assigned" />
+        </id>
+        <property name="transactionId" type="string">
+            <column name="TransactionID" length="36" not-null="true" />
+        </property>
+        <property name="productId" type="string">
+            <column name="ProductID" length="36" not-null="true" />
+        </property>
+        <property name="parentId" type="string">
+            <column name="ParentID" length="36" />
+        </property>
+        <property name="type" type="string">
+            <column name="Type" />
+        </property>
+        <property name="start" type="string">
+            <column name="Start" />
+        </property>
+        <property name="end" type="string">
+            <column name="End" />
+        </property>
+        <property name="ppu" type="java.lang.Integer">
+            <column name="PPU" />
+        </property>
+        <property name="quantity" type="java.lang.Integer">
+            <column name="Quantity" />
+        </property>
+        <property name="amountInclVat" type="big_decimal">
+            <column name="AmountInclVAT" />
+        </property>
+        <property name="amountExclVat" type="big_decimal">
+            <column name="AmountExclVAT" />
+        </property>
+        <property name="amountVat" type="big_decimal">
+            <column name="AmountVAT" />
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column name="CreatedDate" length="23" />
+        </property>
+        <property name="updatedDate" type="timestamp">
+            <column name="UpdatedDate" length="23" />
+        </property>
+    </class>
+</hibernate-mapping>

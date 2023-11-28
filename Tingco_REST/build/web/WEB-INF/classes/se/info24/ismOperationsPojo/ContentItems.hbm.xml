@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 25, 2011 3:25:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.ContentItems" schema="dbo" table="ContentItems">
+    <cache usage="nonstrict-read-write"/>
+    <id name="contentItemId" type="string">
+      <column length="36" name="ContentItemID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="version" type="java.lang.Integer">
+      <column name="Version"/>
+    </property>
+    <property name="contentTypeId" type="string">
+      <column length="36" name="ContentTypeID" not-null="true"/>
+    </property>
+    <property name="contentCategoryId" type="string">
+      <column length="36" name="ContentCategoryID" not-null="true"/>
+    </property>
+    <property name="startTime" type="timestamp">
+      <column length="23" name="StartTime" not-null="true"/>
+    </property>
+    <property name="stopTime" type="timestamp">
+      <column length="23" name="StopTime" not-null="true"/>
+    </property>
+    <property name="expiryTime" type="timestamp">
+      <column length="23" name="ExpiryTime"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="contentItemSubject" type="string">
+      <column length="50" name="ContentItemSubject" not-null="true"/>
+    </property>
+    <property name="posLatitude" type="java.lang.Double">
+      <column name="PosLatitude" precision="53" scale="0"/>
+    </property>
+    <property name="posLongitude" type="java.lang.Double">
+      <column name="PosLongitude" precision="53" scale="0"/>
+    </property>
+    <property name="posDepth" type="java.lang.Double">
+      <column name="PosDepth" precision="53" scale="0"/>
+    </property>
+    <property name="posDirection" type="java.lang.Integer">
+      <column name="PosDirection"/>
+    </property>
+    <property name="coordinateSystemId" type="string">
+      <column length="50" name="CoordinateSystemID"/>
+    </property>
+    <property name="sourceName" type="string">
+      <column length="50" name="SourceName"/>
+    </property>
+    <property name="sourceReferenceId" type="string">
+      <column length="200" name="SourceReferenceID"/>
+    </property>
+    <property name="priority" type="java.lang.Integer">
+      <column name="Priority"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID"/>
+    </property>
+    <set cascade="save-update,delete" inverse="true" name="contentItemsToDevices">
+      <key>
+        <column name="ContentItemID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.ismOperationsPojo.ContentItemsToDevice"/>
+    </set>
+  </class>
+  <query name="getContentItemsById">
+        from ContentItems where contentItemId = :contentItemID 
+    </query>
+  <query name="getContentItemsByIds">
+        from ContentItems where contentItemId in(:contentItemId) order by contentItemSubject asc
+    </query>
+  <query name="getContentItemsByContentCategoryId">
+        from ContentItems where contentCategoryId = :conCatID order by contentItemSubject asc
+    </query>
+  <query name="getContentItemsBySearchString">
+        from ContentItems where contentItemSubject like '%'+:contentItemSubject+'%' order by createdDate desc
+    </query>
+  <query name="getContentItemsBySearchStringAndContentCategoryId">
+        from ContentItems where contentCategoryId = :contentCategoryId and contentItemSubject like '%'+:contentItemSubject+'%' order by createdDate desc
+    </query>
+  <query name="getContentItemsByIdAndContentCategoryId">
+        from ContentItems where contentItemId = :contentItemID and contentCategoryId = :contentCategoryId order by createdDate desc
+    </query>
+  <query name="getContentItemsByCCID">
+        from ContentItems where contentCategoryId = :contentCategoryId order by createdDate desc
+    </query>
+  <query name="getContentItemsByGroupIDs">
+        from ContentItems where groupId in (:groupId) order by createdDate desc
+    </query>
+  <query name="getContentItemsByGroupIDsAndSearchString">
+        from ContentItems where groupId in (:groupId) and contentItemSubject like '%'+:contentItemSubject+'%'
+    </query>
+</hibernate-mapping>

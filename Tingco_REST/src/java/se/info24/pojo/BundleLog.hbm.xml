@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 28, 2014 4:47:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.BundleLog" schema="dbo" table="BundleLog">
+    <id column="BundleID" name="bundleId" type="string">
+      <!--<column name="BundleID" length="36" />
+            <generator class="assigned" />-->
+    </id>
+    <many-to-one class="se.info24.pojo.Bundle" fetch="select" insert="false" name="bundle" update="false">
+      <column length="36" name="BundleID" not-null="true" unique="true"/>
+    </many-to-one>
+    <property name="bundleVersionId" type="string">
+      <column length="36" name="BundleVersionID"/>
+    </property>
+    <property name="message" type="string">
+      <column name="Message" not-null="true"/>
+    </property>
+    <property name="messageCode" type="string">
+      <column name="MessageCode"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+  </class>
+  <query name="getBundleLogByBundleID">
+        from BundleLog where bundleId = :bundleId order by createdDate desc
+    </query>
+  <query name="getBundleLog">
+        from BundleLog order by createdDate desc
+    </query>
+  <query name="getBundleLogByCreatedDate">
+        from BundleLog order where (createdDate between :fromDate and :toDate) order by createdDate desc
+    </query>
+</hibernate-mapping>

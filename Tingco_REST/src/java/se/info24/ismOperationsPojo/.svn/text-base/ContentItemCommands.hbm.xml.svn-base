@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 30, 2014 10:49:33 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISMOperations" name="se.info24.ismOperationsPojo.ContentItemCommands" schema="dbo" table="ContentItemCommands">
+    <id name="contentItemCommandId" type="string">
+      <column length="36" name="ContentItemCommandID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="contentItemId" type="string">
+      <column length="36" name="ContentItemID" not-null="true"/>
+    </property>
+    <property name="commandId" type="string">
+      <column length="36" name="CommandID"/>
+    </property>
+    <property name="commandName" type="string">
+      <column name="CommandName" not-null="true"/>
+    </property>
+    <property name="commandButtonText" type="string">
+      <column name="CommandButtonText" not-null="true"/>
+    </property>
+    <property name="commandDescription" type="string">
+      <column name="CommandDescription"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="isPublicCommand" type="java.lang.Integer">
+      <column name="IsPublicCommand"/>
+    </property>
+    <property name="isPinCodeRequired" type="java.lang.Integer">
+      <column name="IsPinCodeRequired"/>
+    </property>
+    <property name="isSendEmail" type="java.lang.Integer">
+      <column name="IsSendEmail"/>
+    </property>
+    <property name="isSendSms" type="java.lang.Integer">
+      <column name="IsSendSMS"/>
+    </property>
+    <property name="isCreateSupportCase" type="java.lang.Integer">
+      <column name="IsCreateSupportCase"/>
+    </property>
+    <property name="isControlDevice" type="java.lang.Integer">
+      <column name="IsControlDevice"/>
+    </property>
+    <property name="isLogInWorklog" type="java.lang.Integer">
+      <column name="IsLogInWorklog"/>
+    </property>
+    <property name="isSendEmailToDeviceContacts" type="java.lang.Integer">
+      <column name="IsSendEmailToDeviceContacts"/>
+    </property>
+    <property name="isSendSmstoDeviceContacts" type="java.lang.Integer">
+      <column name="IsSendSMSToDeviceContacts"/>
+    </property>
+    <property name="isSendEvent" type="java.lang.Integer">
+      <column name="IsSendEvent"/>
+    </property>
+    <property name="isLinkToTim" type="java.lang.Integer">
+      <column name="IsLinkToTIM"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate"/>
+    </property>
+    <property name="pinCode" type="string">
+      <column name="PinCode"/>
+    </property>
+    <property name="description" type="string">
+      <column name="Description"/>
+    </property>
+    <property name="displayOrder" type="java.lang.Integer">
+      <column name="DisplayOrder"/>
+    </property>
+    <property name="deviceId" type="string">
+      <column length="36" name="DeviceID"/>
+    </property>
+    <property name="deviceDataItemId" type="string">
+      <column length="36" name="DeviceDataItemID"/>
+    </property>
+    <property name="deviceDataItemValue" type="string">
+      <column name="DeviceDataItemValue"/>
+    </property>
+    <property name="deviceTypeCommandId" type="string">
+      <column length="36" name="DeviceTypeCommandID"/>
+    </property>
+    <property name="sendEmailTo" type="string">
+      <column name="SendEmailTo"/>
+    </property>
+    <property name="sendSmsto" type="string">
+      <column name="SendSMSTo"/>
+    </property>
+    <property name="supportOrganizationId" type="string">
+      <column length="36" name="SupportOrganizationID"/>
+    </property>
+    <property name="eventTypeId" type="string">
+      <column length="36" name="EventTypeID"/>
+    </property>
+    <property name="linkToPageUrl" type="string">
+      <column name="LinkToPageURL"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getContentItemCommandsById">
+        from ContentItemCommands where contentItemCommandId = :contentItemCommandId
+    </query>
+  <query name="getContentItemCommandsByContentItemId">
+        from ContentItemCommands where contentItemId = :contentItemId order by commandName
+    </query>
+</hibernate-mapping>

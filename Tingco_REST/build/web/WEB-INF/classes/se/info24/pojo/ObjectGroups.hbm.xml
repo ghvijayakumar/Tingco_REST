@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 4, 2012 10:52:55 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class lazy="true" name="se.info24.pojo.ObjectGroups" schema="dbo" table="ObjectGroups">
+    <cache usage="nonstrict-read-write"/>
+    <id name="objectGroupId" type="string">
+      <column length="36" name="ObjectGroupID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="objectGroupParentId" type="string">
+      <column length="36" name="ObjectGroupParentID"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <!-- dont comment the below objectGroupTranslationses set as it is used in /useralias/getuseraliasbysearchcriteria/rest/v1 -->
+    <set cascade="delete" inverse="true" name="objectGroupTranslationses">
+      <key>
+        <column length="36" name="ObjectGroupID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ObjectGroupTranslations"/>
+    </set>
+    <!--<set name="ogmuserAliases" inverse="true" cascade="delete">
+            <key>
+                <column name="ObjectGroupID" length="36" not-null="true" />
+            </key>
+            <one-to-many class="se.info24.pojo.OgmuserAlias" />
+        </set>
+        <set name="ogmdevices" inverse="true" cascade="delete">
+            <key>
+                <column name="ObjectGroupID" length="36" not-null="true" />
+            </key>
+            <one-to-many class="se.info24.pojo.Ogmdevice" />
+        </set>
+        <set name="ogmcontainerses" inverse="true" cascade="delete">
+            <key>
+                <column name="ObjectGroupID" length="36" not-null="true" />
+            </key>
+            <one-to-many class="se.info24.pojo.Ogmcontainers" />
+        </set>-->
+  </class>
+  <query name="getObjectGroupsByGroupId">
+        from ObjectGroups where groupId in (:groupId) order by createdDate desc
+    </query>
+  <query name="getObjectGroupsByGroupIds">
+        from ObjectGroups where objectGroupId =:objectGroupId
+    </query>
+  <query name="getObjectGroupsByGroupIdsList">
+        from ObjectGroups where objectGroupId in (:objectGroupId)
+    </query>
+  <query name="getObjectGroupsByGroupIdsandObjectGroupIds">
+        from ObjectGroups where objectGroupId in (:objectGroupId) and groupId in (:groupId) order by createdDate desc
+    </query>
+  <query name="getObjectGroupsByGroupIdsandNotObjectGroupIds">
+        from ObjectGroups where groupId in (:groupId) and objectGroupId not in (:objectGroupId) order by createdDate desc
+    </query>
+</hibernate-mapping>

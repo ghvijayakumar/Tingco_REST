@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 28, 2011 6:45:17 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.ismOperationsPojo.DeviceHistoryDataItems" schema="dbo" table="DeviceHistoryDataItems">
+    <cache usage="nonstrict-read-write"/>
+    <id name="deviceHistoryDataItemId" type="string">
+      <column length="36" name="DeviceHistoryDataItemID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="deviceId" type="string">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </property>
+    <property name="deviceDataItemId" type="string">
+      <column length="36" name="DeviceDataItemID" not-null="true"/>
+    </property>
+    <property name="deviceDataValue" type="string">
+      <column length="1073741823" name="DeviceDataValue" not-null="true"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="language" type="string">
+      <column length="50" name="Language"/>
+    </property>
+    <property name="unit" type="string">
+      <column length="50" name="Unit"/>
+    </property>
+    <property name="dataType" type="string">
+      <column length="50" name="DataType"/>
+    </property>
+    <property name="quality" type="string">
+      <column length="50" name="Quality"/>
+    </property>
+    <property name="scaling" type="java.lang.Double">
+      <column name="Scaling" precision="53" scale="0"/>
+    </property>
+    <property name="md5" type="string">
+      <column length="200" name="MD5"/>
+    </property>
+    <property name="isEncrypted" type="java.lang.Integer">
+      <column name="IsEncrypted"/>
+    </property>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getDeviceHistoryDataItemsById">
+        from DeviceHistoryDataItems as dm where dm.deviceId =:deviceID
+    </query>
+</hibernate-mapping>

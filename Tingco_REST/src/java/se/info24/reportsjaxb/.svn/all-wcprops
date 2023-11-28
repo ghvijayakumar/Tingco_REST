@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/NB_2011/!svn/ver/2364/Tingco_REST/src/java/se/info24/reportsjaxb
+END
+ReportSendScheduleSetting.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/1677/Tingco_REST/src/java/se/info24/reportsjaxb/ReportSendScheduleSetting.java
+END
+ReportSendSchedule.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1677/Tingco_REST/src/java/se/info24/reportsjaxb/ReportSendSchedule.java
+END
+TingcoReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2154/Tingco_REST/src/java/se/info24/reportsjaxb/TingcoReports.java
+END
+ReportTemplateSetting.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/1677/Tingco_REST/src/java/se/info24/reportsjaxb/ReportTemplateSetting.java
+END
+DeviceProductCounterDetails.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/1677/Tingco_REST/src/java/se/info24/reportsjaxb/DeviceProductCounterDetails.java
+END
+TransactionProducts.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1677/Tingco_REST/src/java/se/info24/reportsjaxb/TransactionProducts.java
+END
+InstantMessageLogs.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2154/Tingco_REST/src/java/se/info24/reportsjaxb/InstantMessageLogs.java
+END
+Report.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2004/Tingco_REST/src/java/se/info24/reportsjaxb/Report.java
+END
+ReportTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1677/Tingco_REST/src/java/se/info24/reportsjaxb/ReportTranslations.java
+END
+ObjectUsageRecords.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1677/Tingco_REST/src/java/se/info24/reportsjaxb/ObjectUsageRecords.java
+END
+Addresses.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1677/Tingco_REST/src/java/se/info24/reportsjaxb/Addresses.java
+END
+ObjectUsageUnits.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1677/Tingco_REST/src/java/se/info24/reportsjaxb/ObjectUsageUnits.java
+END
+ObjectProductVariantCounters.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/2222/Tingco_REST/src/java/se/info24/reportsjaxb/ObjectProductVariantCounters.java
+END
+ObjectUsageTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2004/Tingco_REST/src/java/se/info24/reportsjaxb/ObjectUsageTypes.java
+END
+ProductVariantID.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1677/Tingco_REST/src/java/se/info24/reportsjaxb/ProductVariantID.java
+END
+ReportSendSchedules.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1677/Tingco_REST/src/java/se/info24/reportsjaxb/ReportSendSchedules.java
+END
+TransactionProduct.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1682/Tingco_REST/src/java/se/info24/reportsjaxb/TransactionProduct.java
+END
+InstantMessageLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2364/Tingco_REST/src/java/se/info24/reportsjaxb/InstantMessageLog.java
+END
+ObjectUsageRecord.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/1677/Tingco_REST/src/java/se/info24/reportsjaxb/ObjectUsageRecord.java
+END
+MsgStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1677/Tingco_REST/src/java/se/info24/reportsjaxb/MsgStatus.java
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/1677/Tingco_REST/src/java/se/info24/reportsjaxb/ObjectFactory.java
+END
+Reports.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/1677/Tingco_REST/src/java/se/info24/reportsjaxb/Reports.java
+END

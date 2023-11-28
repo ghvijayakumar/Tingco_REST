@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 1, 2011 4:42:34 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISMOperations" name="se.info24.ismOperationsPojo.ObjectUsageRecords" schema="dbo" table="ObjectUsageRecords">
+    <id name="usageRecordId" type="string">
+      <column length="36" name="UsageRecordID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="usageTypeId" type="string">
+      <column length="36" name="UsageTypeID" not-null="true"/>
+    </property>
+    <property name="serviceId" type="string">
+      <column length="36" name="ServiceID"/>
+    </property>
+    <property name="objectId" type="string">
+      <column length="36" name="ObjectID" not-null="true"/>
+    </property>
+    <property name="objectTypeId" type="string">
+      <column length="36" name="ObjectTypeID"/>
+    </property>
+    <property name="objectName" type="string">
+      <column length="50" name="ObjectName" not-null="true"/>
+    </property>
+    <property name="objectDescription" type="string">
+      <column length="200" name="ObjectDescription"/>
+    </property>
+    <property name="usageDescription" type="string">
+      <column length="200" name="UsageDescription"/>
+    </property>
+    <property name="usageStartTime" type="timestamp">
+      <column length="23" name="UsageStartTime"/>
+    </property>
+    <property name="usageStopTime" type="timestamp">
+      <column length="23" name="UsageStopTime"/>
+    </property>
+    <property name="dataItemName" type="string">
+      <column length="50" name="DataItemName"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID"/>
+    </property>
+    <property name="agreementId" type="string">
+      <column length="36" name="AgreementID"/>
+    </property>
+    <property name="usageVolume" type="string">
+      <column length="50" name="UsageVolume"/>
+    </property>
+    <property name="usageUnitId" type="string">
+      <column length="36" name="UsageUnitID"/>
+    </property>
+    <property name="usageUnitName" type="string">
+      <column length="50" name="UsageUnitName"/>
+    </property>
+    <property name="usedByUserId" type="string">
+      <column length="36" name="UsedByUserID"/>
+    </property>
+    <property name="usedByUserName" type="string">
+      <column length="50" name="UsedByUserName"/>
+    </property>
+    <property name="usedByUserAlias" type="string">
+      <column length="200" name="UsedByUserAlias"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getObjectUsageRecordsByUserAlias">
+        from ObjectUsageRecords our where our.usedByUserAlias = :userAlias and month(our.usageStartTime)=:month and year(our.usageStartTime)=:year
+    </query>
+  <query name="getObjectUsageRecordsByDeviceId">
+        from ObjectUsageRecords our where our.objectId in(:deviceId) and our.usageStopTime &lt; getutcdate() and our.usageStopTime &gt; getutcdate() - 1
+    </query>
+  <query name="getUsageLogDetailsById">
+        from ObjectUsageRecords  where usageRecordId =:usageRecordId
+    </query>
+</hibernate-mapping>

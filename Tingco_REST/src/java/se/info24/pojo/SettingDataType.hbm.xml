@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2010 12:53:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.SettingDataType" schema="dbo" table="SettingDataType">
+    <cache usage="nonstrict-read-write"/>
+    <id name="settingDataTypeId" type="string">
+      <column length="36" name="SettingDataTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="settingDataType" type="string">
+      <column length="50" name="SettingDataType" not-null="true"/>
+    </property>
+    <property name="settingDataTypeDescription" type="string">
+      <column length="200" name="SettingDataTypeDescription"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="deviceDetailses">
+      <key>
+        <column length="36" name="SettingDataTypeID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceDetails"/>
+    </set>
+    <set inverse="true" name="deviceSettingsTemplates">
+      <key>
+        <column length="36" name="SettingDataTypeID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceSettingsTemplate"/>
+    </set>
+    <set inverse="true" name="deviceSettingses">
+      <key>
+        <column length="36" name="SettingDataTypeID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceSettings"/>
+    </set>
+    <set inverse="true" name="deviceDetailsTemplates">
+      <key>
+        <column length="36" name="SettingDataTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceDetailsTemplate"/>
+    </set>
+    <set inverse="true" name="objectSettingTemplateses">
+      <key>
+        <column length="36" name="SettingDataTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ObjectSettingTemplates"/>
+    </set>
+    <set inverse="true" name="networkSubscriptionSettingses">
+      <key>
+        <column length="36" name="SettingDataTypeID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.NetworkSubscriptionSettings"/>
+    </set>
+    <set inverse="true" name="networkSettingsTemplates">
+      <key>
+        <column length="36" name="SettingDataTypeID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.NetworkSettingsTemplate"/>
+    </set>
+  </class>
+  <query name="getSettingDataTypeByUserId">
+        from SettingDataType where userId = :userId
+    </query>
+  <query name="getAllSettingDataTypes">
+	from SettingDataType
+    </query>
+  <query name="getSettingDataTypeById">
+        from SettingDataType where settingDataTypeId = :settingDataTypeId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2012 12:18:32 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ProductAttributes" schema="dbo" table="ProductAttributes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="productAttributeId" type="string">
+      <column length="36" name="ProductAttributeID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Products" fetch="select" name="products">
+      <column length="36" name="ProductID" not-null="true"/>
+    </many-to-one>
+    <property name="attributeName" type="string">
+      <column name="AttributeName" not-null="true"/>
+    </property>
+    <property name="attributeValue" type="string">
+      <column name="AttributeValue"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updateddate" type="timestamp">
+      <column length="23" name="Updateddate"/>
+    </property>
+  </class>
+  <query name="getProductAttributes">
+        from ProductAttributes where products.productId in (:productId) and attributeName = 'Provider'
+    </query>
+  <query name="getProductAttributesByProductId">
+        from ProductAttributes where products.productId in (:productId)
+    </query>
+  <query name="getProductAttributesByProductID">
+        from ProductAttributes where products.productId = :productId
+    </query>
+</hibernate-mapping>

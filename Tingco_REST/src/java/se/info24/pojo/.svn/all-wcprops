@@ -1,0 +1,5447 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/NB_2011/!svn/ver/2434/Tingco_REST/src/java/se/info24/pojo
+END
+OrderItems.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/OrderItems.hbm.xml
+END
+AgreementRolesTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1687/Tingco_REST/src/java/se/info24/pojo/AgreementRolesTypes.java
+END
+ObjectUsageUnits.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectUsageUnits.hbm.xml
+END
+ApplicationSolutionTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/535/Tingco_REST/src/java/se/info24/pojo/ApplicationSolutionTranslations.java
+END
+DeviceTypeContentAttributes.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/1581/Tingco_REST/src/java/se/info24/pojo/DeviceTypeContentAttributes.java
+END
+ObjectTypeSettingTemplates.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectTypeSettingTemplates.hbm.xml
+END
+FieldTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/FieldTranslations.hbm.xml
+END
+GroupTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/GroupTranslationsId.java
+END
+GroupWeekdays.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupWeekdays.hbm.xml
+END
+GroupApplicationPackages.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/553/Tingco_REST/src/java/se/info24/pojo/GroupApplicationPackages.java
+END
+PricePlanItemTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/429/Tingco_REST/src/java/se/info24/pojo/PricePlanItemTypes.java
+END
+ServiceDeviceSettingTemplates.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ServiceDeviceSettingTemplates.hbm.xml
+END
+ServiceTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2125/Tingco_REST/src/java/se/info24/pojo/ServiceTypes.java
+END
+UserExtendedLicenses.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/496/Tingco_REST/src/java/se/info24/pojo/UserExtendedLicenses.java
+END
+ProductComponents.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/910/Tingco_REST/src/java/se/info24/pojo/ProductComponents.java
+END
+ObjectAddresses.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectAddresses.hbm.xml
+END
+UserFavoriteContentCategoriesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserFavoriteContentCategoriesId.java
+END
+ObjectSettingPackageMembershipsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/672/Tingco_REST/src/java/se/info24/pojo/ObjectSettingPackageMembershipsId.java
+END
+SupportCaseTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1268/Tingco_REST/src/java/se/info24/pojo/SupportCaseTypes.java
+END
+ProductCategoryTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/455/Tingco_REST/src/java/se/info24/pojo/ProductCategoryTranslationsId.java
+END
+GroupObjectSettingPackagesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/671/Tingco_REST/src/java/se/info24/pojo/GroupObjectSettingPackagesId.java
+END
+GroupProductVariantSubscriptions.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupProductVariantSubscriptions.hbm.xml
+END
+ConnectorVoltages.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/1990/Tingco_REST/src/java/se/info24/pojo/ConnectorVoltages.java
+END
+RecurrenceTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1711/Tingco_REST/src/java/se/info24/pojo/RecurrenceTypeTranslations.java
+END
+BillingCategoryTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/BillingCategoryTranslations.hbm.xml
+END
+DeviceSettingsPackagesTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceSettingsPackagesTranslations.hbm.xml
+END
+ApplicationSolutions.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationSolutions.hbm.xml
+END
+Operations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Operations.hbm.xml
+END
+ObjectGroupTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectGroupTranslations.hbm.xml
+END
+ProductAttributes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductAttributes.hbm.xml
+END
+DeviceTypesInGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceTypesInGroups.java
+END
+DeviceServicesAllowedBundles.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceServicesAllowedBundles.hbm.xml
+END
+SupportTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1266/Tingco_REST/src/java/se/info24/pojo/SupportTypeTranslations.java
+END
+Buildings.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/2406/Tingco_REST/src/java/se/info24/pojo/Buildings.java
+END
+DeviceUsers.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/326/Tingco_REST/src/java/se/info24/pojo/DeviceUsers.java
+END
+ValidationExpressions.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ValidationExpressions.hbm.xml
+END
+SupportCasePriorities.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/1268/Tingco_REST/src/java/se/info24/pojo/SupportCasePriorities.java
+END
+ContentCategoriesInGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2126/Tingco_REST/src/java/se/info24/pojo/ContentCategoriesInGroupsId.java
+END
+LoadBalance.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/1985/Tingco_REST/src/java/se/info24/pojo/LoadBalance.java
+END
+FunctionAreas.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/FunctionAreas.hbm.xml
+END
+ContainerShapes.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/1185/Tingco_REST/src/java/se/info24/pojo/ContainerShapes.java
+END
+GroupProductComponents.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupProductComponents.hbm.xml
+END
+ContactTypeDefaultFields.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/1388/Tingco_REST/src/java/se/info24/pojo/ContactTypeDefaultFields.java
+END
+SupportCaseSubjectTemplates.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportCaseSubjectTemplates.hbm.xml
+END
+WeekdayTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/419/Tingco_REST/src/java/se/info24/pojo/WeekdayTranslations.java
+END
+ObjectImages.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/566/Tingco_REST/src/java/se/info24/pojo/ObjectImages.java
+END
+FunctionAreaTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/FunctionAreaTranslationsId.java
+END
+ApplicationModuleTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationModuleTranslations.hbm.xml
+END
+BuildingTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2315/Tingco_REST/src/java/se/info24/pojo/BuildingTypeTranslations.java
+END
+Contacts.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Contacts.hbm.xml
+END
+RecurringPurchases.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/RecurringPurchases.hbm.xml
+END
+ConnectorTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ConnectorTypes.hbm.xml
+END
+ContactTypeDetails.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1405/Tingco_REST/src/java/se/info24/pojo/ContactTypeDetails.java
+END
+DeviceCommunityMemberships.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceCommunityMemberships.java
+END
+ProductVariantDownloadUrls.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/910/Tingco_REST/src/java/se/info24/pojo/ProductVariantDownloadUrls.java
+END
+DeviceTypeDefaultCategory.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1581/Tingco_REST/src/java/se/info24/pojo/DeviceTypeDefaultCategory.java
+END
+CommandTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/CommandTranslations.hbm.xml
+END
+AddressTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/AddressTypeTranslationsId.java
+END
+ProductsInGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1651/Tingco_REST/src/java/se/info24/pojo/ProductsInGroupsId.java
+END
+ContentCategoriesInGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2126/Tingco_REST/src/java/se/info24/pojo/ContentCategoriesInGroups.java
+END
+ReportSendSchedules.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ReportSendSchedules.hbm.xml
+END
+SystemMessagesToApplications.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SystemMessagesToApplications.hbm.xml
+END
+GroupVisibleApplicationModules.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupVisibleApplicationModules.hbm.xml
+END
+ServiceTypesInGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/440/Tingco_REST/src/java/se/info24/pojo/ServiceTypesInGroups.java
+END
+JourneyTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/326/Tingco_REST/src/java/se/info24/pojo/JourneyTypeTranslationsId.java
+END
+ApplicationTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationTypes.hbm.xml
+END
+Providers.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/1711/Tingco_REST/src/java/se/info24/pojo/Providers.java
+END
+Groups.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/NB_2011/!svn/ver/2126/Tingco_REST/src/java/se/info24/pojo/Groups.java
+END
+ObjectProductVariantPricesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/1667/Tingco_REST/src/java/se/info24/pojo/ObjectProductVariantPricesId.java
+END
+DeviceOperationsMember.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceOperationsMember.hbm.xml
+END
+DeviceSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/740/Tingco_REST/src/java/se/info24/pojo/DeviceSettings.java
+END
+ConnectorVoltages.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ConnectorVoltages.hbm.xml
+END
+ContentAttributeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContentAttributeTranslations.hbm.xml
+END
+TimeFrameGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/419/Tingco_REST/src/java/se/info24/pojo/TimeFrameGroupsId.java
+END
+ProductVariants.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/1990/Tingco_REST/src/java/se/info24/pojo/ProductVariants.java
+END
+ObjectContacts.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectContacts.hbm.xml
+END
+ProductVariantContentCategories.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductVariantContentCategories.hbm.xml
+END
+ApplicationDomainMemberships.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ApplicationDomainMemberships.java
+END
+AgreementItemTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/1711/Tingco_REST/src/java/se/info24/pojo/AgreementItemTypeTranslations.java
+END
+ApplicationTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationTypeTranslations.hbm.xml
+END
+GroupVisibleApplicationSolutionsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/530/Tingco_REST/src/java/se/info24/pojo/GroupVisibleApplicationSolutionsId.java
+END
+PermissionOperations.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/PermissionOperations.java
+END
+ProductVariantServices.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductVariantServices.hbm.xml
+END
+ProductVariantPrices.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductVariantPrices.hbm.xml
+END
+UserFavoriteContentCategories.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserFavoriteContentCategories.hbm.xml
+END
+ObjectSettingPackageMemberships.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectSettingPackageMemberships.hbm.xml
+END
+UserRoleObjectPermissions2.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserRoleObjectPermissions2.java
+END
+ObjectCostCenters.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectCostCenters.hbm.xml
+END
+Services.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Services.hbm.xml
+END
+ReportSendScheduleSettings.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ReportSendScheduleSettings.hbm.xml
+END
+Ogmcontainers.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/1955/Tingco_REST/src/java/se/info24/pojo/Ogmcontainers.java
+END
+ZoneRoomsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/2315/Tingco_REST/src/java/se/info24/pojo/ZoneRoomsId.java
+END
+ProductVariantServices.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/581/Tingco_REST/src/java/se/info24/pojo/ProductVariantServices.java
+END
+ForgetPasswordsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ForgetPasswordsId.java
+END
+ProviderTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1056/Tingco_REST/src/java/se/info24/pojo/ProviderTypeTranslationsId.java
+END
+Currency.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Currency.hbm.xml
+END
+NetworkTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/1317/Tingco_REST/src/java/se/info24/pojo/NetworkTypes.java
+END
+ContentCategoryAttributes.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ContentCategoryAttributes.java
+END
+OgmdeviceId.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/617/Tingco_REST/src/java/se/info24/pojo/OgmdeviceId.java
+END
+UserFavoriteDevices.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserFavoriteDevices.java
+END
+DataItemTranslationsPerDevice.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/617/Tingco_REST/src/java/se/info24/pojo/DataItemTranslationsPerDevice.java
+END
+GroupTrusts.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/GroupTrusts.java
+END
+ApplicationSolutions.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/553/Tingco_REST/src/java/se/info24/pojo/ApplicationSolutions.java
+END
+Operations.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/Operations.java
+END
+UserTimeZonesToActivate.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserTimeZonesToActivate.hbm.xml
+END
+GroupProductVariantSubscriptionsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/566/Tingco_REST/src/java/se/info24/pojo/GroupProductVariantSubscriptionsId.java
+END
+ApplicationModuleTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/530/Tingco_REST/src/java/se/info24/pojo/ApplicationModuleTranslationsId.java
+END
+Domains.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/Domains.java
+END
+NetworkSubscriptionStatuses.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/745/Tingco_REST/src/java/se/info24/pojo/NetworkSubscriptionStatuses.java
+END
+Faq.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Faq.hbm.xml
+END
+UserFavoriteGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserFavoriteGroupsId.java
+END
+ContainerTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContainerTypes.hbm.xml
+END
+ServiceDeviceSubscriptions.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ServiceDeviceSubscriptions.hbm.xml
+END
+SupportCaseResolutionTemplates.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportCaseResolutionTemplates.hbm.xml
+END
+ContentTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ContentTypes.java
+END
+AgreementItemTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/AgreementItemTypes.hbm.xml
+END
+GroupVisibleApplicationSolutions.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupVisibleApplicationSolutions.hbm.xml
+END
+ProvidersInGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/1675/Tingco_REST/src/java/se/info24/pojo/ProvidersInGroups.java
+END
+ProductCategoryTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductCategoryTranslations.hbm.xml
+END
+GroupObjectSettingPackages.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupObjectSettingPackages.hbm.xml
+END
+UserRoles2.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/370/Tingco_REST/src/java/se/info24/pojo/UserRoles2.java
+END
+DeviceDetails.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceDetails.java
+END
+ObjectContactMemberships.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectContactMemberships.hbm.xml
+END
+UserExtendedLicenses.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserExtendedLicenses.hbm.xml
+END
+ServiceTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ServiceTypes.hbm.xml
+END
+DeviceTypeDataitemsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceTypeDataitemsId.java
+END
+AddressType.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/AddressType.hbm.xml
+END
+UserSessions2.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserSessions2.hbm.xml
+END
+Networks.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/NB_2011/!svn/ver/1320/Tingco_REST/src/java/se/info24/pojo/Networks.java
+END
+PermissionTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/PermissionTranslations.hbm.xml
+END
+ContentTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ContentTypeTranslations.java
+END
+ContactFieldTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1388/Tingco_REST/src/java/se/info24/pojo/ContactFieldTranslationsId.java
+END
+ListValues.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ListValues.hbm.xml
+END
+SupportCaseContentLinksId.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1699/Tingco_REST/src/java/se/info24/pojo/SupportCaseContentLinksId.java
+END
+OgmcontainersId.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/1215/Tingco_REST/src/java/se/info24/pojo/OgmcontainersId.java
+END
+DeviceTypeCommandTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceTypeCommandTranslations.hbm.xml
+END
+BundleVersions.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/BundleVersions.hbm.xml
+END
+ProductVariantPricesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/873/Tingco_REST/src/java/se/info24/pojo/ProductVariantPricesId.java
+END
+ApplicationModuleServicesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/672/Tingco_REST/src/java/se/info24/pojo/ApplicationModuleServicesId.java
+END
+CostCenters.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/1185/Tingco_REST/src/java/se/info24/pojo/CostCenters.java
+END
+ServiceDeviceSettingTemplates.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/672/Tingco_REST/src/java/se/info24/pojo/ServiceDeviceSettingTemplates.java
+END
+UnitTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1570/Tingco_REST/src/java/se/info24/pojo/UnitTranslationsId.java
+END
+RoutingTable.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/745/Tingco_REST/src/java/se/info24/pojo/RoutingTable.java
+END
+ApplicationModuleServices.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationModuleServices.hbm.xml
+END
+UserFavoriteGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserFavoriteGroups.hbm.xml
+END
+AgreementStatuses.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/1717/Tingco_REST/src/java/se/info24/pojo/AgreementStatuses.java
+END
+ApplicationProviderTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/1967/Tingco_REST/src/java/se/info24/pojo/ApplicationProviderTypes.java
+END
+FunctionAreaTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/FunctionAreaTranslations.hbm.xml
+END
+GroupTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupTypes.hbm.xml
+END
+ContactTypeDefaultFieldsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1388/Tingco_REST/src/java/se/info24/pojo/ContactTypeDefaultFieldsId.java
+END
+LoadBalance.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/LoadBalance.hbm.xml
+END
+CityTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/CityTranslations.java
+END
+AgreementRoleTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/1687/Tingco_REST/src/java/se/info24/pojo/AgreementRoleTypeTranslationsId.java
+END
+CountryStates.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/CountryStates.hbm.xml
+END
+DeviceGroupMemberships.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceGroupMemberships.java
+END
+ContactTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1388/Tingco_REST/src/java/se/info24/pojo/ContactTypeTranslationsId.java
+END
+News.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/NB_2011/!svn/ver/2125/Tingco_REST/src/java/se/info24/pojo/News.java
+END
+GroupTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/GroupTypeTranslationsId.java
+END
+SupportCaseDeviceLinks.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportCaseDeviceLinks.hbm.xml
+END
+NetworkSubscriptionSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/1317/Tingco_REST/src/java/se/info24/pojo/NetworkSubscriptionSettings.java
+END
+DeviceSettingsPackages.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceSettingsPackages.java
+END
+ProviderTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/1968/Tingco_REST/src/java/se/info24/pojo/ProviderTypes.java
+END
+UserLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/NB_2011/!svn/ver/1062/Tingco_REST/src/java/se/info24/pojo/UserLog.java
+END
+UserRolesInGroups2.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserRolesInGroups2.hbm.xml
+END
+ObjectStateCodeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/950/Tingco_REST/src/java/se/info24/pojo/ObjectStateCodeTranslationsId.java
+END
+GroupVisibleApplicationPackages.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupVisibleApplicationPackages.hbm.xml
+END
+ContentTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContentTypes.hbm.xml
+END
+ReportSendScheduleSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/419/Tingco_REST/src/java/se/info24/pojo/ReportSendScheduleSettings.java
+END
+Services.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/NB_2011/!svn/ver/2207/Tingco_REST/src/java/se/info24/pojo/Services.java
+END
+ObjectCostCenters.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2368/Tingco_REST/src/java/se/info24/pojo/ObjectCostCenters.java
+END
+Ismnews.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/Ismnews.java
+END
+ValidationDataType.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/429/Tingco_REST/src/java/se/info24/pojo/ValidationDataType.java
+END
+BillingCategories.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2242/Tingco_REST/src/java/se/info24/pojo/BillingCategories.java
+END
+MediaFileTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/MediaFileTypes.hbm.xml
+END
+SupportCaseStatuses.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportCaseStatuses.hbm.xml
+END
+UserAlias.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/NB_2011/!svn/ver/868/Tingco_REST/src/java/se/info24/pojo/UserAlias.java
+END
+NetworkSettingsTemplate.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/NetworkSettingsTemplate.hbm.xml
+END
+Fields.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Fields.hbm.xml
+END
+DeviceTypeChannelsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/411/Tingco_REST/src/java/se/info24/pojo/DeviceTypeChannelsId.java
+END
+UserGroupMemberships.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserGroupMemberships.java
+END
+ContainerUserAlias.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2119/Tingco_REST/src/java/se/info24/pojo/ContainerUserAlias.java
+END
+SupportCases.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/1699/Tingco_REST/src/java/se/info24/pojo/SupportCases.java
+END
+UserApplicationSettingsToActivate.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserApplicationSettingsToActivate.hbm.xml
+END
+ApplicationPackageModules.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationPackageModules.hbm.xml
+END
+ValidationExpressions.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/429/Tingco_REST/src/java/se/info24/pojo/ValidationExpressions.java
+END
+ServicesVisibleToGroupId.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/456/Tingco_REST/src/java/se/info24/pojo/ServicesVisibleToGroupId.java
+END
+NewsCategoryTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/NewsCategoryTranslations.hbm.xml
+END
+DeviceTypeChannels.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceTypeChannels.hbm.xml
+END
+DateGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DateGroups.hbm.xml
+END
+ServiceDeviceSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/683/Tingco_REST/src/java/se/info24/pojo/ServiceDeviceSettings.java
+END
+ContainerDevicesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1185/Tingco_REST/src/java/se/info24/pojo/ContainerDevicesId.java
+END
+ProductTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2104/Tingco_REST/src/java/se/info24/pojo/ProductTypes.java
+END
+OgmuserAliasId.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/868/Tingco_REST/src/java/se/info24/pojo/OgmuserAliasId.java
+END
+DeviceDataitemTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2167/Tingco_REST/src/java/se/info24/pojo/DeviceDataitemTranslations.java
+END
+ContentAttributeChanges.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContentAttributeChanges.hbm.xml
+END
+ObjectSettingPackageTemplatesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/672/Tingco_REST/src/java/se/info24/pojo/ObjectSettingPackageTemplatesId.java
+END
+ReportTemplateSettings.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ReportTemplateSettings.hbm.xml
+END
+SystemMessages.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/SystemMessages.java
+END
+UserAddresses.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserAddresses.java
+END
+MeasurementTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/MeasurementTypeTranslations.hbm.xml
+END
+DeviceLinksId.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2282/Tingco_REST/src/java/se/info24/pojo/DeviceLinksId.java
+END
+EventActionSchedules.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/803/Tingco_REST/src/java/se/info24/pojo/EventActionSchedules.java
+END
+DeviceDataItems.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceDataItems.hbm.xml
+END
+SupportPriorityTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/1266/Tingco_REST/src/java/se/info24/pojo/SupportPriorityTranslations.java
+END
+RoutingTable.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/RoutingTable.hbm.xml
+END
+DeviceDetailsTemplate.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceDetailsTemplate.hbm.xml
+END
+ServiceContentCategories.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ServiceContentCategories.hbm.xml
+END
+ProductVariantServicesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/581/Tingco_REST/src/java/se/info24/pojo/ProductVariantServicesId.java
+END
+GroupDefaultAgreement.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/585/Tingco_REST/src/java/se/info24/pojo/GroupDefaultAgreement.java
+END
+NewsCategoryTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2125/Tingco_REST/src/java/se/info24/pojo/NewsCategoryTranslationsId.java
+END
+ObjectGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectGroups.hbm.xml
+END
+GroupAlias.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupAlias.hbm.xml
+END
+UserLoginResetRequests.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserLoginResetRequests.hbm.xml
+END
+DeviceTypesInGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceTypesInGroups.hbm.xml
+END
+PricePlanItemTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/429/Tingco_REST/src/java/se/info24/pojo/PricePlanItemTypeTranslations.java
+END
+BuildingDevices.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2315/Tingco_REST/src/java/se/info24/pojo/BuildingDevices.java
+END
+MeasurementTypesInGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/411/Tingco_REST/src/java/se/info24/pojo/MeasurementTypesInGroups.java
+END
+DeviceServices.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/1688/Tingco_REST/src/java/se/info24/pojo/DeviceServices.java
+END
+PricePlanItems.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/PricePlanItems.hbm.xml
+END
+Containers.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/2097/Tingco_REST/src/java/se/info24/pojo/Containers.java
+END
+ConnectorModes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ConnectorModes.hbm.xml
+END
+ServiceDeviceSubscriptions.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/671/Tingco_REST/src/java/se/info24/pojo/ServiceDeviceSubscriptions.java
+END
+ProductComponents.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductComponents.hbm.xml
+END
+UserAliasTypesInGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/456/Tingco_REST/src/java/se/info24/pojo/UserAliasTypesInGroupsId.java
+END
+UserTypeTranslations2Id.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserTypeTranslations2Id.java
+END
+DeviceTypeServicesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/674/Tingco_REST/src/java/se/info24/pojo/DeviceTypeServicesId.java
+END
+BundleTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/BundleTypes.hbm.xml
+END
+ApplicationTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ApplicationTranslationsId.java
+END
+Reports.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Reports.hbm.xml
+END
+DeviceTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/2286/Tingco_REST/src/java/se/info24/pojo/DeviceTypes.java
+END
+AgreementRolesTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/AgreementRolesTypes.hbm.xml
+END
+ObjectMediaFiles.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1361/Tingco_REST/src/java/se/info24/pojo/ObjectMediaFiles.java
+END
+FieldCategories.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/950/Tingco_REST/src/java/se/info24/pojo/FieldCategories.java
+END
+GroupLimitPackages.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/605/Tingco_REST/src/java/se/info24/pojo/GroupLimitPackages.java
+END
+SupportCaseServiceLinks.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1699/Tingco_REST/src/java/se/info24/pojo/SupportCaseServiceLinks.java
+END
+DeviceDataItemScaling.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceDataItemScaling.hbm.xml
+END
+CityTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/CityTranslations.hbm.xml
+END
+ApplicationPackageTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/530/Tingco_REST/src/java/se/info24/pojo/ApplicationPackageTranslationsId.java
+END
+DeviceServicesAvailableBundlesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2207/Tingco_REST/src/java/se/info24/pojo/DeviceServicesAvailableBundlesId.java
+END
+RoomTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/2326/Tingco_REST/src/java/se/info24/pojo/RoomTypes.java
+END
+UsersToActivateId.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UsersToActivateId.java
+END
+ObjectSettingPackages.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/672/Tingco_REST/src/java/se/info24/pojo/ObjectSettingPackages.java
+END
+ObjectContactTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/1243/Tingco_REST/src/java/se/info24/pojo/ObjectContactTypeTranslationsId.java
+END
+CommandParseTargets.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1649/Tingco_REST/src/java/se/info24/pojo/CommandParseTargets.java
+END
+PricePlansInGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/1667/Tingco_REST/src/java/se/info24/pojo/PricePlansInGroupsId.java
+END
+EventTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/798/Tingco_REST/src/java/se/info24/pojo/EventTypes.java
+END
+AgreementItemTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/1711/Tingco_REST/src/java/se/info24/pojo/AgreementItemTypeTranslationsId.java
+END
+ApplicationDomainMembershipsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ApplicationDomainMembershipsId.java
+END
+SupportCaseSubjectTemplates.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/1266/Tingco_REST/src/java/se/info24/pojo/SupportCaseSubjectTemplates.java
+END
+DeviceTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceTypes.hbm.xml
+END
+DeviceDataItemScaling.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2188/Tingco_REST/src/java/se/info24/pojo/DeviceDataItemScaling.java
+END
+ContainerShapes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContainerShapes.hbm.xml
+END
+CountryPhoneCodes.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/399/Tingco_REST/src/java/se/info24/pojo/CountryPhoneCodes.java
+END
+SupportCaseImpacts.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportCaseImpacts.hbm.xml
+END
+ContactGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContactGroups.hbm.xml
+END
+BundleCategories.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1983/Tingco_REST/src/java/se/info24/pojo/BundleCategories.java
+END
+ContentCategories.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2126/Tingco_REST/src/java/se/info24/pojo/ContentCategories.java
+END
+UserContentTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserContentTypes.hbm.xml
+END
+ApplicationTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ApplicationTypeTranslationsId.java
+END
+RecurrenceTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/RecurrenceTypeTranslations.hbm.xml
+END
+PricePlanTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/PricePlanTypes.hbm.xml
+END
+ProductCategories.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/566/Tingco_REST/src/java/se/info24/pojo/ProductCategories.java
+END
+Routers.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Routers.hbm.xml
+END
+PricePlansInGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1667/Tingco_REST/src/java/se/info24/pojo/PricePlansInGroups.java
+END
+DeviceTypesInGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceTypesInGroupsId.java
+END
+AgreementStatusTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/1624/Tingco_REST/src/java/se/info24/pojo/AgreementStatusTranslationsId.java
+END
+GroupAddresses.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/644/Tingco_REST/src/java/se/info24/pojo/GroupAddresses.java
+END
+ObjectProductVariantCountersId.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/1667/Tingco_REST/src/java/se/info24/pojo/ObjectProductVariantCountersId.java
+END
+BundleCategoryTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/BundleCategoryTranslations.hbm.xml
+END
+BundleTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/1983/Tingco_REST/src/java/se/info24/pojo/BundleTypes.java
+END
+DeviceDataitemTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceDataitemTranslations.hbm.xml
+END
+Reports.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/NB_2011/!svn/ver/495/Tingco_REST/src/java/se/info24/pojo/Reports.java
+END
+Addresses.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Addresses.hbm.xml
+END
+AgreementStatusTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/AgreementStatusTranslations.hbm.xml
+END
+ConnectorCurrents.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ConnectorCurrents.hbm.xml
+END
+UnitTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UnitTranslations.hbm.xml
+END
+ApplicationTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ApplicationTypeTranslations.java
+END
+ObjectSettingTemplates.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectSettingTemplates.hbm.xml
+END
+WeekdayTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/419/Tingco_REST/src/java/se/info24/pojo/WeekdayTranslationsId.java
+END
+ApplicationPackageModules.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/530/Tingco_REST/src/java/se/info24/pojo/ApplicationPackageModules.java
+END
+BundleCategoryTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1983/Tingco_REST/src/java/se/info24/pojo/BundleCategoryTranslations.java
+END
+Ismnews.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Ismnews.hbm.xml
+END
+ObjectTypeFieldsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/950/Tingco_REST/src/java/se/info24/pojo/ObjectTypeFieldsId.java
+END
+ChargeTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/429/Tingco_REST/src/java/se/info24/pojo/ChargeTypes.java
+END
+UserContentCategories.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/378/Tingco_REST/src/java/se/info24/pojo/UserContentCategories.java
+END
+Channels.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Channels.hbm.xml
+END
+DeviceSettingsPackagesTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceSettingsPackagesTranslations.java
+END
+ObjectAddressesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/950/Tingco_REST/src/java/se/info24/pojo/ObjectAddressesId.java
+END
+ProductVariantContentCategoriesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/581/Tingco_REST/src/java/se/info24/pojo/ProductVariantContentCategoriesId.java
+END
+BuildingTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/BuildingTypeTranslations.hbm.xml
+END
+ReportTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/419/Tingco_REST/src/java/se/info24/pojo/ReportTranslationsId.java
+END
+BundleTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/1983/Tingco_REST/src/java/se/info24/pojo/BundleTypeTranslationsId.java
+END
+GroupVisibleApplicationPackages.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/530/Tingco_REST/src/java/se/info24/pojo/GroupVisibleApplicationPackages.java
+END
+UserContentTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/378/Tingco_REST/src/java/se/info24/pojo/UserContentTypes.java
+END
+ObjectSettingPackageTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/671/Tingco_REST/src/java/se/info24/pojo/ObjectSettingPackageTranslationsId.java
+END
+ReportTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ReportTranslations.hbm.xml
+END
+BundleTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/BundleTypeTranslations.hbm.xml
+END
+GroupLimits.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupLimits.hbm.xml
+END
+CommandTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/1649/Tingco_REST/src/java/se/info24/pojo/CommandTypes.java
+END
+ServicesVisibleToGroup.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ServicesVisibleToGroup.hbm.xml
+END
+RecurrenceTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/RecurrenceTypes.hbm.xml
+END
+Faq.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/NB_2011/!svn/ver/2383/Tingco_REST/src/java/se/info24/pojo/Faq.java
+END
+ServiceContentSubscriptions.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ServiceContentSubscriptions.hbm.xml
+END
+ContainerTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/1581/Tingco_REST/src/java/se/info24/pojo/ContainerTypes.java
+END
+GroupDefaultUserAlias.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/1056/Tingco_REST/src/java/se/info24/pojo/GroupDefaultUserAlias.java
+END
+UserProviderTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/1057/Tingco_REST/src/java/se/info24/pojo/UserProviderTypes.java
+END
+ChargeTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ChargeTypeTranslations.hbm.xml
+END
+UserPasswords.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserPasswords.java
+END
+ContainerDevices.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1202/Tingco_REST/src/java/se/info24/pojo/ContainerDevices.java
+END
+ApplicationPackageModulesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/530/Tingco_REST/src/java/se/info24/pojo/ApplicationPackageModulesId.java
+END
+ApplicationSolutionTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationSolutionTranslations.hbm.xml
+END
+MessageItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/745/Tingco_REST/src/java/se/info24/pojo/MessageItems.java
+END
+ObjectContactTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/1243/Tingco_REST/src/java/se/info24/pojo/ObjectContactTypeTranslations.java
+END
+CityTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/CityTranslationsId.java
+END
+JourneyTypesInGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/JourneyTypesInGroups.hbm.xml
+END
+DeviceTypeBillingCategories.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceTypeBillingCategories.hbm.xml
+END
+ObjectStateControl.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectStateControl.hbm.xml
+END
+AgreementItems.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/AgreementItems.hbm.xml
+END
+SupportStatusTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/1266/Tingco_REST/src/java/se/info24/pojo/SupportStatusTranslationsId.java
+END
+DeviceGroupMemberships.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceGroupMemberships.hbm.xml
+END
+ServiceTypesInGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ServiceTypesInGroups.hbm.xml
+END
+ProductVariantMeasurementTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/910/Tingco_REST/src/java/se/info24/pojo/ProductVariantMeasurementTypes.java
+END
+GroupSettings.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupSettings.hbm.xml
+END
+Products.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/NB_2011/!svn/ver/1651/Tingco_REST/src/java/se/info24/pojo/Products.java
+END
+DeviceAgreementMembershipsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceAgreementMembershipsId.java
+END
+ObjectProductVariantCounters.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectProductVariantCounters.hbm.xml
+END
+SupportCaseContentLinks.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1699/Tingco_REST/src/java/se/info24/pojo/SupportCaseContentLinks.java
+END
+ObjectMediaFilesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1361/Tingco_REST/src/java/se/info24/pojo/ObjectMediaFilesId.java
+END
+BuildingTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/BuildingTypes.hbm.xml
+END
+UserPasswords.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserPasswords.hbm.xml
+END
+AgreementItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/1717/Tingco_REST/src/java/se/info24/pojo/AgreementItems.java
+END
+ValidationMemberships.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ValidationMemberships.hbm.xml
+END
+TimeZones.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/2038/Tingco_REST/src/java/se/info24/pojo/TimeZones.java
+END
+SystemMessageTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SystemMessageTranslations.hbm.xml
+END
+GroupProductComponentsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/644/Tingco_REST/src/java/se/info24/pojo/GroupProductComponentsId.java
+END
+UserTimeZones2.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserTimeZones2.hbm.xml
+END
+DeviceCommandSchedules.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceCommandSchedules.hbm.xml
+END
+ObjectSettingTemplates.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/712/Tingco_REST/src/java/se/info24/pojo/ObjectSettingTemplates.java
+END
+PricePlanItemTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/PricePlanItemTypeTranslations.hbm.xml
+END
+BuildingDevices.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2414/Tingco_REST/src/java/se/info24/pojo/BuildingDevices.hbm.xml
+END
+DeviceDataItemScalingId.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/617/Tingco_REST/src/java/se/info24/pojo/DeviceDataItemScalingId.java
+END
+DeviceDataitemTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceDataitemTranslationsId.java
+END
+ObjectFieldData.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectFieldData.hbm.xml
+END
+ServiceTypesInGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/440/Tingco_REST/src/java/se/info24/pojo/ServiceTypesInGroupsId.java
+END
+ContactTypesInContacts.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContactTypesInContacts.hbm.xml
+END
+ObjectContactTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectContactTypes.hbm.xml
+END
+DeviceTypesInServicesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2282/Tingco_REST/src/java/se/info24/pojo/DeviceTypesInServicesId.java
+END
+DeviceOperationsStatusTranslationId.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceOperationsStatusTranslationId.java
+END
+JourneyTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/454/Tingco_REST/src/java/se/info24/pojo/JourneyTypes.hbm.xml
+END
+ObjectStateCodeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/1193/Tingco_REST/src/java/se/info24/pojo/ObjectStateCodeTranslations.java
+END
+ObjectUsageTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectUsageTypes.hbm.xml
+END
+DeviceServicesAvailableBundles.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceServicesAvailableBundles.hbm.xml
+END
+ApplicationPackageTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationPackageTranslations.hbm.xml
+END
+ApplicationTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ApplicationTranslations.java
+END
+DeviceTypeServices.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/674/Tingco_REST/src/java/se/info24/pojo/DeviceTypeServices.java
+END
+ProductVariantContentCategories.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/581/Tingco_REST/src/java/se/info24/pojo/ProductVariantContentCategories.java
+END
+UserApplicationSettingsToActivate.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserApplicationSettingsToActivate.java
+END
+PermissionOperationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/PermissionOperationsId.java
+END
+BillingCategories.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/BillingCategories.hbm.xml
+END
+ValidationDataType.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ValidationDataType.hbm.xml
+END
+UserGroupMemberships2.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserGroupMemberships2.java
+END
+ProductVariantAttributes.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/873/Tingco_REST/src/java/se/info24/pojo/ProductVariantAttributes.java
+END
+UserAliasTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2097/Tingco_REST/src/java/se/info24/pojo/UserAliasTypes.java
+END
+CardPrefixes.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2097/Tingco_REST/src/java/se/info24/pojo/CardPrefixes.java
+END
+BillingCategoryTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2242/Tingco_REST/src/java/se/info24/pojo/BillingCategoryTranslations.java
+END
+AgreementTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/AgreementTypes.hbm.xml
+END
+DeviceTypeMeasurementTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceTypeMeasurementTypes.hbm.xml
+END
+ObjectContactMemberships.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/548/Tingco_REST/src/java/se/info24/pojo/ObjectContactMemberships.java
+END
+ConnectorModes.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/1990/Tingco_REST/src/java/se/info24/pojo/ConnectorModes.java
+END
+Zones.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Zones.hbm.xml
+END
+ServiceContentSubscriptions.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/566/Tingco_REST/src/java/se/info24/pojo/ServiceContentSubscriptions.java
+END
+UsersToActivate.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UsersToActivate.java
+END
+SystemMessageStatuses.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/SystemMessageStatuses.java
+END
+BundleCategoryTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/1983/Tingco_REST/src/java/se/info24/pojo/BundleCategoryTranslationsId.java
+END
+DeviceGroupMembershipsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceGroupMembershipsId.java
+END
+SupportOrgVisibleToGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportOrgVisibleToGroups.hbm.xml
+END
+DeviceOperationsMember.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceOperationsMember.java
+END
+UserRolesInGroups2.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserRolesInGroups2.java
+END
+ServiceTypeBundlesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2125/Tingco_REST/src/java/se/info24/pojo/ServiceTypeBundlesId.java
+END
+Bundle.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Bundle.hbm.xml
+END
+UserTimeZones2.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserTimeZones2.java
+END
+UserRoleMemberships2Id.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserRoleMemberships2Id.java
+END
+DeviceCommandSchedules.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1541/Tingco_REST/src/java/se/info24/pojo/DeviceCommandSchedules.java
+END
+GroupDefaultUserAlias.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupDefaultUserAlias.hbm.xml
+END
+UserFavoriteServicesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserFavoriteServicesId.java
+END
+ProductTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/456/Tingco_REST/src/java/se/info24/pojo/ProductTranslationsId.java
+END
+EventTypesInTypesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/798/Tingco_REST/src/java/se/info24/pojo/EventTypesInTypesId.java
+END
+SupportOrganizationUsersId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1266/Tingco_REST/src/java/se/info24/pojo/SupportOrganizationUsersId.java
+END
+Networks.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Networks.hbm.xml
+END
+ObjectProductVariantPrices.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1667/Tingco_REST/src/java/se/info24/pojo/ObjectProductVariantPrices.java
+END
+Schedules.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Schedules.hbm.xml
+END
+Country.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/NB_2011/!svn/ver/2315/Tingco_REST/src/java/se/info24/pojo/Country.java
+END
+SupportCaseServiceLinksId.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1699/Tingco_REST/src/java/se/info24/pojo/SupportCaseServiceLinksId.java
+END
+ContainerUserAliasId.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2097/Tingco_REST/src/java/se/info24/pojo/ContainerUserAliasId.java
+END
+Bundle.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/NB_2011/!svn/ver/2125/Tingco_REST/src/java/se/info24/pojo/Bundle.java
+END
+Permissions.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/Permissions.java
+END
+Connectors.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/2313/Tingco_REST/src/java/se/info24/pojo/Connectors.java
+END
+Unit.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/NB_2011/!svn/ver/1570/Tingco_REST/src/java/se/info24/pojo/Unit.java
+END
+CommandTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1649/Tingco_REST/src/java/se/info24/pojo/CommandTranslations.java
+END
+EventTypesInGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/EventTypesInGroups.hbm.xml
+END
+GroupTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/GroupTypes.java
+END
+TimeGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/TimeGroups.hbm.xml
+END
+ServiceDeviceSettings.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ServiceDeviceSettings.hbm.xml
+END
+DeviceAgreementMemberships.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceAgreementMemberships.java
+END
+DeviceTypeContentAttributes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceTypeContentAttributes.hbm.xml
+END
+DomainSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DomainSettings.java
+END
+DeviceBillingCategories.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceBillingCategories.hbm.xml
+END
+Company.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Company.hbm.xml
+END
+DeviceOperationsStatus.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceOperationsStatus.hbm.xml
+END
+ContactTypesInGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContactTypesInGroups.hbm.xml
+END
+EventItemActionsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/802/Tingco_REST/src/java/se/info24/pojo/EventItemActionsId.java
+END
+Zones.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/NB_2011/!svn/ver/2315/Tingco_REST/src/java/se/info24/pojo/Zones.java
+END
+CountryPhoneCodes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/CountryPhoneCodes.hbm.xml
+END
+UserRoleMembershipsToActivateId.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserRoleMembershipsToActivateId.java
+END
+News.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/News.hbm.xml
+END
+Providers.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Providers.hbm.xml
+END
+Ogmdevice.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/2243/Tingco_REST/src/java/se/info24/pojo/Ogmdevice.java
+END
+DeviceTypesInServices.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceTypesInServices.hbm.xml
+END
+UserTypeTranslations2.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserTypeTranslations2.java
+END
+UserAliasTypesInGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/456/Tingco_REST/src/java/se/info24/pojo/UserAliasTypesInGroups.java
+END
+UserSettings2.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserSettings2.hbm.xml
+END
+SupportCaseNotes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportCaseNotes.hbm.xml
+END
+MessageItemDataTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/MessageItemDataTypes.hbm.xml
+END
+DeviceTypeBillingCategories.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2242/Tingco_REST/src/java/se/info24/pojo/DeviceTypeBillingCategories.java
+END
+ObjectStateControl.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/950/Tingco_REST/src/java/se/info24/pojo/ObjectStateControl.java
+END
+ContainerDevices.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2434/Tingco_REST/src/java/se/info24/pojo/ContainerDevices.hbm.xml
+END
+AddressTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/AddressTypeTranslations.hbm.xml
+END
+UserProviderTypeReferences.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserProviderTypeReferences.hbm.xml
+END
+MeasurementTypesInGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/MeasurementTypesInGroups.hbm.xml
+END
+DeviceOperationsStatusTranslation.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceOperationsStatusTranslation.java
+END
+Applications.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/1968/Tingco_REST/src/java/se/info24/pojo/Applications.java
+END
+ConnectorAcdc.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ConnectorAcdc.hbm.xml
+END
+UserAliasOrders.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserAliasOrders.hbm.xml
+END
+ListValues.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/950/Tingco_REST/src/java/se/info24/pojo/ListValues.java
+END
+ApplicationGroupMembershipsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ApplicationGroupMembershipsId.java
+END
+ChargeTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/429/Tingco_REST/src/java/se/info24/pojo/ChargeTypeTranslations.java
+END
+TimeGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/419/Tingco_REST/src/java/se/info24/pojo/TimeGroups.java
+END
+ContactGroupsInContactsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1326/Tingco_REST/src/java/se/info24/pojo/ContactGroupsInContactsId.java
+END
+UserAddresses.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserAddresses.hbm.xml
+END
+SystemMessages.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SystemMessages.hbm.xml
+END
+PricePlans.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/1717/Tingco_REST/src/java/se/info24/pojo/PricePlans.java
+END
+ServiceTypeBundles.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2141/Tingco_REST/src/java/se/info24/pojo/ServiceTypeBundles.hbm.xml
+END
+ContactTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContactTypes.hbm.xml
+END
+ContentAttributes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContentAttributes.hbm.xml
+END
+ObjectContacts.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/551/Tingco_REST/src/java/se/info24/pojo/ObjectContacts.java
+END
+Fields.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/NB_2011/!svn/ver/950/Tingco_REST/src/java/se/info24/pojo/Fields.java
+END
+NetworkSettingsTemplate.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1317/Tingco_REST/src/java/se/info24/pojo/NetworkSettingsTemplate.java
+END
+ObjectSettingPackageTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectSettingPackageTranslations.hbm.xml
+END
+ProductCategories.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductCategories.hbm.xml
+END
+GroupDefaultServiceClientLogin.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/1974/Tingco_REST/src/java/se/info24/pojo/GroupDefaultServiceClientLogin.java
+END
+ProductVariants.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductVariants.hbm.xml
+END
+ContentAttributeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ContentAttributeTranslationsId.java
+END
+ProductsInGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductsInGroups.hbm.xml
+END
+Agreements.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Agreements.hbm.xml
+END
+DeviceTypeCommandTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/551/Tingco_REST/src/java/se/info24/pojo/DeviceTypeCommandTranslationsId.java
+END
+ProductCategoryTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/455/Tingco_REST/src/java/se/info24/pojo/ProductCategoryTranslations.java
+END
+GroupObjectSettingPackages.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/671/Tingco_REST/src/java/se/info24/pojo/GroupObjectSettingPackages.java
+END
+RecurrenceTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/1722/Tingco_REST/src/java/se/info24/pojo/RecurrenceTypes.java
+END
+ProductVariantMeasurementTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductVariantMeasurementTypes.hbm.xml
+END
+DeviceTypeBillingCategoriesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2242/Tingco_REST/src/java/se/info24/pojo/DeviceTypeBillingCategoriesId.java
+END
+RoomTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/RoomTypes.hbm.xml
+END
+ProductVariantDownloadUrls.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductVariantDownloadUrls.hbm.xml
+END
+DeviceCommunityMemberships.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceCommunityMemberships.hbm.xml
+END
+ContactTypeDetails.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContactTypeDetails.hbm.xml
+END
+ProductVariantTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductVariantTranslations.hbm.xml
+END
+GroupApplicationPackagesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/530/Tingco_REST/src/java/se/info24/pojo/GroupApplicationPackagesId.java
+END
+RoomTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2315/Tingco_REST/src/java/se/info24/pojo/RoomTypeTranslationsId.java
+END
+ObjectAddresses.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/950/Tingco_REST/src/java/se/info24/pojo/ObjectAddresses.java
+END
+ObjectContentCategorySubscriptionsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ObjectContentCategorySubscriptionsId.java
+END
+UserLoginResetRequests.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2342/Tingco_REST/src/java/se/info24/pojo/UserLoginResetRequests.java
+END
+SupportStatusTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportStatusTranslations.hbm.xml
+END
+GroupAlias.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/1069/Tingco_REST/src/java/se/info24/pojo/GroupAlias.java
+END
+ObjectGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/1500/Tingco_REST/src/java/se/info24/pojo/ObjectGroups.java
+END
+UsersToActivate.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UsersToActivate.hbm.xml
+END
+SystemMessageStatuses.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SystemMessageStatuses.hbm.xml
+END
+UserFavoriteDataItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/1424/Tingco_REST/src/java/se/info24/pojo/UserFavoriteDataItems.java
+END
+ServiceDeviceSettingTemplatesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/672/Tingco_REST/src/java/se/info24/pojo/ServiceDeviceSettingTemplatesId.java
+END
+DeviceServicesActiveBundles.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2207/Tingco_REST/src/java/se/info24/pojo/DeviceServicesActiveBundles.java
+END
+ConnectorTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/1990/Tingco_REST/src/java/se/info24/pojo/ConnectorTypes.java
+END
+FunctionAreaTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/FunctionAreaTranslations.java
+END
+BuildingTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2315/Tingco_REST/src/java/se/info24/pojo/BuildingTypes.java
+END
+ContactTypeFields.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/1388/Tingco_REST/src/java/se/info24/pojo/ContactTypeFields.java
+END
+JourneyTypesInGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/326/Tingco_REST/src/java/se/info24/pojo/JourneyTypesInGroupsId.java
+END
+ObjectContentCategorySubscriptions.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ObjectContentCategorySubscriptions.java
+END
+GroupWeekdays.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/421/Tingco_REST/src/java/se/info24/pojo/GroupWeekdays.java
+END
+Currency.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/NB_2011/!svn/ver/1667/Tingco_REST/src/java/se/info24/pojo/Currency.java
+END
+DeviceDataItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2188/Tingco_REST/src/java/se/info24/pojo/DeviceDataItems.java
+END
+ContactFieldTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/1388/Tingco_REST/src/java/se/info24/pojo/ContactFieldTranslations.java
+END
+EventTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/748/Tingco_REST/src/java/se/info24/pojo/EventTypeTranslationsId.java
+END
+ApplicationGroupMemberships.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationGroupMemberships.hbm.xml
+END
+UserRoleMemberships2.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserRoleMemberships2.hbm.xml
+END
+UserSettingsToActivate.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserSettingsToActivate.hbm.xml
+END
+JourneyTypesInGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/326/Tingco_REST/src/java/se/info24/pojo/JourneyTypesInGroups.java
+END
+ContactTypeFields.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContactTypeFields.hbm.xml
+END
+MessageItems.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/MessageItems.hbm.xml
+END
+ObjectContactTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectContactTypeTranslations.hbm.xml
+END
+ContactTypeDefaultFields.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContactTypeDefaultFields.hbm.xml
+END
+ApplicationEmailTemplates.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationEmailTemplates.hbm.xml
+END
+ObjectUsageUnits.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/910/Tingco_REST/src/java/se/info24/pojo/ObjectUsageUnits.java
+END
+UserFavoriteContentCategories.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserFavoriteContentCategories.java
+END
+ObjectSettingPackageMemberships.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/672/Tingco_REST/src/java/se/info24/pojo/ObjectSettingPackageMemberships.java
+END
+ZoneRooms.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ZoneRooms.hbm.xml
+END
+UnitTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1570/Tingco_REST/src/java/se/info24/pojo/UnitTranslations.java
+END
+GroupTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupTranslations.hbm.xml
+END
+UserInvitations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserInvitations.hbm.xml
+END
+PricePlanVersions.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/PricePlanVersions.hbm.xml
+END
+PermissionTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/PermissionTranslations.java
+END
+ContentTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ContentTypeTranslationsId.java
+END
+City.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/City.hbm.xml
+END
+EventTypesInGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/798/Tingco_REST/src/java/se/info24/pojo/EventTypesInGroups.java
+END
+NewsVisibleInGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2125/Tingco_REST/src/java/se/info24/pojo/NewsVisibleInGroupsId.java
+END
+GroupDefaultServiceClientLogin.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupDefaultServiceClientLogin.hbm.xml
+END
+NetworkTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/NetworkTypes.hbm.xml
+END
+GroupApplicationPackages.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupApplicationPackages.hbm.xml
+END
+EventItemActions.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/EventItemActions.hbm.xml
+END
+NetworkSubscriptions.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/NetworkSubscriptions.hbm.xml
+END
+UserFavoriteServices.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserFavoriteServices.hbm.xml
+END
+ProductTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductTranslations.hbm.xml
+END
+EventTypesInTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/EventTypesInTypes.hbm.xml
+END
+ObjectContactTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1240/Tingco_REST/src/java/se/info24/pojo/ObjectContactTypes.java
+END
+PricePlansInGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/PricePlansInGroups.hbm.xml
+END
+Weekdays.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/NB_2011/!svn/ver/419/Tingco_REST/src/java/se/info24/pojo/Weekdays.java
+END
+UserAlias.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2418/Tingco_REST/src/java/se/info24/pojo/UserAlias.hbm.xml
+END
+ObjectTypeOperations.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ObjectTypeOperations.java
+END
+ProductCategoriesInGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/456/Tingco_REST/src/java/se/info24/pojo/ProductCategoriesInGroups.java
+END
+ServiceContentCategoriesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2127/Tingco_REST/src/java/se/info24/pojo/ServiceContentCategoriesId.java
+END
+TimeFrames.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/TimeFrames.hbm.xml
+END
+ForgetPasswords.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ForgetPasswords.hbm.xml
+END
+ServicesVisibleToGroup.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/456/Tingco_REST/src/java/se/info24/pojo/ServicesVisibleToGroup.java
+END
+UserTypes2.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserTypes2.java
+END
+AgreementStatuses.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/AgreementStatuses.hbm.xml
+END
+ApplicationProviderTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationProviderTypes.hbm.xml
+END
+DeviceTypeDefaultCategory.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceTypeDefaultCategory.hbm.xml
+END
+SystemSettings.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SystemSettings.hbm.xml
+END
+ContactGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/1398/Tingco_REST/src/java/se/info24/pojo/ContactGroups.java
+END
+FieldTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/FieldTypes.hbm.xml
+END
+ContentCategoryAttributesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ContentCategoryAttributesId.java
+END
+MessageTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/MessageTypes.hbm.xml
+END
+SupportTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1266/Tingco_REST/src/java/se/info24/pojo/SupportTypeTranslationsId.java
+END
+UserProviderTypeReferences.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1419/Tingco_REST/src/java/se/info24/pojo/UserProviderTypeReferences.java
+END
+GroupTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/GroupTranslations.java
+END
+PricePlanTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/429/Tingco_REST/src/java/se/info24/pojo/PricePlanTypeTranslationsId.java
+END
+UserFavoriteDataItems.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserFavoriteDataItems.hbm.xml
+END
+Permissions.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Permissions.hbm.xml
+END
+JourneyTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/326/Tingco_REST/src/java/se/info24/pojo/JourneyTypeTranslations.java
+END
+ApplicationPackages.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/535/Tingco_REST/src/java/se/info24/pojo/ApplicationPackages.java
+END
+ContentTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContentTypeTranslations.hbm.xml
+END
+RoomTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/RoomTypeTranslations.hbm.xml
+END
+ContactGroupsInContacts.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContactGroupsInContacts.hbm.xml
+END
+SupportOrganizationUsers.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportOrganizationUsers.hbm.xml
+END
+MessageTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/745/Tingco_REST/src/java/se/info24/pojo/MessageTypes.java
+END
+ContentCategoryTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ContentCategoryTranslations.java
+END
+AgreementTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1626/Tingco_REST/src/java/se/info24/pojo/AgreementTypeTranslations.java
+END
+RecurringPurchases.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1730/Tingco_REST/src/java/se/info24/pojo/RecurringPurchases.java
+END
+Contacts.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/NB_2011/!svn/ver/1388/Tingco_REST/src/java/se/info24/pojo/Contacts.java
+END
+MessageItemDataTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/745/Tingco_REST/src/java/se/info24/pojo/MessageItemDataTypes.java
+END
+UserSettingsToActivate.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserSettingsToActivate.java
+END
+ContactTypesInGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/644/Tingco_REST/src/java/se/info24/pojo/ContactTypesInGroupsId.java
+END
+PricePlans.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/PricePlans.hbm.xml
+END
+DevicePendingDelete.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/548/Tingco_REST/src/java/se/info24/pojo/DevicePendingDelete.java
+END
+Channels.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/NB_2011/!svn/ver/1711/Tingco_REST/src/java/se/info24/pojo/Channels.java
+END
+DeviceTypeMeasurementTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/714/Tingco_REST/src/java/se/info24/pojo/DeviceTypeMeasurementTypes.java
+END
+AgreementTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/1626/Tingco_REST/src/java/se/info24/pojo/AgreementTypes.java
+END
+UserCommunityMembershipsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserCommunityMembershipsId.java
+END
+GroupTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/GroupTypeTranslations.java
+END
+GroupsFirstDayOfWeekId.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/644/Tingco_REST/src/java/se/info24/pojo/GroupsFirstDayOfWeekId.java
+END
+Groups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Groups.hbm.xml
+END
+GroupProductComponents.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/644/Tingco_REST/src/java/se/info24/pojo/GroupProductComponents.java
+END
+GroupWeekdaysId.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/421/Tingco_REST/src/java/se/info24/pojo/GroupWeekdaysId.java
+END
+ContactTypesInGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/644/Tingco_REST/src/java/se/info24/pojo/ContactTypesInGroups.java
+END
+DeviceOperationsStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceOperationsStatus.java
+END
+UserRoleMembershipsToActivate.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserRoleMembershipsToActivate.hbm.xml
+END
+DeviceAgreementMemberships.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceAgreementMemberships.hbm.xml
+END
+ServiceClientLogins.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2318/Tingco_REST/src/java/se/info24/pojo/ServiceClientLogins.java
+END
+OrderItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/566/Tingco_REST/src/java/se/info24/pojo/OrderItems.java
+END
+RecurrenceTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/1711/Tingco_REST/src/java/se/info24/pojo/RecurrenceTypeTranslationsId.java
+END
+OgmuserAlias.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2415/Tingco_REST/src/java/se/info24/pojo/OgmuserAlias.hbm.xml
+END
+ConnectorCurrents.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/1990/Tingco_REST/src/java/se/info24/pojo/ConnectorCurrents.java
+END
+ObjectFieldDataId.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/950/Tingco_REST/src/java/se/info24/pojo/ObjectFieldDataId.java
+END
+DeviceTypeDataitems.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceTypeDataitems.hbm.xml
+END
+ApplicationPackageTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/553/Tingco_REST/src/java/se/info24/pojo/ApplicationPackageTranslations.java
+END
+DeviceServicesAvailableBundles.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2207/Tingco_REST/src/java/se/info24/pojo/DeviceServicesAvailableBundles.java
+END
+Orders.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Orders.hbm.xml
+END
+ObjectSettingPackageTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/675/Tingco_REST/src/java/se/info24/pojo/ObjectSettingPackageTranslations.java
+END
+ProviderTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProviderTypeTranslations.hbm.xml
+END
+SupportOrgVisibleToGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/741/Tingco_REST/src/java/se/info24/pojo/SupportOrgVisibleToGroupsId.java
+END
+JourneyTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/JourneyTypeTranslations.hbm.xml
+END
+DeviceServices.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceServices.hbm.xml
+END
+ProvidersInGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProvidersInGroups.hbm.xml
+END
+DeviceServicesAllowedBundles.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2207/Tingco_REST/src/java/se/info24/pojo/DeviceServicesAllowedBundles.java
+END
+ProductVariantDevices.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductVariantDevices.hbm.xml
+END
+ProductVariantAttributes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductVariantAttributes.hbm.xml
+END
+UserGroupMemberships2.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserGroupMemberships2.hbm.xml
+END
+Users2Id.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/Users2Id.java
+END
+DeviceLinks.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/2282/Tingco_REST/src/java/se/info24/pojo/DeviceLinks.java
+END
+ContentCategoryAttributes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContentCategoryAttributes.hbm.xml
+END
+MediaFileTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/1361/Tingco_REST/src/java/se/info24/pojo/MediaFileTypes.java
+END
+SupportCaseStatuses.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1268/Tingco_REST/src/java/se/info24/pojo/SupportCaseStatuses.java
+END
+ContactTypesInContacts.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1402/Tingco_REST/src/java/se/info24/pojo/ContactTypesInContacts.java
+END
+UserAliasOrders.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2406/Tingco_REST/src/java/se/info24/pojo/UserAliasOrders.java
+END
+City.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/City.java
+END
+GroupVisibleApplicationPackagesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/530/Tingco_REST/src/java/se/info24/pojo/GroupVisibleApplicationPackagesId.java
+END
+Applications.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Applications.hbm.xml
+END
+DeviceOperationsStatusTranslation.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceOperationsStatusTranslation.hbm.xml
+END
+BundleLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/1983/Tingco_REST/src/java/se/info24/pojo/BundleLog.java
+END
+ProductVariantComponents.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/910/Tingco_REST/src/java/se/info24/pojo/ProductVariantComponents.java
+END
+AgreementRoles.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/1687/Tingco_REST/src/java/se/info24/pojo/AgreementRoles.java
+END
+DeviceSettingsTemplate.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceSettingsTemplate.java
+END
+SupportImpactTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1266/Tingco_REST/src/java/se/info24/pojo/SupportImpactTranslations.java
+END
+GroupVisibleApplicationSolutions.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/530/Tingco_REST/src/java/se/info24/pojo/GroupVisibleApplicationSolutions.java
+END
+AgreementItemTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/AgreementItemTypeTranslations.hbm.xml
+END
+ApplicationDomainMemberships.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationDomainMemberships.hbm.xml
+END
+BuildingTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2315/Tingco_REST/src/java/se/info24/pojo/BuildingTypeTranslationsId.java
+END
+ApplicationSolutionTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/530/Tingco_REST/src/java/se/info24/pojo/ApplicationSolutionTranslationsId.java
+END
+PricePlanItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/1852/Tingco_REST/src/java/se/info24/pojo/PricePlanItems.java
+END
+ApplicationModules.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationModules.hbm.xml
+END
+AgreementRoleTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/AgreementRoleTypeTranslations.hbm.xml
+END
+SupportStatusTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/1266/Tingco_REST/src/java/se/info24/pojo/SupportStatusTranslations.java
+END
+SupportOrganizationUsers.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/1266/Tingco_REST/src/java/se/info24/pojo/SupportOrganizationUsers.java
+END
+ProductVariantTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/511/Tingco_REST/src/java/se/info24/pojo/ProductVariantTranslationsId.java
+END
+EventTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/753/Tingco_REST/src/java/se/info24/pojo/EventTypeTranslations.java
+END
+ObjectSettingPackages.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectSettingPackages.hbm.xml
+END
+CommandParseTargets.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/CommandParseTargets.hbm.xml
+END
+UserFavoriteDataItemsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1424/Tingco_REST/src/java/se/info24/pojo/UserFavoriteDataItemsId.java
+END
+ApplicationTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ApplicationTypes.java
+END
+SupportCaseDeviceLinks.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1210/Tingco_REST/src/java/se/info24/pojo/SupportCaseDeviceLinks.java
+END
+UserGroupMemberships2Id.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserGroupMemberships2Id.java
+END
+SystemMessageTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/SystemMessageTranslations.java
+END
+Orders.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/NB_2011/!svn/ver/566/Tingco_REST/src/java/se/info24/pojo/Orders.java
+END
+ContentCategoryTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContentCategoryTranslations.hbm.xml
+END
+ProviderTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/1058/Tingco_REST/src/java/se/info24/pojo/ProviderTypeTranslations.java
+END
+ContactTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1388/Tingco_REST/src/java/se/info24/pojo/ContactTypeTranslations.java
+END
+SupportTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportTypeTranslations.hbm.xml
+END
+Buildings.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Buildings.hbm.xml
+END
+ServiceSettings.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ServiceSettings.hbm.xml
+END
+NewsVisibleInGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/NewsVisibleInGroups.hbm.xml
+END
+DeviceServicesAllowedBundlesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2207/Tingco_REST/src/java/se/info24/pojo/DeviceServicesAllowedBundlesId.java
+END
+ProductVariantTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/566/Tingco_REST/src/java/se/info24/pojo/ProductVariantTranslations.java
+END
+FieldTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/950/Tingco_REST/src/java/se/info24/pojo/FieldTypes.java
+END
+UserRolesInGroups2Id.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserRolesInGroups2Id.java
+END
+UserTypes2.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserTypes2.hbm.xml
+END
+GroupDefaultAgreement.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupDefaultAgreement.hbm.xml
+END
+NetworkSubscriptionStatuses.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/NetworkSubscriptionStatuses.hbm.xml
+END
+Domains.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Domains.hbm.xml
+END
+UserFavoriteGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserFavoriteGroups.java
+END
+SupportCaseNotes.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1686/Tingco_REST/src/java/se/info24/pojo/SupportCaseNotes.java
+END
+UserSettings2.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserSettings2.java
+END
+UserRoleMembershipsToActivate.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserRoleMembershipsToActivate.java
+END
+ServiceSubscriptionAcl.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/566/Tingco_REST/src/java/se/info24/pojo/ServiceSubscriptionAcl.java
+END
+GroupsFirstDayOfWeek.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/644/Tingco_REST/src/java/se/info24/pojo/GroupsFirstDayOfWeek.java
+END
+MeasurementTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/411/Tingco_REST/src/java/se/info24/pojo/MeasurementTypeTranslations.java
+END
+UserRoleObjectPermissions2.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserRoleObjectPermissions2.hbm.xml
+END
+GroupTrustsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/GroupTrustsId.java
+END
+DataItemTranslationsPerDeviceId.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/617/Tingco_REST/src/java/se/info24/pojo/DataItemTranslationsPerDeviceId.java
+END
+UserFavoriteDevicesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserFavoriteDevicesId.java
+END
+ObjectSettingPackageTemplates.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/685/Tingco_REST/src/java/se/info24/pojo/ObjectSettingPackageTemplates.java
+END
+Commands.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/NB_2011/!svn/ver/1649/Tingco_REST/src/java/se/info24/pojo/Commands.java
+END
+TimeZones.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/TimeZones.hbm.xml
+END
+NetworkSubscriptionSettings.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/NetworkSubscriptionSettings.hbm.xml
+END
+DeviceSettingsPackages.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceSettingsPackages.hbm.xml
+END
+ProviderTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProviderTypes.hbm.xml
+END
+DeviceSettings.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceSettings.hbm.xml
+END
+PricePlanTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/PricePlanTypeTranslations.hbm.xml
+END
+Company.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/NB_2011/!svn/ver/1211/Tingco_REST/src/java/se/info24/pojo/Company.java
+END
+DeviceBillingCategories.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2242/Tingco_REST/src/java/se/info24/pojo/DeviceBillingCategories.java
+END
+PermissionTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/PermissionTranslationsId.java
+END
+UserContentTypesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/378/Tingco_REST/src/java/se/info24/pojo/UserContentTypesId.java
+END
+ObjectMediaFiles.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectMediaFiles.hbm.xml
+END
+FieldCategories.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/FieldCategories.hbm.xml
+END
+WeekdayTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/WeekdayTranslations.hbm.xml
+END
+ObjectUsageTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2002/Tingco_REST/src/java/se/info24/pojo/ObjectUsageTypes.java
+END
+JourneyTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/326/Tingco_REST/src/java/se/info24/pojo/JourneyTypes.java
+END
+DeviceTypeContentAttributesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/1581/Tingco_REST/src/java/se/info24/pojo/DeviceTypeContentAttributesId.java
+END
+ContentAttributes.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/1582/Tingco_REST/src/java/se/info24/pojo/ContentAttributes.java
+END
+EventTypesInTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/798/Tingco_REST/src/java/se/info24/pojo/EventTypesInTypes.java
+END
+ProductTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1651/Tingco_REST/src/java/se/info24/pojo/ProductTranslations.java
+END
+UserFavoriteServices.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserFavoriteServices.java
+END
+ContactTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContactTypeTranslations.hbm.xml
+END
+ObjectProductVariantPrices.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectProductVariantPrices.hbm.xml
+END
+CommandTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/CommandTypes.hbm.xml
+END
+ProductAttributes.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/566/Tingco_REST/src/java/se/info24/pojo/ProductAttributes.java
+END
+DeviceDetails.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceDetails.hbm.xml
+END
+UserRoles2.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserRoles2.hbm.xml
+END
+SupportPriorityTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/1266/Tingco_REST/src/java/se/info24/pojo/SupportPriorityTranslationsId.java
+END
+UserAliasTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserAliasTypes.hbm.xml
+END
+ObjectTypeSettingTemplatesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/712/Tingco_REST/src/java/se/info24/pojo/ObjectTypeSettingTemplatesId.java
+END
+FieldTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/950/Tingco_REST/src/java/se/info24/pojo/FieldTranslationsId.java
+END
+ChargeTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ChargeTypes.hbm.xml
+END
+EventActionSchedules.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/EventActionSchedules.hbm.xml
+END
+GroupVisibleApplicationModulesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/530/Tingco_REST/src/java/se/info24/pojo/GroupVisibleApplicationModulesId.java
+END
+PricePlanItemTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/PricePlanItemTypes.hbm.xml
+END
+ProductVariantDevices.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2197/Tingco_REST/src/java/se/info24/pojo/ProductVariantDevices.java
+END
+PricePlanItemTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/429/Tingco_REST/src/java/se/info24/pojo/PricePlanItemTypeTranslationsId.java
+END
+BuildingDevicesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2315/Tingco_REST/src/java/se/info24/pojo/BuildingDevicesId.java
+END
+UserGroupMemberships.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserGroupMemberships.hbm.xml
+END
+ObjectSettingPackageTemplates.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectSettingPackageTemplates.hbm.xml
+END
+UserInvitationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserInvitationsId.java
+END
+GroupTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupTypeTranslations.hbm.xml
+END
+ObjectTags.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/1990/Tingco_REST/src/java/se/info24/pojo/ObjectTags.java
+END
+ContactFieldTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContactFieldTranslations.hbm.xml
+END
+Ogmdevice.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Ogmdevice.hbm.xml
+END
+GroupVisibleApplicationModules.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/530/Tingco_REST/src/java/se/info24/pojo/GroupVisibleApplicationModules.java
+END
+ContentCategoryTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ContentCategoryTranslationsId.java
+END
+Products.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Products.hbm.xml
+END
+SupportCaseImpacts.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1268/Tingco_REST/src/java/se/info24/pojo/SupportCaseImpacts.java
+END
+UserContentCategoriesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/378/Tingco_REST/src/java/se/info24/pojo/UserContentCategoriesId.java
+END
+DeviceTypeDataitems.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceTypeDataitems.java
+END
+AgreementTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/AgreementTypeTranslations.hbm.xml
+END
+DeviceServicesActiveBundles.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceServicesActiveBundles.hbm.xml
+END
+Connectors.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Connectors.hbm.xml
+END
+ObjectGroupTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/627/Tingco_REST/src/java/se/info24/pojo/ObjectGroupTranslationsId.java
+END
+UserProviderTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserProviderTypes.hbm.xml
+END
+SystemMessagesToApplicationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/SystemMessagesToApplicationsId.java
+END
+DeviceUsers.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceUsers.hbm.xml
+END
+SupportOrgVisibleToGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/741/Tingco_REST/src/java/se/info24/pojo/SupportOrgVisibleToGroups.java
+END
+SupportCaseDeviceLinksId.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/1210/Tingco_REST/src/java/se/info24/pojo/SupportCaseDeviceLinksId.java
+END
+UserCommunityMemberships.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserCommunityMemberships.hbm.xml
+END
+NewsCategories.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/NewsCategories.hbm.xml
+END
+UserApplicationSettings.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserApplicationSettings.hbm.xml
+END
+EventTypeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/EventTypeTranslations.hbm.xml
+END
+ApplicationModuleServices.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/672/Tingco_REST/src/java/se/info24/pojo/ApplicationModuleServices.java
+END
+ObjectProductVariantCounters.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/1667/Tingco_REST/src/java/se/info24/pojo/ObjectProductVariantCounters.java
+END
+BundleDetails.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2147/Tingco_REST/src/java/se/info24/pojo/BundleDetails.java
+END
+DeviceCommunityMembershipsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceCommunityMembershipsId.java
+END
+UserRoleMemberships2.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserRoleMemberships2.java
+END
+UserAliasDetails.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserAliasDetails.hbm.xml
+END
+DeviceLinks.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceLinks.hbm.xml
+END
+ObjectStateCodes.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1193/Tingco_REST/src/java/se/info24/pojo/ObjectStateCodes.java
+END
+ProductVariantDevicesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/839/Tingco_REST/src/java/se/info24/pojo/ProductVariantDevicesId.java
+END
+ReportTemplateSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/419/Tingco_REST/src/java/se/info24/pojo/ReportTemplateSettings.java
+END
+ProductTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductTypes.hbm.xml
+END
+DeviceServicesActiveBundlesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2207/Tingco_REST/src/java/se/info24/pojo/DeviceServicesActiveBundlesId.java
+END
+ForgetPasswords.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ForgetPasswords.java
+END
+TimeFrames.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/419/Tingco_REST/src/java/se/info24/pojo/TimeFrames.java
+END
+NetworkSubscriptionsPendingDelete.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/NetworkSubscriptionsPendingDelete.hbm.xml
+END
+AgreementRoleTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/1687/Tingco_REST/src/java/se/info24/pojo/AgreementRoleTypeTranslations.java
+END
+ObjectTypeFields.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2038/Tingco_REST/src/java/se/info24/pojo/ObjectTypeFields.java
+END
+ServiceClientLogins.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ServiceClientLogins.hbm.xml
+END
+FunctionAreas.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/1717/Tingco_REST/src/java/se/info24/pojo/FunctionAreas.java
+END
+DeviceTypeCommandTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/551/Tingco_REST/src/java/se/info24/pojo/DeviceTypeCommandTranslations.java
+END
+BundleVersions.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2207/Tingco_REST/src/java/se/info24/pojo/BundleVersions.java
+END
+BundleCategories.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/BundleCategories.hbm.xml
+END
+UserLog.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserLog.hbm.xml
+END
+MeasurementTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/411/Tingco_REST/src/java/se/info24/pojo/MeasurementTypeTranslationsId.java
+END
+NetworkSubscriptionsPendingDelete.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/NB_2011/!svn/ver/1317/Tingco_REST/src/java/se/info24/pojo/NetworkSubscriptionsPendingDelete.java
+END
+ServiceSubscriptionAcl.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ServiceSubscriptionAcl.hbm.xml
+END
+ChargeTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/429/Tingco_REST/src/java/se/info24/pojo/ChargeTypeTranslationsId.java
+END
+ObjectContentCategorySubscriptions.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectContentCategorySubscriptions.hbm.xml
+END
+DomainSettings.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DomainSettings.hbm.xml
+END
+DeviceTypeChannels.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/411/Tingco_REST/src/java/se/info24/pojo/DeviceTypeChannels.java
+END
+DateGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/617/Tingco_REST/src/java/se/info24/pojo/DateGroups.java
+END
+MeasurementTypesInGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/411/Tingco_REST/src/java/se/info24/pojo/MeasurementTypesInGroupsId.java
+END
+GroupLimitPackages.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupLimitPackages.hbm.xml
+END
+SupportCaseServiceLinks.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportCaseServiceLinks.hbm.xml
+END
+ObjectImages.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectImages.hbm.xml
+END
+ContactTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/1388/Tingco_REST/src/java/se/info24/pojo/ContactTypes.java
+END
+NetworkSubscriptions.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2398/Tingco_REST/src/java/se/info24/pojo/NetworkSubscriptions.java
+END
+EventItemActions.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/802/Tingco_REST/src/java/se/info24/pojo/EventItemActions.java
+END
+AddressType.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/1659/Tingco_REST/src/java/se/info24/pojo/AddressType.java
+END
+Country.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Country.hbm.xml
+END
+UserSessions2.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserSessions2.java
+END
+AgreementTypeTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/1626/Tingco_REST/src/java/se/info24/pojo/AgreementTypeTranslationsId.java
+END
+Containers.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Containers.hbm.xml
+END
+UserAliasDetails.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/871/Tingco_REST/src/java/se/info24/pojo/UserAliasDetails.java
+END
+BundleLog.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/BundleLog.hbm.xml
+END
+ProductVariantComponents.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductVariantComponents.hbm.xml
+END
+ObjectTypeOperations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectTypeOperations.hbm.xml
+END
+Weekdays.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Weekdays.hbm.xml
+END
+Routers.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/NB_2011/!svn/ver/745/Tingco_REST/src/java/se/info24/pojo/Routers.java
+END
+UserContentCategories.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserContentCategories.hbm.xml
+END
+ObjectFieldData.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/1237/Tingco_REST/src/java/se/info24/pojo/ObjectFieldData.java
+END
+SupportPriorityTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportPriorityTranslations.hbm.xml
+END
+GroupTrusts.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupTrusts.hbm.xml
+END
+ConnectorAcdc.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/1990/Tingco_REST/src/java/se/info24/pojo/ConnectorAcdc.java
+END
+DataItemTranslationsPerDevice.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DataItemTranslationsPerDevice.hbm.xml
+END
+UserFavoriteDevices.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserFavoriteDevices.hbm.xml
+END
+PricePlanVersions.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/429/Tingco_REST/src/java/se/info24/pojo/PricePlanVersions.java
+END
+UserInvitations.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserInvitations.java
+END
+DeviceTypeCommands.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceTypeCommands.hbm.xml
+END
+Users2.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Users2.hbm.xml
+END
+GroupLimits.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/605/Tingco_REST/src/java/se/info24/pojo/GroupLimits.java
+END
+GroupAddresses.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupAddresses.hbm.xml
+END
+ContainerUserAlias.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContainerUserAlias.hbm.xml
+END
+Schedules.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/1541/Tingco_REST/src/java/se/info24/pojo/Schedules.java
+END
+SupportCases.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportCases.hbm.xml
+END
+PermissionOperations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/PermissionOperations.hbm.xml
+END
+ContactGroupsInContacts.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/1326/Tingco_REST/src/java/se/info24/pojo/ContactGroupsInContacts.java
+END
+Lists.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Lists.hbm.xml
+END
+ObjectTypeFields.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectTypeFields.hbm.xml
+END
+UserApplicationSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserApplicationSettings.java
+END
+SystemMessagesToApplications.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/SystemMessagesToApplications.java
+END
+CountryStates.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/CountryStates.java
+END
+SupportCaseContentLinks.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportCaseContentLinks.hbm.xml
+END
+ObjectTypeOperationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ObjectTypeOperationsId.java
+END
+ValidationMemberships.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/485/Tingco_REST/src/java/se/info24/pojo/ValidationMemberships.java
+END
+ContentCategoriesInGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContentCategoriesInGroups.hbm.xml
+END
+ZoneRooms.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/2315/Tingco_REST/src/java/se/info24/pojo/ZoneRooms.java
+END
+DeviceManufacturers.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceManufacturers.java
+END
+UserExtendedLicensesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/496/Tingco_REST/src/java/se/info24/pojo/UserExtendedLicensesId.java
+END
+SupportCasePriorities.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportCasePriorities.hbm.xml
+END
+ObjectTags.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2422/Tingco_REST/src/java/se/info24/pojo/ObjectTags.hbm.xml
+END
+ApplicationModuleTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/534/Tingco_REST/src/java/se/info24/pojo/ApplicationModuleTranslations.java
+END
+ProductVariantMeasurementTypesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/910/Tingco_REST/src/java/se/info24/pojo/ProductVariantMeasurementTypesId.java
+END
+DeviceTypesInServices.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2282/Tingco_REST/src/java/se/info24/pojo/DeviceTypesInServices.java
+END
+ApplicationProviderTypesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/1967/Tingco_REST/src/java/se/info24/pojo/ApplicationProviderTypesId.java
+END
+SupportCaseTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportCaseTypes.hbm.xml
+END
+ApplicationSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ApplicationSettings.java
+END
+SupportOrganizations.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/745/Tingco_REST/src/java/se/info24/pojo/SupportOrganizations.java
+END
+ObjectTypeSettingTemplates.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/712/Tingco_REST/src/java/se/info24/pojo/ObjectTypeSettingTemplates.java
+END
+FieldTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/950/Tingco_REST/src/java/se/info24/pojo/FieldTranslations.java
+END
+ContentAttributeChanges.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ContentAttributeChanges.java
+END
+ObjectStateCodeTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectStateCodeTranslations.hbm.xml
+END
+ProductVariantComponentsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/910/Tingco_REST/src/java/se/info24/pojo/ProductVariantComponentsId.java
+END
+Agreements.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/2315/Tingco_REST/src/java/se/info24/pojo/Agreements.java
+END
+ProductsInGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1651/Tingco_REST/src/java/se/info24/pojo/ProductsInGroups.java
+END
+ApplicationModules.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/540/Tingco_REST/src/java/se/info24/pojo/ApplicationModules.java
+END
+SettingDataType.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SettingDataType.hbm.xml
+END
+Lists.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/NB_2011/!svn/ver/950/Tingco_REST/src/java/se/info24/pojo/Lists.java
+END
+DeviceSettingsPackagesTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceSettingsPackagesTranslationsId.java
+END
+ServicesChannels.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1711/Tingco_REST/src/java/se/info24/pojo/ServicesChannels.java
+END
+Rooms.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/NB_2011/!svn/ver/2404/Tingco_REST/src/java/se/info24/pojo/Rooms.java
+END
+ObjectCostCentersId.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2368/Tingco_REST/src/java/se/info24/pojo/ObjectCostCentersId.java
+END
+ContentCategories.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ContentCategories.hbm.xml
+END
+EventItems.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/EventItems.hbm.xml
+END
+ApplicationSettings.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationSettings.hbm.xml
+END
+SupportOrganizations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportOrganizations.hbm.xml
+END
+SystemMessageTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/SystemMessageTranslationsId.java
+END
+ObjectStateCodes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ObjectStateCodes.hbm.xml
+END
+DeviceTypeMeasurementTypesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/714/Tingco_REST/src/java/se/info24/pojo/DeviceTypeMeasurementTypesId.java
+END
+SettingDataType.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/1317/Tingco_REST/src/java/se/info24/pojo/SettingDataType.java
+END
+MeasurementTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/910/Tingco_REST/src/java/se/info24/pojo/MeasurementTypes.java
+END
+GroupsFirstDayOfWeek.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/GroupsFirstDayOfWeek.hbm.xml
+END
+EventTypesInGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/748/Tingco_REST/src/java/se/info24/pojo/EventTypesInGroupsId.java
+END
+BlacklistType.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/1983/Tingco_REST/src/java/se/info24/pojo/BlacklistType.java
+END
+DevicePendingDelete.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DevicePendingDelete.hbm.xml
+END
+ProductVariantPrices.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/873/Tingco_REST/src/java/se/info24/pojo/ProductVariantPrices.java
+END
+NewsCategoryTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2125/Tingco_REST/src/java/se/info24/pojo/NewsCategoryTranslations.java
+END
+AgreementStatusTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/1624/Tingco_REST/src/java/se/info24/pojo/AgreementStatusTranslations.java
+END
+Addresses.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/1210/Tingco_REST/src/java/se/info24/pojo/Addresses.java
+END
+ServiceTypeBundles.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2125/Tingco_REST/src/java/se/info24/pojo/ServiceTypeBundles.java
+END
+CostCenters.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/CostCenters.hbm.xml
+END
+ProvidersInGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/1675/Tingco_REST/src/java/se/info24/pojo/ProvidersInGroupsId.java
+END
+DeviceTypeCommands.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1649/Tingco_REST/src/java/se/info24/pojo/DeviceTypeCommands.java
+END
+DeviceManufacturers.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceManufacturers.hbm.xml
+END
+Users2.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/NB_2011/!svn/ver/1983/Tingco_REST/src/java/se/info24/pojo/Users2.java
+END
+UserDetails.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/NB_2011/!svn/ver/378/Tingco_REST/src/java/se/info24/pojo/UserDetails.java
+END
+ObjectGroupTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/627/Tingco_REST/src/java/se/info24/pojo/ObjectGroupTranslations.java
+END
+ApplicationPackages.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationPackages.hbm.xml
+END
+ProductCategoriesInGroupsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/456/Tingco_REST/src/java/se/info24/pojo/ProductCategoriesInGroupsId.java
+END
+BillingCategoryTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/NB_2011/!svn/ver/2242/Tingco_REST/src/java/se/info24/pojo/BillingCategoryTranslationsId.java
+END
+Device.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/NB_2011/!svn/ver/2404/Tingco_REST/src/java/se/info24/pojo/Device.java
+END
+AgreementRoles.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/AgreementRoles.hbm.xml
+END
+ContentAttributeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ContentAttributeTranslations.java
+END
+DeviceSettingsTemplate.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceSettingsTemplate.hbm.xml
+END
+SupportImpactTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SupportImpactTranslations.hbm.xml
+END
+ProductCategoriesInGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ProductCategoriesInGroups.hbm.xml
+END
+PricePlanTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/429/Tingco_REST/src/java/se/info24/pojo/PricePlanTypes.java
+END
+CardPrefixes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/CardPrefixes.hbm.xml
+END
+UserDetails.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserDetails.hbm.xml
+END
+GroupProductVariantSubscriptions.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/NB_2011/!svn/ver/566/Tingco_REST/src/java/se/info24/pojo/GroupProductVariantSubscriptions.java
+END
+UserProviderTypeReferencesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/1089/Tingco_REST/src/java/se/info24/pojo/UserProviderTypeReferencesId.java
+END
+AgreementItemTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/1717/Tingco_REST/src/java/se/info24/pojo/AgreementItemTypes.java
+END
+SupportCaseResolutionTemplates.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/NB_2011/!svn/ver/1266/Tingco_REST/src/java/se/info24/pojo/SupportCaseResolutionTemplates.java
+END
+BundleTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/1983/Tingco_REST/src/java/se/info24/pojo/BundleTypeTranslations.java
+END
+ReportTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/NB_2011/!svn/ver/419/Tingco_REST/src/java/se/info24/pojo/ReportTranslations.java
+END
+DeviceServicesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/1688/Tingco_REST/src/java/se/info24/pojo/DeviceServicesId.java
+END
+RoomTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/2315/Tingco_REST/src/java/se/info24/pojo/RoomTypeTranslations.java
+END
+ServiceSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/1713/Tingco_REST/src/java/se/info24/pojo/ServiceSettings.java
+END
+NewsVisibleInGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2125/Tingco_REST/src/java/se/info24/pojo/NewsVisibleInGroups.java
+END
+SensorTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/SensorTypes.hbm.xml
+END
+UserCommunityMemberships.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserCommunityMemberships.java
+END
+UserRoleObjectPermissions2Id.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserRoleObjectPermissions2Id.java
+END
+NewsCategories.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/2125/Tingco_REST/src/java/se/info24/pojo/NewsCategories.java
+END
+ServicesChannels.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ServicesChannels.hbm.xml
+END
+Rooms.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Rooms.hbm.xml
+END
+Commands.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Commands.hbm.xml
+END
+ReportSendSchedules.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/419/Tingco_REST/src/java/se/info24/pojo/ReportSendSchedules.java
+END
+UserAliasTypesInGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserAliasTypesInGroups.hbm.xml
+END
+UserTypeTranslations2.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/UserTypeTranslations2.hbm.xml
+END
+AgreementRolesId.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/NB_2011/!svn/ver/530/Tingco_REST/src/java/se/info24/pojo/AgreementRolesId.java
+END
+AddressTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/AddressTypeTranslations.java
+END
+SupportImpactTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/NB_2011/!svn/ver/1266/Tingco_REST/src/java/se/info24/pojo/SupportImpactTranslationsId.java
+END
+EventTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/EventTypes.hbm.xml
+END
+ApplicationEmailTemplates.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/549/Tingco_REST/src/java/se/info24/pojo/ApplicationEmailTemplates.java
+END
+OgmuserAlias.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/868/Tingco_REST/src/java/se/info24/pojo/OgmuserAlias.java
+END
+CommandTranslationsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/1649/Tingco_REST/src/java/se/info24/pojo/CommandTranslationsId.java
+END
+TimeFrameGroups.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/TimeFrameGroups.hbm.xml
+END
+UserTimeZonesToActivate.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/UserTimeZonesToActivate.java
+END
+DeviceDetailsTemplate.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/DeviceDetailsTemplate.java
+END
+ServiceContentCategories.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/2127/Tingco_REST/src/java/se/info24/pojo/ServiceContentCategories.java
+END
+Unit.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Unit.hbm.xml
+END
+SystemSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/SystemSettings.java
+END
+ValidationMembershipsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/485/Tingco_REST/src/java/se/info24/pojo/ValidationMembershipsId.java
+END
+TimeFrameGroups.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/NB_2011/!svn/ver/419/Tingco_REST/src/java/se/info24/pojo/TimeFrameGroups.java
+END
+GroupSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/NB_2011/!svn/ver/644/Tingco_REST/src/java/se/info24/pojo/GroupSettings.java
+END
+ApplicationGroupMemberships.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/pojo/ApplicationGroupMemberships.java
+END
+CommandParseTargetsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/1649/Tingco_REST/src/java/se/info24/pojo/CommandParseTargetsId.java
+END
+PricePlanTypeTranslations.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/NB_2011/!svn/ver/429/Tingco_REST/src/java/se/info24/pojo/PricePlanTypeTranslations.java
+END
+EventItems.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/802/Tingco_REST/src/java/se/info24/pojo/EventItems.java
+END
+Device.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Device.hbm.xml
+END
+DeviceTypeServices.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/DeviceTypeServices.hbm.xml
+END
+ApplicationTranslations.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/ApplicationTranslations.hbm.xml
+END
+Ogmcontainers.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/Ogmcontainers.hbm.xml
+END
+ObjectContactMembershipsId.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/NB_2011/!svn/ver/548/Tingco_REST/src/java/se/info24/pojo/ObjectContactMembershipsId.java
+END
+MeasurementTypes.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/MeasurementTypes.hbm.xml
+END
+BlacklistType.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/NB_2011/!svn/ver/2413/Tingco_REST/src/java/se/info24/pojo/BlacklistType.hbm.xml
+END
+SensorTypes.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/NB_2011/!svn/ver/1420/Tingco_REST/src/java/se/info24/pojo/SensorTypes.java
+END

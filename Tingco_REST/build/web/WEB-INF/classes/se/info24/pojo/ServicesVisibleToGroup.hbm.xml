@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 16, 2012 11:28:09 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ServicesVisibleToGroup" schema="dbo" table="ServicesVisibleToGroup">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ServicesVisibleToGroupId" name="id">
+      <key-property name="serviceId" type="string">
+        <column length="36" name="ServiceID"/>
+      </key-property>
+      <key-property name="groupId" type="string">
+        <column length="36" name="GroupID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Groups" fetch="select" insert="false" name="groups" update="false">
+      <column length="36" name="GroupID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Services" fetch="select" insert="false" name="services" update="false">
+      <column length="36" name="ServiceID" not-null="true"/>
+    </many-to-one>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getServicesVisibleToGroupByGroupId">
+        from ServicesVisibleToGroup where groupId = :groupId
+    </query>
+</hibernate-mapping>

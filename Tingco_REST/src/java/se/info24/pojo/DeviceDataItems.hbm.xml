@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 6, 2010 12:53:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DeviceDataItems" schema="dbo" table="DeviceDataItems">
+    <cache usage="nonstrict-read-write"/>
+    <id name="deviceDataItemId" type="string">
+      <column length="36" name="DeviceDataItemID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="deviceDataFieldName" type="string">
+      <column length="200" name="DeviceDataFieldName" not-null="true"/>
+    </property>
+    <property name="deviceDataGroupName" type="string">
+      <column length="200" name="DeviceDataGroupName" not-null="true"/>
+    </property>
+    <property name="unit" type="string">
+      <column length="50" name="Unit"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="50" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set cascade="save-update,delete" inverse="true" name="deviceDataItemScaling">
+      <key>
+        <column length="36" name="DeviceDataItemID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceDataItemScaling"/>
+    </set>
+    <set cascade="save-update,delete" inverse="true" name="deviceDataitemTranslationses">
+      <key>
+        <column length="36" name="DeviceDataItemID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceDataitemTranslations"/>
+    </set>
+    <set cascade="save-update,delete" inverse="true" name="deviceTypeDataitemses">
+      <key>
+        <column length="36" name="DeviceDataItemID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypeDataitems"/>
+    </set>
+    <set cascade="save-update,delete" inverse="true" name="userFavoriteDataItemses">
+      <key>
+        <column length="36" name="DeviceDataItemID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.UserFavoriteDataItems"/>
+    </set>
+    <set cascade="save-update,delete" inverse="true" name="connectorses">
+      <key>
+        <column length="36" name="DeviceDataItemID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Connectors"/>
+    </set>
+  </class>
+  <query name="getDeviceDataItemsByItemId">
+      from DeviceDataItems ddi where ddi.deviceDataItemId = :id
+    </query>
+  <query name="getDeviceDataItemsByIdList">
+      from DeviceDataItems ddi where ddi.deviceDataItemId in (:id) order by deviceDataFieldName
+    </query>
+  <query name="getDeviceDataItems">
+      from DeviceDataItems ddi where ddi.deviceDataItemId = :id and ddi.deviceDataFieldName like 'DO_'
+    </query>
+  <query name="getDeviceDataItemsList">
+      from DeviceDataItems ddi where ddi.deviceDataItemId in (:id) and ddi.deviceDataFieldName like 'DO_' order by deviceDataFieldName
+    </query>
+  <query name="getAllDeviceDataItems">
+      from DeviceDataItems order by deviceDataFieldName
+    </query>
+</hibernate-mapping>

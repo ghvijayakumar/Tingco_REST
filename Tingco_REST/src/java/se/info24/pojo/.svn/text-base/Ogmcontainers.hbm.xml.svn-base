@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 13, 2013 7:22:06 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Ogmcontainers" schema="dbo" table="OGMContainers">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.OgmcontainersId" name="id">
+      <key-property name="containerId" type="string">
+        <column length="36" name="ContainerID"/>
+      </key-property>
+      <key-property name="objectGroupId" type="string">
+        <column length="36" name="ObjectGroupID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.ObjectGroups" fetch="select" insert="false" name="objectGroups" update="false">
+      <column length="36" name="ObjectGroupID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Containers" fetch="select" insert="false" name="containers" update="false">
+      <column length="36" name="ContainerID" not-null="true"/>
+    </many-to-one>
+    <property insert="false" name="objectGroupId" type="string" update="false">
+      <column length="36" name="ObjectGroupID"/>
+    </property>
+    <property name="scheduleId" type="string">
+      <column length="36" name="ScheduleID"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getOgmcontainersById">
+        from Ogmcontainers where id.containerId = :containerId
+    </query>
+  <query name="getOgmContainersByContainerIdAndObjectGroupId">
+      from Ogmcontainers where id.containerId = :containerId and id.objectGroupId = :objectGroupId
+  </query>
+  <query name="getOgmContainersByObjectGroupId">
+      from Ogmcontainers where id.objectGroupId = :objectGroupId
+  </query>
+</hibernate-mapping>

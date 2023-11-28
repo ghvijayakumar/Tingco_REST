@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 26, 2012 11:51:18 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ProductVariantDevices" schema="dbo" table="ProductVariantDevices">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ProductVariantDevicesId" name="id">
+      <key-property name="productVariantId" type="string">
+        <column length="36" name="ProductVariantID"/>
+      </key-property>
+      <key-property name="deviceId" type="string">
+        <column length="36" name="DeviceID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.ProductVariants" fetch="select" insert="false" name="productVariants" update="false">
+      <column length="36" name="ProductVariantID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Device" fetch="select" insert="false" name="device" update="false">
+      <column length="36" name="DeviceID" not-null="true"/>
+    </many-to-one>
+    <property name="isEnabled" type="java.lang.Integer">
+      <column name="IsEnabled"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate"/>
+    </property>
+    <property name="displayOrder" type="java.lang.Integer">
+      <column name="DisplayOrder"/>
+    </property>
+    <property name="bayNumber" type="java.lang.Integer">
+      <column name="BayNumber"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="isDefault" type="java.lang.Integer">
+      <column name="IsDefault"/>
+    </property>
+  </class>
+  <query name="getProductVariantDevicesByIds">
+        from ProductVariantDevices where id.productVariantId = :productVariantId and id.deviceId = :deviceId
+    </query>
+  <query name="getProductVariantDevicesByDeviceId">
+        from ProductVariantDevices where id.deviceId = :deviceId
+    </query>
+  <query name="getProductVariantDevicesByProductVariantId">
+        from ProductVariantDevices where id.productVariantId = :productVariantId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 29, 2012 6:24:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ServiceDeviceSettings" schema="dbo" table="ServiceDeviceSettings">
+    <cache usage="nonstrict-read-write"/>
+    <id name="serviceDeviceSettingId" type="string">
+      <column length="36" name="ServiceDeviceSettingID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.ServiceDeviceSubscriptions" fetch="select" name="serviceDeviceSubscriptions">
+      <column length="36" name="ServiceDeviceSubscriptionID" not-null="true"/>
+    </many-to-one>
+    <!-- <many-to-one name="serviceDeviceSettingParentID" type="string" fetch="select">
+            <column name="ServiceDeviceSettingParentID" length="36" />
+        </many-to-one>-->
+    <property name="serviceDeviceSettingParentID" type="string">
+      <column length="36" name="ServiceDeviceSettingParentID"/>
+    </property>
+    <property name="serviceDeviceSettingName" type="string">
+      <column name="ServiceDeviceSettingName" not-null="true"/>
+    </property>
+    <property name="serviceDeviceSettingValue" type="string">
+      <column name="ServiceDeviceSettingValue" not-null="true"/>
+    </property>
+    <property name="settingDataTypeId" type="string">
+      <column length="36" name="SettingDataTypeID"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <property name="objectSettingTemplateId" type="string">
+      <column length="36" name="ObjectSettingTemplateID"/>
+    </property>
+    <set cascade="delete" inverse="true" name="serviceDeviceSettingses">
+      <key>
+        <column length="36" name="ServiceDeviceSettingParentID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ServiceDeviceSettings"/>
+    </set>
+  </class>
+  <query name="getServiceDeviceSettings">
+        from ServiceDeviceSettings where serviceDeviceSubscriptions.serviceDeviceSubscriptionId = :serviceDeviceSubscriptionId order by serviceDeviceSettingName asc
+    </query>
+  <query name="getServiceDeviceSettingsById">
+        from ServiceDeviceSettings where objectSettingTemplateId = :objectSettingTemplateId and serviceDeviceSubscriptions.serviceDeviceSubscriptionId = :serviceDeviceSubscriptionId
+    </query>
+  <query name="getServiceDeviceSettingsBySubscriptionIdandName">
+        from ServiceDeviceSettings where serviceDeviceSubscriptions.serviceDeviceSubscriptionId = :serviceDeviceSubscriptionId and serviceDeviceSettingName = :serviceDeviceSettingName order by activeFromDate desc
+    </query>
+  <query name="getServiceDeviceSettingsBySettingId">
+        from ServiceDeviceSettings where serviceDeviceSettingId = :serviceDeviceSettingId
+    </query>
+  <query name="getServiceDeviceSettingsBySettingIdList">
+        from ServiceDeviceSettings where serviceDeviceSubscriptions.serviceDeviceSubscriptionId in (:serviceDeviceSubscriptionId) order by serviceDeviceSettingName asc
+    </query>
+  <query name="getServiceDeviceSettingsByIds">
+         from ServiceDeviceSettings where objectSettingTemplateId = :objectSettingTemplateId and serviceDeviceSettingId = :serviceDeviceSettingId
+    </query>
+</hibernate-mapping>

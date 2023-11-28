@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2011 10:43:34 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DomainSettings" schema="dbo" table="DomainSettings">
+    <cache usage="nonstrict-read-write"/>
+    <id name="domainSettingId" type="string">
+      <column length="36" name="DomainSettingID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="domainSettingParentId" type="string">
+      <column length="36" name="DomainSettingParentID"/>
+    </property>
+    <property name="domainId" type="string">
+      <column length="36" name="DomainID" not-null="true"/>
+    </property>
+    <property name="domainSettingName" type="string">
+      <column length="50" name="DomainSettingName" not-null="true"/>
+    </property>
+    <property name="domainSettingValue" type="string">
+      <column length="200" name="DomainSettingValue" not-null="true"/>
+    </property>
+    <property name="settingDataTypeId" type="string">
+      <column length="36" name="SettingDataTypeID" not-null="true"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+</hibernate-mapping>

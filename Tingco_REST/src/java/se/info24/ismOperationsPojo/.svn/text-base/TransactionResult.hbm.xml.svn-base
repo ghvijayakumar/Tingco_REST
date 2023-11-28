@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 26, 2012 5:25:15 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class catalog="ISMOperations" name="se.info24.ismOperationsPojo.TransactionResult" schema="dbo" table="TransactionResult">
+        <cache usage="nonstrict-read-write"/>
+        <id name="transactionId" type="string">
+            <column length="36" name="TransactionID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="transactionParentId" type="string">
+            <column length="36" name="TransactionParentID"/>
+        </property>
+        <property name="transactionStartTime" type="timestamp">
+            <column length="23" name="TransactionStartTime" not-null="true"/>
+        </property>
+        <property name="dataItemId" type="string">
+            <column length="36" name="DataItemID"/>
+        </property>
+        <property name="externalTransactionId" type="string">
+            <column name="ExternalTransactionID"/>
+        </property>
+        <property name="amount" type="big_decimal">
+            <column name="Amount"/>
+        </property>
+        <property name="currencyId" type="java.lang.Integer">
+            <column name="CurrencyID"/>
+        </property>
+        <property name="userAliasId" type="string">
+            <column length="36" name="UserAliasID"/>
+        </property>
+        <property name="userAlias" type="string">
+            <column name="UserAlias"/>
+        </property>
+        <property name="userId" type="string">
+            <column length="36" name="UserID"/>
+        </property>
+        <property name="firstName" type="string">
+            <column name="FirstName"/>
+        </property>
+        <property name="lastName" type="string">
+            <column name="LastName"/>
+        </property>
+        <property name="userGroupId" type="string">
+            <column length="36" name="UserGroupID"/>
+        </property>
+        <property name="userAliasTypeId" type="string">
+            <column length="36" name="UserAliasTypeID"/>
+        </property>
+        <property name="userAliasTypeName" type="string">
+            <column name="UserAliasTypeName"/>
+        </property>
+        <property name="providerId" type="string">
+            <column length="36" name="ProviderID"/>
+        </property>
+        <property name="providerName" type="string">
+            <column name="ProviderName"/>
+        </property>
+        <property name="deviceId" type="string">
+            <column length="36" name="DeviceID"/>
+        </property>
+        <property name="deviceGroupId" type="string">
+            <column length="36" name="DeviceGroupID"/>
+        </property>
+        <property name="deviceName" type="string">
+            <column name="DeviceName"/>
+        </property>
+        <property name="transactionPurpose" type="string">
+            <column name="TransactionPurpose"/>
+        </property>
+        <property name="transactionAccount" type="string">
+            <column name="TransactionAccount"/>
+        </property>
+        <property name="transactionNote" type="string">
+            <column name="TransactionNote"/>
+        </property>
+        <property name="isPurchase" type="java.lang.Integer">
+            <column name="IsPurchase"/>
+        </property>
+        <property name="isPayment" type="java.lang.Integer">
+            <column name="IsPayment"/>
+        </property>
+        <property name="isInvoiced" type="java.lang.Integer">
+            <column name="IsInvoiced"/>
+        </property>
+        <property name="isPaid" type="java.lang.Integer">
+            <column name="IsPaid"/>
+        </property>
+        <property name="lastUpdatedByUserId" type="string">
+            <column length="36" name="LastUpdatedByUserID"/>
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column length="23" name="CreatedDate"/>
+        </property>
+        <property name="updatedDate" type="timestamp">
+            <column length="23" name="UpdatedDate"/>
+        </property>
+        <property name="amountExclVat" type="java.lang.Long">
+            <column name="AmountExclVAT" precision="18" scale="0" />
+        </property>
+        <property name="amountVat" type="java.lang.Long">
+            <column name="AmountVAT" precision="18" scale="0" />
+        </property>
+    </class>
+    <query name="getTransactionResultById">
+        from TransactionResult where transactionId = :transactionId
+    </query>
+    <query name="getTransactionResultByParentId">
+        from TransactionResult where transactionParentId = :transactionParentId
+    </query>
+    <query name="getTransactionResultByStartTimeAndUserId">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and userId = :userId order by transactionStartTime desc
+    </query>
+    <query name="getTransactionResultByStartTimeAndUserIduserAliasId">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and userId = :userId and userAliasId = :userAliasId order by transactionStartTime desc
+    </query>
+  <!-- <query name="getTransactionResultBySearchStringUserName">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and (userAlias like '%'+:searchString+'%' or firstName like '%'+:searchString+'%' or lastName like '%'+:searchString+'%') and TransactionParentID = null order by createdDate, firstName desc
+    </query>-->
+    <query name="getTransactionResultBySearchStringGroupName">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and userGroupId in(:searchString) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringDeviceName">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and deviceName like '%'+:searchString+'%' and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringDeviceID">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and deviceId = :searchString and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringUserGroupName">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and (userAlias like '%'+:searchString+'%' or firstName like '%'+:searchString+'%' or lastName like '%'+:searchString+'%') and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringDeviceGroupName">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and deviceName like '%'+:searchString+'%' and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringDeviceIDGroupName">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and deviceId = :searchString and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringUserDeviceName">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and (userAlias like '%'+:searchString+'%' or firstName like '%'+:searchString+'%' or lastName like '%'+:searchString+'%') and deviceName like '%'+:deviceName+'%' and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringUserDeviceIDName">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and (userAlias like '%'+:searchString+'%' or firstName like '%'+:searchString+'%' or lastName like '%'+:searchString+'%') and deviceId =:deviceName and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringUserDeviceGroupName">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and (userAlias like '%'+:searchString+'%' or firstName like '%'+:searchString+'%' or lastName like '%'+:searchString+'%') and deviceName like '%'+:deviceName+'%' and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringUserDeviceIDGroupName">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and (userAlias like '%'+:searchString+'%' or firstName like '%'+:searchString+'%' or lastName like '%'+:searchString+'%') and deviceId =:deviceName and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+  <!--getSalesbyProductVariant-->
+    <query name="getTransactionResultBySearchStringObjectGroupName">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and deviceId in(:deviceId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringGroup">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and deviceGroupId in(:searchString) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringDevice">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and deviceId in(:searchString) and deviceGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchDeviceName">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and deviceName like '%'+:searchString+'%' and deviceGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchDeviceNameID">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and deviceName like '%'+:searchString+'%' and deviceId in(:deviceId)and deviceGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringGroupS">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and deviceGroupId in(:searchString) and isPurchase = 1 AND transactionParentId = null
+    </query>
+  <!--UserDetail. -->
+    <query name="getTransactionResultBySearchStringUserGroupNameUserDetail">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and (userAlias like '%'+:searchString+'%') and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringUserGroupNameUserDetailID">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and userAliasId =:searchString and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringUserDeviceIDNameUserDetail">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and (userAlias like '%'+:searchString+'%') and deviceId =:deviceName and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringUserDeviceIDNameUserDetailID">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and userAliasId =:searchString and deviceId =:deviceName and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringUserDeviceNameUserDetail">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and (userAlias like '%'+:searchString+'%') and deviceName like '%'+:deviceName+'%' and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringUserDeviceNameUserDetailID">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and userAliasId =:searchString and deviceName like '%'+:deviceName+'%' and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringUserDeviceIDGroupNameUserDetail">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and (userAlias like '%'+:searchString+'%') and deviceId =:deviceName and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringUserDeviceIDGroupNameUserDetailID">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and userAliasId =:searchString and deviceId =:deviceName and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringUserDeviceGroupNameUserDetail">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and (userAlias like '%'+:searchString+'%') and deviceName like '%'+:deviceName+'%' and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+    <query name="getTransactionResultBySearchStringUserDeviceGroupNameUserDetailID">
+        from TransactionResult where (transactionStartTime between :fromDate and :toDate) and userAliasId =:searchString and deviceName like '%'+:deviceName+'%' and userGroupId in(:userGroupId) and isPurchase = 1 order by createdDate, firstName desc
+    </query>
+</hibernate-mapping>

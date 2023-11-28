@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 5, 2013 12:26:18 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.Contacts" schema="dbo" table="Contacts">
+    <cache usage="nonstrict-read-write"/>
+    <id name="contactId" type="string">
+      <column length="36" name="ContactID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="contactName" type="string">
+      <column name="ContactName"/>
+    </property>
+    <property name="contactDescription" type="string">
+      <column name="ContactDescription"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getContactByContactId">
+        from Contacts where contactId = :contactId
+    </query>
+  <query name="getContactByGroupIdsList">
+        from Contacts where groupId in (:groupId) order by contactName asc
+    </query>
+  <query name="getContactByGroupIdsListsearchString">
+        from Contacts where groupId in (:groupId) and contactName like '%'+:contactName+'%' order by contactName asc
+    </query>
+</hibernate-mapping>

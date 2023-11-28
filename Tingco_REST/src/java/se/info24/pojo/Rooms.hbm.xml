@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 21, 2014 12:56:47 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.Rooms" schema="dbo" table="Rooms">
+    <id name="roomId" type="string">
+      <column length="36" name="RoomID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.Buildings" fetch="select" name="buildings">
+      <column length="36" name="BuildingID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Agreements" fetch="select" name="agreements">
+      <column length="36" name="AgreementID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.RoomTypes" fetch="select" name="roomTypes">
+      <column length="36" name="RoomTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="roomName" type="string">
+      <column name="RoomName" not-null="true"/>
+    </property>
+    <property name="roomDescription" type="string">
+      <column name="RoomDescription"/>
+    </property>
+    <property name="roomNumber" type="string">
+      <column name="RoomNumber"/>
+    </property>
+    <property name="containerId" type="string">
+      <column length="36" name="ContainerID"/>
+    </property>
+    <property name="isNonSmoking" type="java.lang.Integer">
+      <column name="IsNonSmoking"/>
+    </property>
+    <property name="isPublicAccess" type="java.lang.Integer">
+      <column name="IsPublicAccess"/>
+    </property>
+    <property name="isDoNotDisturb" type="java.lang.Integer">
+      <column name="IsDoNotDisturb"/>
+    </property>
+    <property name="ownerGroupId" type="string">
+      <column length="36" name="OwnerGroupID" not-null="true"/>
+    </property>
+    <property name="usedByGroupId" type="string">
+      <column length="36" name="UsedByGroupID"/>
+    </property>
+    <property name="floorLevel" type="string">
+      <column name="FloorLevel"/>
+    </property>
+    <property name="area" type="big_decimal">
+      <column name="Area"/>
+    </property>
+    <property name="areaUnit" type="string">
+      <column name="AreaUnit"/>
+    </property>
+    <property name="volume" type="big_decimal">
+      <column name="Volume"/>
+    </property>
+    <property name="volumeUnit" type="string">
+      <column name="VolumeUnit"/>
+    </property>
+    <property name="layoutImageUrl" type="string">
+      <column name="LayoutImageURL"/>
+    </property>
+    <property name="rating" type="java.lang.Integer">
+      <column name="Rating"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set cascade="save-update,delete" inverse="true" name="zoneRoomses">
+      <key>
+        <column length="36" name="RoomID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ZoneRooms"/>
+    </set>
+    <set inverse="true" name="buildingDeviceses">
+      <key>
+        <column length="36" name="RoomID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.BuildingDevices"/>
+    </set>
+  </class>
+  <query name="getRoomsByGroupIDsList">
+        from Rooms where ownerGroupId in(:groupId) order by createdDate desc
+    </query>
+  <query name="getRoomsByIdAndOwnerGroupIds">
+        from Rooms where ownerGroupId in(:groupId) and roomId = :roomId
+    </query>
+  <query name="getRoomsByRoomNameAndOwnerGroupIds">
+        from Rooms where ownerGroupId in(:groupId) and roomName like '%'+:searchString+'%' order by roomName asc
+    </query>
+  <query name="getRoomsByBuildingId">
+        from Rooms where buildings.buildingId = :buildingId order by createdDate desc
+    </query>
+</hibernate-mapping>

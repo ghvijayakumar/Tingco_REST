@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 13, 2012 10:38:45 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.MeasurementTypesInGroups" schema="dbo" table="MeasurementTypesInGroups">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.MeasurementTypesInGroupsId" name="id">
+      <key-property name="measurementTypeId" type="string">
+        <column length="36" name="MeasurementTypeID"/>
+      </key-property>
+      <key-property name="groupId" type="string">
+        <column length="36" name="GroupID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Groups" fetch="select" insert="false" name="groups" update="false">
+      <column length="36" name="GroupID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.MeasurementTypes" fetch="select" insert="false" name="measurementTypes" update="false">
+      <column length="36" name="MeasurementTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getMeasurementTypesInGroupsByGroupId">
+        from MeasurementTypesInGroups where id.groupId = :groupId
+    </query>
+  <query name="getMeasurementTypesInGroupsByID">
+        from MeasurementTypesInGroups where id.groupId = :groupId and id.measurementTypeId = :measurementTypeId
+    </query>
+</hibernate-mapping>

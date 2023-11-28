@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 18, 2011 3:54:18 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ContentAttributeChanges" schema="dbo" table="ContentAttributeChanges">
+    <cache usage="nonstrict-read-write"/>
+    <id name="contentAttributeId" type="string">
+      <column length="36" name="ContentAttributeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="changeMode" type="java.lang.Byte">
+      <column name="ChangeMode"/>
+    </property>
+  </class>
+</hibernate-mapping>

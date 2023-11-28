@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 21, 2014 12:56:47 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.BuildingTypeTranslations" schema="dbo" table="BuildingTypeTranslations">
+    <composite-id class="se.info24.pojo.BuildingTypeTranslationsId" name="id">
+      <key-property name="buildingTypeId" type="string">
+        <column length="36" name="BuildingTypeID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Country" fetch="select" insert="false" name="country" update="false">
+      <column name="CountryID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.BuildingTypes" fetch="select" insert="false" name="buildingTypes" update="false">
+      <column length="36" name="BuildingTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="buildingTypeName" type="string">
+      <column name="BuildingTypeName" not-null="true"/>
+    </property>
+    <property name="buildingTypeDescription" type="string">
+      <column name="BuildingTypeDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getBuildingTypeTranslationsById">
+        from BuildingTypeTranslations where buildingTypeId = :buildingTypeId and countryId =:countryId
+    </query>
+  <query name="getBuildingTypeTranslationsByCountryId">
+        from BuildingTypeTranslations where countryId =:countryId order by buildingTypeName asc
+    </query>
+</hibernate-mapping>

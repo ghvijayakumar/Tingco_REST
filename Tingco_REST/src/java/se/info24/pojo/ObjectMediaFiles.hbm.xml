@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 3, 2013 5:37:51 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ObjectMediaFiles" schema="dbo" table="ObjectMediaFiles">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ObjectMediaFilesId" name="id">
+      <key-property name="objectId" type="string">
+        <column length="36" name="ObjectID"/>
+      </key-property>
+      <key-property name="mediaFileId" type="string">
+        <column length="36" name="MediaFileID"/>
+      </key-property>
+    </composite-id>
+    <property name="displayScheduleId" type="string">
+      <column length="36" name="DisplayScheduleID"/>
+    </property>
+    <property name="displayOrder" type="java.lang.Integer">
+      <column name="DisplayOrder"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getObjectMediaFilesByIds">
+        from ObjectMediaFiles where id.objectId = :objectId and mediaFileId = :mediaFileId
+    </query>
+  <query name="getObjectMediaFilesByobjectId">
+        from ObjectMediaFiles where id.objectId = :objectId and mediaFileId in (:mediaFileId)
+    </query>
+  <query name="getObjectMediaFilesByNotobjectId">
+        from ObjectMediaFiles where id.objectId = :objectId
+    </query>
+  <query name="getObjectMediaFilesByMediaFileID">
+        from ObjectMediaFiles where id.mediaFileId = :mediaFileId
+    </query>
+</hibernate-mapping>

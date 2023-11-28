@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 27, 2011 11:09:38 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.CountryStates" schema="dbo" table="CountryStates">
+    <cache usage="nonstrict-read-write"/>
+    <id name="countryStateId" type="string">
+      <column length="36" name="CountryStateID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="stateName" type="string">
+      <column length="50" name="StateName" not-null="true"/>
+    </property>
+    <property name="stateDescription" type="string">
+      <column length="200" name="StateDescription"/>
+    </property>
+    <property name="stateShortCode" type="string">
+      <column length="10" name="StateShortCode"/>
+    </property>
+    <property name="countryId" type="int">
+      <column name="CountryID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getCountryStatesByCountryId">
+        from CountryStates as c where c.countryId = :countryId
+    </query>
+</hibernate-mapping>

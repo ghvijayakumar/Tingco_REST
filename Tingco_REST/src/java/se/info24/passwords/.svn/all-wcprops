@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/NB_2011/!svn/ver/2342/Tingco_REST/src/java/se/info24/passwords
+END
+PasswordResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/passwords/PasswordResource.java
+END
+ForgotPasswordResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/NB_2011/!svn/ver/318/Tingco_REST/src/java/se/info24/passwords/ForgotPasswordResource.java
+END
+PasswordsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/NB_2011/!svn/ver/2342/Tingco_REST/src/java/se/info24/passwords/PasswordsResource.java
+END
+ForgotPasswordsResource.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/NB_2011/!svn/ver/1583/Tingco_REST/src/java/se/info24/passwords/ForgotPasswordsResource.java
+END

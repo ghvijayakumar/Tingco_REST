@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 11, 2013 10:33:01 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.SupportCaseContentLinks" schema="dbo" table="SupportCaseContentLinks">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.SupportCaseContentLinksId" name="id">
+      <key-property name="supportCaseId" type="string">
+        <column length="36" name="SupportCaseID"/>
+      </key-property>
+      <key-property name="contentCategoryId" type="string">
+        <column length="36" name="ContentCategoryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.SupportCases" fetch="select" insert="false" name="supportCases" update="false">
+      <column length="36" name="SupportCaseID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.ContentCategories" fetch="select" insert="false" name="contentCategories" update="false">
+      <column length="36" name="ContentCategoryID" not-null="true"/>
+    </many-to-one>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2010 3:59:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserRoleObjectPermissions2" schema="dbo" table="UserRoleObjectPermissions2">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.UserRoleObjectPermissions2Id" name="id">
+      <key-property name="userRoleId" type="string">
+        <column length="36" name="UserRoleID"/>
+      </key-property>
+      <key-property name="permissionId" type="string">
+        <column length="36" name="PermissionID"/>
+      </key-property>
+      <key-property name="objectId" type="string">
+        <column length="36" name="ObjectID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.UserRoles2" fetch="select" insert="false" name="userRoles2" update="false">
+      <column length="36" name="UserRoleID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Permissions" fetch="select" insert="false" name="permissions" update="false">
+      <column length="36" name="PermissionID" not-null="true"/>
+    </many-to-one>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="deleteUserRoleObjectPermissionsById">
+      delete from UserRoleObjectPermissions2 where ObjectID = :iTrustgroupID and UserRoleID = :roleid
+  </query>
+  <query name="getUserRoleObjectPermissions2ByObjectIDandUserRoleID">
+      from UserRoleObjectPermissions2 where UserRoleID = :userroleID  and ObjectID = :objectID
+  </query>
+  <query name="getUserRoleObjectPermissions2ByObjectIDsandUserRoleIDs">
+      from UserRoleObjectPermissions2 where UserRoleID in(:userroleID)  and ObjectID in (:objectID)
+  </query>
+  <query name="getUserRoleObjectPermissions2">
+      from UserRoleObjectPermissions2 where UserRoleID = :userroleID  and PermissionID = :permissionID  and ObjectID = :objectID
+  </query>
+  <query name="getUserRoleObjectPermissions2ByObjectId">
+      from UserRoleObjectPermissions2 as urop where urop.id.objectId = :objectID
+  </query>
+  <query name="getUserRoleObjectPermissions2ByUserId">
+      from UserRoleObjectPermissions2 where id.userRoleId = :userRoleID
+  </query>
+  <query name="getAllUserRoleObjectPermissions2">
+      from UserRoleObjectPermissions2
+  </query>
+  <query name="getUserRoleObjectPermissions">
+      from UserRoleObjectPermissions2 where id.userRoleId in (:userRoleID) and ObjectID = :objectID
+  </query>
+</hibernate-mapping>

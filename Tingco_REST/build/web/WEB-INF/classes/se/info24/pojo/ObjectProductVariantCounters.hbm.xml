@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 20, 2013 4:26:31 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.ObjectProductVariantCounters" schema="dbo" table="ObjectProductVariantCounters">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ObjectProductVariantCountersId" name="id">
+      <key-property name="objectId" type="string">
+        <column length="36" name="ObjectID"/>
+      </key-property>
+      <key-property name="productVariantId" type="string">
+        <column length="36" name="ProductVariantID"/>
+      </key-property>
+    </composite-id>
+    <property name="countSinceLastUpdate" type="int">
+      <column name="CountSinceLastUpdate" not-null="true"/>
+    </property>
+    <property name="countTotal" type="int">
+      <column name="CountTotal" not-null="true"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getObjectProductVariantCountersByObjectID">
+        from ObjectProductVariantCounters where objectId =:objectId order by createdDate desc
+    </query>
+  <query name="getObjectProductVariantCountersByID">
+        from ObjectProductVariantCounters where objectId =:objectId and productVariantId =:productVariantId
+    </query>
+</hibernate-mapping>

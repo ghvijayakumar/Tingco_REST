@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 2, 2011 11:41:52 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ObjectUsageUnits" schema="dbo" table="ObjectUsageUnits">
+    <cache usage="nonstrict-read-write"/>
+    <id name="usageUnitId" type="string">
+      <column length="36" name="UsageUnitID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="usageUnitName" type="string">
+      <column length="50" name="UsageUnitName"/>
+    </property>
+    <property name="usageUnitDescription" type="string">
+      <column length="200" name="UsageUnitDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="chargeTypeses">
+      <key>
+        <column length="36" name="UsageUnitID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.ChargeTypes"/>
+    </set>
+    <set inverse="true" name="measurementTypeses">
+      <key>
+        <column length="36" name="UsageUnitID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.MeasurementTypes"/>
+    </set>
+  </class>
+  <query name="getObjectUsageUnitsById">
+        from ObjectUsageUnits where usageUnitId = :usageUnitId
+    </query>
+  <query name="getAllObjectUsageUnits">
+        from ObjectUsageUnits order by usageUnitName
+    </query>
+</hibernate-mapping>

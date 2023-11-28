@@ -1,0 +1,4332 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package se.info24.service;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Set;
+import java.util.TimeZone;
+import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.Path;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.PathParam;
+import javax.xml.datatype.DatatypeConfigurationException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+import se.info24.application.ApplicationDAO;
+import se.info24.device.DeviceDAO;
+import se.info24.group.GroupDAO;
+import se.info24.ismOperationsPojo.BundleFiles;
+import se.info24.jaxbUtil.TingcoServiceXML;
+import se.info24.pojo.ApplicationModuleServices;
+import se.info24.pojo.ApplicationPackageModules;
+import se.info24.pojo.Bundle;
+import se.info24.pojo.BundleLog;
+import se.info24.pojo.BundleCategoryTranslations;
+import se.info24.pojo.BundleTypeTranslations;
+import se.info24.pojo.BundleVersions;
+import se.info24.pojo.Channels;
+import se.info24.pojo.Device;
+import se.info24.pojo.DeviceServices;
+import se.info24.pojo.GroupApplicationPackages;
+import se.info24.pojo.GroupTranslations;
+import se.info24.pojo.GroupTrusts;
+import se.info24.pojo.ServiceDeviceSettings;
+import se.info24.pojo.ServiceDeviceSubscriptions;
+import se.info24.pojo.ServiceSettings;
+import se.info24.pojo.BundleDetails;
+import se.info24.pojo.ContentCategoryTranslations;
+import se.info24.pojo.DeviceServicesActiveBundles;
+import se.info24.pojo.DeviceServicesAllowedBundles;
+import se.info24.pojo.DeviceServicesAllowedBundlesId;
+import se.info24.pojo.DeviceServicesAvailableBundles;
+import se.info24.pojo.DeviceTypeServices;
+import se.info24.pojo.DeviceTypeServicesId;
+import se.info24.pojo.DeviceTypes;
+import se.info24.pojo.GroupDefaultAgreement;
+import se.info24.pojo.GroupDefaultServiceClientLogin;
+import se.info24.pojo.ServiceClientLogins;
+import se.info24.pojo.ServiceContentSubscriptions;
+import se.info24.objectpojo.ServiceStatusDetails;
+import se.info24.pojo.ServiceTypeBundles;
+import se.info24.pojo.ServiceTypeBundlesId;
+import se.info24.pojo.ServiceTypes;
+import se.info24.pojo.Services;
+import se.info24.pojo.ServicesChannels;
+import se.info24.pojo.ServicesVisibleToGroup;
+import se.info24.pojo.SettingDataType;
+import se.info24.pojo.UserSessions2;
+import se.info24.pojo.UserTimeZones2;
+import se.info24.pojo.Users2;
+import se.info24.products.ProductsDAO;
+import se.info24.restUtil.RestUtilDAO;
+import se.info24.servicejaxb.Service;
+import se.info24.servicejaxb.TingcoService;
+import se.info24.user.UserDAO;
+import se.info24.user.User_LoginsResource;
+import se.info24.util.HibernateUtil;
+import se.info24.util.JAXBManager;
+import se.info24.util.RESTDoc;
+import se.info24.util.TCMUtil;
+
+/**
+ * REST Web Service
+ *
+ * @author Vijayakumar
+ */
+@Path("/services")
+public class ServicessResource {
+
+    @Context
+    private UriInfo context;
+    @Context
+    HttpServletRequest request;
+    TingcoService tingcoService = new TingcoService();
+    ServiceDAO serviceDAO = new ServiceDAO();
+    DeviceDAO deviceDAO = new DeviceDAO();
+    UserDAO userDAO = new UserDAO();
+    GroupDAO groupDAO = new GroupDAO();
+    TingcoServiceXML tingcoServiceXML = new TingcoServiceXML();
+    GregorianCalendar currentDateTime = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+//    private DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    /** Creates a new instance of ServicessResource */
+    public ServicessResource() {
+    }
+
+    /**
+     * GetServices
+     * @param groupid
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/get/rest/{rest}/groupid/{groupid}")
+    @RESTDoc(methodName = "GetServices", desc = "Used to get the Services", req_Params = {"GroupId;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_GetServices(@PathParam("groupid") String groupId) throws DatatypeConfigurationException {
+        return getServices(groupId);
+    }
+
+    /**
+     * GetServices
+     * @param groupid
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/get/json/{json}/groupid/{groupid}")
+    public TingcoService getJson_GetServices(@PathParam("groupid") String groupId) throws DatatypeConfigurationException {
+        return getServices(groupId);
+    }
+
+    /**
+     * GetContentSubscriptionDetails
+     * @param groupid
+     * @param serviceClientLoginId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getcontentsubscriptiondetails/rest/{rest}/countryid/{countryid}/groupid/{groupid}{serviceclientloginid:(/serviceclientloginid/[^/]+?)?}")
+    public TingcoService getXML_getContentSubscriptionDetails(@PathParam("countryid") int countryId, @PathParam("groupid") String groupId, @PathParam("serviceclientloginid") String serviceClientLoginId) throws DatatypeConfigurationException {
+        return getContentSubscriptionDetails(countryId, groupId, serviceClientLoginId);
+    }
+
+    /**
+     * GetContentSubscriptionDetails
+     * @param groupid
+     * @param serviceClientLoginId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getcontentsubscriptiondetails/json/{json}/countryid/{countryid}/groupid/{groupid}{serviceclientloginid:(/serviceclientloginid/[^/]+?)?}")
+    public TingcoService getJson_getContentSubscriptionDetails(@PathParam("countryid") int countryId, @PathParam("groupid") String groupId, @PathParam("serviceclientloginid") String serviceClientLoginId) throws DatatypeConfigurationException {
+        return getContentSubscriptionDetails(countryId, groupId, serviceClientLoginId);
+    }
+
+    /**
+     * GetDeviceActiveBundleDetails
+     * @param deviceId
+     * @param serviceId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getdeviceactivebundledetails/rest/{rest}/deviceid/{deviceid}{serviceid:(/serviceid/[^/]+?)?}")
+    @RESTDoc(methodName = "GetDeviceActiveBundleDetails", desc = "Used to Get DeviceActiveBundle Details", req_Params = {"DeviceId;UUID"}, opt_Params = {"ServiceId;UUID"}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXML_getDeviceActiveBundleDetails(@PathParam("deviceid") String deviceId, @PathParam("serviceid") String serviceId) throws DatatypeConfigurationException {
+        return getDeviceActiveBundleDetails(deviceId, serviceId);
+    }
+
+    /**
+     * GetDeviceActiveBundleDetails
+     * @param deviceId
+     * @param serviceId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getdeviceactivebundledetails/json/{json}/deviceid/{deviceid}{serviceid:(/serviceid/[^/]+?)?}")
+    public TingcoService getJson_getDeviceActiveBundleDetails(@PathParam("deviceid") String deviceId, @PathParam("serviceid") String serviceId) throws DatatypeConfigurationException {
+        return getDeviceActiveBundleDetails(deviceId, serviceId);
+    }
+
+    /**
+     * GetDeviceServicesAllowedBundles
+     * @param deviceId
+     * @param serviceId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getdeviceservicesallowedbundles/rest/{rest}/deviceid/{deviceid}{serviceid:(/serviceid/[^/]+?)?}")
+    @RESTDoc(methodName = "GetDeviceServicesAllowedBundles", desc = "Used to Get DeviceServicesAllowedBundles", req_Params = {"DeviceId;UUID"}, opt_Params = {"ServiceId;UUID"}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXML_getDeviceServicesAllowedBundles(@PathParam("deviceid") String deviceId, @PathParam("serviceid") String serviceId) throws DatatypeConfigurationException {
+        return getDeviceServicesAllowedBundles(deviceId, serviceId);
+    }
+
+    /**
+     * GetDeviceServicesAllowedBundles
+     * @param deviceId
+     * @param serviceId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getdeviceservicesallowedbundles/json/{json}/deviceid/{deviceid}{serviceid:(/serviceid/[^/]+?)?}")
+    public TingcoService getJson_getDeviceServicesAllowedBundles(@PathParam("deviceid") String deviceId, @PathParam("serviceid") String serviceId) throws DatatypeConfigurationException {
+        return getDeviceServicesAllowedBundles(deviceId, serviceId);
+    }
+
+    /**
+     * GetDeviceAvailableBundlesNotInAllowedBundles
+     * @param deviceId
+     * @param serviceId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getdeviceavailablebundlesnotinallowedbundles/rest/{rest}/deviceid/{deviceid}{serviceid:(/serviceid/[^/]+?)?}")
+    @RESTDoc(methodName = "GetDeviceAvailableBundlesNotInAllowedBundles", desc = "Used to Get DeviceAvailableBundlesNotInAllowedBundles", req_Params = {"DeviceId;UUID"}, opt_Params = {"ServiceId;UUID"}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXML_getDeviceAvailableBundlesNotInAllowedBundles(@PathParam("deviceid") String deviceId, @PathParam("serviceid") String serviceId) throws DatatypeConfigurationException {
+        return getDeviceAvailableBundlesNotInAllowedBundles(deviceId, serviceId);
+    }
+
+    /**
+     * GetDeviceAvailableBundlesNotInAllowedBundles
+     * @param deviceId
+     * @param serviceId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getdeviceavailablebundlesnotinallowedbundles/json/{json}/deviceid/{deviceid}{serviceid:(/serviceid/[^/]+?)?}")
+    public TingcoService getJson_getDeviceAvailableBundlesNotInAllowedBundles(@PathParam("deviceid") String deviceId, @PathParam("serviceid") String serviceId) throws DatatypeConfigurationException {
+        return getDeviceAvailableBundlesNotInAllowedBundles(deviceId, serviceId);
+    }
+
+    /**
+     * GetServicesForDeviceActiveBundles
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getservicesfordeviceactivebundles/rest/{rest}/deviceid/{deviceid}")
+    @RESTDoc(methodName = "GetServicesForDeviceActiveBundles", desc = "Used to Get Services For DeviceActiveBundles", req_Params = {"DeviceId;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXML_getServicesForDeviceActiveBundles(@PathParam("deviceid") String deviceId) throws DatatypeConfigurationException {
+        return getServicesForDeviceActiveBundles(deviceId);
+    }
+
+    /**
+     * GetServicesForDeviceActiveBundles
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getservicesfordeviceactivebundles/json/{json}/deviceid/{deviceid}")
+    public TingcoService getJson_getServicesForDeviceActiveBundles(@PathParam("deviceid") String deviceId) throws DatatypeConfigurationException {
+        return getServicesForDeviceActiveBundles(deviceId);
+    }
+
+    /**
+     * GetServicesForDeviceAvailableBundles
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getservicesfordeviceavailablebundles/rest/{rest}/deviceid/{deviceid}")
+    @RESTDoc(methodName = "GetServicesForDeviceAvailableBundles", desc = "Used to Get Services For DeviceAllowedBundles", req_Params = {"DeviceId;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXML_getServicesForDeviceAvailableBundles(@PathParam("deviceid") String deviceId) throws DatatypeConfigurationException {
+        return getServicesForDeviceAvailableBundles(deviceId);
+    }
+
+    /**
+     * GetServicesForDeviceAvailableBundles
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getservicesfordeviceavailablebundles/json/{json}/deviceid/{deviceid}")
+    public TingcoService getJson_getServicesForDeviceAvailableBundles(@PathParam("deviceid") String deviceId) throws DatatypeConfigurationException {
+        return getServicesForDeviceAvailableBundles(deviceId);
+    }
+
+    /**
+     * GetServicesForContentCategory
+     * @param contentcategoryid
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getservicesforcontentcategory/rest/{rest}/contentcategoryid/{contentcategoryid}")
+    @RESTDoc(methodName = "GetServicesForContentCategory", desc = "Used to get the Services from ContentCategoryId", req_Params = {"ContentCategoryId;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_getServicesForContentCategory(@PathParam("contentcategoryid") String contentCategoryId) {
+        return getServicesForContentCategory(contentCategoryId);
+    }
+
+    /**
+     * GetServicesForContentCategory
+     * @param contentcategoryid
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getservicesforcontentcategory/json/{json}/contentcategoryid/{contentcategoryid}")
+    public TingcoService getJson_getServicesForContentCategory(@PathParam("contentcategoryid") String contentCategoryId) {
+        return getServicesForContentCategory(contentCategoryId);
+    }
+
+    /**
+     * GetAllServices
+     * @param groupid
+     * @param devicetypeid
+     * @param deviceid
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getallservices/rest/{rest}/groupid/{groupid}{devicetypeid:(/devicetypeid/[^/]+?)?}{deviceid:(/deviceid/[^/]+?)?}")
+    @RESTDoc(methodName = "GetAllServices", desc = "Used to get the Services", req_Params = {"GroupId;UUID"}, opt_Params = {"DeviceTypeId;UUID", "DeviceId;UUID"}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_getAllServices(@PathParam("groupid") String groupId, @PathParam("devicetypeid") String deviceTypeId, @PathParam("deviceid") String deviceId) throws DatatypeConfigurationException {
+        return getAllServices(groupId, deviceTypeId, deviceId);
+    }
+
+    /**
+     * GetServices
+     * @param groupid
+     * @param devicetypeid
+     * @param deviceid
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getallservices/json/{json}/groupid/{groupid}{devicetypeid:(/devicetypeid/[^/]+?)?}{deviceid:(/deviceid/[^/]+?)?}")
+    public TingcoService getJson_getAllServices(@PathParam("groupid") String groupId, @PathParam("devicetypeid") String deviceTypeId, @PathParam("deviceid") String deviceId) throws DatatypeConfigurationException {
+        return getAllServices(groupId, deviceTypeId, deviceId);
+    }
+
+    /**
+     * GetServiceTypeBundlesByServiceTypeId
+     * @param serviceTypeId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getservicetypebundlesbyservicetypeid/rest/{rest}/servicetypeid/{servicetypeid}/countryid/{countryid}")
+    @RESTDoc(methodName = "GetServiceTypeBundlesByServiceTypeId", desc = "Used to Get ServiceTypeBundles By ServiceTypeId", req_Params = {"ServiceTypeId;UUID", "CountryId;int"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_getServiceTypeBundlesByServiceTypeId(@PathParam("servicetypeid") String serviceTypeId, @PathParam("countryid") int countryId) throws DatatypeConfigurationException {
+        return getServiceTypeBundlesByServiceTypeId(serviceTypeId, countryId);
+    }
+
+    /**
+     * GetServiceTypeBundlesByServiceTypeId
+     * @param serviceTypeId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getservicetypebundlesbyservicetypeid/json/{json}/servicetypeid/{servicetypeid}/countryid/{countryid}")
+    public TingcoService getJson_getServiceTypeBundlesByServiceTypeId(@PathParam("servicetypeid") String serviceTypeId, @PathParam("countryid") int countryId) throws DatatypeConfigurationException {
+        return getServiceTypeBundlesByServiceTypeId(serviceTypeId, countryId);
+    }
+
+    /**
+     * deleteServiceContentSubscriptions
+     * @param servicecontentSubscriptionId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/deleteservicecontentsubscriptions/rest/{rest}/servicecontentsubscriptionid/{servicecontentsubscriptionid}")
+    @RESTDoc(methodName = "deleteServiceContentSubscriptions", desc = "Used to delete ServiceContentSubscriptions", req_Params = {"ServiceContentSubscriptionId;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_deleteServiceContentSubscriptions(@PathParam("servicecontentsubscriptionid") String serviceContentSubscriptionId) {
+        return deleteServiceContentSubscriptions(serviceContentSubscriptionId);
+    }
+
+    /**
+     * deleteServiceContentSubscriptions
+     * @param servicecontentSubscriptionId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/deleteservicecontentsubscriptions/json/{json}/servicecontentsubscriptionid/{servicecontentsubscriptionid}")
+    public TingcoService getJson_deleteServiceContentSubscriptions(@PathParam("servicecontentsubscriptionid") String serviceContentSubscriptionId) {
+        return deleteServiceContentSubscriptions(serviceContentSubscriptionId);
+    }
+
+    /**
+     * DeleteServiceTypeBundles
+     * @param serviceTypeId
+     * @param bundleId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/deleteservicetypebundles/rest/{rest}/servicetypeid/{servicetypeid}/bundleid/{bundleid}")
+    @RESTDoc(methodName = "DeleteServiceTypeBundles", desc = "Used to Delete ServiceTypeBundles", req_Params = {"ServiceTypeId;UUID", "BundleId;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_deleteServiceTypeBundles(@PathParam("servicetypeid") String serviceTypeId, @PathParam("bundleid") String bundleId) throws DatatypeConfigurationException {
+        return deleteServiceTypeBundles(serviceTypeId, bundleId);
+    }
+
+    /**
+     * DeleteServiceTypeBundles
+     * @param serviceTypeId
+     * @param bundleId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/deleteservicetypebundles/json/{json}/servicetypeid/{servicetypeid}/bundleid/{bundleid}")
+    public TingcoService getJson_getServiceTypeBundlesByServiceTypeId(@PathParam("servicetypeid") String serviceTypeId, @PathParam("bundleid") String bundleId) throws DatatypeConfigurationException {
+        return deleteServiceTypeBundles(serviceTypeId, bundleId);
+    }
+
+    @GET
+    @Produces("application/xml")
+    @Path("/getDeviceServiceSubscriptions/rest/{rest}/deviceid/{deviceid}")
+    public TingcoService getXml_getdeviceservicesubscriptions(@PathParam("deviceid") String deviceId) throws DatatypeConfigurationException {
+        return getDeviceServiceSubscriptions(deviceId);
+    }
+
+    @GET
+    @Produces("application/json")
+    @Path("/getDeviceServiceSubscriptions/json/{json}/deviceid/{deviceid}")
+    public TingcoService getJson_getdeviceservicesubscriptions(@PathParam("deviceid") String deviceId) throws DatatypeConfigurationException {
+        return getDeviceServiceSubscriptions(deviceId);
+    }
+
+    /**
+     * GetServiceDeviceSettings
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getservicedevicesettings/rest/{rest}/deviceid/{deviceid}")
+    @RESTDoc(methodName = "GetServiceDeviceSettings", desc = "Used to Get ServiceDeviceSettings", req_Params = {"DeviceID;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_getServiceDeviceSettings(@PathParam("deviceid") String deviceId) {
+        return getServiceDeviceSettings(deviceId);
+    }
+
+    /**
+     * GetServiceDeviceSettings
+     * @param deviceId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getservicedevicesettings/json/{json}/deviceid/{deviceid}")
+    public TingcoService getJson_getServiceDeviceSettings(@PathParam("deviceid") String deviceId) {
+        return getServiceDeviceSettings(deviceId);
+    }
+
+    /**
+     * GetServiceSettings
+     * @param ServiceID
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getservicesettings/rest/{rest}/serviceid/{serviceid}")
+    @RESTDoc(methodName = "GetServiceSettings", desc = "Used to Get ServiceSettings", req_Params = {"ServiceID;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_getServiceSettings(@PathParam("serviceid") String serviceId) {
+        return getServiceSettings(serviceId);
+    }
+
+    /**
+     * GetServiceSettings
+     * @param ServiceID
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getservicesettings/json/{json}/serviceid/{serviceid}")
+    public TingcoService getJson_getServiceSettings(@PathParam("serviceid") String serviceId) {
+        return getServiceSettings(serviceId);
+    }
+
+    /**
+     * AddServiceSettings
+     * @param ServiceSettingName
+     * @param ServiceSettingValue
+     * @param SettingDataTypeId
+     * @param ServiceId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/addservicesetting/rest/{rest}/serviceid/{serviceid}/servicesettingname/{servicesettingname}/servicesettingvalue/{servicesettingvalue}{settingdatatypeid:(/settingdatatypeid/[^/]+?)?}{servicesettingparentid:(/servicesettingparentid/[^/]+?)?}")
+    @RESTDoc(methodName = "AddServiceSetting", desc = "Used to Add ServiceSetting", req_Params = {"ServiceID;UUID", "ServiceSettingName;string", "ServiceSettingValue;string", "SettingDataTypeId;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_addServiceSetting(@PathParam("serviceid") String serviceId, @PathParam("servicesettingname") String serviceSettingName, @PathParam("servicesettingvalue") String serviceSettingValue, @PathParam("settingdatatypeid") String settingDataTypeId, @PathParam("servicesettingparentid") String serviceSettingParentId) {
+        return addServiceSettings(serviceId, serviceSettingName, serviceSettingValue, settingDataTypeId, serviceSettingParentId);
+    }
+
+    /**
+     * AddServiceSettings
+     * @param ServiceSettingName
+     * @param ServiceSettingValue
+     * @param SettingDataTypeId
+     * @param ServiceId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/addservicesetting/json/{json}/serviceid/{serviceid}/servicesettingname/{servicesettingname}/servicesettingvalue/{servicesettingvalue}{settingdatatypeid:(/settingdatatypeid/[^/]+?)?}{servicesettingparentid:(/servicesettingparentid/[^/]+?)?}")
+    public TingcoService getJson_addServiceSetting(@PathParam("serviceid") String serviceId, @PathParam("servicesettingname") String serviceSettingName, @PathParam("servicesettingvalue") String serviceSettingValue, @PathParam("settingdatatypeid") String settingDataTypeId, @PathParam("servicesettingparentid") String serviceSettingParentId) {
+        return addServiceSettings(serviceId, serviceSettingName, serviceSettingValue, settingDataTypeId, serviceSettingParentId);
+    }
+
+    /**
+     * AddServiceContentSubscriptions
+     * @param contentCategoryId
+     * @param serviceId
+     * @param groupId
+     * @param serviceClientLoginId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/addservicecontentsubscriptions/rest/{rest}/serviceid/{serviceid}/contentcategoryid/{contentcategoryid}/groupid/{groupid}/serviceclientloginid/{serviceclientloginid}")
+    @RESTDoc(methodName = "AddServiceContentSubscriptions", desc = "Used to Add ServiceContentSubscriptions", req_Params = {"ServiceID;UUID", "ContentCategoryId;string", "GroupId;string", "serviceClientLoginId;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_addServiceContentSubscriptions(@PathParam("serviceid") String serviceId, @PathParam("contentcategoryid") String contentCategoryId, @PathParam("groupid") String groupId, @PathParam("serviceclientloginid") String serviceClientLoginId) {
+        return addServiceContentSubscriptions(serviceId, contentCategoryId, groupId, serviceClientLoginId);
+    }
+
+    /**
+     * AddServiceContentSubscriptions
+     * @param contentCategoryId
+     * @param serviceId
+     * @param groupId
+     * @param serviceClientLoginId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/addservicecontentsubscriptions/json/{json}/serviceid/{serviceid}/contentcategoryid/{contentcategoryid}/groupid/{groupid}/serviceclientloginid/{serviceclientloginid}")
+    public TingcoService getJson_addServiceContentSubscriptions(@PathParam("serviceid") String serviceId, @PathParam("contentcategoryid") String contentCategoryId, @PathParam("groupid") String groupId, @PathParam("serviceclientloginid") String serviceClientLoginId) {
+        return addServiceContentSubscriptions(serviceId, contentCategoryId, groupId, serviceClientLoginId);
+    }
+
+    /**
+     * UpdateServiceSetting
+     * @param ServiceSettingId
+     * @param ServiceSettingValue
+     * @param ServiceId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/updateservicesetting/rest/{rest}/serviceid/{serviceid}/servicesettingid/{servicesettingid}/servicesettingvalue/{servicesettingvalue}")
+    @RESTDoc(methodName = "UpdateServiceSetting", desc = "Used to Update ServiceSetting", req_Params = {"ServiceID;UUID", "ServiceSettingId;string", "ServiceSettingValue;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_updateServiceSetting(@PathParam("serviceid") String serviceId, @PathParam("servicesettingid") String serviceSettingId, @PathParam("servicesettingvalue") String serviceSettingValue) {
+        return updateServiceSetting(serviceId, serviceSettingId, serviceSettingValue);
+    }
+
+    /**
+     * UpdateServiceSetting
+     * @param ServiceSettingId
+     * @param ServiceSettingValue
+     * @param ServiceId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/updateservicesetting/json/{json}/serviceid/{serviceid}/servicesettingid/{servicesettingid}/servicesettingvalue/{servicesettingvalue}")
+    public TingcoService getJson_updateServiceSetting(@PathParam("serviceid") String serviceId, @PathParam("servicesettingid") String serviceSettingId, @PathParam("servicesettingvalue") String serviceSettingValue) {
+        return updateServiceSetting(serviceId, serviceSettingId, serviceSettingValue);
+    }
+
+    /**
+     * DeleteServiceSetting
+     * @param ServiceSettingId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/deleteservicesetting/rest/{rest}/servicesettingid/{servicesettingid}")
+    @RESTDoc(methodName = "DeleteServiceSetting", desc = "Used to Delete ServiceSetting", req_Params = {"ServiceSettingId;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_deleteServiceSetting(@PathParam("servicesettingid") String serviceSettingId) {
+        return deleteServiceSetting(serviceSettingId);
+    }
+
+    /**
+     * DeleteServiceSetting
+     * @param ServiceSettingId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/deleteservicesetting/json/{json}/servicesettingid/{servicesettingid}")
+    public TingcoService getJson_deleteServiceSetting(@PathParam("servicesettingid") String serviceSettingId) {
+        return deleteServiceSetting(serviceSettingId);
+    }
+
+    /**
+     * GetServicesDevices
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getservicesdevices/rest/{rest}/countryid/{countryid}")
+    @RESTDoc(methodName = "GetServicesDevices", desc = "Used to Get ServicesDevices", req_Params = {"CountryId;int"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_getServicesDevices(@PathParam("countryid") int countryId) {
+        return getServicesDevices(countryId);
+    }
+
+    /**
+     * GetServicesDevices
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getservicesdevices/json/{json}/countryid/{countryid}")
+    public TingcoService getJson_getServicesDevices(@PathParam("countryid") int countryId) {
+        return getServicesDevices(countryId);
+    }
+
+    /**
+     * GetServices
+     * @param serviceId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getservicebyserviceid/rest/{rest}/serviceid/{serviceid}/countryid/{countryid}")
+    @RESTDoc(methodName = "GetServices", desc = "Used to Get Services", req_Params = {"serviceId;string", "countryId;int"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_getServicesDevices(@PathParam("serviceid") String serviceId, @PathParam("countryid") int countryId) {
+        return getServicebyId(serviceId, countryId);
+    }
+
+    /**
+     * GetServices
+     * @param serviceId
+     * @param countryId
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getservicebyserviceid/json/{json}/serviceid/{serviceid}/countryid/{countryid}")
+    public TingcoService getJson_getServicesDevices(@PathParam("serviceid") String serviceId, @PathParam("countryid") int countryId) {
+        return getServicebyId(serviceId, countryId);
+    }
+
+    /**
+     * GetServicesListForPopup
+     * @param searchstring
+     * @return
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getserviceslistforpopup/rest/{rest}{searchstring:(/searchstring/[^/]+?)?}")
+    @RESTDoc(methodName = "GetServicesListForPopup", desc = "Used to Ge tServicesList For Popup", req_Params = {"searchstring;string"}, opt_Params = {"searchstring;string"}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_getServicesListForPopup(@PathParam("searchstring") String searchString) throws DatatypeConfigurationException {
+        return getServicesListForPopup(searchString);
+    }
+
+    /**
+     * GetServicesListForPopup
+     * @param searchstring
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getserviceslistforpopup/json/{json}{searchstring:(/searchstring/[^/]+?)?}")
+    public TingcoService getJson_getServicesListForPopup(@PathParam("searchstring") String searchString) throws DatatypeConfigurationException {
+        return getServicesListForPopup(searchString);
+    }
+
+    /**
+     * AddNewChannelToService
+     * @param searchstring
+     * @return
+     */
+//    ServiceID(M),ChannelId(M),ChannelDirection(M)
+    @GET
+    @Produces("application/xml")
+    @Path("/addnewchanneltoservice/rest/{rest}/serviceid/{serviceid}/channelid/{channelid}/channeldirection/{channeldirection}{channeltag:(/channeltag/[^/]+?)?}")
+    @RESTDoc(methodName = "AddNewChannelToService", desc = "Used to Add New Channel To Service", req_Params = {"serviceid;UUID"}, opt_Params = {"searchstring;string"}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_AddNewChannelToService(@PathParam("serviceid") String serviceID, @PathParam("channelid") String channelID, @PathParam("channeldirection") String channelDirection, @PathParam("channeltag") String channelTag) throws DatatypeConfigurationException {
+        return addNewChannelToService(serviceID, channelID, channelDirection, channelTag);
+    }
+
+    /**
+     * AddNewChannelToService
+     * @param searchstring
+     * @return
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/addnewchanneltoservice/json/{json}/serviceid/{serviceid}/channelid/{channelid}/channeldirection/{channeldirection}{channeltag:(/channeltag/[^/]+?)?}")
+    public TingcoService getJson_AddNewChannelToService(@PathParam("serviceid") String serviceID, @PathParam("channelid") String channelID, @PathParam("channeldirection") String channelDirection, @PathParam("channeltag") String channelTag) throws DatatypeConfigurationException {
+        return addNewChannelToService(serviceID, channelID, channelDirection, channelTag);
+    }
+
+    /**
+     * UpdateServicesAndDeviceServices
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/updateservicesanddeviceservices/rest/{rest}")
+    @RESTDoc(methodName = "UpdateServicesAndDeviceServices", desc = "Used to Update Services And DeviceServices", req_Params = {"rest;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService postXml_updateServicesAndDeviceServices(String content) {
+        return updateServicesAndDeviceServices(content);
+    }
+
+    /**
+     * UpdateServicesAndDeviceServices
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/updateservicesanddeviceservices/json/{json}")
+    public TingcoService postJson_updateServicesAndDeviceServices(String content) {
+        return updateServicesAndDeviceServices(content);
+    }
+
+    /**
+     * AddDeviceServicesAllowedBundles
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/adddeviceservicesallowedbundles/rest/{rest}")
+    @RESTDoc(methodName = "AddDeviceServicesAllowedBundles", desc = "Used to Add DeviceServicesAllowedBundless", req_Params = {"rest;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService postXml_addDeviceServicesAllowedBundles(String content) {
+        return addDeviceServicesAllowedBundles(content);
+    }
+
+    /**
+     * AddDeviceServicesAllowedBundles
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/adddeviceservicesallowedbundles/json/{json}")
+    public TingcoService postJson_addDeviceServicesAllowedBundles(String content) {
+        return addDeviceServicesAllowedBundles(content);
+    }
+
+    /**
+     * deleteDeviceServicesAllowedBundles
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/deletedeviceservicesallowedbundles/rest/{rest}")
+    @RESTDoc(methodName = "DeleteDeviceServicesAllowedBundles", desc = "Used to Delete DeviceServicesAllowedBundles", req_Params = {"rest;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService postXml_deleteDeviceServicesAllowedBundles(String content) {
+        return deleteDeviceServicesAllowedBundles(content);
+    }
+
+    /**
+     * deleteDeviceServicesAllowedBundles
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/deletedeviceservicesallowedbundles/json/{json}")
+    public TingcoService postJson_deleteDeviceServicesAllowedBundles(String content) {
+        return deleteDeviceServicesAllowedBundles(content);
+    }
+
+    /**
+     * GetServiceStatusDetails
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/getservicestatusdetails/rest/{rest}")
+    @RESTDoc(methodName = "GetServiceStatusDetails", desc = "Used to Get ServiceStatus Details", req_Params = {}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService postXml_getServiceStatusDetails(String content) {
+        return getServiceStatusDetails(content);
+    }
+
+    /**
+     * GetServiceStatusDetails
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/getservicestatusdetails/json/{json}")
+    public TingcoService postJson_getServiceStatusDetails(String content) {
+        return getServiceStatusDetails(content);
+    }
+
+    /**
+     * AddServiceTypeBundles
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/addservicetypebundles/rest/{rest}")
+    @RESTDoc(methodName = "AddServiceTypeBundles", desc = "Used to Add ServiceTypeBundles", req_Params = {}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService postXml_addServiceTypeBundles(String content) {
+        return addServiceTypeBundles(content);
+    }
+
+    /**
+     * AddServiceTypeBundles
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/addservicetypebundles/json/{json}")
+    public TingcoService postJson_addServiceTypeBundles(String content) {
+        return addServiceTypeBundles(content);
+    }
+
+    /**
+     * AddServicesAndDeviceServices
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/addservicesanddeviceservices/rest/{rest}")
+    @RESTDoc(methodName = "UpdateServicesAndDeviceServices", desc = "Used to Add Services And DeviceServices", req_Params = {"rest;string"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService postXml_addServicesAndDeviceServices(String content) {
+        return addServicesAndDeviceServices(content);
+    }
+
+    /**
+     * AddServicesAndDeviceServices
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/addservicesanddeviceservices/json/{json}")
+    public TingcoService postJson_addServicesAndDeviceServices(String content) {
+        return addServicesAndDeviceServices(content);
+    }
+
+    /**
+     * AddUpdateBundles
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/addupdatebundles/rest/{rest}")
+    @RESTDoc(methodName = "Add or Update Bundles", desc = "Used to Add or Update Bundles", req_Params = {}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService postXml_addUpdateBundles(String content) {
+        return addUpdateBundles(content);
+    }
+
+    /**
+     * AddUpdateBundles
+     * @param content
+     * @return
+     */
+    @POST
+//    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/addupdatebundles/json/{json}")
+    public TingcoService postJson_addUpdateBundles(String content) {
+        return addUpdateBundles(content);
+    }
+
+    /**
+     * AddBundleVersionAndFile
+     * @param content
+     * @return
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/addbundleversionandfile/rest/{rest}")
+    @RESTDoc(methodName = "Add New BundleVersion and BundleFile", desc = "Used to Add BundleVersios and BundleFiles", req_Params = {}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService postXml_addBundleVersionAndBundleFile(String content) {
+        return addBundleVersionAndBundleFile(content);
+    }
+
+    /**
+     * AddNewBundleVersionAndFile
+     * @param content
+     * @return
+     */
+    @POST
+//    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/addnewbundleversionandfile/json/{json}")
+    public TingcoService postJson_addBundleVersionAndBundleFile(String content) {
+        return addBundleVersionAndBundleFile(content);
+    }
+
+    /**
+     * POST method for creating an instance of ServicessResource
+     * @param content representation for the new resource
+     * @return an HTTP response with content of the created resource
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    public Response postXml(String content) {
+        //TODO
+        return Response.created(context.getAbsolutePath()).build();
+    }
+
+    /**
+     * ServiceSettingInfo
+     * @param serviceSettingId
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/servicesettinginfo/rest/{rest}/servicesettingid/{servicesettingid}")
+    @RESTDoc(methodName = "ServiceSettingInfo", desc = "Used to get Service Setting Info", req_Params = {"servicesettingid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getXml_ServiceSettingInfo(@PathParam("servicesettingid") String serviceSettingId) throws DatatypeConfigurationException {
+        return getServiceSettingInfo(serviceSettingId);
+    }
+
+    /**
+     * ServiceSettingInfo
+     * @param serviceSettingId
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/servicesettinginfo/json/{json}/servicesettingid/{servicesettingid}")
+    public TingcoService getJson_ServiceSettingInfo(@PathParam("servicesettingid") String serviceSettingId) throws DatatypeConfigurationException {
+        return getServiceSettingInfo(serviceSettingId);
+    }
+
+    /**
+     *
+     * @param serviceId
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getservicechannellist/rest/{rest}/serviceid/{serviceid}")
+    @RESTDoc(methodName = "GetServiceChannelList", desc = "Get ServiceChannel List", req_Params = {"serviceid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getXml_GetServiceChannelList(@PathParam("serviceid") String serviceId) throws DatatypeConfigurationException {
+        return getServiceChannelList(serviceId);
+    }
+
+    /**
+     * 
+     * @param serviceId
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getservicechannellist/json/{json}/serviceid/{serviceid}")
+    @RESTDoc(methodName = "GetServiceChannelList", desc = "Get ServiceChannel List", req_Params = {"serviceid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getJson_GetServiceChannelList(@PathParam("serviceid") String serviceId) throws DatatypeConfigurationException {
+        return getServiceChannelList(serviceId);
+    }
+
+    /**
+     * GetBundleLogDetails
+     * @param bundleId
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getbundlelogdetails/rest/{rest}{bundleid:(/bundleid/[^/]+?)?}{timeperiod:(/timeperiod/[^/]+?)?}{fromdate:(/fromdate/[^/]+?)?}{todate:(/todate/[^/]+?)?}")
+    @RESTDoc(methodName = "GetBundleLogDetails", desc = "Get BundleLog Details", req_Params = {"bundleid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getXml_GetBundleLogDetails(@PathParam("bundleid") String bundleId, @PathParam("timeperiod") String timePeriod, @PathParam("fromdate") String fromDate, @PathParam("todate") String toDate) throws DatatypeConfigurationException {
+        return getBundleLogDetails(bundleId, timePeriod, fromDate, toDate);
+    }
+
+    /**
+     * GetBundleLogDetails
+     * @param bundleId
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getbundlelogdetails/json/{json}{bundleid:(/bundleid/[^/]+?)?}{timeperiod:(/timeperiod/[^/]+?)?}{fromdate:(/fromdate/[^/]+?)?}{todate:(/todate/[^/]+?)?}")
+    @RESTDoc(methodName = "GetBundleLogDetails", desc = "Get BundleLog Details", req_Params = {"bundleid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getJson_GetBundleLogDetails(@PathParam("bundleid") String bundleId, @PathParam("timeperiod") String timePeriod, @PathParam("fromdate") String fromDate, @PathParam("todate") String toDate) throws DatatypeConfigurationException {
+        return getBundleLogDetails(bundleId, timePeriod, fromDate, toDate);
+    }
+
+    /**
+     *
+     * @param countryID
+     * @param searchString
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getbundletypes/rest/{rest}/countryid/{countryid}{searchstring:(/searchstring/[^/]+?)?}")
+    @RESTDoc(methodName = "GetBundleTypes", desc = "Get ServiceChannel List", req_Params = {"serviceid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getXml_GetBundleTypes(@PathParam("countryid") int countryID, @PathParam("searchstring") String searchString) throws DatatypeConfigurationException {
+        return getBundleTypes(countryID, searchString);
+    }
+
+    /**
+     *
+     * @param countryID
+     * @param searchString
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getbundletypes/json/{json}/countryid/{countryid}{searchstring:(/searchstring/[^/]+?)?}")
+    @RESTDoc(methodName = "GetBundleTypes", desc = "Get ServiceChannel List", req_Params = {"serviceid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getJson_GetBundleTypes(@PathParam("countryid") int countryID, @PathParam("searchstring") String searchString) throws DatatypeConfigurationException {
+        return getBundleTypes(countryID, searchString);
+    }
+
+    /**
+     *
+     * @param countryID
+     * @param searchString
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getbundlecayegories/rest/{rest}/countryid/{countryid}{searchstring:(/searchstring/[^/]+?)?}")
+    @RESTDoc(methodName = "GetBundleCayegories", desc = "Get ServiceChannel List", req_Params = {"serviceid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getXml_GetBundleCayegories(@PathParam("countryid") int countryID, @PathParam("searchstring") String searchString) throws DatatypeConfigurationException {
+        return getBundleCayegories(countryID, searchString);
+    }
+
+    /**
+     *
+     * @param countryID
+     * @param searchString
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getbundlecayegories/json/{json}/countryid/{countryid}{searchstring:(/searchstring/[^/]+?)?}")
+    @RESTDoc(methodName = "GetBundleCayegories", desc = "Get ServiceChannel List", req_Params = {"serviceid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getJson_GetBundleCayegories(@PathParam("countryid") int countryID, @PathParam("searchstring") String searchString) throws DatatypeConfigurationException {
+        return getBundleCayegories(countryID, searchString);
+    }
+
+    /**
+     *
+     * @param groupId
+     * @param searchString
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getbundlelist/rest/{rest}/groupid/{groupid}{searchstring:(/searchstring/[^/]+?)?}")
+    @RESTDoc(methodName = "GetBundleList", desc = "Get ServiceChannel List", req_Params = {"serviceid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getXml_GetBundleList(@PathParam("groupid") String groupId, @PathParam("searchstring") String searchString) throws DatatypeConfigurationException {
+        return getBundleList(groupId, searchString);
+    }
+
+    /**
+     * GetBundleDetailsById
+     * @param bundleid
+     * @param countryid
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getbundledetailsbyid/rest/{rest}/bundleid/{bundleid}/countryid/{countryid}")
+    @RESTDoc(methodName = "GetBundleDetailsById", desc = "Get Bundle Details By Id", req_Params = {"bundleid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getXml_GetBundleDetailsById(@PathParam("bundleid") String bundleid, @PathParam("countryid") String countryid) throws DatatypeConfigurationException {
+        return getBundleDetailsById(bundleid, countryid);
+    }
+
+    /**
+     *
+     * @param groupId
+     * @param searchString
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getbundlelist/json/{json}/groupid/{groupid}{searchstring:(/searchstring/[^/]+?)?}")
+    @RESTDoc(methodName = "GetBundleList", desc = "Get ServiceChannel List", req_Params = {"serviceid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getJson_GetBundleList(@PathParam("groupid") String groupId, @PathParam("searchstring") String searchString) throws DatatypeConfigurationException {
+        return getBundleList(groupId, searchString);
+    }
+
+    /**
+     *
+     * @param bundleVersionId
+     * @param changeLog
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/updatechangeddatabybundleversionid/json/{json}/bundleversionid/{bundleversionid}{changelog:(/changelog/[^/]+?)?}")
+    @RESTDoc(methodName = "UpdatechangedDataByBundleVersionID", desc = "Update changedData By BundleVersionID", req_Params = {"serviceid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getJson_UpdatechangedDataByBundleVersionID(@PathParam("bundleversionid") String bundleVersionId, @PathParam("changelog") String changeLog) throws DatatypeConfigurationException {
+        return UpdatechangedDataByBundleVersionID(bundleVersionId, changeLog);
+    }
+
+    /**
+     *
+     * @param bundleVersionId
+     * @param changeLog
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/updatechangeddatabybundleversionid/rest/{rest}/bundleversionid/{bundleversionid}{changelog:(/changelog/[^/]+?)?}")
+    @RESTDoc(methodName = "UpdatechangedDataByBundleVersionID", desc = "Update changedData By BundleVersionID", req_Params = {"serviceid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getXml_UpdatechangedDataByBundleVersionID(@PathParam("bundleversionid") String bundleVersionId, @PathParam("changelog") String changeLog) throws DatatypeConfigurationException {
+        return UpdatechangedDataByBundleVersionID(bundleVersionId, changeLog);
+    }
+
+    /**
+
+     * GetBundleDetailsById
+     * @param bundleid
+     * @param countryid
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getbundledetailsbyid/json/{json}/bundleid/{bundleid}/countryid/{countryid}")
+    public TingcoService getJson_GetBundleDetailsById(@PathParam("bundleid") String bundleid, @PathParam("countryid") String countryid) throws DatatypeConfigurationException {
+        return getBundleDetailsById(bundleid, countryid);
+    }
+
+    /**
+     * GetBundleVersionsListByBundleID
+     * @param bundleid
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getbundleversionslistbybundleid/rest/{rest}/bundleid/{bundleid}")
+    @RESTDoc(methodName = "GetBundleVersionsListByBundleID", desc = "GetBundleVersionsListByBundleID", req_Params = {"bundleid;UUID"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_GetBundleVersionsListByBundleID(@PathParam("bundleid") String bundleid) throws DatatypeConfigurationException {
+        return getBundleVersionsListByBundleID(bundleid);
+    }
+
+    /**
+     * GetBundleVersionsListByBundleID
+     * @param bundleid
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getbundleversionslistbybundleid/json/{json}/bundleid/{bundleid}")
+    public TingcoService getJson_GetBundleVersionsListByBundleID(@PathParam("bundleid") String bundleid) throws DatatypeConfigurationException {
+        return getBundleVersionsListByBundleID(bundleid);
+    }
+
+    /**
+     * GetBundleDetailsByBundleCategoryAndSearchString
+     * @param groupid
+     * @param countryid
+     * @param bundlecategoryid
+     * @param searchSring for BundleName
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getbundlebybundlecategoryandsearchstring/rest/{rest}/groupid/{groupid}/countryid/{countryid}{searchstring:(/searchstring/[^/]+?)?}{bundlecategoryid:(/bundlecategoryid/[^/]+?)?}")
+    @RESTDoc(methodName = "GetBundleDetailsByCategoryAndSearchString", desc = "Get BundleDetails By Category And SearchString", req_Params = {"countryid;int"}, opt_Params = {"searchString;String, bundleCategoryId;UUID"}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_getBundleDetailsByBundleCategoryAndSearchString(@PathParam("groupid") String groupId, @PathParam("countryid") int countryId, @PathParam("searchstring") String searchString, @PathParam("bundlecategoryid") String bundleCategoryId) throws DatatypeConfigurationException {
+        return getBundleByBundleCategoryAndSearchString(groupId, countryId, searchString, bundleCategoryId);
+    }
+
+    /**
+     * GetBundleDetailsByBundleCategoryAndSearchString
+     * @param groupid
+     * @param countryid
+     * @param bundlecategoryid
+     * @param searchSring for BundleName
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getbundlebybundlecategoryandsearchstring/json/{json}/groupid/{groupid}/countryid/{countryid}{searchstring:(/searchstring/[^/]+?)?}{bundlecategoryid:(/bundlecategoryid/[^/]+?)?}")
+    public TingcoService getJson_getBundleDetailsByBundleCategoryAndSearchString(@PathParam("groupid") String groupId, @PathParam("countryid") int countryId, @PathParam("searchstring") String searchString, @PathParam("bundlecategoryid") String bundleCategoryId) throws DatatypeConfigurationException {
+        return getBundleByBundleCategoryAndSearchString(groupId, countryId, searchString, bundleCategoryId);
+    }
+
+    /**
+     * AddServiceType
+     * @param serviceTypeName
+     * @param description
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/addservicetype/rest/{rest}/servicetypename/{servicetypename}{description:(/description/[^/]+?)?}")
+    @RESTDoc(methodName = "AddServiceType", desc = "Add ServiceType", req_Params = {"servicetypename;String"}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getXml_AddServiceType(@PathParam("servicetypename") String serviceTypeName, @PathParam("description") String description) throws DatatypeConfigurationException {
+        return addServiceType(serviceTypeName, description);
+    }
+
+    /**
+     * AddServiceType
+     * @param serviceTypeName
+     * @param description
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/addservicetype/json/{json}/servicetypename/{servicetypename}{description:(/description/[^/]+?)?}")
+    public TingcoService getJson_AddServiceType(@PathParam("servicetypename") String serviceTypeName, @PathParam("description") String description) throws DatatypeConfigurationException {
+        return addServiceType(serviceTypeName, description);
+    }
+
+    /**
+     * Sub-resource locator method for  {id}
+     */
+    @Path("{id}")
+    public ServicesResource getServicesResource() {
+        return new ServicesResource();
+    }
+
+    /**
+     * GetServicesByDeviceType
+     * @param deviceTypeId
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getservicesbydevicetype/rest/{rest}/devicetypeid/{devicetypeid}/countryid/{countryid}")
+    @RESTDoc(methodName = "GetServicesByDeviceType", desc = "Get Services By DeviceType", req_Params = {""}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_GetServicesByDeviceType(@PathParam("devicetypeid") String deviceTypeId, @PathParam("countryid") int countryId) throws DatatypeConfigurationException {
+        return getServicesByDeviceType(deviceTypeId, countryId);
+    }
+
+    /**
+     * GetServicesByDeviceType
+     * @param deviceTypeId
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getservicesbydevicetype/json/{json}/devicetypeid/{devicetypeid}/countryid/{countryid}")
+    public TingcoService getJson_GetServicesByDeviceType(@PathParam("devicetypeid") String deviceTypeId, @PathParam("countryid") int countryId) throws DatatypeConfigurationException {
+        return getServicesByDeviceType(deviceTypeId, countryId);
+    }
+
+    /**
+     * GetServices
+     * @param searchString
+     * @param countryId
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getservices/rest/{rest}{searchstring:(/searchstring/[^/]+?)?}")
+    @RESTDoc(methodName = "GetServices", desc = "GetServices", req_Params = {""}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_GetServicesBySearchString(@PathParam("searchstring") String searchString) throws DatatypeConfigurationException {
+        return getServicesBySerachString(searchString);
+    }
+
+    /**
+     * GetServices
+     * @param searchString
+     * @param countryId
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getservices/json/{json}{searchstring:(/searchstring/[^/]+?)?}")
+    public TingcoService getJson_GetServicesBySearchString(@PathParam("searchstring") String searchString) throws DatatypeConfigurationException {
+        return getServicesBySerachString(searchString);
+    }
+
+    /**
+     * AddServiceToDeviceType
+     * @param content
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/xml")
+    @Path("/addservicetodevicetype/rest/{rest}{isdefault :(/isdefault/[^/]+?)?}")
+    @RESTDoc(methodName = "AddServiceToDeviceType", desc = "AddServiceToDeviceType", req_Params = {""}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"POST"}, versions = {"1"})
+    public TingcoService getXml_AddServiceToDeviceType(String content,@PathParam("isdefault") String isDefault) throws DatatypeConfigurationException {
+        return addServiceToDeviceType(content,isDefault);
+    }
+
+    /**
+     * AddServiceToDeviceType
+     * @param content
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @POST
+    @Consumes("application/xml")
+    @Produces("application/json")
+    @Path("/addservicetodevicetype/json/{json}{isdefault :(/isdefault/[^/]+?)?}")
+    public TingcoService getJson_AddServiceToDeviceType(String content,@PathParam("isdefault") String isDefault) throws DatatypeConfigurationException {
+        return addServiceToDeviceType(content,isDefault);
+    }
+
+    @GET
+    @Produces("application/xml")
+    @Path("/deletedevicetypeservicebyid/rest/{rest}/devicetypeid/{devicetypeid}/serviceid/{serviceid}")
+    @RESTDoc(methodName = "DeleteDeviceTypeServiceById", desc = "DeleteDeviceTypeServiceById", req_Params = {""}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_DeleteDeviceTypeServiceById(@PathParam("devicetypeid") String deviceTypeId, @PathParam("serviceid") String serviceId) throws DatatypeConfigurationException {
+        return deleteDeviceTypeServiceById(deviceTypeId, serviceId);
+    }
+
+    @GET
+    @Produces("application/json")
+    @Path("/deletedevicetypeservicebyid/json/{json}/devicetypeid/{devicetypeid}/serviceid/{serviceid}")
+    public TingcoService getJson_DeleteDeviceTypeServiceById(@PathParam("devicetypeid") String deviceTypeId, @PathParam("serviceid") String serviceId) throws DatatypeConfigurationException {
+        return deleteDeviceTypeServiceById(deviceTypeId, serviceId);
+    }
+    /**
+     * GetServiceClientLoginByGroupId
+     * @param groupId
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/xml")
+    @Path("/getserviceclientloginbygroupid/rest/{rest}/groupid/{groupid}")
+    @RESTDoc(methodName = "GetServiceClientLoginByGroupId", desc = "GetServiceClientLoginByGroupId", req_Params = {""}, opt_Params = {}, method_formats = {"REST", "JSON"}, method_requests = {"GET"}, versions = {"1"})
+    public TingcoService getXml_GetServiceClientLoginByGroupId(@PathParam("groupid") String groupId) throws DatatypeConfigurationException {
+        return getServiceClientLoginByGroupId(groupId);
+    }
+    /**
+     * GetServiceClientLoginByGroupId
+     * @param groupId
+     * @return
+     * @throws javax.xml.datatype.DatatypeConfigurationException
+     */
+    @GET
+    @Produces("application/json")
+    @Path("/getserviceclientloginbygroupid/json/{json}/groupid/{groupid}")
+    public TingcoService getJson_GetServiceClientLoginByGroupId(@PathParam("groupid") String groupId) throws DatatypeConfigurationException {
+        return getServiceClientLoginByGroupId(groupId);
+    }
+
+    private TingcoService getServiceClientLoginByGroupId(String groupId) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    Object groupDefaultClientLogin = serviceDAO.getGroupDefaultServiceClientLoginByGroupID(groupId, session);
+                    if (groupDefaultClientLogin == null) {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No Data Found");
+                        return tingcoService;
+                    } else {
+                        tingcoService = tingcoServiceXML.buildGetServiceClientLoginByGroupId(tingcoService, (GroupDefaultServiceClientLogin)groupDefaultClientLogin);
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService deleteDeviceTypeServiceById(String deviceTypeId, String serviceId) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.DELETE);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    Object object = serviceDAO.getDeviceTypeServicesByDeviceTypeIDAndServiceID(deviceTypeId, serviceId, session);
+                    if (object == null) {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No Data Found");
+                        return tingcoService;
+                    } else {
+                        DeviceTypeServices dts = (DeviceTypeServices) object;
+                        if (!serviceDAO.deleteDeviceTypeServices(dts, session)) {
+                            tingcoService.getMsgStatus().setResponseCode(-1);
+                            tingcoService.getMsgStatus().setResponseText("Error Occurred While Delete");
+                            return tingcoService;
+                        }
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService addServiceToDeviceType(String content, String isDefault) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.ADD);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    TingcoService tingcoServicePosted = (TingcoService) JAXBManager.getInstance().unMarshall(content, TingcoService.class);
+
+                    if (!isDefault.equals("")) {
+                        isDefault = isDefault.split("/")[2];
+                    } else {
+                        isDefault = null;
+                    }
+                    if (tingcoServicePosted.getServices().getDeviceTypeID() != null && tingcoServicePosted.getServices().getDeviceTypeID().getValue() != null) {
+                        Object dt = deviceDAO.getDeviceTypesById(tingcoServicePosted.getServices().getDeviceTypeID().getValue(), session);
+                        if (dt == null) {
+                            tingcoService.getMsgStatus().setResponseCode(-1);
+                            tingcoService.getMsgStatus().setResponseText("No DeviceType Found With Given Input");
+                            return tingcoService;
+                        } else {
+                            DeviceTypes deviceTypes = (DeviceTypes) dt;
+                            List<DeviceTypeServices> deviceTypeServiceses = new ArrayList<DeviceTypeServices>();
+                            GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+                            for (Service serviceXml : tingcoServicePosted.getServices().getService()) {
+                                if (serviceXml.getServiceID() != null) {
+                                    Object object = serviceDAO.getServicesbyServiceId(session, serviceXml.getServiceID());
+                                    if (object != null) {
+                                        Object deviceTypeServicesTemp = serviceDAO.getDeviceTypeServicesByDeviceTypeIDAndServiceID(tingcoServicePosted.getServices().getDeviceTypeID().getValue(), serviceXml.getServiceID(), session);
+                                        if (deviceTypeServicesTemp != null) {
+                                            continue;
+                                        }
+                                        Services services = (Services) object;
+                                        DeviceTypeServices dts = new DeviceTypeServices();
+                                        dts.setId(new DeviceTypeServicesId(deviceTypes.getDeviceTypeId(), services.getServiceId()));
+                                        if(isDefault != null){
+                                            if(isDefault.equalsIgnoreCase("0")){
+                                                dts.setIsDefault(0);
+                                            }else if(isDefault.equalsIgnoreCase("1")){
+                                                dts.setIsDefault(1);
+                                            }
+                                        }else{
+                                            dts.setIsDefault(0);
+                                        }
+                                        
+                                        dts.setCreatedDate(gc.getTime());
+                                        dts.setUpdatedDate(gc.getTime());
+                                        dts.setLastUpdatedByUserId(sessions2.getUserId());
+                                        deviceTypeServiceses.add(dts);
+                                    }
+                                }
+                            }
+                            if (!deviceTypeServiceses.isEmpty()) {
+                                if (!serviceDAO.saveDeviceTypeServices(deviceTypeServiceses, session)) {
+                                    tingcoService.getMsgStatus().setResponseCode(-1);
+                                    tingcoService.getMsgStatus().setResponseText("Error Occurred While Adding");
+                                    return tingcoService;
+                                }
+                            }
+                        }
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No DeviceType Found in Input");
+                        return tingcoService;
+                    }
+
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getServicesBySerachString(String searchString) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (searchString.equals("")) {
+                    searchString = null;
+                } else {
+                    searchString = searchString.split("/")[2];
+                }
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    Users2 user = userDAO.getUserById(sessions2.getUserId(), session);
+                    List<GroupTrusts> groupTrusts = groupDAO.getGroupTrustByGroupID(user.getGroupId(), session);
+                    Set<String> groupIdsList = groupDAO.getGroupIdsList(user.getGroupId(), groupTrusts);
+                    List<List<String>> listsplit = TCMUtil.splitStringList(new ArrayList(groupIdsList), 2000);
+                    List<Services> allTrustedServices = new ArrayList<Services>();
+                    List<Services> filiteredServices = new ArrayList<Services>();
+                    if (searchString != null) {
+                        if (TCMUtil.isValidUUID(searchString)) {
+                            for (List<String> list : listsplit) {
+                                List<Services> temp = serviceDAO.getServicesByServiceIdAndTrustedGroupIDS(searchString, list, session);
+                                allTrustedServices.addAll(temp);
+                            }
+                        } else {
+                            for (List<String> list : listsplit) {
+                                List<Services> temp = serviceDAO.getServicesBySearchStringAndGroupIDs(searchString, list, session);
+                                allTrustedServices.addAll(temp);
+                            }
+                        }
+                    } else {
+                        for (List<String> list : listsplit) {
+                            List<Services> temp = serviceDAO.getServicesByTrustedGroupIDs(list, session);
+                            allTrustedServices.addAll(temp);
+                        }
+
+                    }
+                    if (allTrustedServices.isEmpty()) {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No Data Found");
+                        return tingcoService;
+                    } else {
+                        List<String> serviceIds = new ArrayList<String>();
+                        for (Services services : allTrustedServices) {
+                            serviceIds.add(services.getServiceId());
+                        }
+                        filiteredServices.addAll(serviceDAO.getServices(serviceIds, session, 200));
+                    }
+                    tingcoService = tingcoServiceXML.buildGetServices(filiteredServices, tingcoService);
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getServicesByDeviceType(String deviceTypeId, int countryId) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<DeviceTypeServices> deviceTypeServiceses = serviceDAO.getDeviceTypeServicesByDeviceTypeID(deviceTypeId, session);
+                    if (deviceTypeServiceses.isEmpty()) {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No Data Found");
+                        return tingcoService;
+                    } else {
+                        Set<String> serviceIds = new HashSet<String>();
+                        for (DeviceTypeServices dts : deviceTypeServiceses) {
+                            serviceIds.add(dts.getId().getServiceId());
+                        }
+                        Users2 user = userDAO.getUserById(sessions2.getUserId(), session);
+                        List<GroupTrusts> groupTrusts = groupDAO.getGroupTrustByGroupID(user.getGroupId(), session);
+                        Set<String> groupIdsList = groupDAO.getGroupIdsList(user.getGroupId(), groupTrusts);
+                        List<List<String>> listsplit = TCMUtil.splitStringList(new ArrayList(groupIdsList), 2000);
+                        List<Services> allTrustedServices = new ArrayList<Services>();
+                        for (List<String> list : listsplit) {
+                            List<Services> temp = serviceDAO.getServicesByServiceIDAndGroupIDs(serviceIds, list, session);
+                            allTrustedServices.addAll(temp);
+                        }
+                        TCMUtil.loger(this.getClass().getName(), "All Trusted Services Size :" + allTrustedServices.size(), "info");
+                        if (allTrustedServices.isEmpty()) {
+                            tingcoService.getMsgStatus().setResponseCode(-1);
+                            tingcoService.getMsgStatus().setResponseText("No Data Found");
+                            return tingcoService;
+                        } else {
+                            List<String> serviceIDS = new ArrayList<String>();
+                            List<String> groupIDs = new ArrayList<String>();
+                            for (Services services : allTrustedServices) {
+                                serviceIDS.add(services.getServiceId());
+                                groupIDs.add(services.getGroups().getGroupId());
+                            }
+                            List<Services> filiteredServices = serviceDAO.getServices(serviceIDS, session, 200);
+                            List<GroupTranslations> groupTranslationses = groupDAO.getGroupTranslationsById(groupIDs, countryId, session);
+
+                            tingcoService = tingcoServiceXML.buildGetServicesByDeviceType(tingcoService, filiteredServices, groupTranslationses);
+                        }
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService addServiceContentSubscriptions(String serviceId, String contentCategoryId, String groupId, String serviceClientLoginId) {
+        Session session = null;
+        Transaction tx = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.ADD);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<ServiceContentSubscriptions> serviceContentSubs = serviceDAO.getServiceContentSubscriptionsByVariousIds(serviceId, contentCategoryId, serviceClientLoginId, session);
+                    if (serviceContentSubs.isEmpty()) {
+                        tx = session.beginTransaction();
+                        ProductsDAO productDAO = new ProductsDAO();
+                        GroupDefaultAgreement gda = productDAO.getGroupDefaultAgreement(groupId, session);
+                        ServiceContentSubscriptions serviceContentSub = new ServiceContentSubscriptions();
+                        serviceContentSub.setServiceContentSubscriptionId(UUID.randomUUID().toString());
+                        serviceContentSub.setServiceId(serviceId);
+                        serviceContentSub.setContentCategoryId(contentCategoryId);
+                        serviceContentSub.setAgreementId(gda.getAgreements().getAgreementId());
+                        serviceContentSub.setServiceClientLoginId(serviceClientLoginId);
+                        serviceContentSub.setSubscriptionEnabled(1);
+                        serviceContentSub.setServiceSubscriptionAclid("9B264945-E9D6-491E-827F-6593301A208C");
+                        serviceContentSub.setUserId(sessions2.getUserId());
+                        serviceContentSub.setCreatedDate(currentDateTime.getTime());
+                        serviceContentSub.setUpdatedDate(currentDateTime.getTime());
+                        session.saveOrUpdate(serviceContentSub);
+                        tx.commit();
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Selected content already exists");
+                        return tingcoService;
+                    }
+
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService addServiceType(String serviceTypeName, String description) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            if (!description.equals("")) {
+                description = description.split("/")[2];
+            } else {
+                description = null;
+            }
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.ADD);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+                    ServiceTypes serviceTypes = new ServiceTypes();
+                    serviceTypes.setServiceTypeId(UUID.randomUUID().toString().toUpperCase());
+                    serviceTypes.setServiceTypeName(TCMUtil.convertHexToString(serviceTypeName));
+                    if (description != null) {
+                        serviceTypes.setServiceTypeDescription(TCMUtil.convertHexToString(description));
+                    }
+                    serviceTypes.setCreatedDate(gc.getTime());
+                    serviceTypes.setUpdatedDate(gc.getTime());
+                    serviceTypes.setUserId(sessions2.getUserId());
+                    if (!serviceDAO.saveServiceTypes(session, serviceTypes)) {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Error occured");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService UpdatechangedDataByBundleVersionID(String bundleVersionId, String changeLog) {
+        Session session = null;
+        boolean hasPermission = false;
+        Transaction tx = null;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            if (!changeLog.equals("")) {
+                changeLog = changeLog.split("/")[2];
+            } else {
+                changeLog = null;
+            }
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    BundleVersions bundleVersions = (BundleVersions) session.get(BundleVersions.class, bundleVersionId);
+                    if (bundleVersions == null) {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Data Not Found");
+                        return tingcoService;
+                    }
+                    if (changeLog != null) {
+                        bundleVersions.setChangeLog(changeLog);
+                    } else {
+                        bundleVersions.setChangeLog(null);
+                    }
+                    tx = session.beginTransaction();
+                    session.saveOrUpdate(bundleVersions);
+                    tx.commit();
+                    return tingcoService;
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            if (tx != null) {
+                tx.rollback();
+            }
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+    }
+
+    private TingcoService addServiceTypeBundles(String content) {
+        Session session = null;
+        boolean hasPermission = false;
+        Transaction tx = null;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.ADD);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    tx = session.beginTransaction();
+                    int i = 0;
+                    TingcoService service = (TingcoService) JAXBManager.getInstance().unMarshall(content, TingcoService.class);
+                    Service servicejaxb = service.getServices().getService().get(0);
+                    List<String> bundleIds = servicejaxb.getBundles().getBundle().get(0).getBundleIDs();
+                    for (String bundleId : bundleIds) {
+                        ServiceTypeBundles serviceTypeBundles = new ServiceTypeBundles();
+                        serviceTypeBundles.setId(new ServiceTypeBundlesId(servicejaxb.getServiceType().getServiceTypeID(), bundleId));
+                        serviceTypeBundles.setLastUpdatedByUserId(sessions2.getUserId());
+                        serviceTypeBundles.setCreatedDate(currentDateTime.getTime());
+                        serviceTypeBundles.setUpdatedDate(currentDateTime.getTime());
+                        session.saveOrUpdate(serviceTypeBundles);
+                        i++;
+                        if (i % 20 == 0) {
+                            session.flush();
+                            session.clear();
+                        }
+                    }
+                    tx.commit();
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            if (tx != null) {
+                tx.rollback();
+            }
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService deleteDeviceServicesAllowedBundles(String content) {
+        boolean hasPermission = false;
+        Session session = null;
+        long requestedTime = System.currentTimeMillis();
+        Transaction tx = null;
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.DELETE);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    tx = session.beginTransaction();
+                    TingcoService services = (TingcoService) JAXBManager.getInstance().unMarshall(content, TingcoService.class);
+                    List<Service> servicejaxb = services.getServices().getService();
+                    int numberOfDeletes = 0;
+                    for (Service service : servicejaxb) {
+                        DeviceServicesAllowedBundles dsab = (DeviceServicesAllowedBundles) session.get(DeviceServicesAllowedBundles.class, new DeviceServicesAllowedBundlesId(service.getDevice().get(0).getDeviceID(), service.getServiceID(), service.getBundles().getBundle().get(0).getBundleVersions().get(0).getBundleVersion().getBundleVersionID()));
+                        session.delete(dsab);
+                        numberOfDeletes++;
+                        if (numberOfDeletes % 20 == 0) {
+                            session.flush();
+                            session.clear();
+                        }
+                    }
+                    tx.commit();
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception e) {
+            if (tx != null) {
+                if (tx.wasCommitted()) {
+                    tx.rollback();
+                }
+            }
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService deleteServiceContentSubscriptions(String serviceContentSubscriptionId) {
+        boolean hasPermission = false;
+        Session session = null;
+        Transaction tx = null;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.DELETE);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    tx = session.beginTransaction();
+                    Object serviceContentSubscriptions = serviceDAO.getServiceContentSubsscriptions(serviceContentSubscriptionId, session);
+                    if (serviceContentSubscriptions != null) {
+                        session.delete(serviceContentSubscriptions);
+                        tx.commit();
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (DatatypeConfigurationException ex) {
+            if (tx != null) {
+                if (tx.wasCommitted()) {
+                    tx.rollback();
+                }
+            }
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error Occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService deleteServiceTypeBundles(String serviceTypeId, String bundleId) {
+        boolean hasPermission = false;
+        Session session = null;
+        Transaction tx = null;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.DELETE);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+
+                    Object serviceTypeBundles = serviceDAO.getServiceTypeBundlesByIds(serviceTypeId, bundleId, session);
+//                    if (serviceTypeBundles != null) {
+//                        session.delete(serviceTypeBundles);
+//                        tx.commit();
+//                    }
+                    if (serviceTypeBundles != null) {
+                        tx = session.beginTransaction();
+                        session.delete(serviceTypeBundles);
+                        tx.commit();
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Data Not Found.");
+                        return tingcoService;
+                    }
+
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (DatatypeConfigurationException ex) {
+            if (tx != null) {
+                if (tx.wasCommitted()) {
+                    tx.rollback();
+                }
+            }
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error Occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getBundleByBundleCategoryAndSearchString(String groupId, int countryId, String searchString, String bundleCategoryId) {
+        long requestedTime = System.currentTimeMillis();
+        Session session = null;
+        boolean hasPermission = false;
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    if (!searchString.equals("")) {
+                        searchString = searchString.split("/")[2];
+                    } else {
+                        searchString = null;
+                    }
+                    if (!bundleCategoryId.equals("")) {
+                        bundleCategoryId = bundleCategoryId.split("/")[2];
+                    } else {
+                        bundleCategoryId = null;
+                    }
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<BundleDetails> bundleDetails = serviceDAO.getBundleDetailsByBundleCategoryAndSearchString(groupId, countryId, searchString, bundleCategoryId, session);
+
+                    if (!bundleDetails.isEmpty()) {
+                        Collections.sort(bundleDetails, new Comparator<se.info24.pojo.BundleDetails>() {
+
+                            public int compare(BundleDetails o1, BundleDetails o2) {
+                                return o1.getBundleName().compareToIgnoreCase(o2.getBundleName());
+                            }
+                        });
+                        tingcoService = tingcoServiceXML.buildBundleByBundleCategoryAndSearchString(tingcoService, bundleDetails);
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No data found");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getBundleVersionsListByBundleID(String bundleid) {
+        Session session = null;
+        Session ismOprSession = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    ismOprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    UserTimeZones2 userTimeZones2 = RestUtilDAO.getUserTimeZones2byUserId(sessions2.getUserId(), session);
+                    if (userTimeZones2 != null) {
+                        String timeZoneGMToffset = RestUtilDAO.getTimezoneById(userTimeZones2.getTimeZoneId(), session).getTimeZoneGmtoffset();
+                        Object bundleObject = serviceDAO.getBundleByBundleId(bundleid, session);
+                        if (bundleObject != null) {
+                            Bundle bundle = (Bundle) bundleObject;
+                            List<BundleVersions> bundleVersionses = serviceDAO.getBundleVersionByBundleID(bundle.getBundleId(), session, 2000);
+                            if (!bundleVersionses.isEmpty()) {
+                                List<String> userIDs = new ArrayList<String>();
+                                List<BundleFiles> bundleFileses = new ArrayList<BundleFiles>();
+                                for (BundleVersions bv : bundleVersionses) {
+                                    userIDs.add(bv.getLastUpdatedByUserId());
+                                    List<BundleFiles> fileses = serviceDAO.getBundleFilesByBundleVersionID(bv.getBundleVersionId(), ismOprSession);
+                                    if (!fileses.isEmpty()) {
+                                        bundleFileses.add(fileses.get(0));
+                                    }
+                                }
+                                List<Users2> usersDetails = userDAO.getUser2ListByUserId(userIDs, session);
+                                tingcoService = tingcoServiceXML.buildGetBundleVersionsListByBundleID(tingcoService, bundle, bundleFileses, bundleVersionses, usersDetails, timeZoneGMToffset);
+                            } else {
+                                tingcoService.getMsgStatus().setResponseCode(-1);
+                                tingcoService.getMsgStatus().setResponseText("Data Not Found");
+                                return tingcoService;
+                            }
+                        } else {
+                            tingcoService.getMsgStatus().setResponseCode(-1);
+                            tingcoService.getMsgStatus().setResponseText("Data Not Found With Given BundleId");
+                            return tingcoService;
+                        }
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("userTimeZones is not found");
+                        return tingcoService;
+                    }
+
+
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getBundleDetailsById(String bundleid, String countryid) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    Object bundleObject = serviceDAO.getBundleByBundleId(bundleid, session);
+                    if (bundleObject != null) {
+                        Bundle bundle = (Bundle) bundleObject;
+                        BundleCategoryTranslations bundleCategoryTranslations = null;
+                        BundleTypeTranslations bundleTypeTranslations = null;
+                        if (bundle.getBundleCategoryId() != null) {
+                            Object bct = serviceDAO.getBundleCategoryTranslationsByID(bundle.getBundleCategoryId(), Integer.parseInt(countryid), session);
+                            if (bct != null) {
+                                bundleCategoryTranslations = (BundleCategoryTranslations) bct;
+                            }
+                        }
+                        if (bundle.getBundleTypeId() != null) {
+                            Object btt = serviceDAO.getBundalTypeTranslationsByID(bundle.getBundleTypeId(), Integer.parseInt(countryid), session);
+                            if (btt != null) {
+                                bundleTypeTranslations = (BundleTypeTranslations) btt;
+                            }
+                        }
+                        GroupTranslations groupTranslations = groupDAO.getGroupTranslationsByIds(bundle.getGroupId(), Integer.parseInt(countryid), session);
+                        tingcoService = tingcoServiceXML.buildGetBundleDetailsById(tingcoService, bundle, bundleCategoryTranslations, bundleTypeTranslations, groupTranslations, session);
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Data Not Found");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getBundleList(String groupID, String searchString) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            if (!searchString.equals("")) {
+                searchString = searchString.split("/")[2];
+            } else {
+                searchString = null;
+            }
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<GroupTrusts> groupTrustsList = groupDAO.getGroupTrustByGroupID(groupID, session);
+                    Set<String> groupIdList = groupDAO.getGroupIdsList(groupID, groupTrustsList);
+
+                    List<Bundle> bundles = new ArrayList<Bundle>();
+
+                    List<List<String>> listsplit = TCMUtil.splitStringList(new ArrayList(groupIdList), 2000);
+                    for (List<String> list : listsplit) {
+                        if (searchString == null) {
+                            List<Bundle> bundlesTemp = serviceDAO.getBundleByCountryID(session, list, 200);
+                            if (bundlesTemp != null) {
+                                bundles.addAll(bundlesTemp);
+                            }
+                        } else {
+                            List<Bundle> bundlesTemp = serviceDAO.getBundleTranslationsByName(session, list, searchString);
+                            if (bundlesTemp != null) {
+                                bundles.addAll(bundlesTemp);
+                            }
+                        }
+                    }
+                    if (bundles.isEmpty()) {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Data Not Found");
+                        return tingcoService;
+                    }
+                    return tingcoServiceXML.buildGetBundleList(tingcoService, bundles);
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+    }
+
+    private TingcoService getBundleLogDetails(String bundleId, String timePeriod, String fromDate, String toDate) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (!bundleId.equals("")) {
+                bundleId = bundleId.split("/")[2];
+            } else {
+                bundleId = null;
+            }
+            if (!timePeriod.equals("")) {
+                timePeriod = timePeriod.split("/")[2];
+            } else {
+                timePeriod = null;
+            }
+            if (!fromDate.equals("")) {
+                fromDate = fromDate.split("/")[2];
+            } else {
+                fromDate = null;
+            }
+            if (!toDate.equals("")) {
+                toDate = toDate.split("/")[2];
+            } else {
+                toDate = null;
+            }
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    UserTimeZones2 userTimeZones2 = RestUtilDAO.getUserTimeZones2byUserId(sessions2.getUserId(), session);
+                    if (userTimeZones2 != null) {
+                        String timeZoneGMToffset = RestUtilDAO.getTimezoneById(userTimeZones2.getTimeZoneId(), session).getTimeZoneGmtoffset();
+                        List<BundleLog> bundleLogs = new ArrayList<BundleLog>();
+                        SimpleDateFormat lFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+                        String gc_time = lFormat.format(gc.getTime());
+                        GregorianCalendar gc_diff = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+                        gc_diff.setTime(gc.getTime());
+                        if (timePeriod != null) {
+                            if (timePeriod.equalsIgnoreCase("100")) {
+                                bundleLogs = serviceDAO.getBundleLog(session, 100);
+                            } else if (timePeriod.equalsIgnoreCase("hour")) {
+                                gc_diff.add(GregorianCalendar.HOUR, -1);
+                                long gc_diff_Millis = gc_diff.getTimeInMillis();
+                                Date gc_diff_lDate = new Date(gc_diff_Millis);
+                                String gc_diff_time = lFormat.format(gc_diff_lDate);
+                                bundleLogs = serviceDAO.getBundleLogByCreatedDate(session, gc_diff_time, gc_time, 200);
+                            } else if (timePeriod.equalsIgnoreCase("day")) {
+                                gc_diff.add(GregorianCalendar.DATE, -1);
+                                long gc_diff_Millis = gc_diff.getTimeInMillis();
+                                Date gc_diff_lDate = new Date(gc_diff_Millis);
+                                String gc_diff_time = lFormat.format(gc_diff_lDate);
+                                bundleLogs = serviceDAO.getBundleLogByCreatedDate(session, gc_diff_time, gc_time, 200);
+                            } else if (timePeriod.equalsIgnoreCase("week")) {
+                                gc_diff.add(GregorianCalendar.DATE, -7);
+                                long gc_diff_Millis = gc_diff.getTimeInMillis();
+                                Date gc_diff_lDate = new Date(gc_diff_Millis);
+                                String gc_diff_time = lFormat.format(gc_diff_lDate);
+                                bundleLogs = serviceDAO.getBundleLogByCreatedDate(session, gc_diff_time, gc_time, 200);
+                            } else if (timePeriod.equalsIgnoreCase("month")) {
+                                gc_diff.add(GregorianCalendar.MONTH, -1);
+                                long gc_diff_Millis = gc_diff.getTimeInMillis();
+                                Date gc_diff_lDate = new Date(gc_diff_Millis);
+                                String gc_diff_time = lFormat.format(gc_diff_lDate);
+                                bundleLogs = serviceDAO.getBundleLogByCreatedDate(session, gc_diff_time, gc_time, 200);
+                            }
+                        } else if (fromDate != null && toDate != null) {
+                            gc.setTime(lFormat.parse(fromDate));
+                            gc.setTime(RestUtilDAO.convertUserLocalTimetoGMT(timeZoneGMToffset, gc.getTime()));
+                            String fromDateString = lFormat.format(gc.getTime());
+                            gc.setTime(lFormat.parse(toDate));
+                            gc.setTime(RestUtilDAO.convertUserLocalTimetoGMT(timeZoneGMToffset, gc.getTime()));
+                            String toDateString = lFormat.format(gc.getTime());
+                            bundleLogs = serviceDAO.getBundleLogByCreatedDate(session, fromDateString, toDateString, 200);
+                        }
+
+                        if (timePeriod != null || fromDate != null) {
+                            if (bundleId != null) {
+                                if (!bundleLogs.isEmpty()) {
+                                    for (BundleLog bundleLog : bundleLogs) {
+                                        if (bundleLog.getBundleId().equalsIgnoreCase(bundleId)) {
+                                            bundleLogs = serviceDAO.getBundleLogByBundleID(bundleId, session, 2000);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        } else if (bundleId != null) {
+                            bundleLogs = serviceDAO.getBundleLogByBundleID(bundleId, session, 2000);
+                        } else {
+                            bundleLogs = serviceDAO.getBundleLog(session, 100);
+                        }
+
+                        if (!bundleLogs.isEmpty()) {
+                            Set<String> bundleVersionIDs = new HashSet<String>();
+                            Set<String> bundleIdSet = new HashSet<String>();
+                            for (BundleLog bl : bundleLogs) {
+                                if (bl.getBundleVersionId() != null) {
+                                    bundleVersionIDs.add(bl.getBundleVersionId());
+                                }
+                                bundleIdSet.add(bl.getBundleId());
+                            }
+                            List<Bundle> bundles = serviceDAO.getBundleByIds(new ArrayList<String>(bundleIdSet), session);
+                            List<BundleVersions> bundleVersionses = new ArrayList<BundleVersions>();
+                            if (!bundleVersionIDs.isEmpty()) {
+                                bundleVersionses = serviceDAO.getBundleVersionByBundleVersionID(session, bundleVersionIDs);
+                            }
+                            tingcoService = tingcoServiceXML.buildGetBundleLogDetails(tingcoService, bundleLogs, bundleVersionses, timeZoneGMToffset, bundles);
+                        } else {
+                            tingcoService.getMsgStatus().setResponseCode(-1);
+                            tingcoService.getMsgStatus().setResponseText("No Data Found");
+                            return tingcoService;
+                        }
+
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("userTimeZones is not found");
+                        return tingcoService;
+                    }
+
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getBundleCayegories(int countryID, String searchString) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            if (!searchString.equals("")) {
+                searchString = searchString.split("/")[2];
+            } else {
+                searchString = null;
+            }
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<BundleCategoryTranslations> bundleCategoryTranslations = new ArrayList<BundleCategoryTranslations>();
+                    if (searchString == null) {
+                        bundleCategoryTranslations = serviceDAO.getBundleCategoryTranslations(session, countryID, 200);
+                    } else {
+                        bundleCategoryTranslations = serviceDAO.getBundleCategoryTranslationsByName(session, countryID, searchString);
+                    }
+                    if (bundleCategoryTranslations.isEmpty()) {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Data Not Found");
+                        return tingcoService;
+                    }
+                    return tingcoServiceXML.buildGetBundleCayegories(tingcoService, bundleCategoryTranslations);
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+
+            delayLog(requestedTime);
+        }
+    }
+
+    private TingcoService getBundleTypes(int countryID, String searchString) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            if (!searchString.equals("")) {
+                searchString = searchString.split("/")[2];
+            } else {
+                searchString = null;
+            }
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<BundleTypeTranslations> bundleTypeTranslations = new ArrayList();
+                    if (searchString == null) {
+                        bundleTypeTranslations = serviceDAO.getBundalTypes(session, countryID, 200);
+                    } else {
+                        bundleTypeTranslations = serviceDAO.getBundalTypesByName(session, countryID, searchString);
+                    }
+                    if (bundleTypeTranslations.isEmpty()) {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Data Not Found");
+                        return tingcoService;
+                    }
+                    return tingcoServiceXML.buildGetBundleTypes(tingcoService, bundleTypeTranslations);
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+
+            delayLog(requestedTime);
+        }
+    }
+
+    private TingcoService addBundleVersionAndBundleFile(String content) {
+        Session session = null;
+        Session ismOperationsSession = null;
+        boolean hasPermission = false;
+        Transaction ismtx = null;
+        Transaction tx = null;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.ADD);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    ismOperationsSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                    ismtx = session.beginTransaction();
+                    tx = ismOperationsSession.beginTransaction();
+//                    boolean isBundleVersionAdded = false;
+//                    boolean isBundleFileAdded = false;
+                    TingcoService service = (TingcoService) JAXBManager.getInstance().unMarshall(content, TingcoService.class);
+                    se.info24.servicejaxb.Bundle bundleJaxb = service.getServices().getService().get(0).getBundles().getBundle().get(0);
+                    String bundleVersionId = UUID.randomUUID().toString();
+                    BundleVersions bundleVersions = new BundleVersions();
+                    Bundle bundle = (Bundle) session.get(Bundle.class, bundleJaxb.getBundleID());
+                    bundleVersions.setBundle(bundle);
+                    bundleVersions.setBundleVersionId(bundleVersionId);
+                    bundleVersions.setMajor(0);
+                    bundleVersions.setMinor(0);
+                    bundleVersions.setMicro(0);
+                    bundleVersions.setQualifier(null);
+                    bundleVersions.setChangeLog("pending");
+                    bundleVersions.setLastUpdatedByUserId(sessions2.getUserId());
+                    bundleVersions.setCreatedDate(currentDateTime.getTime());
+
+                    se.info24.servicejaxb.BundleFiles bundleFilesJaxb = bundleJaxb.getBundleVersions().get(0).getBundleVersion().getBundleFiles();
+                    BundleFiles bundleFiles = new BundleFiles();
+                    bundleFiles.setBundleFileId(UUID.randomUUID().toString());
+                    bundleFiles.setBundleVersionId(bundleVersionId);
+                    bundleFiles.setBundleFileName(bundleFilesJaxb.getBundleFileName());
+                    bundleFiles.setBundleFileLength(bundleFilesJaxb.getBundleFileLength().longValue());
+                    bundleFiles.setBundleFileBlob(bundleFilesJaxb.getBundleFileBlob().getBytes());
+                    bundleFiles.setLastUpdatedByUserId(sessions2.getUserId());
+                    bundleFiles.setCreatedDate(currentDateTime.getTime());
+                    bundleFiles.setUpdatedDate(currentDateTime.getTime());
+                    session.saveOrUpdate(bundleVersions);
+                    ismOperationsSession.saveOrUpdate(bundleFiles);
+
+                    ismtx.commit();
+                    tx.commit();
+//                    isBundleVersionAdded = serviceDAO.saveBundleVersions(bundleVersions, session);
+//                    isBundleFileAdded = serviceDAO.saveBundleFiles(bundleFiles, ismOperationsSession);
+//                    if (isBundleVersionAdded && isBundleFileAdded) {
+//                        ismtx.commit();
+//                        tx.commit();
+//                    } else {
+//                        tingcoService.getMsgStatus().setResponseCode(-1);
+//                        tingcoService.getMsgStatus().setResponseText("Error occured");
+//                        return tingcoService;
+//                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            if (tx != null) {
+                tx.rollback();
+            }
+            if (ismtx != null) {
+                ismtx.rollback();
+            }
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            if (ismOperationsSession != null) {
+                ismOperationsSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService addUpdateBundles(String content) {
+        Session session = null;
+        Session ismOperationsSession = null;
+        boolean hasPermission = false;
+        Transaction ismtx = null;
+        Transaction tx = null;
+        long requestedTime = System.currentTimeMillis();
+
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.ADD);
+                if (hasPermission) {
+                    TingcoService service = (TingcoService) JAXBManager.getInstance().unMarshall(content, TingcoService.class);
+                    se.info24.servicejaxb.Bundle bundleJaxb = service.getServices().getService().get(0).getBundles().getBundle().get(0);
+                    Bundle bundle = null;
+                    BundleFiles bundleFiles = null;
+//                    boolean isBundleAdded = false;
+//                    boolean isBundleFileAdded = true; // true because checking (if (isBundleAdded && isBundleFileAdded)) below.
+                    if (bundleJaxb.getBundleID() != null) { //Update existing bundle
+                        session = HibernateUtil.getSessionFactory().openSession();
+                        ismtx = session.beginTransaction();
+                        bundle = (Bundle) serviceDAO.getBundleByBundleId(bundleJaxb.getBundleID(), session);
+                        bundle.setBundleName(bundleJaxb.getBundleName());
+                        bundle.setBundleSymbolicName(bundleJaxb.getBundleSymbolicName());
+                        if (bundleJaxb.getBundleDescription() != null) {
+                            bundle.setBundleDescription(bundleJaxb.getBundleDescription());
+                        }
+                        bundle.setGroupId(bundleJaxb.getGroupID().getValue());
+                        bundle.setBundleCategoryId(bundleJaxb.getBundleCategoryID());
+                        bundle.setBundleTypeId(bundleJaxb.getBundleTypeID());
+                        if (bundleJaxb.getBundleIconURL() != null) {
+                            bundle.setBundleIconUrl(bundleJaxb.getBundleIconURL());
+                        }
+                        bundle.setLastUpdatedByUserId(sessions2.getUserId());
+                        bundle.setCreatedDate(currentDateTime.getTime());
+                        bundle.setUpdatedDate(currentDateTime.getTime());
+                        System.out.println("i am here");
+//                        isBundleAdded = serviceDAO.saveBundle(bundle, session);
+                        session.saveOrUpdate(bundle);
+                        ismtx.commit();
+                    } else { // Add new Bundle, BundleVersion and BundleFiles
+                        session = HibernateUtil.getSessionFactory().openSession();
+                        ismOperationsSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+                        tx = ismOperationsSession.beginTransaction();
+                        ismtx = session.beginTransaction();
+                        String bundleId = UUID.randomUUID().toString();
+                        bundle = new Bundle();
+                        bundle.setBundleId(bundleId);
+                        bundle.setBundleName(bundleJaxb.getBundleName());
+                        bundle.setBundleSymbolicName(bundleJaxb.getBundleSymbolicName());
+                        if (bundleJaxb.getBundleDescription() != null) {
+                            bundle.setBundleDescription(bundleJaxb.getBundleDescription());
+                        }
+                        bundle.setGroupId(bundleJaxb.getGroupID().getValue());
+                        bundle.setBundleCategoryId(bundleJaxb.getBundleCategoryID());
+                        bundle.setBundleTypeId(bundleJaxb.getBundleTypeID());
+                        if (bundleJaxb.getBundleIconURL() != null) {
+                            bundle.setBundleIconUrl(bundleJaxb.getBundleIconURL());
+                        }
+                        bundle.setLastUpdatedByUserId(sessions2.getUserId());
+                        bundle.setCreatedDate(currentDateTime.getTime());
+                        bundle.setUpdatedDate(currentDateTime.getTime());
+
+                        String bundleVersionId = UUID.randomUUID().toString();
+                        BundleVersions bundleVersions = new BundleVersions();
+//                        Bundle bu =(Bundle)  session.get(Bundle.class, bundleId);
+                        bundleVersions.setBundle(bundle);
+                        bundleVersions.setBundleVersionId(bundleVersionId);
+                        bundleVersions.setMajor(0);
+                        bundleVersions.setMinor(0);
+                        bundleVersions.setMicro(0);
+                        bundleVersions.setQualifier(null);
+                        bundleVersions.setChangeLog("pending");
+                        bundleVersions.setLastUpdatedByUserId(sessions2.getUserId());
+                        bundleVersions.setCreatedDate(currentDateTime.getTime());
+                        Set<BundleVersions> bundleVersionsSet = new HashSet<BundleVersions>();
+                        bundleVersionsSet.add(bundleVersions);
+                        bundle.setBundleVersionses(bundleVersionsSet);
+
+                        if (!bundleJaxb.getBundleVersions().isEmpty()) { // code change needed in future like bundleJaxb.getBundleVersions().get(0).getBundleVersion().getBundleFiles() != null
+                            se.info24.servicejaxb.BundleFiles bundleFilesJaxb = bundleJaxb.getBundleVersions().get(0).getBundleVersion().getBundleFiles();
+                            bundleFiles = new BundleFiles();
+                            bundleFiles.setBundleFileId(UUID.randomUUID().toString());
+                            bundleFiles.setBundleVersionId(bundleVersionId);
+                            bundleFiles.setBundleFileName(bundleFilesJaxb.getBundleFileName());
+                            bundleFiles.setBundleFileLength(bundleFilesJaxb.getBundleFileLength().longValue());
+                            bundleFiles.setBundleFileBlob(bundleFilesJaxb.getBundleFileBlob().getBytes());
+                            bundleFiles.setLastUpdatedByUserId(sessions2.getUserId());
+                            bundleFiles.setCreatedDate(currentDateTime.getTime());
+                            bundleFiles.setUpdatedDate(currentDateTime.getTime());
+                        }
+
+                        session.saveOrUpdate(bundle);
+
+//                        isBundleAdded = serviceDAO.saveBundle(bundle, session);
+
+                        if (bundleFiles != null) {
+                            ismOperationsSession.saveOrUpdate(bundleFiles);
+//                            isBundleFileAdded = serviceDAO.saveBundleFiles(bundleFiles, ismOperationsSession);
+                        }
+                        ismtx.commit();
+                        tx.commit();
+                    }
+//                    if (isBundleAdded && isBundleFileAdded) {
+//                        ismtx.commit();
+//                        tx.commit();
+//                    } else {
+//                        tingcoService.getMsgStatus().setResponseCode(-1);
+//                        tingcoService.getMsgStatus().setResponseText("Error occured");
+//                        return tingcoService;
+//                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            if (tx != null) {
+                tx.rollback();
+            }
+            if (ismtx != null) {
+                ismtx.rollback();
+            }
+            return tingcoService;
+        } finally {
+
+            if (session != null) {
+                session.close();
+            }
+            if (ismOperationsSession != null) {
+                ismOperationsSession.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getContentSubscriptionDetails(int countryId, String groupId, String serviceClientLoginId) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.GROUPS, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+
+                    if (!serviceClientLoginId.equals("")) {
+                        serviceClientLoginId = serviceClientLoginId.split("/")[2];
+                    } else {
+                        serviceClientLoginId = null;
+                    }
+//                    List<ContentCategoriesInGroups> contentCategoriesInGroupses = serviceDAO.getContentCategoriesInGroupsByGroupId(session, groupId);
+//                    if (contentCategoriesInGroupses.isEmpty()) {
+//                        tingcoService.getMsgStatus().setResponseCode(-1);
+//                        tingcoService.getMsgStatus().setResponseText("Data Not Found");
+//                        return tingcoService;
+//                    }
+                    ProductsDAO productdAO = new ProductsDAO();
+
+                    List<String> serviceClientLoginIdList = new ArrayList<String>();
+                    List<ServiceClientLogins> serviceClientLogins = new ArrayList<ServiceClientLogins>();
+                    if (serviceClientLoginId != null) {
+                        serviceClientLogins = serviceDAO.getServiceClientLoginsByIdAndGroupID(groupId, serviceClientLoginId, session);
+                    } else {
+                        serviceClientLogins = productdAO.getServiceClientLoginsByGroupId(groupId, session);
+                    }
+
+                    if (serviceClientLogins.isEmpty()) {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Data Not Found");
+                        return tingcoService;
+                    }
+                    for (ServiceClientLogins serviceClientLogin : serviceClientLogins) {
+                        serviceClientLoginIdList.add(serviceClientLogin.getServiceClientLoginId());
+                    }
+
+                    List<ServiceContentSubscriptions> serviceContentSubscriptionses = serviceDAO.getServiceContentSubscriptionsBySCLID(serviceClientLoginIdList, session);
+
+                    if (serviceContentSubscriptionses.isEmpty()) {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Data Not Found");
+                        return tingcoService;
+                    }
+
+                    List<String> serviceId = new ArrayList<String>();
+                    List<String> contentCategoryId = new ArrayList<String>();
+
+                    for (ServiceContentSubscriptions serviceContentSubscriptions : serviceContentSubscriptionses) {
+                        serviceId.add(serviceContentSubscriptions.getServiceId());
+                        contentCategoryId.add(serviceContentSubscriptions.getContentCategoryId());
+                    }
+
+                    List<Services> serviceses = serviceDAO.getServices(session, serviceId);
+                    ProductsDAO productsDAO = new ProductsDAO();
+                    List<ContentCategoryTranslations> contentCategoryTranslations = productsDAO.getContentCategoryTranslations(new HashSet<String>(contentCategoryId), countryId, session);
+
+                    return tingcoServiceXML.buildGetContentSubscriptionDetails(tingcoService, serviceses, serviceClientLogins, contentCategoryTranslations, serviceContentSubscriptionses);
+
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+//        return tingcoService;
+    }
+
+    private TingcoService getDeviceActiveBundleDetails(String deviceId, String serviceId) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                if (!serviceId.equals("")) {
+                    serviceId = serviceId.split("/")[2];
+                } else {
+                    serviceId = null;
+                }
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<DeviceServicesActiveBundles> deviceServicesActiveBundlesList = new ArrayList<DeviceServicesActiveBundles>();
+                    if (serviceId == null) {
+                        deviceServicesActiveBundlesList = serviceDAO.getDeviceServicesActiveBundlesByDeviceId(deviceId, session);
+                    } else {
+                        Object deviceServicesActiveBundles = serviceDAO.getDeviceServicesActiveBundlesByIds(deviceId, serviceId, session);
+                        deviceServicesActiveBundlesList.add((DeviceServicesActiveBundles) deviceServicesActiveBundles);
+                    }
+                    if (!deviceServicesActiveBundlesList.isEmpty()) {
+                        UserTimeZones2 userTimeZones2 = RestUtilDAO.getUserTimeZones2byUserId(sessions2.getUserId(), session);
+                        String timeZoneGMToffset = RestUtilDAO.getTimezoneById(userTimeZones2.getTimeZoneId(), session).getTimeZoneGmtoffset();
+                        tingcoService = tingcoServiceXML.buildDeviceServicesActiveBundles(tingcoService, deviceServicesActiveBundlesList, timeZoneGMToffset);
+                        return tingcoService;
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No data found");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+    }
+
+    private TingcoService getDeviceServicesAllowedBundles(String deviceId, String serviceId) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                if (!serviceId.equals("")) {
+                    serviceId = serviceId.split("/")[2];
+                } else {
+                    serviceId = null;
+                }
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<DeviceServicesAllowedBundles> deviceServicesAllowedBundlesList = new ArrayList<DeviceServicesAllowedBundles>();
+                    if (serviceId == null) {
+                        deviceServicesAllowedBundlesList = serviceDAO.getDeviceServicesAllowedBundlesByDeviceId(deviceId, session);
+                    } else {
+                        deviceServicesAllowedBundlesList = serviceDAO.getDeviceServicesAllowedBundlesByDeviceIdServiceId(deviceId, serviceId, session);
+                    }
+                    if (!deviceServicesAllowedBundlesList.isEmpty()) {
+                        tingcoService = tingcoServiceXML.buildDeviceAllowedBundleDetails(tingcoService, deviceServicesAllowedBundlesList);
+                        return tingcoService;
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No data found");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+    }
+
+    private TingcoService getDeviceAvailableBundlesNotInAllowedBundles(String deviceId, String serviceId) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                if (!serviceId.equals("")) {
+                    serviceId = serviceId.split("/")[2];
+                } else {
+                    serviceId = null;
+                }
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<DeviceServicesAvailableBundles> deviceServicesAvailableBundlesList = new ArrayList<DeviceServicesAvailableBundles>();
+                    if (serviceId == null) {
+                        deviceServicesAvailableBundlesList = serviceDAO.getDeviceServicesAvailableBundlesNotInAllowedBundlesByDeviceId(deviceId, session);
+                    } else {
+                        deviceServicesAvailableBundlesList = serviceDAO.getDeviceServicesAvailableBundlesNotInAllowedBundlesByDeviceIdServiceId(deviceId, serviceId, session);
+                    }
+                    if (!deviceServicesAvailableBundlesList.isEmpty()) {
+                        tingcoService = tingcoServiceXML.buildDeviceAvailableBundlesNotInAllowedBundles(tingcoService, deviceServicesAvailableBundlesList);
+                        return tingcoService;
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No data found");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+    }
+
+    private TingcoService getServiceChannelList(String serviceId) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<ServicesChannels> servicesChannelseList = serviceDAO.getServicesChannelsByServiceId(session, serviceId);
+                    if (servicesChannelseList.isEmpty()) {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Data Not Found");
+                        return tingcoService;
+                    }
+                    List<String> channelId = new ArrayList<String>();
+                    for (ServicesChannels servicesChannels : servicesChannelseList) {
+                        channelId.add(servicesChannels.getChannels().getChannelId());
+                    }
+
+                    List<Channels> channelList = serviceDAO.getChannelByIds(session, channelId);
+                    return tingcoServiceXML.buildGetServiceChannelList(tingcoService, channelList, servicesChannelseList);
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+    }
+
+    private TingcoService getServiceSettingInfo(String serviceSettingId) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    UserTimeZones2 userTimeZones2 = RestUtilDAO.getUserTimeZones2byUserId(sessions2.getUserId(), session);
+                    if (userTimeZones2 != null) {
+                        String timeZoneGMToffset = RestUtilDAO.getTimezoneById(userTimeZones2.getTimeZoneId(), session).getTimeZoneGmtoffset();
+                        Object object = serviceDAO.getServiceSettingsByServiceSettingId(serviceSettingId, session);
+                        if (object != null) {
+                            ServiceSettings serviceSettings = (ServiceSettings) object;
+                            Users2 users2 = null;
+                            if (serviceSettings.getUserId() != null) {
+                                users2 = userDAO.getUserById(serviceSettings.getUserId(), session);
+                            }
+                            tingcoService = tingcoServiceXML.buildGetServiceSettingInfo(tingcoService, serviceSettings, users2, timeZoneGMToffset);
+                        } else {
+                            tingcoService.getMsgStatus().setResponseCode(-1);
+                            tingcoService.getMsgStatus().setResponseText("Data Not found");
+                            return tingcoService;
+                        }
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("userTimeZones is not found");
+                        return tingcoService;
+                    }
+
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService addNewChannelToService(String serviceID, String channelID, String channelDirection, String channelTag) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                if (!channelTag.equals("")) {
+                    channelTag = channelTag.split("/")[2];
+                } else {
+                    channelTag = null;
+                }
+
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.ADD);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    ServicesChannels servicesChannels = new ServicesChannels();
+                    Channels ch = serviceDAO.getChannelById(channelID, session);
+                    if (ch == null) {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Channel is not valid");
+                        return tingcoService;
+                    }
+                    servicesChannels.setChannels(ch);
+                    Object service = serviceDAO.getServicesbyServiceId(session, serviceID);
+                    if (service == null) {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("ServiceID is not valid");
+                        return tingcoService;
+                    }
+                    servicesChannels.setServices((Services) service);
+                    servicesChannels.setChannelDirection(Integer.valueOf(channelDirection));
+                    if (channelTag != null) {
+                        servicesChannels.setChannelTag(channelTag);
+                    }
+                    servicesChannels.setUserId(sessions2.getUserId());
+                    GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+                    servicesChannels.setUpdatedDate(gc.getTime());
+                    servicesChannels.setCreatedDate(gc.getTime());
+
+                    if (serviceDAO.addNewChannelToService(servicesChannels, session)) {
+                        tingcoService.getMsgStatus().setResponseCode(0);
+                        tingcoService.getMsgStatus().setResponseText("Added");
+                        return tingcoService;
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Error occured while adding");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+    }
+
+    private TingcoService addServiceSettings(String serviceId, String serviceSettingName, String serviceSettingValue, String settingDataTypeId, String serviceSettingParentId) {
+        Session session = null;
+        Transaction tx = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                if (!settingDataTypeId.equals("")) {
+                    settingDataTypeId = settingDataTypeId.split("/")[2];
+                } else {
+                    settingDataTypeId = null;
+                }
+                if (!serviceSettingParentId.equals("")) {
+                    serviceSettingParentId = serviceSettingParentId.split("/")[2];
+                } else {
+                    serviceSettingParentId = null;
+                }
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    tx = session.beginTransaction();
+                    String newServiceSettingId = UUID.randomUUID().toString();
+                    ServiceSettings serviceSettings = new ServiceSettings();
+                    serviceSettingValue = TCMUtil.convertHexToString(serviceSettingValue);
+                    SettingDataType settingDataType = null;
+                    if (settingDataTypeId != null) {
+                        settingDataType = deviceDAO.getSettingDataTypeById(settingDataTypeId, session);
+                    }
+                    if (serviceDAO.addServiceSettings(serviceSettings, newServiceSettingId, serviceSettingParentId, serviceId, serviceSettingName, serviceSettingValue, settingDataType, currentDateTime.getTime(), sessions2.getUserId(), currentDateTime.getTime(), currentDateTime.getTime(), session)) {
+                        tx.commit();
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Error occured while adding");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            if (tx != null) {
+                if (tx.wasCommitted()) {
+                    tx.rollback();
+                }
+            }
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService addServicesAndDeviceServices(String content) {
+        boolean hasPermission = false;
+        Session session = null;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.ADD);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    Transaction tx = session.beginTransaction();
+                    TingcoService services = (TingcoService) JAXBManager.getInstance().unMarshall(content, TingcoService.class);
+                    if (services.getServices() != null) {
+                        Service serv = services.getServices().getService().get(0);
+                        Services service = new Services();
+                        String newServiceId = UUID.randomUUID().toString();
+                        if (serviceDAO.saveServices(service, newServiceId, serv.getServiceName(), serv.getServiceDescription(), serv.getGroupID().getValue(), serv.getServiceType().getServiceTypeID(), serv.getServiceEnabled(), currentDateTime.getTime(), serv.getReplicates(), sessions2.getUserId(), currentDateTime.getTime(), currentDateTime.getTime(), session)) {
+                            if (!serv.getDevice().isEmpty()) {
+                                DeviceServices deviceServices = new DeviceServices();
+                                serviceDAO.saveDeviceServices(deviceServices, serv.getDevice().get(0).getDeviceID(), newServiceId, sessions2.getUserId(), currentDateTime.getTime(), currentDateTime.getTime(), session);
+                            }
+                            tx.commit();
+                        }
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Invalid XML found");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService deleteServiceSetting(String serviceSettingId) {
+        Session session = null;
+        Transaction tx = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.DELETE);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    tx = session.beginTransaction();
+                    Object obj = serviceDAO.getServiceSettingsByServiceSettingId(serviceSettingId, session);
+                    session.delete(obj);
+                    tx.commit();
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            if (tx != null) {
+                if (tx.wasCommitted()) {
+                    tx.rollback();
+                }
+            }
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getAllServices(String groupId, String deviceTypeId, String deviceId) {
+        boolean hasPermission = false;
+        ApplicationDAO applicationDAO = new ApplicationDAO();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                if (groupId.equals("")) {
+                    tingcoService.getMsgStatus().setResponseCode(-1);
+                    tingcoService.getMsgStatus().setResponseText("groupId should not be empty");
+                    return tingcoService;
+                }
+                if (!deviceTypeId.equals("") && !deviceId.equals("")) {
+                    tingcoService.getMsgStatus().setResponseCode(-1);
+                    tingcoService.getMsgStatus().setResponseText("Both DeviceTypeId and DeviceId not required. Either DeviceTypeId or DeviceId is required");
+                    return tingcoService;
+                }
+
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    if (!deviceTypeId.equals("") && deviceId.equals("")) {
+                        deviceTypeId = deviceTypeId.split("/")[2];
+                        List<GroupApplicationPackages> groupappPackagesList = applicationDAO.getGroupApplicationPackagesbyGroupId(groupId, session);
+                        if (!groupappPackagesList.isEmpty()) {
+                            Set<String> applicationPackageIdsList = applicationDAO.getApplicationPackageIds(groupappPackagesList);
+                            List<ApplicationPackageModules> appPackageModulesList = applicationDAO.getApplicationPackageModulesbyIdsList(applicationPackageIdsList, session);
+                            Set<String> applicationModuleIdsList = applicationDAO.getApplicationModuleIds(appPackageModulesList);
+                            List<ApplicationModuleServices> applicationModuleServicesList = applicationDAO.getApplicationModuleServices(applicationModuleIdsList, session);
+                            Set<String> serviceIdsList = serviceDAO.getserviceIDsList(session, applicationModuleServicesList);
+//                            List<DeviceTypeServices> deviceTypeServicesList = serviceDAO.getDeviceTypeServices(serviceIdsList, deviceTypeId, session);
+                            List<Services> servicesList = session.createCriteria(Services.class).add(Restrictions.in("serviceId", serviceIdsList)).addOrder(Order.desc("createdDate")).setMaxResults(200).list();
+                            List<String> serviceIdList = serviceDAO.getservicesIDsList(session, servicesList);
+                            List<Services> serviceList = serviceDAO.getServices(session, serviceIdList);
+                            tingcoService = tingcoServiceXML.buildTingcoAllServices(tingcoService, serviceList, null, deviceTypeId);
+                        } else {
+                            tingcoService.getMsgStatus().setResponseCode(-1);
+                            tingcoService.getMsgStatus().setResponseText("No groups found in the given groupId");
+                            return tingcoService;
+                        }
+
+                    } else if (deviceTypeId.equals("") && !deviceId.equals("")) {
+                        deviceId = deviceId.split("/")[2];
+                        Device device = deviceDAO.getDeviceById(deviceId, session);
+                        List<GroupApplicationPackages> groupappPackagesList = applicationDAO.getGroupApplicationPackagesbyGroupId(groupId, session);
+                        if (!groupappPackagesList.isEmpty()) {
+                            Set<String> applicationPackageIdsList = applicationDAO.getApplicationPackageIds(groupappPackagesList);
+                            List<ApplicationPackageModules> appPackageModulesList = applicationDAO.getApplicationPackageModulesbyIdsList(applicationPackageIdsList, session);
+                            Set<String> applicationModuleIdsList = applicationDAO.getApplicationModuleIds(appPackageModulesList);
+                            List<ApplicationModuleServices> applicationModuleServicesList = applicationDAO.getApplicationModuleServices(applicationModuleIdsList, session);
+                            Set<String> serviceIdsList = serviceDAO.getserviceIDsList(session, applicationModuleServicesList);
+//                            List<DeviceTypeServices> deviceTypeServicesList = serviceDAO.getDeviceTypeServices(serviceIdsList, deviceTypeId, session);
+                            List<Services> servicesList = session.createCriteria(Services.class).add(Restrictions.in("serviceId", serviceIdsList)).addOrder(Order.desc("createdDate")).setMaxResults(200).list();
+                            List<String> serviceIdList = serviceDAO.getservicesIDsList(session, servicesList);
+                            List<Services> serviceList = serviceDAO.getServices(session, serviceIdList);
+                            tingcoService = tingcoServiceXML.buildTingcoAllServices(tingcoService, serviceList, device, null);
+                        } else {
+                            tingcoService.getMsgStatus().setResponseCode(-1);
+                            tingcoService.getMsgStatus().setResponseText("No groups found in the given groupId");
+                            return tingcoService;
+                        }
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Either DeviceTypeId or DeviceId is required");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getDeviceServiceSubscriptions(String deviceId) throws DatatypeConfigurationException {
+        boolean hasPermission = false;
+        tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+        Session session = null;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            if (request.getAttribute("USERSESSION") != null) {
+                if (deviceId.equals("")) {
+                    tingcoService.getMsgStatus().setResponseCode(-1);
+                    tingcoService.getMsgStatus().setResponseText("deviceId should not be empty");
+                    return tingcoService;
+                }
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<ServiceDeviceSubscriptions> subscriptionList = serviceDAO.getServiceDeviceSubscriptionsByDeviceId(session, deviceId);
+                    if (!subscriptionList.isEmpty()) {
+                        tingcoService = serviceDAO.getDeviceServiceSubscriptions(subscriptionList, session, tingcoService);
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No Record found for ServiceDeviceSubscriptions");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getServiceDeviceSettings(String deviceId) {
+        Session session = null;
+        boolean hasPermission = false;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                if (deviceId.equals("")) {
+                    tingcoService.getMsgStatus().setResponseCode(-1);
+                    tingcoService.getMsgStatus().setResponseText("DeviceId should not be empty");
+                    return tingcoService;
+                }
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.DEVICE, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<ServiceDeviceSubscriptions> subscriptionList = serviceDAO.getServiceDeviceSubscriptionsByDeviceId(session, deviceId);
+                    if (!subscriptionList.isEmpty()) {
+                        List<String> subscriptionIdList = new ArrayList<String>();
+                        for (ServiceDeviceSubscriptions subscription : subscriptionList) {
+                            subscriptionIdList.add(subscription.getServiceDeviceSubscriptionId());
+                        }
+                        List<ServiceDeviceSubscriptions> subscriptionsList = serviceDAO.getServiceDeviceSubscriptions(session, subscriptionIdList);
+                        List<ServiceDeviceSettings> settingsList = serviceDAO.getServiceDeviceSettingsBySettingIdList(subscriptionIdList, session);
+                        tingcoService = tingcoServiceXML.buildServiceDeviceSettings(tingcoService, subscriptionsList, settingsList);
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No Record found in ServiceDeviceSubscriptions");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getServiceSettings(String serviceId) {
+        boolean hasPermission = false;
+        Session session = null;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<ServiceSettings> serviceSettingsList = serviceDAO.getServiceSettingsByServiceId(serviceId, session);
+                    if (!serviceSettingsList.isEmpty()) {
+                        tingcoService = tingcoServiceXML.buildServiceSettings(tingcoService, serviceSettingsList);
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No data found");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (DatatypeConfigurationException ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error Occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getServiceStatusDetails(String content) {
+        boolean hasPermission = false;
+        Session session = null;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    TingcoService services = (TingcoService) JAXBManager.getInstance().unMarshall(content, TingcoService.class);
+                    Service serviceXML = services.getServices().getService().get(0);
+                    List<ServiceStatusDetails> serviceStatusDetailsList = serviceDAO.getServiceStatusDetails(serviceXML, session);
+                    if (!serviceStatusDetailsList.isEmpty()) {
+                        UserTimeZones2 userTimeZones2 = RestUtilDAO.getUserTimeZones2byUserId(sessions2.getUserId(), session);
+                        String timeZoneGMToffset = RestUtilDAO.getTimezoneById(userTimeZones2.getTimeZoneId(), session).getTimeZoneGmtoffset();
+                        Collections.sort(serviceStatusDetailsList, new Comparator<ServiceStatusDetails>() {
+
+                            public int compare(ServiceStatusDetails o1, ServiceStatusDetails o2) {
+                                return o1.getServiceName().compareToIgnoreCase(o2.getServiceName());
+                            }
+                        });
+
+                        tingcoService = tingcoServiceXML.buildServiceStatusDetails(tingcoService, serviceStatusDetailsList, timeZoneGMToffset);
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No Service Status found");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getServiceTypeBundlesByServiceTypeId(String serviceTypeId, int countryId) {
+        boolean hasPermission = false;
+        Session session = null;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<BundleDetails> serviceTypeBundlesList = serviceDAO.getServiceTypeBundlesByServiceTypeId(serviceTypeId, countryId, session);
+                    if (!serviceTypeBundlesList.isEmpty()) {
+                        Collections.sort(serviceTypeBundlesList, new Comparator<se.info24.pojo.BundleDetails>() {
+
+                            public int compare(BundleDetails o1, BundleDetails o2) {
+                                return o1.getBundleName().compareToIgnoreCase(o2.getBundleName());
+                            }
+                        });
+                        tingcoService = tingcoServiceXML.buildServiceTypeBundlesByServiceTypeId(tingcoService, serviceTypeBundlesList);
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No data found");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (DatatypeConfigurationException ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error Occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getServicebyId(String serviceId, int countryId) {
+        boolean hasPermission = false;
+        Session session = null;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    Object obj = serviceDAO.getServicesbyServiceId(session, serviceId);
+                    if (obj != null) {
+                        List<Services> servicesList = new ArrayList<Services>();
+                        servicesList.add((Services) obj);
+                        return tingcoServiceXML.buildServicesAndDevices(servicesList, countryId, session);
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No data found");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (DatatypeConfigurationException ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error Occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+    }
+
+    private TingcoService getServices(String groupId) throws DatatypeConfigurationException {
+        boolean hasPermission = false;
+        Session session = null;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                if (groupId.equals("")) {
+                    tingcoService.getMsgStatus().setResponseCode(-1);
+                    tingcoService.getMsgStatus().setResponseText("Group Id should not be empty");
+                    return tingcoService;
+                }
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<ServicesVisibleToGroup> servicesVisibleToGroupList = serviceDAO.getServicesVisibleToGroups(session, groupId);
+                    if (!servicesVisibleToGroupList.isEmpty()) {
+                        ArrayList<String> serviceIDList = serviceDAO.getserviceIDList(session, servicesVisibleToGroupList);
+                        List<Services> servicesList = serviceDAO.getServices(session, serviceIDList);
+                        if (!servicesList.isEmpty()) {
+                            tingcoService = tingcoServiceXML.buildServices(tingcoService, servicesList);
+                        } else {
+                            tingcoService.getMsgStatus().setResponseCode(-1);
+                            tingcoService.getMsgStatus().setResponseText("No Record found for Services");
+                        }
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No Record found for ServicesVisibleTogroup");
+                    }
+                    return tingcoService;
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (DatatypeConfigurationException ex) {
+            TCMUtil.exceptionLog(getClass().getName(), ex);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error Occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+
+    }
+
+    public void delayLog(long requestedTime) {
+        TCMUtil.loger(getClass().getName(), " [tingco API] [Request took " + (System.currentTimeMillis() - requestedTime) + "ms]", "Info");
+    }
+
+    private TingcoService getServicesDevices(int countryId) {
+        long requestedTime = System.currentTimeMillis();
+        Session session = null;
+        boolean hasPermission = false;
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<Services> servicesList = serviceDAO.getAllServices(session, 2000);
+                    tingcoService = tingcoServiceXML.buildServicesAndDevices(servicesList, countryId, session);
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private boolean getPermission(String userId, String functionarea, String operation) {
+        boolean hasPermission = false;
+        Hashtable<String, ArrayList> ht = (Hashtable<String, ArrayList>) User_LoginsResource.permissions.get(userId);
+        if (ht.containsKey(functionarea)) {
+            ArrayList<String> operations = ht.get(functionarea);
+            for (int i = 0; i < operations.size(); i++) {
+                if (operations.get(i).equalsIgnoreCase(operation)) {
+                    hasPermission = true;
+                    break;
+                }
+            }
+        }
+        return hasPermission;
+    }
+
+    private TingcoService getServicesForContentCategory(String contentCategoryId) {
+        long requestedTime = System.currentTimeMillis();
+        Session session = null;
+        boolean hasPermission = false;
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<String> serviceIdsList = serviceDAO.getServiceContentCategories(contentCategoryId, session);
+                    if (!serviceIdsList.isEmpty()) {
+                        List<Services> services = serviceDAO.getServices(session, serviceIdsList);
+                        tingcoService = tingcoServiceXML.buildServices(tingcoService, services);
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No data found");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getServicesForDeviceActiveBundles(String deviceId) {
+        long requestedTime = System.currentTimeMillis();
+        Session session = null;
+        boolean hasPermission = false;
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<Services> servicesList = serviceDAO.getDeviceServicesActiveBundlesByDeviceIdByServiceNameOrder(deviceId, session);
+                    if (!servicesList.isEmpty()) {
+                        tingcoService = tingcoServiceXML.buildServices(tingcoService, servicesList);
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No data found");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getServicesForDeviceAvailableBundles(String deviceId) {
+        long requestedTime = System.currentTimeMillis();
+        Session session = null;
+        boolean hasPermission = false;
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<Services> servicesList = serviceDAO.getDeviceServicesAvailableBundlesByDeviceIdByServiceNameOrder(deviceId, session);
+                    if (!servicesList.isEmpty()) {
+                        tingcoService = tingcoServiceXML.buildServices(tingcoService, servicesList);
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No data found");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService getServicesListForPopup(String searchString) {
+        boolean hasPermission = false;
+        Session session = null;
+        long requestedTime = System.currentTimeMillis();
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.READ);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    List<Services> servicesList = new ArrayList<Services>();
+                    if (!searchString.equals("")) {
+                        searchString = searchString.split("/")[2];
+                        if (TCMUtil.isValidUUID(searchString)) { //checking in the ServiceID of services table
+                            Object obj = serviceDAO.getServicesbyServiceId(session, searchString);
+                            if (obj != null) {
+                                servicesList.add((Services) obj);
+                            } else {
+                                tingcoService.getMsgStatus().setResponseCode(-1);
+                                tingcoService.getMsgStatus().setResponseText("No data found");
+                                return tingcoService;
+                            }
+                        } else { //checking in the servicename of services table
+                            servicesList = serviceDAO.getServicesByServiceName(searchString, 2000, session);
+                        }
+                    } else { //If searchstring is not given
+                        servicesList = serviceDAO.getAllServices(session, 2000);
+                    }
+                    if (!servicesList.isEmpty()) {
+                        tingcoService = tingcoServiceXML.buildServices(tingcoService, servicesList);
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("No data found");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService addDeviceServicesAllowedBundles(String content) {
+        boolean hasPermission = false;
+        Session session = null;
+        long requestedTime = System.currentTimeMillis();
+        Transaction tx = null;
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.ADD);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    tx = session.beginTransaction();
+                    TingcoService services = (TingcoService) JAXBManager.getInstance().unMarshall(content, TingcoService.class);
+                    List<Service> servicejaxb = services.getServices().getService();
+                    int numberOfSaves = 0;
+                    for (Service service : servicejaxb) {
+                        DeviceServicesAllowedBundles dsab = new DeviceServicesAllowedBundles();
+                        dsab.setId(new DeviceServicesAllowedBundlesId(service.getDevice().get(0).getDeviceID(), service.getServiceID(), service.getBundles().getBundle().get(0).getBundleVersions().get(0).getBundleVersion().getBundleVersionID()));
+                        dsab.setAllowedFrom(currentDateTime.getTime());
+                        dsab.setAllowedByUser(sessions2.getUserId());
+                        dsab.setInstalledDate(currentDateTime.getTime());
+                        session.saveOrUpdate(dsab);
+                        numberOfSaves++;
+                        if (numberOfSaves % 20 == 0) {
+                            session.flush();
+                            session.clear();
+                        }
+                    }
+                    tx.commit();
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception e) {
+            if (tx != null) {
+                if (tx.wasCommitted()) {
+                    tx.rollback();
+                }
+            }
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService updateServiceSetting(String serviceId, String serviceSettingId, String serviceSettingValue) {
+        long requestedTime = System.currentTimeMillis();
+        Session session = null;
+        boolean hasPermission = false;
+        Transaction tx = null;
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.UPDATE);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    tx = session.beginTransaction();
+                    Object obj = serviceDAO.getServiceSettingsByServiceSettingId(serviceSettingId, session);
+                    ServiceSettings serviceSettings = (ServiceSettings) obj;
+                    serviceSettingValue = TCMUtil.convertHexToString(serviceSettingValue);
+                    if (serviceDAO.saveServiceSettings(serviceSettings, serviceSettings.getServiceSettingId(), null, serviceId, serviceSettings.getServiceSettingName(), serviceSettingValue, serviceSettings.getSettingDataType(), serviceSettings.getActiveFromDate(), sessions2.getUserId(), serviceSettings.getCreatedDate(), currentDateTime.getTime(), session)) {
+                        tx.commit();
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Error occured while adding");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception e) {
+            if (tx != null) {
+                if (tx.wasCommitted()) {
+                    tx.rollback();
+                }
+            }
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+
+    private TingcoService updateServicesAndDeviceServices(String content) {
+        boolean hasPermission = false;
+        Session session = null;
+        long requestedTime = System.currentTimeMillis();
+        Transaction tx = null;
+        try {
+            tingcoService = tingcoServiceXML.buildTingcoServiceTemplate();
+            if (request.getAttribute("USERSESSION") != null) {
+                UserSessions2 sessions2 = (UserSessions2) request.getAttribute("USERSESSION");
+                hasPermission = getPermission(sessions2.getUserId(), TCMUtil.SERVICES, TCMUtil.UPDATE);
+                if (hasPermission) {
+                    session = HibernateUtil.getSessionFactory().openSession();
+                    tx = session.beginTransaction();
+                    TingcoService services = (TingcoService) JAXBManager.getInstance().unMarshall(content, TingcoService.class);
+                    if (services.getServices() != null) {
+                        Service serv = services.getServices().getService().get(0);
+                        Services service = (Services) serviceDAO.getServicesbyServiceId(session, serv.getServiceID());
+                        if (serviceDAO.saveServices(service, serv.getServiceID(), serv.getServiceName(), serv.getServiceDescription(), serv.getGroupID().getValue(), serv.getServiceType().getServiceTypeID(), serv.getServiceEnabled(), currentDateTime.getTime(), serv.getReplicates(), sessions2.getUserId(), null, currentDateTime.getTime(), session)) {
+                            if (!serv.getDevice().isEmpty()) { //If the .net team is sending the <Device><DeviceID></DeviceID></Device> tag then update existing or add new deviceservices
+                                Object obj = serviceDAO.getDeviceServices(serv.getServiceID(), serv.getDevice().get(0).getDeviceID(), session);
+                                DeviceServices deviceServices;
+                                if (obj != null) { //DeviceServices record exists. so, update CreatedDate and UpdatedDate. CreatedDate updation is mandatory.
+                                    deviceServices = (DeviceServices) obj;
+                                    serviceDAO.saveDeviceServices(deviceServices, null, null, null, currentDateTime.getTime(), currentDateTime.getTime(), session);
+                                } else { //DeviceServices record does not exist. so, add new DeviceServices record.
+                                    deviceServices = new DeviceServices();
+                                    serviceDAO.saveDeviceServices(deviceServices, serv.getDevice().get(0).getDeviceID(), serv.getServiceID(), sessions2.getUserId(), currentDateTime.getTime(), currentDateTime.getTime(), session);
+                                }
+                            } else { //If the .net team is not sending the <Device><DeviceID></DeviceID></Device> tag, delete all the devices subscribed for this service. 
+                                List<DeviceServices> deviceServicesList = serviceDAO.getDeviceServicesByServiceId(serv.getServiceID(), session);
+                                if (!deviceServicesList.isEmpty()) {
+                                    int i = 0;
+                                    for (DeviceServices ds : deviceServicesList) {
+                                        session.delete(ds);
+                                        i++;
+                                        if (i % 20 == 0) {
+                                            session.flush();
+                                            session.clear();
+                                        }
+                                    }
+                                }
+                            }
+                            tx.commit();
+                        }
+                    } else {
+                        tingcoService.getMsgStatus().setResponseCode(-1);
+                        tingcoService.getMsgStatus().setResponseText("Invalid XML found");
+                        return tingcoService;
+                    }
+                } else {
+                    tingcoService.getMsgStatus().setResponseCode(-10);
+                    tingcoService.getMsgStatus().setResponseText("User Permission is not given");
+                    return tingcoService;
+                }
+            } else {
+                tingcoService.getMsgStatus().setResponseCode(-3);
+                tingcoService.getMsgStatus().setResponseText("User Session is Not Valid");
+                return tingcoService;
+            }
+        } catch (Exception e) {
+            if (tx != null) {
+                if (tx.wasCommitted()) {
+                    tx.rollback();
+                }
+            }
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tingcoService.getMsgStatus().setResponseCode(-1);
+            tingcoService.getMsgStatus().setResponseText("Error occured");
+            return tingcoService;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            delayLog(requestedTime);
+        }
+        return tingcoService;
+    }
+}

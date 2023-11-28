@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 26, 2012 3:24:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ChargeTypeTranslations" schema="dbo" table="ChargeTypeTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ChargeTypeTranslationsId" name="id">
+      <key-property name="chargeTypeId" type="string">
+        <column length="36" name="ChargeTypeID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <property name="chargeTypeName" type="string">
+      <column length="50" name="ChargeTypeName" not-null="true"/>
+    </property>
+    <property name="chargeTypeDescription" type="string">
+      <column length="200" name="ChargeTypeDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getChargeTypeTranslations">
+        from ChargeTypeTranslations where chargeTypeId = :chargeTypeId and countryId = :countryId
+    </query>
+  <query name="getChargeTypeTranslationsByCountryID">
+        from ChargeTypeTranslations where countryId = :countryId order by chargeTypeName
+    </query>
+</hibernate-mapping>

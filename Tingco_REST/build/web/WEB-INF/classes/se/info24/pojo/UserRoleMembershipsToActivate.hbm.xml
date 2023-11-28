@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 11, 2011 1:59:33 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UserRoleMembershipsToActivate" schema="dbo" table="UserRoleMembershipsToActivate">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.UserRoleMembershipsToActivateId" name="id">
+      <key-property name="userId" type="string">
+        <column length="36" name="UserID"/>
+      </key-property>
+      <key-property name="userRoleId" type="string">
+        <column length="36" name="UserRoleID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.UserRoles2" fetch="select" insert="false" name="userRoles2" update="false">
+      <column length="36" name="UserRoleID" not-null="true"/>
+    </many-to-one>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getUserRoleMembershipsToActivateByUserID">
+      from UserRoleMembershipsToActivate where UserID = :userID
+  </query>
+</hibernate-mapping>

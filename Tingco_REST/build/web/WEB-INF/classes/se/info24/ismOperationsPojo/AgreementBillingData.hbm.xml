@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 24, 2014 10:41:10 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISMOperations" name="se.info24.ismOperationsPojo.AgreementBillingData" schema="dbo" table="AgreementBillingData">
+    <id name="billingDataId" type="string">
+      <column length="36" name="BillingDataID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="agreementId" type="string">
+      <column length="36" name="AgreementID" not-null="true"/>
+    </property>
+    <property name="agreementName" type="string">
+      <column name="AgreementName" not-null="true"/>
+    </property>
+    <property name="agreementNumber" type="string">
+      <column name="AgreementNumber" not-null="true"/>
+    </property>
+    <property name="billingCategoryId" type="string">
+      <column length="36" name="BillingCategoryID" not-null="true"/>
+    </property>
+    <property name="sku" type="string">
+      <column name="SKU" not-null="true"/>
+    </property>
+    <property name="categoryName" type="string">
+      <column name="CategoryName" not-null="true"/>
+    </property>
+    <property name="numberOfObjects" type="int">
+      <column name="NumberOfObjects" not-null="true"/>
+    </property>
+    <property name="numberOfNewObjects" type="int">
+      <column name="NumberOfNewObjects" not-null="true"/>
+    </property>
+    <property name="year" type="int">
+      <column name="Year" not-null="true"/>
+    </property>
+    <property name="month" type="int">
+      <column name="Month" not-null="true"/>
+    </property>
+    <property name="day" type="int">
+      <column name="Day" not-null="true"/>
+    </property>
+    <property name="isInvoiced" type="java.lang.Integer">
+      <column name="IsInvoiced"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getAgreementBillingDetails">
+        from AgreementBillingData where agreementId = :agreementId and year = :year and month = :month order by sku
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,136 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package se.info24.jaxbUtil;
+
+import java.math.BigDecimal;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.TimeZone;
+import java.util.UUID;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import se.info24.pojo.ObjectGroupTranslations;
+import se.info24.pojo.UserAlias;
+import se.info24.pojo.UserAliasTypes;
+import se.info24.tingcovirtualgatejaxb.MsgStatus;
+import se.info24.tingcovirtualgatejaxb.ObjectFactory;
+import se.info24.tingcovirtualgatejaxb.ObjectGroups;
+import se.info24.tingcovirtualgatejaxb.TingcoVirtualGate;
+import se.info24.tingcovirtualgatejaxb.UserAliases;
+import se.info24.tingcovirtualgatejaxb.VirtualGate;
+import se.info24.tingcovirtualgatejaxb.VirtualGates;
+
+/**
+ *
+ * @author Ravikant
+ */
+public class TingcoVirtualGateXML {
+
+    ObjectFactory objectFactory;
+
+    public TingcoVirtualGateXML() {
+        objectFactory = new ObjectFactory();
+    }
+
+    public TingcoVirtualGate buildTingcoVirtualGateTemplate() throws DatatypeConfigurationException {
+        TingcoVirtualGate tingcoVirtualGate = objectFactory.createTingcoVirtualGate();
+        tingcoVirtualGate.setCreateRef("Info24");
+        tingcoVirtualGate.setMsgVer(new BigDecimal("1.0"));
+        tingcoVirtualGate.setRegionalUnits("Metric");
+        tingcoVirtualGate.setTimeZone("UTC");
+
+        tingcoVirtualGate.setMsgID(UUID.randomUUID().toString());
+        tingcoVirtualGate.setMsgTimeStamp(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar(TimeZone.getTimeZone("GMT"))));
+
+        MsgStatus msgStatus = new MsgStatus();
+        msgStatus.setResponseCode(0);
+        msgStatus.setResponseText("OK");
+
+        tingcoVirtualGate.setMsgStatus(msgStatus);
+        return tingcoVirtualGate;
+    }
+
+    public TingcoVirtualGate buildgetValidTicketsList(TingcoVirtualGate tingcoVirtualGate, List<UserAlias> userAliases) {
+        if (userAliases.isEmpty()) {
+            tingcoVirtualGate.getMsgStatus().setResponseCode(-1);
+            tingcoVirtualGate.getMsgStatus().setResponseText("No UserAlias Found");
+            return tingcoVirtualGate;
+        }
+        int seq = 1;
+        VirtualGates virtualGates = new VirtualGates();
+        VirtualGate virtualGate = new VirtualGate();
+        for (UserAlias ua : userAliases) {
+            UserAliases aliasesJaxb = new UserAliases();
+            aliasesJaxb.setSeqNo(seq++);
+            aliasesJaxb.setUserAliasID(ua.getUserAliasId());
+            aliasesJaxb.setUserAlias(ua.getUserAlias());
+            virtualGate.getUserAliases().add(aliasesJaxb);
+        }
+        virtualGate.setCountofValidTickets(userAliases.size() + "");
+        virtualGates.getVirtualGate().add(virtualGate);
+        tingcoVirtualGate.setVirtualGates(virtualGates);
+        return tingcoVirtualGate;
+    }
+
+    public TingcoVirtualGate buildgetValidTicketsCount(TingcoVirtualGate tingcoVirtualGate, int count) {
+        VirtualGates virtualGates = new VirtualGates();
+        VirtualGate virtualGate = new VirtualGate();
+        virtualGate.setCountofValidTickets(count + "");
+        virtualGates.getVirtualGate().add(virtualGate);
+        tingcoVirtualGate.setVirtualGates(virtualGates);
+        return tingcoVirtualGate;
+    }
+
+    public TingcoVirtualGate buildGetCardTypes(TingcoVirtualGate tingcoVirtualGate, List<UserAliasTypes> userAliasTypeses) {
+        if (userAliasTypeses.isEmpty()) {
+            tingcoVirtualGate.getMsgStatus().setResponseCode(-1);
+            tingcoVirtualGate.getMsgStatus().setResponseText("No Data Found");
+            return tingcoVirtualGate;
+        }
+        VirtualGates virtualGates = new VirtualGates();
+        VirtualGate virtualGate = new VirtualGate();
+        UserAliases aliasesJaxb = new UserAliases();
+        for (UserAliasTypes uat : userAliasTypeses) {
+            se.info24.tingcovirtualgatejaxb.UserAliasTypes aliasTypesJaxb = new se.info24.tingcovirtualgatejaxb.UserAliasTypes();
+            aliasTypesJaxb.setUserAliasTypeID(uat.getUserAliasTypeId());
+            aliasTypesJaxb.setUserAliasTypeName(uat.getUserAliasTypeName());
+            aliasesJaxb.getUserAliasTypes().add(aliasTypesJaxb);
+        }
+        virtualGate.getUserAliases().add(aliasesJaxb);
+        virtualGates.getVirtualGate().add(virtualGate);
+        tingcoVirtualGate.setVirtualGates(virtualGates);
+        return tingcoVirtualGate;
+    }
+
+    public TingcoVirtualGate buildAllVenues(TingcoVirtualGate tingcoVirtualGate, List<ObjectGroupTranslations> ogtransList) {
+        VirtualGates virtualGates = new VirtualGates();
+        VirtualGate virtualGate = new VirtualGate();
+        ObjectGroups objectGroups = new ObjectGroups();
+        for (ObjectGroupTranslations ogt : ogtransList) {
+            se.info24.tingcovirtualgatejaxb.ObjectGroupTranslations objectGroupTrans = new se.info24.tingcovirtualgatejaxb.ObjectGroupTranslations();
+            objectGroupTrans.setObjectGroupID(ogt.getId().getObjectGroupId());
+            objectGroupTrans.setObjectGroupName(ogt.getObjectGroupName());
+            objectGroups.getObjectGroupTranslations().add(objectGroupTrans);
+        }
+        virtualGate.getObjectGroups().add(objectGroups);
+        virtualGates.getVirtualGate().add(virtualGate);
+        tingcoVirtualGate.setVirtualGates(virtualGates);
+        return tingcoVirtualGate;
+    }
+
+    public TingcoVirtualGate builtcreateNewUserAlias(TingcoVirtualGate tingcoVirtualGate, String firstName, String lastName, String userAlias, String oChar) {
+        VirtualGates virtualGates = new VirtualGates();
+        VirtualGate virtualGate = new VirtualGate();
+        UserAliases aliasesJaxb = new UserAliases();
+        aliasesJaxb.setFirstName(firstName);
+        aliasesJaxb.setLastName(lastName);
+        aliasesJaxb.setUserAlias(userAlias);
+        aliasesJaxb.setISOTrack(oChar);
+        virtualGate.getUserAliases().add(aliasesJaxb);
+        virtualGates.getVirtualGate().add(virtualGate);
+        tingcoVirtualGate.setVirtualGates(virtualGates);
+        return tingcoVirtualGate;
+    }
+}

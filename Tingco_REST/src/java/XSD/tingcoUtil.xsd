@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="ST_LastUpdatedByUserID">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:element name="tingcoUtils">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="MsgID"/>
+                <xs:element ref="MsgTimeStamp"/>
+                <xs:element ref="MsgStatus" minOccurs="0"/>
+                <xs:element ref="MailExists"/>
+                <xs:element ref="OrganizationRoleExists"/>
+                <xs:element ref="OrganizationExists"/>
+                <xs:element ref="UserPermissionExists"/>
+                <xs:element ref="CountryStates" maxOccurs="unbounded"/>
+                <xs:element ref="Languages" maxOccurs="unbounded"/>
+                <xs:element ref="Timezones" maxOccurs="unbounded"/>
+                <xs:element ref="Currency" maxOccurs="unbounded"/>
+                <xs:element ref="NetworkTypes" maxOccurs="unbounded"/>
+                <xs:element ref="News" maxOccurs="unbounded"/>
+                <xs:element ref="UserInvitation"  minOccurs="0"/>
+                <xs:element ref="CountryPhoneCodes"  maxOccurs="unbounded"/>
+                <xs:element ref="WeekDayTranslations"  maxOccurs="unbounded"/>
+                <xs:element ref="Country"  maxOccurs="unbounded"/>
+                <xs:element ref="ObjectLogs"  minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="TimeZone" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="UTC"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="RegionalUnits" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Metric"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="MsgVer" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:decimal"/>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="CreateRef" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Info24"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+	
+    <xs:element name="UserInvitation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="InvitedBy"/>
+                <xs:element ref="InvitedTo" />
+                <xs:element ref="InvitationLink" />
+                <xs:element ref="IsActive" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ObjectLogs">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ObjectId" type="xs:string" />
+                <xs:element name="TimePeriod" type="xs:string" />
+                <xs:element name="FromDate" type="xs:string" />
+                <xs:element name="ToDate" type="xs:string" />
+                <xs:element name="Message" type="xs:string" />
+                <xs:element name="MessageCode" type="xs:string" />
+                <xs:element ref="ObjectLog" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ObjectLog">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ObjectId" type="xs:string" />
+                <xs:element name="Message" type="xs:string" />
+                <xs:element name="MessageCode" type="xs:string" />
+                <xs:element name="CreatedDate" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="InvitedBy">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+	
+    <xs:element name="InvitedTo">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+	
+    <xs:element name="InvitationLink">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="IsActive">
+        <xs:simpleType>
+            <xs:restriction base="xs:int"/>
+        </xs:simpleType>
+    </xs:element>
+	
+    <xs:element name="MailExists">
+        <xs:simpleType>
+            <xs:restriction base="xs:boolean"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="OrganizationRoleExists">
+        <xs:simpleType>
+            <xs:restriction base="xs:boolean"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="OrganizationExists">
+        <xs:simpleType>
+            <xs:restriction base="xs:int"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="UserPermissionExists">
+        <xs:simpleType>
+            <xs:restriction base="xs:boolean"/>
+        </xs:simpleType>
+    </xs:element>
+	
+    <xs:element name="Languages">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="CountryID"/>
+                <xs:element ref="LanguageCode" />
+                <xs:element ref="Language" />
+                <xs:element ref="Currency" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+	
+    <xs:element name="CountryID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_CountryID">
+                    <xs:attribute name="CountryName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+	
+    <xs:simpleType name="ST_CountryID">
+        <xs:restriction base="xs:int"/>
+    </xs:simpleType>
+
+    <xs:element name="LanguageCode">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+	
+    <xs:element name="Language">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+
+    <xs:element name="CountryStates">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="CountryStateID"/>
+                <xs:element ref="StateName"/>
+                <xs:element ref="StateDesc"/>
+                <xs:element ref="StateShortCode"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="CountryStateID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="StateName">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="StateDesc">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="StateShortCode">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+	
+    <xs:element name="Timezones">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="TimezoneID"/>
+                <xs:element ref="TimezoneName"/>
+                <xs:element ref="TimeZoneDescription"/>
+                <xs:element ref="TimeZoneGMTOffset"/>
+                <xs:element ref="DaylightSavingStartTime"/>
+                <xs:element ref="DaylightSavingEndTime"/>
+                <xs:element ref="DaylightSavingOffset"/>
+                <xs:element ref="DaylightSavingStartRule"/>
+                <xs:element ref="DaylightSavingStopRule"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+                <xs:element ref="UserTimeZone" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="CountryPhoneCodes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="CountryCallingCodeID"/>
+                <xs:element ref="CountryCallingCode"/>
+                <xs:element ref="CountryID"/>
+                <xs:element ref="LastUpdatedByUserID"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="CountryCallingCodeID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="CountryCallingCode">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="UserTimeZone">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="TimeZoneID"/>
+                <xs:element ref="UseDayLightSaving"/>
+                <xs:element ref="TimeZoneName"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="TimeZoneID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="UseDayLightSaving">
+        <xs:simpleType>
+            <xs:restriction base="xs:int"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="TimeZoneName">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="News">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="NewsID"/>
+                <xs:element ref="Subject"/>
+                <xs:element ref="Body"/>
+                <xs:element name="NewsIDTCMV3" type="xs:string"/>
+                <xs:element name="GroupID" type="GroupID" maxOccurs="unbounded"/>
+                <xs:element name="ActiveFromDate" type="xs:string"/>
+                <xs:element name="ActiveToDate" type="xs:string"/>
+                <xs:element name="IsEnabled" type="xs:decimal"/>
+                <xs:element name="IsVisibleToAllGroups" type="xs:decimal"/>
+                <xs:element ref="LastUpdatedByUserID"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+                <xs:element ref="NewsCategories" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="NewsCategories">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="NewsCategoryID" type="xs:string"/>
+                <xs:element name="ObjectCode" type="xs:string"/>
+                <xs:element ref="LastUpdatedByUserID"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+                <xs:element ref="NewsCategoryTranslations"  maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="NewsCategoryTranslations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="NewsCategoryID" type="xs:string"/>
+                <xs:element ref="CountryID"/>
+                <xs:element name="CategoryName" type="xs:string"/>
+                <xs:element name="CategoryDescription" type="xs:string"/>
+                <xs:element ref="LastUpdatedByUserID"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="NewsID">
+        <xs:simpleType>
+            <xs:restriction base="xs:int"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="Subject">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="Body">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+	
+    <xs:element name="TimezoneID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+	
+    <xs:element name="TimezoneName">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="TimeZoneDescription">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="TimeZoneGMTOffset">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="DaylightSavingStartTime">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="DaylightSavingEndTime">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="DaylightSavingOffset">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="DaylightSavingStartRule">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="DaylightSavingStopRule">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="CreatedDate">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="UpdatedDate">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="NetworkTypes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="NetworkTypeID"/>
+                <xs:element ref="NetworkTypeName"/>
+                <xs:element ref="NetworkTypeDescription"/>
+                <xs:element ref="LastUpdatedByUserID"/>
+                <xs:element ref="CreatedDate"/>
+                <xs:element ref="UpdatedDate"/>
+            </xs:sequence>
+            <xs:attribute name="SeqNo" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NetworkTypeID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+	
+    <xs:element name="NetworkTypeName">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="NetworkTypeDescription">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="Currency">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="CountryID"  maxOccurs="unbounded"/>
+                <xs:element ref="CurrencyID"/>
+                <xs:element ref="CurrencyISOCode"/>
+                <xs:element ref="CurrencyISOCharCode"/>
+                <xs:element ref="CurrencyName"/>
+                <xs:element ref="CurrencyDescription"/>
+                <xs:element ref="LastUpdatedByUserID"/>
+            </xs:sequence>
+            <xs:attribute name="SeqNo" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+	
+    <xs:element name="CurrencyID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+	
+    <xs:element name="CurrencyISOCode">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="CurrencyISOCharCode">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+	
+    <xs:element name="CurrencyName">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="CurrencyDescription">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="LastUpdatedByUserID">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="ST_LastUpdatedByUserID">
+                    <xs:attribute name="UserFullName" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="MsgID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="MsgTimeStamp">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="MsgStatus">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ResponseCode"/>
+                <xs:element ref="ResponseText"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ResponseText">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ResponseCode">
+        <xs:simpleType>
+            <xs:restriction base="xs:int"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="WeekDayTranslations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="WeekdayID"/>
+                <xs:element ref="WeekdayValue"/>
+                <xs:element ref="SortOrder"/>
+                <xs:element ref="CountryID"/>
+                <xs:element ref="WeekdayName"/>
+                <xs:element ref="WeekdayDescription"/>
+                <xs:element ref="UserID"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="WeekdayID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="WeekdayValue">
+        <xs:simpleType>
+            <xs:restriction base="xs:int"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="SortOrder">
+        <xs:simpleType>
+            <xs:restriction base="xs:int"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="WeekdayName">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="WeekdayDescription">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="UserID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="Country">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="CountryID"/>
+                <xs:element ref="CurrencyID"/>
+                <xs:element ref="CountryName"/>
+                <xs:element ref="CountryDescription"/>
+                <xs:element ref="LanguageCode"/>
+                <xs:element ref="Language"/>
+                <xs:element ref="DisplayOrder"/>
+                <xs:element ref="FunctionID"/>
+                <xs:element ref="TimeZoneID"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="CountryName">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="CountryDescription">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="DisplayOrder">
+        <xs:simpleType>
+            <xs:restriction base="xs:int"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="FunctionID">
+        <xs:simpleType>
+            <xs:restriction base="xs:int"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:complexType name="GroupID">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="GroupName" type="xs:string">
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+</xs:schema>

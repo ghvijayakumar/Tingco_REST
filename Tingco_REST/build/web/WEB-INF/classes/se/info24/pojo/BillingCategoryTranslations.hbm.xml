@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 8, 2014 4:03:11 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.BillingCategoryTranslations" schema="dbo" table="BillingCategoryTranslations">
+    <composite-id class="se.info24.pojo.BillingCategoryTranslationsId" name="id">
+      <key-property name="billingCategoryId" type="string">
+        <column length="36" name="BillingCategoryID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.Country" fetch="select" insert="false" name="country" update="false">
+      <column name="CountryID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.BillingCategories" fetch="select" insert="false" name="billingCategories" update="false">
+      <column length="36" name="BillingCategoryID" not-null="true"/>
+    </many-to-one>
+    <property name="categoryName" type="string">
+      <column name="CategoryName" not-null="true"/>
+    </property>
+    <property name="categoryDescription" type="string">
+      <column name="CategoryDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getBillingCategoryTranslations">
+        from BillingCategoryTranslations where id.billingCategoryId = :billingCategoryId and id.countryId = :countryId
+    </query>
+  <query name="getBillingCategoryTranslationsByIDs">
+        from BillingCategoryTranslations where id.billingCategoryId in(:billingCategoryId) and id.countryId = :countryId order by categoryName
+    </query>
+  <query name="getBillingCategoryTranslationsBySearchString">
+        from BillingCategoryTranslations where id.billingCategoryId in(:billingCategoryId) and id.countryId = :countryId and categoryName like '%'+:categoryName+'%' order by categoryName
+    </query>
+</hibernate-mapping>

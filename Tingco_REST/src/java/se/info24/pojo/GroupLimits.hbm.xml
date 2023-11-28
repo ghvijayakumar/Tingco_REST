@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 4, 2012 12:08:11 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.GroupLimits" schema="dbo" table="GroupLimits">
+    <cache usage="nonstrict-read-write"/>
+    <id name="groupId" type="string">
+      <column length="36" name="GroupID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.GroupLimitPackages" fetch="select" name="groupLimitPackages">
+      <column length="36" name="GroupLimitPackageID"/>
+    </many-to-one>
+    <property name="maxNumberOfDevices" type="java.lang.Integer">
+      <column name="MaxNumberOfDevices"/>
+    </property>
+    <property name="currentNumberOfDevices" type="java.lang.Integer">
+      <column name="CurrentNumberOfDevices"/>
+    </property>
+    <property name="maxNumberOfUsers" type="java.lang.Integer">
+      <column name="MaxNumberOfUsers"/>
+    </property>
+    <property name="currentNumberOfUsers" type="java.lang.Integer">
+      <column name="CurrentNumberOfUsers"/>
+    </property>
+    <property name="maxNumberOfSubscriptions" type="java.lang.Integer">
+      <column name="MaxNumberOfSubscriptions"/>
+    </property>
+    <property name="currentNumberOfSubscriptions" type="java.lang.Integer">
+      <column name="CurrentNumberOfSubscriptions"/>
+    </property>
+    <property name="maxNumberOfChildGroups" type="java.lang.Integer">
+      <column name="MaxNumberOfChildGroups"/>
+    </property>
+    <property name="currentNumberOfChildGroups" type="java.lang.Integer">
+      <column name="CurrentNumberOfChildGroups"/>
+    </property>
+    <property name="maxNumberOfTrustingGroups" type="java.lang.Integer">
+      <column name="MaxNumberOfTrustingGroups"/>
+    </property>
+    <property name="currentNumberOfTrustingGroups" type="java.lang.Integer">
+      <column name="CurrentNumberOfTrustingGroups"/>
+    </property>
+    <property name="maxDataStorageSize" type="java.lang.Integer">
+      <column name="MaxDataStorageSize"/>
+    </property>
+    <property name="currentDataStorageSize" type="java.lang.Integer">
+      <column name="CurrentDataStorageSize"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getGroupLimitsById">
+        from GroupLimits where groupId =:groupId
+    </query>
+</hibernate-mapping>

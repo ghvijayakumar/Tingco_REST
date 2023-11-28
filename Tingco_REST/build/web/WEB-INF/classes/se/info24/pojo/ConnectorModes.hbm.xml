@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 28, 2014 4:47:26 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.ConnectorModes" schema="dbo" table="ConnectorModes">
+    <id name="connectorModeId" type="string">
+      <column length="36" name="ConnectorModeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="objectCode" type="string">
+      <column name="ObjectCode" not-null="true" unique="true"/>
+    </property>
+    <property name="connectorModeName" type="string">
+      <column name="ConnectorModeName" not-null="true"/>
+    </property>
+    <property name="connectorModeDescription" type="string">
+      <column name="ConnectorModeDescription"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="connectorses">
+      <key>
+        <column length="36" name="ConnectorModeID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Connectors"/>
+    </set>
+  </class>
+  <query name="getAllConnectorsModesOrderByConnectorModeName">
+        from ConnectorModes order by connectorModeName
+    </query>
+</hibernate-mapping>

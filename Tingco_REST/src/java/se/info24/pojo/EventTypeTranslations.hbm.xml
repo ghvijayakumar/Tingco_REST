@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 28, 2012 11:17:07 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.EventTypeTranslations" schema="dbo" table="EventTypeTranslations">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.EventTypeTranslationsId" name="id">
+      <key-property name="eventTypeId" type="string">
+        <column length="36" name="EventTypeID"/>
+      </key-property>
+      <key-property name="countryId" type="int">
+        <column name="CountryID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.EventTypes" fetch="select" insert="false" name="eventTypes" update="false">
+      <column length="36" name="EventTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="eventTypeName" type="string">
+      <column name="EventTypeName" not-null="true"/>
+    </property>
+    <property name="eventTypeDescription" type="string">
+      <column name="EventTypeDescription"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getEventTypeTranslationsbyId">
+        from EventTypeTranslations where id.eventTypeId = :eventTypeId and id.countryId = :countryId
+    </query>
+  <query name="getEventTypeTranslationsbyIds">
+        from EventTypeTranslations where id.eventTypeId in (:eventTypeId) and id.countryId = :countryId order by eventTypeName
+    </query>
+  <query name="getEventTypeTranslationsbyCountryId">
+        from EventTypeTranslations where id.countryId = :countryId order by EventTypeName
+    </query>
+  <query name="getEventTypeTranslationsbyIdsAndName">
+        from EventTypeTranslations where id.eventTypeId in (:eventTypeId) and id.countryId = :countryId and eventTypeName like :searchString order by eventTypeName
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="ST_ValidationValue">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:element name="tingcoPricePlans">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="MsgID"/>
+                <xs:element ref="MsgTimeStamp"/>
+                <xs:element ref="MsgStatus" minOccurs="0"/>
+                <xs:element ref="PricePlans" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="TimeZone" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="UTC"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="RegionalUnits" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Metric"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="MsgVer" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:decimal"/>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="CreateRef" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Info24"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MsgTimeStamp">
+        <xs:simpleType>
+            <xs:restriction base="xs:dateTime"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="MsgStatus">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ResponseCode"/>
+                <xs:element ref="ResponseText"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MsgID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ResponseText">
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ResponseCode">
+        <xs:simpleType>
+            <xs:restriction base="xs:int"/>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="PricePlans">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="PricePlan" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="PricePlan">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="PricePlanID" type="xs:string"/>
+                <xs:element name="PricePlanName" type="xs:string"/>
+                 <xs:element name="PricePlanNameTCMV3" type="xs:string"/>
+                <xs:element name="PricePlanDescription" type="xs:string"/>
+                <xs:element name="GroupID" type="xs:string"/>
+                <xs:element name="GroupName" type="xs:string"/>
+                <xs:element name="PricePlanTypeID" type="xs:string"/>
+                <xs:element name="ActiveFromDate" type="xs:string"/>
+                <xs:element name="ActiveToDate" type="xs:string"/>
+                 <xs:element name="ActiveFromDateTCMV3" type="xs:string"/>
+                <xs:element name="ActiveToDateTCMV3" type="xs:string"/>
+                <xs:element name="IsEnabled" type="xs:int"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+                <xs:element ref="PricePlanTypes" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="PricePlanVersions" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ChargeTypes" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="UserAliasTypes" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Products" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ProductCategories" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ProductVariants" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="SeqNo">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int"/>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="PricePlanTypes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="PricePlanTypeID" type="xs:string"/>
+                <xs:element name="PricePlanTypeCode" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+                <xs:element ref="PricePlanTypeTranslations" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="PricePlanTypeTranslations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="PricePlanTypeID" type="xs:string"/>
+                <xs:element name="CountryID" type="xs:int"/>
+                <xs:element name="PricePlanTypeName" type="xs:string"/>
+                <xs:element name="PricePlanTypeDescription" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="PricePlanVersions">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="PricePlanVersionID" type="xs:string"/>
+                <xs:element name="PricePlanID" type="xs:string"/>
+                <xs:element name="VersionName" type="xs:string"/>
+                <xs:element name="VersionNameTCMV3" type="xs:string"/>
+                <xs:element name="VersionDescription" type="xs:string"/>
+                <xs:element name="ActiveFromDate" type="xs:dateTime"/>
+                <xs:element name="ActiveToDate" type="xs:dateTime"/>
+                <xs:element name="ActiveFromDateTCMV3" type="xs:string"/>
+                <xs:element name="ActiveToDateTCMV3" type="xs:string"/>
+                <xs:element name="Priority" type="xs:int"/>
+                <xs:element name="CurrencyID" type="xs:int"/>
+                <xs:element name="IsEnabled" type="xs:int"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+                <xs:element name="CurrencyISOCharCode" type="xs:string" />
+                <xs:element ref="PricePlanItems" minOccurs="0" maxOccurs="unbounded"/> 
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="PricePlanItems">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="PricePlanItemID" type="xs:string"/>
+                <xs:element name="PricePlanItemParentID" type="xs:string"/>
+                <xs:element name="PricePlanVersionID" type="xs:string"/>
+                <xs:element name="ItemName" type="xs:string"/>
+                <xs:element name="ItemDescription" type="xs:string"/>
+                <xs:element name="PricePlanItemTypeID" type="xs:string"/>
+                <xs:element name="ChargeTypeID" type="xs:string"/>
+                <xs:element name="ValidationDataTypeID" type="xs:int"/>
+                <xs:element name="ValidationDataType" type="xs:string"/>
+                <xs:element name="ValidationExpressionID" type="xs:int"/>
+                <xs:element name="ValidationExpression" type="xs:string"/>
+                <xs:element ref="ValidationValue"/>
+                <xs:element name="ItemAmount" type="xs:float"/>
+                <xs:element name="ItemPercent" type="xs:float"/>
+                <xs:element name="IsEnabled" type="xs:int"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+                <xs:element name="ChargeTypeName" type="xs:string"/>
+                <xs:element ref="ValidationExpressions" maxOccurs="unbounded" />
+                <xs:element ref="PricePlanItemTypes" maxOccurs="unbounded" />
+                <xs:element ref="ValidationDataTypes" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+   
+    <xs:element name="ValidationExpressions">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ValidationExpressionID"  type="xs:int"/>
+                <xs:element name="ValidationExpression" type="xs:string"/>
+                <xs:element name="ValidationExpressionDescription" type="xs:string"/>
+                <xs:element name="UserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="PricePlanItemTypes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="PricePlanItemTypeID"  type="xs:string"/>
+                <xs:element name="PricePlanItemTypeCode" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+                <xs:element ref="PricePlanItemTypeTranslations" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+<xs:element name="PricePlanItemTypeTranslations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="PricePlanItemTypeID"  type="xs:string"/>
+                <xs:element name="CountryID" type="xs:int"/>
+                <xs:element name="PricePlanItemTypeName"  type="xs:string"/>
+                <xs:element name="PricePlanItemTypeDescription" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ValidationDataTypes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ValidationDataTypeID"  type="xs:int"/>
+                <xs:element name="ValidationDataType" type="xs:string"/>
+                <xs:element name="ValidationDataTypeDescription" type="xs:string"/>
+                <xs:element name="UserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ChargeTypes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ChargeTypeID"  type="xs:string"/>
+                <xs:element name="ChargeTypeCode" type="xs:string"/>
+                <xs:element name="UsageUnitID" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+                <xs:element ref="ChargeTypeTranslations" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ChargeTypeTranslations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ChargeTypeID"  type="xs:string"/>
+                <xs:element name="CountryID" type="xs:int"/>
+                <xs:element name="ChargeTypeName" type="xs:string"/>
+                <xs:element name="ChargeTypeDescription" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="UserAliasTypes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="UserAliasTypeID"  type="xs:string"/>
+                <xs:element name="UserAliasTypeName" type="xs:string"/>
+                <xs:element name="UserAliasTypeDescription" type="xs:string"/>
+                <xs:element name="LastUpdatedByUserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+     <xs:element name="Products">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ProductID"  type="xs:string"/>
+                <xs:element name="IsEnabled" type="xs:int"/>
+                <xs:element name="DisplayInWebShop" type="xs:int"/>
+                <xs:element name="ProductTypeID"  type="xs:string"/>
+                <xs:element name="ProductCategoryID" type="xs:string"/>
+                <xs:element name="IsDeleted" type="xs:int"/>
+                <xs:element name="IsDownloadProduct"  type="xs:int"/>
+                <xs:element name="ExtendedMembershipRequired" type="xs:int"/>
+                <xs:element name="UserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+                <xs:element ref="ProductTranslations" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ProductTranslations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ProductID"  type="xs:string"/>
+                <xs:element name="CountryID" type="xs:int"/>
+                <xs:element name="ProductName" type="xs:string"/>
+                <xs:element name="ProductDescription"  type="xs:string"/>
+                <xs:element name="ProductSummary" type="xs:string"/>
+                <xs:element name="UserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ProductCategories">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ProductCategoryID"  type="xs:string"/>
+                <xs:element name="ProductCategoryParentID" type="xs:string"/>
+                <xs:element name="DisplayOrder" type="xs:int"/>
+                <xs:element name="UserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+                <xs:element ref="ProductCategoryTranslations" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ProductCategoryTranslations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ProductCategoryID"  type="xs:string"/>
+                <xs:element name="CountryID" type="xs:int"/>
+                <xs:element name="ProductCategoryName" type="xs:string"/>
+                <xs:element name="ProductCategoryDescription"  type="xs:string"/>
+                <xs:element name="UserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ProductVariants">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ProductVariantID"  type="xs:string"/>
+                <xs:element name="ProductID" type="xs:string"/>
+                <xs:element name="IsDefault" type="xs:int"/>
+                <xs:element name="IsEnabled" type="xs:int"/>
+                <xs:element name="DisplayInWebShop" type="xs:int"/>
+                <xs:element name="Deleted" type="xs:int"/>
+                <xs:element name="ServiceID" type="xs:string"/>
+                <xs:element name="SearchHitsIncluded" type="xs:int"/>
+                <xs:element name="NumberOfAccessDaysIncluded" type="xs:int"/>
+                <xs:element name="UserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+                <xs:element ref="ProductVariantTranslations" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ProductVariantTranslations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ProductVariantID"  type="xs:string"/>
+                <xs:element name="CountryID" type="xs:int"/>
+                <xs:element name="ProductVariantName" type="xs:string"/>
+                <xs:element name="ProductVariantDescription" type="xs:string"/>
+                <xs:element name="ProductVariantSummary" type="xs:string"/>
+                <xs:element name="UserID" type="xs:string"/>
+                <xs:element name="CreatedDate" type="xs:dateTime"/>
+                <xs:element name="UpdatedDate" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+<xs:element name="ValidationValue">
+        <xs:complexType>
+                <xs:simpleContent>
+                    <xs:extension base="ST_ValidationValue">
+                        <xs:attribute name="ID" use="required">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string"/>
+                            </xs:simpleType>
+                        </xs:attribute>
+                    </xs:extension>
+                </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

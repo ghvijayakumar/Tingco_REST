@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 19, 2013 10:34:50 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.NetworkSettingsTemplate" schema="dbo" table="NetworkSettingsTemplate">
+    <cache usage="nonstrict-read-write"/>
+    <id name="networkSettingTemplateId" type="string">
+      <column length="36" name="NetworkSettingTemplateID"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="se.info24.pojo.NetworkSettingsTemplate" fetch="select" name="networkSettingsTemplate">
+      <column length="36" name="NetworkSettingTemplateParentID"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.NetworkTypes" fetch="select" name="networkTypes">
+      <column length="36" name="NetworkTypeID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.SettingDataType" fetch="select" name="settingDataType">
+      <column length="36" name="SettingDataTypeID"/>
+    </many-to-one>
+    <property name="networkSettingName" type="string">
+      <column name="NetworkSettingName" not-null="true"/>
+    </property>
+    <property name="networkSettingValue" type="string">
+      <column name="NetworkSettingValue" not-null="true"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="userId" type="string">
+      <column length="36" name="UserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="networkSettingsTemplates">
+      <key>
+        <column length="36" name="NetworkSettingTemplateParentID"/>
+      </key>
+      <one-to-many class="se.info24.pojo.NetworkSettingsTemplate"/>
+    </set>
+  </class>
+  <query name="getNetworkSettingsTemplateByNetworkTypes">
+        from NetworkSettingsTemplate where networkTypes.networkTypeId = :networkTypeId
+    </query>
+</hibernate-mapping>

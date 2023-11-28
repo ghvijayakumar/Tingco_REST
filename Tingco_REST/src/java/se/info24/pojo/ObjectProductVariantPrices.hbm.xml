@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 20, 2013 4:26:31 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="ISM" name="se.info24.pojo.ObjectProductVariantPrices" schema="dbo" table="ObjectProductVariantPrices">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.ObjectProductVariantPricesId" name="id">
+      <key-property name="objectId" type="string">
+        <column length="36" name="ObjectID"/>
+      </key-property>
+      <key-property name="productVariantId" type="string">
+        <column length="36" name="ProductVariantID"/>
+      </key-property>
+      <key-property name="currencyId" type="int">
+        <column name="CurrencyID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.ProductVariants" fetch="select" insert="false" name="productVariants" update="false">
+      <column length="36" name="ProductVariantID" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.info24.pojo.Currency" fetch="select" insert="false" name="currency" update="false">
+      <column name="CurrencyID" not-null="true"/>
+    </many-to-one>
+    <property name="pricePerUnitExclVat" type="big_decimal">
+      <column name="PricePerUnitExclVAT" not-null="true"/>
+    </property>
+    <property name="vatpercent" type="big_decimal">
+      <column name="VATPercent" not-null="true" precision="5"/>
+    </property>
+    <property name="quantityUnit" type="string">
+      <column name="QuantityUnit" not-null="true"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID" not-null="true"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getObjectProductVariantPricesByID">
+        from ObjectProductVariantPrices where objectId =:objectId and productVariantId =:productVariantId and currencyId =:currencyId
+    </query>
+  <query name="getObjectProductVariantPricesByObjectID">
+        from ObjectProductVariantPrices where objectId =:objectId order by createdDate
+    </query>
+  <query name="getObjectProductVariantPricesByObjectIDAndProductVariantID">
+        from ObjectProductVariantPrices where objectId =:objectId and productVariantId =:productVariantId order by createdDate
+    </query>
+</hibernate-mapping>

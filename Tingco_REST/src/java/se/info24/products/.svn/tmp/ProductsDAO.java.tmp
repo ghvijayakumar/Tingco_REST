@@ -1,0 +1,972 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package se.info24.products;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TimeZone;
+import java.util.UUID;
+import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
+import se.info24.ismOperationsPojo.MeasurementData;
+import se.info24.ismOperationsPojo.ObjectUsageRecords;
+import se.info24.ismOperationsPojo.TransactionProducts;
+import se.info24.ismOperationsPojo.TransactionResult;
+import se.info24.permission.PermissionDAO;
+import se.info24.pojo.AgreementRoles;
+import se.info24.pojo.ContentCategoryTranslations;
+import se.info24.pojo.ContentTypeTranslations;
+import se.info24.pojo.FunctionAreas;
+import se.info24.pojo.GroupDefaultAgreement;
+import se.info24.pojo.GroupLimitPackages;
+import se.info24.pojo.GroupProductVariantSubscriptions;
+import se.info24.pojo.ObjectImages;
+import se.info24.pojo.ObjectProductVariantCounters;
+import se.info24.pojo.ObjectProductVariantPrices;
+import se.info24.pojo.Orders;
+import se.info24.pojo.ProductAttributes;
+import se.info24.pojo.ProductCategoriesInGroups;
+import se.info24.pojo.ProductCategoryTranslations;
+import se.info24.pojo.ProductTranslations;
+import se.info24.pojo.ProductTypes;
+import se.info24.pojo.ProductVariantAttributes;
+import se.info24.pojo.ProductVariantComponents;
+import se.info24.pojo.ProductVariantContentCategories;
+import se.info24.pojo.ProductVariantDevices;
+import se.info24.pojo.ProductVariantDownloadUrls;
+import se.info24.pojo.ProductVariantMeasurementTypes;
+import se.info24.pojo.ProductVariantPrices;
+import se.info24.pojo.ProductVariantServices;
+import se.info24.pojo.ProductVariantTranslations;
+import se.info24.pojo.ProductVariants;
+import se.info24.pojo.Products;
+import se.info24.pojo.ProductsInGroups;
+import se.info24.pojo.Providers;
+import se.info24.pojo.ProvidersInGroups;
+import se.info24.pojo.ServiceClientLogins;
+import se.info24.pojo.ServiceContentSubscriptions;
+import se.info24.pojo.ServiceSubscriptionAcl;
+import se.info24.pojo.UserAlias;
+import se.info24.pojo.Users2;
+import se.info24.util.HibernateUtil;
+import se.info24.util.TCMUtil;
+
+/**
+ *
+ * @author Vijayakumar
+ */
+public class ProductsDAO {
+
+    public List<String> getproductsByProductsInGroups(String groupId, Session session, int maxResult) {
+        StringBuffer queryString = new StringBuffer();
+        queryString.append("select p.productId as productId from products as p inner join productsInGroups as pig on p.productId = pig.productId and pig.groupId in(select groupId from groupTrusts where iTrustGroupId = '" + groupId + "' or groupId = '" + groupId + "') ");
+        SQLQuery query = session.createSQLQuery(queryString.toString());
+        query.addScalar("productId", Hibernate.STRING);
+//        query.setResultTransformer(Transformers.aliasToBean(Products.class));
+        return query.setMaxResults(maxResult).list();
+    }
+
+    boolean extendSubscriptions(ServiceSubscriptionAcl ssacl, int months, int searchHitsLeftToUse, Session session) {
+        boolean result = false;
+        Transaction tx = session.beginTransaction();
+        try {
+            GregorianCalendar gc = new GregorianCalendar();
+            gc.setTime(ssacl.getActiveToDate());
+            gc.add(GregorianCalendar.MONTH, months);
+//            ssacl.setActiveToDate(gc.getTime());
+//            ssacl.setSearchHitsLeftToUse(100);
+//            session.saveOrUpdate(ssacl);
+            Query query = session.createQuery("UPDATE ServiceSubscriptionAcl SET activeToDate = :activeToDate, searchHitsLeftToUse = :searchHitsLeftToUse WHERE serviceSubscriptionAclid = :serviceSubscriptionAclid");
+            query.setParameter("activeToDate", gc.getTime());
+            query.setParameter("searchHitsLeftToUse", 100);
+            query.setParameter("serviceSubscriptionAclid", ssacl.getServiceSubscriptionAclid());
+            query.executeUpdate();
+            tx.commit();
+            session.flush();
+            result = true;
+        } catch (Exception e) {
+            result = false;
+            tx.rollback();
+            TCMUtil.exceptionLog(getClass().getName(), e);
+        }
+        return result;
+    }
+
+    Set<String> getAgreementIdList(List<AgreementRoles> agreementRolesList) {
+        Set<String> agreementIdList = new HashSet<String>();
+        for (AgreementRoles ar : agreementRolesList) {
+            agreementIdList.add(ar.getId().getAgreementId());
+        }
+        return agreementIdList;
+    }
+
+<<<<<<< .mine
+    public List<ContentCategoryTranslations> getContentCategoryTranslations(Set<String> contentCategoryIdSet, int countryId, Session session) {
+=======
+   public List<ContentCategoryTranslations> getContentCategoryTranslations(Set<String> contentCategoryIdSet, int countryId, Session session) {
+>>>>>>> .r2172
+        return session.getNamedQuery("getContentCategoryTransByIdListAndCountryId").setParameterList("contentCategoryId", contentCategoryIdSet).setInteger("countryId", countryId).list();
+    }
+
+    public ContentCategoryTranslations getContentCategoryTranslations(String contentCategoryId, int countryId, Session session) {
+        return (ContentCategoryTranslations) session.getNamedQuery("getContentCategoryTransByIds").setString("contentCategoryId", contentCategoryId).setInteger("countryId", countryId).uniqueResult();
+    }
+
+    public ContentTypeTranslations getContentTypeTranslations(String contentTypeId, int countryId, Session session) {
+        return (ContentTypeTranslations) session.getNamedQuery("getContentTypeTranslationsByIds").setString("contentTypeId", contentTypeId).setInteger("countryId", countryId).uniqueResult();
+    }
+
+    List<GroupLimitPackages> getGroupLimitPackages(Session session) {
+        return session.getNamedQuery("getAllGroupLimitPackages").list();
+    }
+
+    public GroupLimitPackages getGroupLimitPackagesById(String groupLimitPackageId, Session session) {
+        return (GroupLimitPackages) session.getNamedQuery("getGroupLimitPackagesById").setString("groupLimitPackageId", groupLimitPackageId).uniqueResult();
+    }
+
+    List<GroupProductVariantSubscriptions> getGroupProductVariantSubscriptions(String groupId, Session session) {
+        return session.getNamedQuery("getGroupProductVariantSubscriptionsByGroupID").setString("groupId", groupId).setMaxResults(100).list();
+    }
+
+    public List<GroupProductVariantSubscriptions> getAllGroupProductVariantSubscriptions(String groupId, Session session) {
+        return session.getNamedQuery("getGroupProductVariantSubscriptionsByGroupID").setString("groupId", groupId).list();
+    }
+
+    GroupProductVariantSubscriptions getGroupProductVariantSubscriptions(String serviceClientLoginId, String serviceSubscriptionACLID, Session session) {
+        return (GroupProductVariantSubscriptions) session.getNamedQuery("getGroupProductVariantSubscriptionsByLoginIDandACLID").setString("serviceClientLoginId", serviceClientLoginId).setString("serviceSubscriptionAclid", serviceSubscriptionACLID).uniqueResult();
+    }
+
+    List<ObjectImages> getObjectImages(List<String> productsIdList, Session session) {
+        return session.getNamedQuery("getObjectImages").setParameterList("objectId", productsIdList).list();
+    }
+
+    List<ProductAttributes> getProductAttributes(List<String> productsIdList, Session session) {
+        return session.getNamedQuery("getProductAttributes").setParameterList("productId", productsIdList).list();
+    }
+
+    List<ProductAttributes> getProductAttributesByProductId(List<String> productsIdList, Session session) {
+        return session.getNamedQuery("getProductAttributesByProductId").setParameterList("productId", productsIdList).list();
+    }
+
+    public List<ProductsInGroups> getProductsInGroupsByGroupId(Session session, String groupId) {
+        return session.getNamedQuery("getProductsInGroupsByGroupId").setString("groupId", groupId).list();
+    }
+
+    public List<ProductTranslations> getProductTranslations(Session session, Set<String> productId, int countryId) {
+        return session.getNamedQuery("getProductTranslations").setParameterList("productId", productId).setInteger("countryId", countryId).list();
+    }
+
+    public Object getProductsInGroupsByIds(Session session, String groupId, String productId) {
+        return session.getNamedQuery("getProductsInGroupsByIds").setString("groupId", groupId).setString("productId", productId).uniqueResult();
+    }
+
+    List<ProductCategoriesInGroups> getProductCategoriesInGroups(Session session, String groupId) {
+        return session.getNamedQuery("getProductCategoriesInGroupsByGroupId").setString("groupId", groupId).list();
+    }
+
+    List<ProductCategoryTranslations> getProductCategoryTranslations(Session session, List<ProductCategoriesInGroups> productsCategoriesInGroupsList, int countryId) {
+        ArrayList<String> pctList = new ArrayList<String>();
+        for (ProductCategoriesInGroups pct : productsCategoriesInGroupsList) {
+            pctList.add(pct.getId().getProductCategoryId());
+        }
+        return session.getNamedQuery("getProductCategoryTranslations").setParameterList("productCategoryId", pctList).setInteger("countryId", countryId).setMaxResults(100).list();
+    }
+
+    Set<String> getProductIdList(List<ProductsInGroups> productsInGroupsList) {
+        Set<String> productIdList = new HashSet<String>();
+        for (ProductsInGroups pgs : productsInGroupsList) {
+            productIdList.add(pgs.getId().getProductId());
+        }
+        return productIdList;
+    }
+
+    List<ProductTranslations> getProductTranslationsByIdandSearchString(Set<String> productIdsList, String searchString, int countryId, Session session) {
+        String productId = null;
+        if (searchString.length() == 36) {
+            productId = searchString;
+        }
+        return session.getNamedQuery("getProductTranslationsByIdandSearch").setParameterList("productId", productIdsList).setString("productID", productId).setString("searchString", "%" + searchString + "%").setInteger("countryId", countryId).list();
+    }
+
+    List<String> getProductVariantIdList(List<ProductVariants> productVariantsList) {
+        List<String> productVariantsidList = new ArrayList<String>();
+        for (ProductVariants productVariants : productVariantsList) {
+            productVariantsidList.add(productVariants.getProductVariantId());
+        }
+        return productVariantsidList;
+    }
+
+    List<ProductVariants> getProductVariants(List<String> productVariantIdList, Session session) {
+        return session.getNamedQuery("getProductVariantsById").setParameterList("productVariantId", productVariantIdList).list();
+    }
+
+    public ProductVariants getProductVariants(String productVariantId, Session session) {
+        return (ProductVariants) session.getNamedQuery("getProductVariantsByProductVariantId").setString("productVariantId", productVariantId).uniqueResult();
+    }
+
+    List<ProductVariants> getProductVariantsByProductIdsList(Set<String> productIdList, String limit, Session session) {
+        if (limit != null) {
+            return session.getNamedQuery("getProductVariantsByProductidList").setParameterList("productId", productIdList).setMaxResults(Integer.parseInt(limit)).list();
+        } else {
+            return session.getNamedQuery("getProductVariantsByProductidList").setParameterList("productId", productIdList).list();
+        }
+    }
+
+    List<Products> getProducts(List<String> productsIdList, Session session) {
+        return session.getNamedQuery("getProducts").setParameterList("productId", productsIdList).list();
+    }
+    List<Products> getAllProducts(Session session) {
+        return session.getNamedQuery("getAllProducts").list();
+    }
+
+    List<Products> getProductsByProductCategoryId(Session session, String productCategoryId) {
+        return session.getNamedQuery("getProductsByProductCategoryId").setString("productCategoryId", productCategoryId).list();
+    }
+
+    List<Products> getProductsByProductId(Set<String> productIdList, Session session, int maxResult) {
+        return session.getNamedQuery("getProductsByOrder").setParameterList("productId", productIdList).setMaxResults(maxResult).list();
+    }
+
+    public List<ServiceClientLogins> getServiceClientLogins(List<String> serviceClientLoginIdList, Session session) {
+        return session.getNamedQuery("getServiceClientLogins").setParameterList("serviceClientLoginId", serviceClientLoginIdList).list();
+    }
+
+    public List<ServiceClientLogins> getServiceClientLoginsByGroupIdList(Set<String> groupIdSet, Session session) {
+        return session.getNamedQuery("getServiceClientLoginsByGroupIds").setParameterList("groupId", groupIdSet).setMaxResults(50).list();
+    }
+
+    List<ServiceClientLogins> getServiceClientLoginsByGroupIdandSearchString(Set<String> groupIdSet, String searchString, Session session) {
+        return session.getNamedQuery("getServiceClientLoginsByIdandSearchString").setParameterList("groupId", groupIdSet).setString("searchString", searchString).setMaxResults(50).list();
+    }
+
+    ServiceClientLogins getServiceClientLoginsById(String serviceClientLoginId, Session session) {
+        return (ServiceClientLogins) session.getNamedQuery("getServiceClientLoginsById").setString("serviceClientLoginId", serviceClientLoginId).uniqueResult();
+    }
+
+    public List<ServiceClientLogins> getServiceClientLoginsByGroupId(String groupId, Session session) {
+        return session.getNamedQuery("getServiceClientLoginsByGroupId").setString("groupId", groupId).list();
+    }
+
+    List<ServiceContentSubscriptions> getServiceContentSubscriptions(String serviceClientLoginId, String serviceSubscriptionACLID, Session session) {
+        return session.getNamedQuery("getServiceContentSubscriptionsByLoginIDandACLID").setString("serviceClientLoginId", serviceClientLoginId).setString("serviceSubscriptionAclid", serviceSubscriptionACLID).list();
+    }
+
+    List<ServiceContentSubscriptions> getServiceContentSubscriptions(List<String> serviceSubscriptionaclIdList, List<String> serviceClientLoginIdList, Session session) {
+        return session.getNamedQuery("getServiceContentSubscriptions").setParameterList("serviceClientLoginId", serviceClientLoginIdList).setParameterList("serviceSubscriptionAclid", serviceSubscriptionaclIdList).list();
+//        return session.createCriteria(ServiceContentSubscriptions.class).add(Restrictions.in("serviceClientLoginId", serviceClientLoginIdList)).add(Restrictions.in("serviceSubscriptionAclid", serviceSubscriptionaclIdList)).setProjection(Projections.distinct(Projections.property("contentCategoryId"))).list();
+    }
+
+    List<ServiceSubscriptionAcl> getServiceSubscriptionACLList(List<String> serviceSubscriptionaclIdList, Session session) {
+        return session.getNamedQuery("getServiceSubscriptionAclById").setParameterList("serviceSubscriptionAclid", serviceSubscriptionaclIdList).list();
+    }
+
+    ServiceSubscriptionAcl getServiceSubscriptionAcl(String serviceSubscriptionACLID, Session session) {
+        return (ServiceSubscriptionAcl) session.getNamedQuery("getServiceSubscriptionAcl").setString("serviceSubscriptionAclid", serviceSubscriptionACLID).uniqueResult();
+    }
+
+    public Set<String> getproductsByProductsInGroups(List<ProductsInGroups> productsInGroupsList, Session session, int maxResult) {
+        Set<String> productIdList = getProductIdList(productsInGroupsList);
+        List<Products> productsList = getProductsByProductId(productIdList, session, maxResult);
+        if (!(productsList.isEmpty())) {
+            List<String> productIdsList = new ArrayList<String>();
+            for (Products p : productsList) {
+                productIdsList.add(p.getProductId());
+            }
+        }
+        return productIdList;
+    }
+
+    boolean placeOrder(String groupId, String productVariantId, String productVariantName, String userId, String months, String serviceClientLoginName, Session session) {
+        boolean result = false;
+        boolean orderItemResult = false;
+        Orders orders = new Orders();
+        String orderId = UUID.randomUUID().toString();
+        GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+        PermissionDAO permissionDAO = new PermissionDAO();
+        Transaction tx = session.beginTransaction();
+        try {
+            Users2 users2 = (Users2) session.getNamedQuery("getUsers2ByUserId").setString("userId", userId).list().get(0);
+            FunctionAreas functionareas = permissionDAO.getFunctionAreas(session, "PRODUCTS");
+            orders.setOrderId(orderId);
+            orders.setGroupId(groupId);
+            orders.setOrderStatusText("Delivered");
+            orders.setOrderedDate(gc.getTime());
+            orders.setOrderedByUserId(userId);
+            orders.setOrderedByUserFullName(users2.getFirstName() + " " + users2.getLastName());
+            orders.setShippedDate(gc.getTime());
+            orders.setIsShipped(1);
+            orders.setIsCanceled(0);
+            orders.setLastUpdatedByUserId(users2.getUserId());
+            orders.setCreatedDate(gc.getTime());
+            orders.setUpdatedDate(gc.getTime());
+            session.saveOrUpdate(orders);
+            tx.commit();
+            result = true;
+            session.flush();
+            if (result) {
+                tx = session.beginTransaction();
+                String orderItemsId = UUID.randomUUID().toString();
+                Query query = session.createSQLQuery("INSERT INTO OrderItems values(:orderItemId, :orderId, :orderItemComments, :orderStatusId, :orderStatusText, :functionAreaId,:objectId,:objectName,:orderedQuantity,:quantityUnit,:itemPrice,:itemPriceCurrencyId,:itemPlannedShippingDate,:itemActualShippedDate,:lastUpdatedByUserId,:createdDate,:updatedDate)");
+                query.setParameter("orderItemId", orderItemsId);
+                query.setParameter("orderId", orderId);
+                if (serviceClientLoginName != null) {
+                    query.setParameter("orderItemComments", serviceClientLoginName);
+                }
+                query.setParameter("orderStatusId", null);
+                query.setParameter("orderStatusText", "Delivered");
+                query.setParameter("functionAreaId", functionareas.getFunctionAreaId());
+                query.setParameter("objectId", productVariantId);
+                query.setParameter("objectName", productVariantName);
+                query.setParameter("orderedQuantity", BigDecimal.valueOf(Double.valueOf(months)));
+                query.setParameter("quantityUnit", "Months");
+                query.setParameter("itemPrice", null);
+                query.setParameter("itemPriceCurrencyId", null);
+                query.setParameter("itemPlannedShippingDate", null);
+                query.setParameter("itemActualShippedDate", gc.getTime());
+                query.setParameter("lastUpdatedByUserId", userId);
+                query.setParameter("createdDate", gc.getTime());
+                query.setParameter("updatedDate", gc.getTime());
+                query.executeUpdate();
+                tx.commit();
+                result = true;
+                orderItemResult = true;
+            }
+
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            result = false;
+            TCMUtil.exceptionLog(getClass().getName(), e);
+        } finally {
+            if (!orderItemResult) {
+                tx = session.beginTransaction();
+                session.delete(orders);
+                tx.commit();
+            }
+        }
+
+        return result;
+    }
+
+    boolean rollbackExtendedSubscription(Date activeToDate, int searchHitsLeftToUse, String serviceSubscriptionAclid, Session session) {
+        boolean result = false;
+        Transaction tx = session.beginTransaction();
+        try {
+            Query query = session.createQuery("UPDATE ServiceSubscriptionAcl SET activeToDate = :activeToDate, searchHitsLeftToUse = :searchHitsLeftToUse WHERE serviceSubscriptionAclid = :serviceSubscriptionAclid");
+            query.setParameter("activeToDate", activeToDate);
+            query.setParameter("searchHitsLeftToUse", searchHitsLeftToUse);
+            query.setParameter("serviceSubscriptionAclid", serviceSubscriptionAclid);
+            query.executeUpdate();
+            tx.commit();
+            result = true;
+        } catch (Exception e) {
+            result = false;
+            tx.rollback();
+            TCMUtil.exceptionLog(getClass().getName(), e);
+        }
+
+        return result;
+    }
+
+    public boolean cancelProductSubscription(List<ServiceContentSubscriptions> serviceContentSubList, GroupProductVariantSubscriptions groupProductVariantSub, Session session) {
+        Transaction tx = null;
+        boolean result = false;
+        try {
+            tx = session.beginTransaction();
+            if (!serviceContentSubList.isEmpty()) {
+                for (ServiceContentSubscriptions scs : serviceContentSubList) {
+                    session.delete(scs);
+                }
+            }
+            tx.commit();
+            if (groupProductVariantSub != null) {
+                tx = session.beginTransaction();
+                session.delete(groupProductVariantSub);
+                tx.commit();
+            }
+            result = true;
+        } catch (Exception e) {
+            result = false;
+            TCMUtil.exceptionLog(getClass().getName(), e);
+        }
+        return result;
+    }
+
+    public ProductCategoryTranslations getProductCategoryTranslationsByID(String productCategoryId, int countryID, Session session) {
+        return (ProductCategoryTranslations) session.getNamedQuery("getProductCategoryTranslationsByID").setString("productCategoryId", productCategoryId).setInteger("countryId", countryID).uniqueResult();
+    }
+
+    public ProductTranslations getProductTranslationsById(String productId, int countryId, Session session) {
+        return (ProductTranslations) session.getNamedQuery("getProductTranslationsById").setString("productId", productId).setInteger("countryId", countryId).uniqueResult();
+    }
+
+    public List<ProductAttributes> getProductAttributesByProductID(String productId, Session session) {
+        return session.getNamedQuery("getProductAttributesByProductID").setString("productId", productId).list();
+    }
+
+    public List<ProductVariants> getProductVariantsByProductId(String productId, Session session) {
+        return session.getNamedQuery("getProductVariantsByProductId").setString("productId", productId).list();
+    }
+
+    public List<ProductVariantTranslations> getProductVariantTranslations(Session session, List<String> productVariantIdList, int countryId) {
+        return session.getNamedQuery("getProductVariantTranslations").setParameterList("productVariantId", productVariantIdList).setInteger("countryId", countryId).list();
+    }
+
+    public List<ProductVariantTranslations> getProductVariantTranslationsorderByCreatedDate(Session session, List<String> productVariantIdList, int countryId) {
+        return session.getNamedQuery("getProductVariantTranslationsorderByCreatedDate").setParameterList("productVariantId", productVariantIdList).setInteger("countryId", countryId).setMaxResults(200).list();
+    }
+
+    public List<ProductVariantTranslations> getProductVariantTranslationsBySearchString(Session session, List<String> productVariantIdList, int countryId, String searchString, int maxResult) {
+        if (maxResult == 0) {
+            return session.getNamedQuery("getProductVariantTranslationsBySearchString").setParameterList("productVariantId", productVariantIdList).setInteger("countryId", countryId).setString("searchString", searchString).list();
+        } else {
+            return session.getNamedQuery("getProductVariantTranslationsBySearchString").setParameterList("productVariantId", productVariantIdList).setInteger("countryId", countryId).setString("searchString", searchString).setMaxResults(maxResult).list();
+        }
+    }
+
+    public List<ProductVariantTranslations> getProductVariantTranslations(Session session, List<String> productVariantIdList, int countryId, String limit) {
+        if (limit != null) {
+            return session.getNamedQuery("getProductVariantTranslations").setParameterList("productVariantId", productVariantIdList).setInteger("countryId", countryId).setMaxResults(Integer.parseInt(limit)).list();
+        } else {
+            return session.getNamedQuery("getProductVariantTranslations").setParameterList("productVariantId", productVariantIdList).setInteger("countryId", countryId).list();
+        }
+    }
+
+    List<ProductVariantContentCategories> getProductVariantContentCategories(String productvariantid, Session session) {
+        return session.getNamedQuery("getProductVariantContentCategoriesByProductvariantId").setString("productvariantid", productvariantid).list();
+    }
+
+    List<ProductVariantServices> getProductVariantServices(String productvariantid, Session session) {
+        return session.getNamedQuery("getProductVariantServicesByProductvariantId").setString("productvariantid", productvariantid).list();
+    }
+
+    public ProductVariantTranslations getProductVariantTranslationsByIds(String productvariantid, int countryId, Session session) {
+        return (ProductVariantTranslations) session.getNamedQuery("getProductVariantTranslationsByIds").setString("productvariantid", productvariantid).setInteger("countryId", countryId).uniqueResult();
+    }
+
+    public GroupDefaultAgreement getGroupDefaultAgreement(String groupid, Session session) {
+        return (GroupDefaultAgreement) session.getNamedQuery("getGroupDefaultAgreementByGroupId").setString("groupid", groupid).uniqueResult();
+    }
+
+    public boolean saveServiceSubscriptionAcl(ServiceSubscriptionAcl ssAcl, Session session) {
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.saveOrUpdate(ssAcl);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            tx.rollback();
+            TCMUtil.exceptionLog(getClass().getName(), e);
+        }
+        return false;
+    }
+
+    public boolean saveGroupProductVariantSubscriptions(GroupProductVariantSubscriptions gpvs, Session session) {
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.saveOrUpdate(gpvs);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            tx.rollback();
+            TCMUtil.exceptionLog(getClass().getName(), e);
+        }
+        return false;
+    }
+
+    public boolean saveServiceContentSubscriptions(ServiceContentSubscriptions scs, Session session) {
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.saveOrUpdate(scs);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            tx.rollback();
+            TCMUtil.exceptionLog(getClass().getName(), e);
+        }
+        return false;
+    }
+
+    public void deleteServiceSubscriptionAcl(ServiceSubscriptionAcl ssAcl, Session session) {
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.delete(ssAcl);
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            TCMUtil.exceptionLog(getClass().getName(), e);
+        }
+    }
+
+    public void deleteGroupProductVariantSubscriptions(GroupProductVariantSubscriptions gpvs, Session session) {
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.delete(gpvs);
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            TCMUtil.exceptionLog(getClass().getName(), e);
+        }
+    }
+
+    public void deleteServiceContentSubscriptions(ServiceContentSubscriptions scs, Session session) {
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.delete(scs);
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            TCMUtil.exceptionLog(getClass().getName(), e);
+        }
+    }
+
+    public List<TransactionProducts> getTransactionProductsById(Session oprSession, String transactionId) {
+        Criteria criteria = oprSession.createCriteria(TransactionProducts.class, "tr");
+        criteria.add(Restrictions.eq("tr.id.transactionId", transactionId)).addOrder(Order.asc("tr.productVariantName")).addOrder(Order.desc("tr.createdDate")).setMaxResults(100);
+        return criteria.list();
+    }
+
+    public TransactionResult getTransactionResultsById(Session oprSession, String transactionId) {
+        return (TransactionResult) oprSession.getNamedQuery("getTransactionResultById").setString("transactionId", transactionId).uniqueResult();
+    }
+
+    public List<ProductVariants> getProductVariantsByProductidList(Session session, List<String> productId) {
+        return session.getNamedQuery("getProductVariantsByProductidList").setParameterList("productId", productId).list();
+    }
+
+    public List<se.info24.pojo.ProductVariantDevices> getProductVariantDevicesByDeviceId(Session session, String deviceId) {
+        return session.getNamedQuery("getProductVariantDevicesByDeviceId").setString("deviceId", deviceId).list();
+    }
+
+    ProductVariantPrices getProductVariantPricesByProductVariantIdAndCountryId(Session ismSession, String productVariantId, int countryId) {
+        return (ProductVariantPrices) ismSession.getNamedQuery("getProductVariantPricesByProductVariantIdAndCountryId").setString("productVariantId", productVariantId).setInteger("countryId", countryId).uniqueResult();
+    }
+
+    List<ProductVariantAttributes> getProductVariantAttributesByProductVariantId(Session ismSession, List<String> productVariantIdList) {
+        return ismSession.getNamedQuery("getProductVariantAttributesByProductVariantId").setParameterList("productVariantId", productVariantIdList).list();
+    }
+
+    public boolean updateProductVariantDetails(Session ismSession, ProductVariants pv, List<ProductVariantTranslations> pvtList) {
+        Transaction tx = null;
+        try {
+            tx = ismSession.beginTransaction();
+            ismSession.saveOrUpdate(pv);
+            for (ProductVariantTranslations pvt : pvtList) {
+                ismSession.saveOrUpdate(pvt);
+            }
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tx.rollback();
+            return false;
+        }
+    }
+
+    public boolean saveUpdateProductVariantAttributes(Session ismSession, ProductVariantAttributes attribute) {
+        Transaction tx = null;
+        try {
+            tx = ismSession.beginTransaction();
+            ismSession.saveOrUpdate(attribute);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tx.rollback();
+            return false;
+        }
+    }
+
+    ProductVariantAttributes getProductVariantAttributesByID(Session ismSession, String productVariantAttributeId, String productVariantId) {
+        return (ProductVariantAttributes) ismSession.getNamedQuery("getProductVariantAttributesByID").setString("productVariantAttributeId", productVariantAttributeId).setString("productVariantId", productVariantId).uniqueResult();
+    }
+
+    public boolean deleteProductVariantAttributes(Session ismSession, ProductVariantAttributes attribute) {
+        Transaction tx = null;
+        try {
+            tx = ismSession.beginTransaction();
+            ismSession.delete(attribute);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tx.rollback();
+            return false;
+        }
+    }
+
+    public boolean saveUpdateProductVariantPrices(Session ismSession, ProductVariantPrices prices) {
+        Transaction tx = null;
+        try {
+            tx = ismSession.beginTransaction();
+            ismSession.saveOrUpdate(prices);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tx.rollback();
+            return false;
+        }
+    }
+
+    public boolean saveUpdateProductVariantPricesKey(Session ismSession, String productVariantId, int countryId, String pricePerUnitExclVat, String vatPercent, String quantityUnit, int newCountryId) {
+        Transaction tx = null;
+        try {
+            tx = ismSession.beginTransaction();
+            GregorianCalendar gc = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+            Query queryWithNewCountry = ismSession.createQuery("update ProductVariantPrices pvp set pvp.id.countryId = :newcountryId, pvp.pricePerUnitExclVat = :pricePerUnitExclVat, pvp.vatpercent = :vatpercent, pvp.quantityUnit = :quantityUnit, pvp.updatedDate = :updatedDate where pvp.id.productVariantId = :productVariantId and pvp.id.countryId = :oldcountryId");
+            queryWithNewCountry.setParameter("newcountryId", newCountryId);
+            queryWithNewCountry.setBigDecimal("pricePerUnitExclVat", new BigDecimal(pricePerUnitExclVat));
+            queryWithNewCountry.setBigDecimal("vatpercent", new BigDecimal(vatPercent));
+            queryWithNewCountry.setParameter("quantityUnit", quantityUnit);
+            queryWithNewCountry.setParameter("updatedDate", gc.getTime());
+            queryWithNewCountry.setParameter("productVariantId", productVariantId);
+            queryWithNewCountry.setParameter("oldcountryId", countryId);
+            queryWithNewCountry.executeUpdate();
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tx.rollback();
+            return false;
+        }
+    }
+
+    public boolean deleteProductVariantPrices(Session ismSession, ProductVariantPrices prices) {
+        Transaction tx = null;
+        try {
+            tx = ismSession.beginTransaction();
+            ismSession.delete(prices);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tx.rollback();
+            return false;
+        }
+    }
+
+    List<ProductVariantTranslations> getProductVariantTranslationsByProductVariantID(Session ismSession, String productvariantid) {
+        return ismSession.getNamedQuery("getProductVariantTranslationsByProductVariantID").setString("productvariantid", productvariantid).list();
+    }
+
+    public boolean addProductVariant(Session ismSession, ProductVariants pv, List<ProductVariantTranslations> pvtList, List<ProductVariantAttributes> pvaList) {
+        Transaction tx = null;
+        try {
+            tx = ismSession.beginTransaction();
+            ismSession.saveOrUpdate(pv);
+            ismSession.flush();
+            ismSession.clear();
+            for (ProductVariantTranslations pvt : pvtList) {
+                ismSession.saveOrUpdate(pvt);
+                ismSession.flush();
+                ismSession.clear();
+            }
+            for (ProductVariantAttributes pva : pvaList) {
+                ismSession.saveOrUpdate(pva);
+                ismSession.flush();
+                ismSession.clear();
+            }
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tx.rollback();
+            return false;
+        }
+    }
+
+    public List<ProductVariantPrices> getProductVariantPricesByProductVariantId(Session ismSession, String productVariantId) {
+        return ismSession.getNamedQuery("getProductVariantPricesByProductVariantId").setString("productVariantId", productVariantId).list();
+    }
+
+    public List<ProductVariantDevices> getProductVariantDevicesByProductVariantId(Session ismSession, String productVariantId) {
+        return ismSession.getNamedQuery("getProductVariantDevicesByProductVariantId").setString("productVariantId", productVariantId).list();
+    }
+
+    public List<ProductVariantComponents> getProductVariantComponentsByProductvariantId(Session ismSession, String productVariantId) {
+        return ismSession.getNamedQuery("getProductVariantComponentsByProductvariantId").setString("productVariantId", productVariantId).list();
+    }
+
+    public List<ProductVariantMeasurementTypes> getProductVariantMeasurementTypesByProductvariantId(Session ismSession, String productVariantId) {
+        return ismSession.getNamedQuery("getProductVariantMeasurementTypesByProductvariantId").setString("productVariantId", productVariantId).list();
+    }
+
+    public ProductVariantDownloadUrls getProductVariantDownloadUrlsByProductvariantId(Session ismSession, String productVariantId) {
+        return (ProductVariantDownloadUrls) ismSession.getNamedQuery("getProductVariantDownloadUrlsByProductvariantId").setString("productVariantId", productVariantId).uniqueResult();
+    }
+
+    public boolean deleteProductVariant(Session ismSession, ProductVariants productVariant,
+            List<ProductVariantTranslations> pvtList,
+            List<ProductVariantPrices> pvpList,
+            List<ProductVariantAttributes> pvaList,
+            List<ProductVariantDevices> pvdList,
+            List<ProductVariantServices> pvsList,
+            List<ProductVariantContentCategories> pvccList,
+            List<ProductVariantComponents> pvcList,
+            List<ProductVariantMeasurementTypes> pvmList,
+            ProductVariantDownloadUrls pvdurl) {
+        Transaction tx = null;
+        try {
+            tx = ismSession.beginTransaction();
+
+            if (pvdurl != null) {
+                ismSession.delete(pvdurl);
+            }
+            for (ProductVariantMeasurementTypes pvm : pvmList) {
+                ismSession.delete(pvm);
+            }
+            for (ProductVariantComponents pvc : pvcList) {
+                ismSession.delete(pvc);
+            }
+            for (ProductVariantContentCategories pvcc : pvccList) {
+                ismSession.delete(pvcc);
+            }
+            for (ProductVariantServices pvs : pvsList) {
+                ismSession.delete(pvs);
+            }
+            for (ProductVariantDevices pvd : pvdList) {
+                ismSession.delete(pvd);
+            }
+            for (ProductVariantAttributes pva : pvaList) {
+                ismSession.delete(pva);
+            }
+            for (ProductVariantPrices pvp : pvpList) {
+                ismSession.delete(pvp);
+            }
+            for (ProductVariantTranslations pvt : pvtList) {
+                ismSession.delete(pvt);
+            }
+            ismSession.delete(productVariant);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            tx.rollback();
+            return false;
+        }
+    }
+
+    public Object getObjectProductVariantCountersByID(String deviceId, String productVaraintId, Session session) {
+        return session.getNamedQuery("getObjectProductVariantCountersByID").setString("objectId", deviceId).setString("productVariantId", productVaraintId).uniqueResult();
+    }
+
+    Object getObjectProductVariantPricesByID(String deviceId, String productVaraintId, int currencyId, Session session) {
+        return session.getNamedQuery("getObjectProductVariantPricesByID").setString("objectId", deviceId).setString("productVariantId", productVaraintId).setInteger("currencyId", currencyId).uniqueResult();
+    }
+
+    Object getProductVariantPricesByID(String productVaraintId, int countryId, Session session) {
+        return session.getNamedQuery("getProductVariantPricesByID").setString("productVariantId", productVaraintId).setInteger("countryId", countryId).uniqueResult();
+    }
+
+    public List<ObjectProductVariantPrices> getObjectProductVariantPricesByObjectID(String objectId, Session session, int maxResult) {
+        return session.getNamedQuery("getObjectProductVariantPricesByObjectID").setString("objectId", objectId).setMaxResults(maxResult).list();
+    }
+
+    public List<ObjectProductVariantPrices> getObjectProductVariantPricesByObjectIDAndProductVariantID(String objectId, String productvariantId, Session session, int maxResult) {
+        return session.getNamedQuery("getObjectProductVariantPricesByObjectIDAndProductVariantID").setString("objectId", objectId).setString("productVariantId", productvariantId).list();
+    }
+
+    public void saveUpdateObjectProductVariantPrices(ObjectProductVariantPrices objectProductVariantPrices, Session session) {
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.saveOrUpdate(objectProductVariantPrices);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
+    public void deleteObjectProductVariantPrices(ObjectProductVariantPrices objectProductVariantPrices, Session session) {
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.delete(objectProductVariantPrices);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
+    public List<ProvidersInGroups> getProvidersInGroupsByGroupID(String groupId, Session session) {
+        return session.getNamedQuery("getProvidersInGroupsByGroupID").setString("groupId", groupId).list();
+    }
+
+    public List<Providers> getProvidersByProviderIDs(Set<String> providerIDs, Session session, int maxResult) {
+        return session.getNamedQuery("getProvidersByProviderIDs").setParameterList("providerId", providerIDs).setMaxResults(maxResult).list();
+    }
+
+    public List<Providers> getProvidersByProviderIDsAndName(Set<String> providerIDs, String searchString, Session session, int maxResult) {
+        return session.getNamedQuery("getProvidersByProviderIDsAndName").setParameterList("providerId", providerIDs).setString("providerName", searchString).setMaxResults(maxResult).list();
+    }
+
+    public boolean addIsmOprationsData(ObjectUsageRecords objectUsageRecords, TransactionProducts transactionProducts, TransactionResult transactionResult, List<MeasurementData> mdList) {
+        Transaction tx = null;
+        Session ismOprSession = null;
+        try {
+            ismOprSession = HibernateUtil.getISMOperationsSessionFactory().openSession();
+            tx = ismOprSession.beginTransaction();
+            ismOprSession.save(objectUsageRecords);
+            ismOprSession.flush();
+            ismOprSession.clear();
+            if (transactionProducts != null) {
+                ismOprSession.save(transactionProducts);
+                ismOprSession.flush();
+                ismOprSession.clear();
+            }
+
+            if (transactionResult != null) {
+                ismOprSession.save(transactionResult);
+                ismOprSession.flush();
+                ismOprSession.clear();
+            }
+            for (MeasurementData md : mdList) {
+                ismOprSession.saveOrUpdate(md);
+            }
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            TCMUtil.exceptionLog(getClass().getName(), e);
+            if (tx != null) {
+                tx.rollback();
+            }
+            return false;
+        } finally {
+            if (ismOprSession != null) {
+                ismOprSession.close();
+            }
+        }
+
+    }
+
+    public UserAlias getUserAliasByUserAlias(Session session, String userAlias) {
+        List<UserAlias> userAliasList = session.getNamedQuery("getUserAliasByUserAlias").setString("userAlias", userAlias).list();
+        return (userAliasList.isEmpty() ? null : userAliasList.get(0));
+    }
+
+    Object getProductCategoriesInGroupsByGroupIdAndProductCategoryID(String groupId, String searchString, Session session) {
+        return session.getNamedQuery("getProductCategoriesInGroupsByGroupIdAndProductCategoryID").setString("groupId", groupId).setString("productCategoryID", searchString).uniqueResult();
+    }
+
+    List<ProductCategoryTranslations> getProductCategoryTranslationsByIDAndSearchString(Session session, Set<String> pcIds, String searchString, int countryId) {
+        return session.getNamedQuery("getProductCategoryTranslationsByIDAndSearchString").setParameterList("productCategoryId", pcIds).setString("searchField", searchString).setInteger("countryId", countryId).list();
+    }
+
+    List<ProductCategoryTranslations> getProductCategoryTranslationsByCountryID(Session session, int countryId) {
+        return session.getNamedQuery("getProductCategoryTranslationsByCountryID").setInteger("countryId", countryId).list();
+    }
+
+    Object getProductTypesByProductTypeID(Session session, String productTypeId) {
+        return session.getNamedQuery("getProductTypesByProductTypeID").setString("productTypeId", productTypeId).uniqueResult();
+    }
+
+    List<ProductTypes> getProductTypesByProductTypeNameSearchString(Session session, String searchField) {
+        return session.getNamedQuery("getProductTypesByProductTypeNameSearchString").setString("searchField", searchField).list();
+    }
+
+    List<ProductTypes> getProductTypes(Session session) {
+        return session.getNamedQuery("getProductTypes").list();
+    }
+
+    public List<Object> getSearchProductDetail(int countryId, String productId, String categoryId, String productTypeId, String searchGroupId, Session session) {
+
+        boolean flag = false;
+
+        StringBuffer sb = new StringBuffer("Select Products.ProductID as ProductID from Products where");
+        if (productId != null) {
+            flag = true;
+            if (productId.length() == 36) {
+                sb.append(" ProductID = '" + productId + "'");
+            } else {
+                sb.append(" ProductID in (Select ProductID from ProductTranslations where (ProductName like '%" + productId + "%') and CountryID = " + countryId + ")");
+            }
+        }
+        if (categoryId != null) {
+            if (flag) {
+                sb.append(" AND ");
+            }
+            flag = true;
+            if (categoryId.length() == 36) {
+                sb.append(" ProductCategoryID = '"+categoryId+"'");
+            } else {
+                sb.append(" ProductCategoryID in (Select ProductCategoryID from ProductCategoryTranslations where (ProductCategoryName like '%"+categoryId+"%'))");
+            }
+        }
+        if (productTypeId != null) {
+            if (flag) {
+                sb.append(" AND ");
+            }
+            flag = true;
+            if (productTypeId.length() == 36) {
+                sb.append(" ProductTypeID = '"+productTypeId+"'");
+            } else {
+                sb.append(" ProductTypeID in (Select ProductTypeID From ProductTypes where (ProductTypeName like '%"+productTypeId+"%'))");
+            }
+        }
+        if (searchGroupId != null) {
+            if (flag) {
+                sb.append(" AND ");
+            }
+            flag = true;
+            if (searchGroupId.length() == 36) {
+                sb.append(" ProductID in (Select ProductID from ProductsInGroups where GroupID = '"+searchGroupId+"')");
+            } else {
+                sb.append(" ProductID in (Select ProductID from ProductsInGroups where GroupID in (select GroupID from GroupTranslations where GroupName like '%"+searchGroupId+"%' and CountryID = "+countryId+"))");
+            }
+        }
+         SQLQuery query = session.createSQLQuery(sb.toString());
+         query.addScalar("ProductID", Hibernate.STRING);
+        return query.list();
+    }
+
+    Object getProductsByProductID(String productID, Session session) {
+        return session.getNamedQuery("getProductsByProductID").setString("productId", productID).uniqueResult();
+    }
+
+    Object getProductCategoriesByProductCategoryID(String productCategoryID, Session session) {
+        return session.getNamedQuery("getProductCategoriesByProductCategoryID").setString("productCategoryId", productCategoryID).uniqueResult();
+    }
+
+    void updateProducts(Session session, Products modifiedProducts, ProductTranslations productTranslations) {
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.saveOrUpdate(modifiedProducts);
+            if(productTranslations != null){
+                session.saveOrUpdate(productTranslations);
+            }
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+    }
+
+}

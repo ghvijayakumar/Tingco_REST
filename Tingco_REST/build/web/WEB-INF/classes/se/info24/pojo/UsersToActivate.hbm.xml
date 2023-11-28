@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2011 10:43:34 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.UsersToActivate" schema="dbo" table="UsersToActivate">
+    <cache usage="nonstrict-read-write"/>
+    <composite-id class="se.info24.pojo.UsersToActivateId" name="id">
+      <key-property name="loginName" type="string">
+        <column length="200" name="LoginName"/>
+      </key-property>
+      <key-property name="domainId" type="string">
+        <column length="36" name="DomainID"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="se.info24.pojo.UserTypes2" fetch="select" name="userTypes2">
+      <column length="36" name="UserTypeID" not-null="true"/>
+    </many-to-one>
+    <property name="userId" type="string">
+      <column length="36" name="UserID" not-null="true" unique="true"/>
+    </property>
+    <property name="groupId" type="string">
+      <column length="36" name="GroupID" not-null="true"/>
+    </property>
+    <property name="password" type="string">
+      <column length="200" name="Password" not-null="true"/>
+    </property>
+    <property name="firstName" type="string">
+      <column length="200" name="FirstName" not-null="true"/>
+    </property>
+    <property name="lastName" type="string">
+      <column length="200" name="LastName" not-null="true"/>
+    </property>
+    <property name="nickName" type="string">
+      <column length="50" name="NickName"/>
+    </property>
+    <property name="userEmail" type="string">
+      <column length="200" name="UserEmail" not-null="true"/>
+    </property>
+    <property name="userMobilePhone" type="string">
+      <column length="50" name="UserMobilePhone"/>
+    </property>
+    <property name="countryId" type="int">
+      <column name="CountryID" not-null="true"/>
+    </property>
+    <property name="isLockedOut" type="int">
+      <column name="IsLockedOut" not-null="true"/>
+    </property>
+    <property name="changePwdRequired" type="int">
+      <column name="ChangePwdRequired" not-null="true"/>
+    </property>
+    <property name="activeFromDate" type="timestamp">
+      <column length="23" name="ActiveFromDate" not-null="true"/>
+    </property>
+    <property name="activeToDate" type="timestamp">
+      <column length="23" name="ActiveToDate" not-null="true"/>
+    </property>
+    <property name="userSmallImageUrl" type="string">
+      <column length="200" name="UserSmallImageURL"/>
+    </property>
+    <property name="lastLoginDate" type="timestamp">
+      <column length="23" name="LastLoginDate"/>
+    </property>
+    <property name="lockedOutDate" type="timestamp">
+      <column length="23" name="LockedOutDate"/>
+    </property>
+    <property name="lastPasswordChangedDate" type="timestamp">
+      <column length="23" name="LastPasswordChangedDate"/>
+    </property>
+    <property name="failedPasswordAttemptCount" type="java.lang.Integer">
+      <column name="FailedPasswordAttemptCount"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+  </class>
+  <query name="getUserToActivateByUserID">
+        from UsersToActivate where UserID = :userID
+    </query>
+  <query name="getUserToActivateByUserIDandDomainID">
+        from UsersToActivate where UserID = :userID and DomainID = :domainID
+    </query>
+</hibernate-mapping>

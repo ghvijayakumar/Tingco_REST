@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 7, 2013 10:56:54 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.ContainerTypes" schema="dbo" table="ContainerTypes">
+    <cache usage="nonstrict-read-write"/>
+    <id name="containerTypeId" type="string">
+      <column length="36" name="ContainerTypeID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="containerTypeName" type="string">
+      <column name="ContainerTypeName" not-null="true"/>
+    </property>
+    <property name="containerTypeDescription" type="string">
+      <column name="ContainerTypeDescription"/>
+    </property>
+    <property name="objectCode" type="string">
+      <column name="ObjectCode" not-null="true" unique="true"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set inverse="true" name="containerses">
+      <key>
+        <column length="36" name="ContainerTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.Containers"/>
+    </set>
+    <set inverse="true" name="deviceTypeDefaultCategories">
+      <key>
+        <column length="36" name="ContentTypeID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypeDefaultCategory"/>
+    </set>
+  </class>
+  <query name="getContainerTypesById">
+      from ContainerTypes  where containerTypeId = :containerTypeId
+   </query>
+</hibernate-mapping>

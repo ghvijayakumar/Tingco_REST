@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 24, 2012 2:27:00 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="se.info24.pojo.DeviceTypeCommands" schema="dbo" table="DeviceTypeCommands">
+    <cache usage="nonstrict-read-write"/>
+    <id name="deviceTypeCommandId" type="string">
+      <column length="36" name="DeviceTypeCommandID"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="deviceTypeCommandParentId" type="string">
+      <column length="36" name="DeviceTypeCommandParentID"/>
+    </property>
+    <property name="deviceTypeId" type="string">
+      <column length="36" name="DeviceTypeID" not-null="true"/>
+    </property>
+    <property name="objectCode" type="string">
+      <column name="ObjectCode" not-null="true"/>
+    </property>
+    <property name="deviceDataItemId" type="string">
+      <column length="36" name="DeviceDataItemID" not-null="true"/>
+    </property>
+    <property name="dataItemValue" type="string">
+      <column name="DataItemValue"/>
+    </property>
+    <property name="flagUserCanSetValue" type="java.lang.Integer">
+      <column name="FlagUserCanSetValue"/>
+    </property>
+    <property name="flagIsNumericValue" type="java.lang.Integer">
+      <column name="FlagIsNumericValue"/>
+    </property>
+    <property name="flagIsVisible" type="java.lang.Integer">
+      <column name="FlagIsVisible"/>
+    </property>
+    <property name="flagValueCanBeNull" type="java.lang.Integer">
+      <column name="FlagValueCanBeNull"/>
+    </property>
+    <property name="displayOrder" type="java.lang.Integer">
+      <column name="DisplayOrder"/>
+    </property>
+    <property name="minNumericValue" type="big_decimal">
+      <column name="MinNumericValue"/>
+    </property>
+    <property name="maxNumericValue" type="big_decimal">
+      <column name="MaxNumericValue"/>
+    </property>
+    <property name="maxCharsInValue" type="java.lang.Integer">
+      <column name="MaxCharsInValue"/>
+    </property>
+    <property name="valueRexExValidationString" type="string">
+      <column name="ValueRexExValidationString"/>
+    </property>
+    <property name="lastUpdatedByUserId" type="string">
+      <column length="36" name="LastUpdatedByUserID"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="23" name="CreatedDate"/>
+    </property>
+    <property name="updatedDate" type="timestamp">
+      <column length="23" name="UpdatedDate"/>
+    </property>
+    <set cascade="all" inverse="true" name="deviceTypeCommandTranslationses">
+      <key>
+        <column length="36" name="DeviceTypeCommandID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceTypeCommandTranslations"/>
+    </set>
+    <set inverse="true" name="deviceCommandScheduleses">
+      <key>
+        <column length="36" name="DeviceTypeCommandID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.DeviceCommandSchedules"/>
+    </set>
+    <set inverse="true" name="commandParseTargetses">
+      <key>
+        <column length="36" name="DeviceTypeCommandID" not-null="true"/>
+      </key>
+      <one-to-many class="se.info24.pojo.CommandParseTargets"/>
+    </set>
+  </class>
+  <query name="getDeviceTypeCommandsByTypeId">
+        from DeviceTypeCommands where deviceTypeId = :deviceTypeId and flagIsVisible = 1 order by createdDate desc
+    </query>
+  <query name="getDeviceTypeCommands">
+        from DeviceTypeCommands where deviceTypeCommandId = :deviceTypeCommandId
+    </query>
+  <query name="getDeviceTypeCommandByIDS">
+        from DeviceTypeCommands where deviceTypeCommandId in (:deviceTypeCommandId) 
+    </query>
+  <query name="getDeviceTypeCommandsByType">
+        from DeviceTypeCommands where deviceTypeId = :deviceTypeId order by createdDate desc
+    </query>
+  <query name="getAllDeviceTypeCommands">
+        from DeviceTypeCommands
+    </query>
+</hibernate-mapping>
